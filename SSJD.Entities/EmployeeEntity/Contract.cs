@@ -18,9 +18,9 @@ namespace SSJD.Entities.EmployeeEntity
         public decimal Salary { get; set; }
         public Active Active { get; set; }
 
-        public List<Employee> Employees { get; } = new();
-        public List<Position> Positions { get; } = new();
-        public List<Level> Levels { get;} = new();
+        public Employee Employee { get; set; } 
+        public Position Position { get; set; }
+        public Level Level { get; set; }
     }
 
 }

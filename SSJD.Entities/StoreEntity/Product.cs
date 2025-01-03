@@ -13,15 +13,15 @@ namespace SSJD.Entities.StoreEntity
         public int ID { get; set; }
         public string Name { get; set; }
         public string Brand { get; set; }
-        public string TypeID { get; set; }
+        public int CategoryID { get; set; }
         public decimal Price { get; set; }
         public int Stock { get; set; }
         public Active isActive { get; set; } = Active.No;
         public string Image { get; set; }
 
-        public List<Type> Types { get; } = new();
+        public Category Category { get; set; } 
 
-        public ProductDetail ProductDetail { get; set; } = null!;
+        public ProductDetail ProductDetail { get; set; } 
 
     }
 }

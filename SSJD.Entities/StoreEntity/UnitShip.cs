@@ -11,6 +11,6 @@ namespace SSJD.Entities.StoreEntity
         public int ID { get; set; }
         public string Name { get; set; }
 
-        public Order Order { get; set; } = null!;
+        public List<Order> Orders { get; } 
     }
 }

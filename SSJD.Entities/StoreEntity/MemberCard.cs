@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SSJD.Entities.CustomerEntity
+namespace SSJD.Entities.StoreEntity
 {
     public class MemberCard
     {
@@ -12,5 +12,7 @@ namespace SSJD.Entities.CustomerEntity
         public int Point { get; set; }
         public string MemberClass { get; set; }
         public decimal Discount { get; set; }
+
+        public Customer Customer { get; set; }
     }
 }

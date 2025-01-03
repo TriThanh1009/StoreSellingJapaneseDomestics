@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SSJD.Entities.CustomerEntity;
 using SSJD.Entities.EmployeeEntity;
+using SSJD.Entities.StoreEntity;
 
 namespace SSJD.Entities.GeneralEnity
 {
@@ -16,7 +16,7 @@ namespace SSJD.Entities.GeneralEnity
         public string PasswordCheck { get; set; }
         public string Email { get; set; }
 
-        public Customer Customer { get; set; } = null!;
-        public Employee Employee { get; set; } = null!;
+        public Customer Customer { get; set; }
+        public Employee Employee { get; set; } 
     }
 }

@@ -1,0 +1,16 @@
+.container{
+    margin-top: 20px;
+    border-radius: 10px;
+    height: 6rem;
+}
+.sign-up-button{
+    color: white;
+    background-color: black;
+    height: 3rem;
+    border-radius: 5px;
+}
+.email{
+    width:20rem;
+    height: 3rem;
+    border-radius: 20px;
+}

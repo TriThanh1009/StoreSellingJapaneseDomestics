@@ -13,10 +13,10 @@ namespace SSJD.Entities.StoreEntity
         public decimal UnitPrice { get; set; }
         public int Quantity { get; set; }
         public int PromotionID { get; set; }
-        public decimal SubTotal { get; set; }
+        public decimal Subtotal { get; set; }
 
-        public List<Order> Orders { get; } = new();
+        public Order Order { get; } = new();
 
-        public List<Promotion> Promotions { get; } = new();
+        public Promotion Promotion { get; set; } 
     }
 }

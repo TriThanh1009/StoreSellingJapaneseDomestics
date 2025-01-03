@@ -14,7 +14,7 @@ namespace SSJD.Entities.StoreEntity
         public DateTime Warranty { get; set; }
         public string Origin { get; set; }
         public string AdditionalImage { get; set; }
-       
-        public List<Product> Products { get; } = new();
+
+        public Product Product { get; set; } 
     }
 }

@@ -19,12 +19,14 @@ namespace SSJD.Entities.EmployeeEntity
         public string Email { get; set; }
         public int PositionID { get; set; }
         public int LevelID { get; set; }
-        public string AccountID { get; set; }
-        public string RoleID { get; set; }
+        public int AccountID { get; set; }
+        public int RoleID { get; set; }
 
-        public Contract Contract { get; set; } = null!;
-        public List<Position> Positions { get; set; }
-        public List<Level> Levels { get; set; }
-        public List<Account> Accounts { get; set; }
+        public List<Contract> Contract { get; }
+        public Position Position { get; set; } 
+        public Level Level { get; set; }
+        public Account Account { get; set; } 
+
+        public Role Role { get; set; } 
     }
 }

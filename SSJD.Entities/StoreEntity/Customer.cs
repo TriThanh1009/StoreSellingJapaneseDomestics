@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using SSJD.Entities.GeneralEnity;
 using SSJD.Entities.GeneralEntity;
 
-namespace SSJD.Entities.CustomerEntity
+namespace SSJD.Entities.StoreEntity
 {
     public class Customer
     {
@@ -17,13 +17,15 @@ namespace SSJD.Entities.CustomerEntity
         public string Address { get; set; }
         public string IdentityCard { get; set; }
         public string Email { get; set; }
-        public string AccountID { get; set; }
+        public int AccountID { get; set; }
         public int MemberCardID { get; set; }
 
         public string Image { get; set; }
 
-        public List<Account> Account { get; } = new();
-        public List<MemberCard> MemberCard { get; set; }
+        public List<Order> Orders { get; set; }
+
+        public Account Account { get; set; } 
+        public MemberCard MemberCard { get; set; }
 
     }
 }

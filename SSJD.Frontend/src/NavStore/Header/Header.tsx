@@ -5,9 +5,9 @@ import './Header.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import logoimg from '../../Image/logo.jpg'
-import { useState } from 'react';
+import React, { useState } from 'react';
 
-function Header(){
+const Header:React.FC=()=>{
     const [openDropdown,setopenDropdown] = useState(null)
     const handleMouseEnter = (dropdownname:any) => {
         setopenDropdown(dropdownname);
@@ -30,7 +30,7 @@ function Header(){
             <div className='Title-Markers' 
                  onMouseEnter={() => handleMouseEnter('markers')}
                  onMouseLeave={handleMouseLeave}>
-                <span aria-expanded={openDropdown === 'markers' ? 'true' : 'false'}>
+                <span className='title' aria-expanded={openDropdown === 'markers' ? 'true' : 'false'}>
                     Markers
                 </span>
                 <i className="bi bi-arrow-down-short"></i>
@@ -50,7 +50,7 @@ function Header(){
             <div className="Title-ArtPaints" 
                  onMouseEnter={() => handleMouseEnter('artPaints')}
                  onMouseLeave={handleMouseLeave}>
-                <span aria-expanded={openDropdown === 'artPaints' ? 'true' : 'false'}>
+                <span className='title' aria-expanded={openDropdown === 'artPaints' ? 'true' : 'false'}>
                     Art and Paints
                 </span>
                 <i className="bi bi-arrow-down-short"></i>
@@ -68,13 +68,13 @@ function Header(){
                 </div>
             </div>
             <div className='Title-Hotsale'>
-                <span onClick={handleclick}> Hot Selling
+                <span className='title' onClick={handleclick}> Hot Selling
                 </span>
             </div>
             <div className="Title-Support" 
                  onMouseEnter={() => handleMouseEnter('Support')}
                  onMouseLeave={handleMouseLeave}>
-                <span aria-expanded={openDropdown === 'Support' ? 'true' : 'false'}>
+                <span className='title' aria-expanded={openDropdown === 'Support' ? 'true' : 'false'}>
                     Support
                 </span>
                 <i className="bi bi-arrow-down-short"></i>

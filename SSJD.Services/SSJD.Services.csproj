@@ -7,23 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="EmployeeService\Contract\" />
-    <Folder Include="EmployeeService\Employee\" />
-    <Folder Include="EmployeeService\Level\" />
-    <Folder Include="GeneralService\Account\" />
-    <Folder Include="GeneralService\Role\" />
-    <Folder Include="StoreService\Categoryy\" />
-    <Folder Include="StoreService\Customer\" />
-    <Folder Include="StoreService\MemberCard\" />
-    <Folder Include="EmployeeService\" />
-    <Folder Include="StoreService\" />
-    <Folder Include="StoreService\UnitShip\" />
-    <Folder Include="StoreService\Promotion\" />
-    <Folder Include="StoreService\ProductDetail\" />
-    <Folder Include="StoreService\Product\" />
-    <Folder Include="StoreService\OrderDetail\" />
-    <Folder Include="StoreService\Order\" />
-    <Folder Include="EmployeeService\Position\" />
+    <ProjectReference Include="..\SSJD.DataAccess\SSJD.DataAccess.csproj" />
+    <ProjectReference Include="..\SSJD.Entities\SSJD.Entities.csproj" />
+    <ProjectReference Include="..\SSJD.ViewModel\SSJD.ViewModel.csproj" />
   </ItemGroup>
 
 </Project>

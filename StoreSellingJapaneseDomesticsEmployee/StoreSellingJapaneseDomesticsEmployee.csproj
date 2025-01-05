@@ -24,4 +24,9 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SSJD.DataAccess\SSJD.DataAccess.csproj" />
+    <ProjectReference Include="..\SSJD.Services\SSJD.Services.csproj" />
+  </ItemGroup>
+
 </Project>

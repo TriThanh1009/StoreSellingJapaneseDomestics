@@ -1,13 +1,13 @@
 .container{
-    /* margin-top: 20px;
-    width: 100%;
-    border-radius: 10px;
-    height: 6rem; */
+   
 }
 .logo img{
     height: 5em;
 }
-
+.title-content{
+    font-size: 20px;
+    font-weight: normal;
+}
 .Title-Markers{
     cursor: pointer;
 }
@@ -21,7 +21,7 @@
     border: 1px solid gray;
 }
 
-.link-drop{
+.link-drop-header{
     text-decoration: none;
     color: black;
 }

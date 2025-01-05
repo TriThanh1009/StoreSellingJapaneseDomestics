@@ -1,25 +1,20 @@
-
+/* eslint-disable @typescript-eslint/no-unused-vars */
 
 import './App.css'
-import Footer from './NavStore/Footer/Footer'
-import Header from './NavStore/Header/Header'
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import routes from './NavStore/Routes/routes';
+import Layout from './NavStore/Layout/Layout';
 
-function App() {
-
-
+const App:React.FC=()=>{
   return (
-    <div className='d-flex flex-column min-vh-100'>
-      <div>
-        <Header/>
-      </div>        
-      <div className='flex-grow-1 p-4'>
-
-      </div>
-      <div className='footer'>
-        <Footer/>
-      </div>
-        
-    </div>
+    <Router>
+      <Routes>
+        {routes.map((route,index)=>(
+          <Route key={index} path={route.path} element={<Layout>{route.element}</Layout>}></Route>
+        ))}
+      </Routes>
+    </Router>
   )
 }
 

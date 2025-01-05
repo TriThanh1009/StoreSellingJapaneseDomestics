@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SSJD.DataAccess", "SSJD.Dat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StoreSellingJapaneseDomesticsEmployee", "StoreSellingJapaneseDomesticsEmployee\StoreSellingJapaneseDomesticsEmployee.csproj", "{A27BBC6E-425F-41BC-89C5-4CD5A95FF210}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SSJD.Services", "SSJD.Services\SSJD.Services.csproj", "{6FE4817F-F9D4-4D99-833F-4DF7FD2B7B2E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SSJD.Services", "SSJD.Services\SSJD.Services.csproj", "{6FE4817F-F9D4-4D99-833F-4DF7FD2B7B2E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SSJD.ViewModel", "SSJD.ViewModel\SSJD.ViewModel.csproj", "{FAD61476-3C81-42B4-864C-064719858E1B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{6FE4817F-F9D4-4D99-833F-4DF7FD2B7B2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6FE4817F-F9D4-4D99-833F-4DF7FD2B7B2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6FE4817F-F9D4-4D99-833F-4DF7FD2B7B2E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FAD61476-3C81-42B4-864C-064719858E1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FAD61476-3C81-42B4-864C-064719858E1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FAD61476-3C81-42B4-864C-064719858E1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FAD61476-3C81-42B4-864C-064719858E1B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

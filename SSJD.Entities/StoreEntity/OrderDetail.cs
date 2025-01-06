@@ -8,11 +8,11 @@ namespace SSJD.Entities.StoreEntity
 {
     public class OrderDetail
     {
-        public int ID { get; set; }
-        public int OrderID { get; set; }
+        public string ID { get; set; }
+        public string OrderID { get; set; }
         public decimal UnitPrice { get; set; }
         public int Quantity { get; set; }
-        public int PromotionID { get; set; }
+        public string PromotionID { get; set; }
         public decimal Subtotal { get; set; }
 
         public Order Order { get; } = new();

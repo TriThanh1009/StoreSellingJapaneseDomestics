@@ -8,10 +8,10 @@ namespace SSJD.Entities.StoreEntity
 {
     public class Order
     {
-        public int ID { get; set; }
-        public int CustomerID { get; set; }
+        public string ID { get; set; }
+        public string CustomerID { get; set; }
         public DateTime OrderDate { get; set; }
-        public int ShippingUnitID { get; set; }
+        public string ShippingUnitID { get; set; }
         public DateTime ShippingDate { get; set; }
         public string ShippingAddress { get; set; }
         public string OrderStatus { get; set; }
@@ -19,7 +19,7 @@ namespace SSJD.Entities.StoreEntity
         public string PaymentMethod { get; set; }
         public string PaymentStatus { get; set; }
 
-        public Customer Customer { get; set; } 
+        public User Customer { get; set; } 
         public UnitShip UnitShip { get; set; } 
         public OrderDetail OrderDetail { get; set; }
 

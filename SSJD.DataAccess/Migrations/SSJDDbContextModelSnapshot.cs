@@ -22,179 +22,225 @@ namespace SSJD.DataAccess.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("SSJD.Entities.EmployeeEntity.Contract", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Active")
-                        .HasMaxLength(10)
-                        .HasColumnType("int");
+                    b.Property<string>("Name")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
-                    b.Property<DateTime>("CreateDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 1, 3, 0, 21, 44, 892, DateTimeKind.Local).AddTicks(9923));
+                    b.Property<string>("NormalizedName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
-                    b.Property<int>("EmployeeID")
-                        .HasColumnType("int");
+                    b.HasKey("Id");
 
-                    b.Property<DateTime>("EndDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 1, 3, 0, 21, 44, 897, DateTimeKind.Local).AddTicks(7138));
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasDatabaseName("RoleNameIndex")
+                        .HasFilter("[NormalizedName] IS NOT NULL");
 
-                    b.Property<int>("LevelID")
-                        .HasColumnType("int");
+                    b.ToTable("AspNetRoles", (string)null);
 
-                    b.Property<int>("PositionID")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("Salary")
-                        .HasMaxLength(20)
-                        .HasColumnType("decimal(18,2)");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("EmployeeID");
-
-                    b.HasIndex("LevelID")
-                        .IsUnique();
-
-                    b.HasIndex("PositionID")
-                        .IsUnique();
-
-                    b.ToTable("Contract", (string)null);
+                    b.HasData(
+                        new
+                        {
+                            Id = "52afbd4f-4e7f-4fec-85a1-9011e8d323d7",
+                            Name = "Admin"
+                        },
+                        new
+                        {
+                            Id = "9c7a9e9a-c24c-4eba-9c79-4135b40eccb0",
+                            Name = "Customer"
+                        });
                 });
 
-            modelBuilder.Entity("SSJD.Entities.EmployeeEntity.Employee", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("AccountID")
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RoleId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetRoleClaims", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasMaxLength(60)
-                        .HasColumnType("nvarchar(60)");
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
                         .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<string>("FullName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("IdentityCard")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<int>("LevelID")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("LevelID1")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PhoneNumber")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasDefaultValue(15);
+                        .HasColumnType("nvarchar(max)")
+                        .HasDefaultValue("15");
 
-                    b.Property<int>("PositionID")
-                        .HasColumnType("int");
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
 
-                    b.Property<int?>("PositionID1")
-                        .HasColumnType("int");
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("RoleID")
-                        .HasColumnType("int");
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
 
-                    b.Property<int?>("RoleID1")
-                        .HasColumnType("int");
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
-                    b.Property<int>("Sex")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasDefaultValue(1);
+                    b.HasKey("Id");
 
-                    b.HasKey("ID");
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
 
-                    b.HasIndex("AccountID")
-                        .IsUnique();
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
 
-                    b.HasIndex("LevelID")
-                        .IsUnique();
+                    b.ToTable("AspNetUsers", (string)null);
 
-                    b.HasIndex("LevelID1");
-
-                    b.HasIndex("PositionID")
-                        .IsUnique();
-
-                    b.HasIndex("PositionID1");
-
-                    b.HasIndex("RoleID")
-                        .IsUnique();
-
-                    b.HasIndex("RoleID1");
-
-                    b.ToTable("Employee", (string)null);
+                    b.UseTptMappingStrategy();
                 });
 
-            modelBuilder.Entity("SSJD.Entities.EmployeeEntity.Level", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Name")
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("ID");
+                    b.HasKey("Id");
 
-                    b.ToTable("Level", (string)null);
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserClaims", (string)null);
                 });
 
-            modelBuilder.Entity("SSJD.Entities.EmployeeEntity.Position", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("nvarchar(450)");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+                    b.Property<string>("ProviderKey")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ProviderDisplayName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("LoginProvider", "ProviderKey");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserLogins", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("RoleId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetUserRoles", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("ID");
+                    b.Property<string>("Value")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.ToTable("Position", (string)null);
+                    b.HasKey("UserId", "LoginProvider", "Name");
+
+                    b.ToTable("AspNetUserTokens", (string)null);
                 });
 
             modelBuilder.Entity("SSJD.Entities.GeneralEnity.Account", b =>
                 {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+                    b.Property<string>("ID")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -218,33 +264,22 @@ namespace SSJD.DataAccess.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Account", (string)null);
-                });
 
-            modelBuilder.Entity("SSJD.Entities.GeneralEntity.Role", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("Role", (string)null);
+                    b.HasData(
+                        new
+                        {
+                            ID = "1",
+                            Email = "admin@gmail.com",
+                            Password = "admin",
+                            PasswordCheck = "admin",
+                            UserName = "admin"
+                        });
                 });
 
             modelBuilder.Entity("SSJD.Entities.StoreEntity.Category", b =>
                 {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+                    b.Property<string>("ID")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -256,72 +291,10 @@ namespace SSJD.DataAccess.Migrations
                     b.ToTable("Category", (string)null);
                 });
 
-            modelBuilder.Entity("SSJD.Entities.StoreEntity.Customer", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
-
-                    b.Property<int>("AccountID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasMaxLength(60)
-                        .HasColumnType("nvarchar(60)");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<string>("FullName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("IdentityCard")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<string>("Image")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("MemberCardID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PhoneNumber")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasDefaultValue(15);
-
-                    b.Property<int>("Sex")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasDefaultValue(1);
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("AccountID")
-                        .IsUnique();
-
-                    b.HasIndex("MemberCardID")
-                        .IsUnique();
-
-                    b.ToTable("Customer", (string)null);
-                });
-
             modelBuilder.Entity("SSJD.Entities.StoreEntity.MemberCard", b =>
                 {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+                    b.Property<string>("ID")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<decimal>("Discount")
                         .HasColumnType("decimal(18,2)");
@@ -336,23 +309,30 @@ namespace SSJD.DataAccess.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("MemberCard");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = "1",
+                            Discount = 30m,
+                            MemberClass = "Gold",
+                            Point = 2000
+                        });
                 });
 
             modelBuilder.Entity("SSJD.Entities.StoreEntity.Order", b =>
                 {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                    b.Property<string>("ID")
+                        .HasColumnType("nvarchar(450)");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
-
-                    b.Property<int>("CustomerID")
-                        .HasColumnType("int");
+                    b.Property<string>("CustomerID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("OrderDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 1, 3, 0, 21, 44, 912, DateTimeKind.Local).AddTicks(6470));
+                        .HasDefaultValue(new DateTime(2025, 1, 6, 18, 25, 38, 857, DateTimeKind.Local).AddTicks(6710));
 
                     b.Property<string>("OrderStatus")
                         .IsRequired()
@@ -376,10 +356,11 @@ namespace SSJD.DataAccess.Migrations
                     b.Property<DateTime>("ShippingDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 1, 3, 0, 21, 44, 913, DateTimeKind.Local).AddTicks(2096));
+                        .HasDefaultValue(new DateTime(2025, 1, 6, 18, 25, 38, 860, DateTimeKind.Local).AddTicks(8309));
 
-                    b.Property<int>("ShippingUnitID")
-                        .HasColumnType("int");
+                    b.Property<string>("ShippingUnitID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<decimal>("TotalPrice")
                         .HasMaxLength(50)
@@ -396,17 +377,16 @@ namespace SSJD.DataAccess.Migrations
 
             modelBuilder.Entity("SSJD.Entities.StoreEntity.OrderDetail", b =>
                 {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                    b.Property<string>("ID")
+                        .HasColumnType("nvarchar(450)");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+                    b.Property<string>("OrderID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("OrderID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PromotionID")
-                        .HasColumnType("int");
+                    b.Property<string>("PromotionID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("Quantity")
                         .HasMaxLength(20)
@@ -433,19 +413,17 @@ namespace SSJD.DataAccess.Migrations
 
             modelBuilder.Entity("SSJD.Entities.StoreEntity.Product", b =>
                 {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+                    b.Property<string>("ID")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Brand")
                         .IsRequired()
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
-                    b.Property<int>("CategoryID")
-                        .HasColumnType("int");
+                    b.Property<string>("CategoryID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Image")
                         .IsRequired()
@@ -480,11 +458,8 @@ namespace SSJD.DataAccess.Migrations
 
             modelBuilder.Entity("SSJD.Entities.StoreEntity.ProductDetail", b =>
                 {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+                    b.Property<string>("ID")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("AdditionalImage")
                         .IsRequired()
@@ -501,13 +476,14 @@ namespace SSJD.DataAccess.Migrations
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
-                    b.Property<int>("ProductID")
-                        .HasColumnType("int");
+                    b.Property<string>("ProductID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("Warranty")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 1, 3, 0, 21, 44, 918, DateTimeKind.Local).AddTicks(8250));
+                        .HasDefaultValue(new DateTime(2025, 1, 6, 18, 25, 38, 865, DateTimeKind.Local).AddTicks(3033));
 
                     b.HasKey("ID");
 
@@ -519,21 +495,18 @@ namespace SSJD.DataAccess.Migrations
 
             modelBuilder.Entity("SSJD.Entities.StoreEntity.Promotion", b =>
                 {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+                    b.Property<string>("ID")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("CreateDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 1, 3, 0, 21, 44, 919, DateTimeKind.Local).AddTicks(1389));
+                        .HasDefaultValue(new DateTime(2025, 1, 6, 18, 25, 38, 865, DateTimeKind.Local).AddTicks(5854));
 
                     b.Property<DateTime>("EndDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 1, 3, 0, 21, 44, 919, DateTimeKind.Local).AddTicks(1683));
+                        .HasDefaultValue(new DateTime(2025, 1, 6, 18, 25, 38, 865, DateTimeKind.Local).AddTicks(6256));
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -550,117 +523,141 @@ namespace SSJD.DataAccess.Migrations
 
             modelBuilder.Entity("SSJD.Entities.StoreEntity.UnitShip", b =>
                 {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+                    b.Property<string>("ID")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("ID");
 
-                    b.ToTable("UnitShip");
+                    b.ToTable("UnitShip", (string)null);
                 });
 
-            modelBuilder.Entity("SSJD.Entities.EmployeeEntity.Contract", b =>
+            modelBuilder.Entity("SSJD.Entities.StoreEntity.User", b =>
                 {
-                    b.HasOne("SSJD.Entities.EmployeeEntity.Employee", "Employee")
-                        .WithMany("Contract")
-                        .HasForeignKey("EmployeeID")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
-                    b.HasOne("SSJD.Entities.EmployeeEntity.Level", "Level")
-                        .WithOne("Contract")
-                        .HasForeignKey("SSJD.Entities.EmployeeEntity.Contract", "LevelID")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                    b.Property<string>("AccountID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
-                    b.HasOne("SSJD.Entities.EmployeeEntity.Position", "Position")
-                        .WithOne("Contract")
-                        .HasForeignKey("SSJD.Entities.EmployeeEntity.Contract", "PositionID")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)");
 
-                    b.Navigation("Employee");
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
-                    b.Navigation("Level");
+                    b.Property<string>("IdentityCard")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
-                    b.Navigation("Position");
+                    b.Property<string>("Image")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MemberCardID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("Sex")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(1);
+
+                    b.HasIndex("AccountID")
+                        .IsUnique()
+                        .HasFilter("[AccountID] IS NOT NULL");
+
+                    b.HasIndex("MemberCardID")
+                        .IsUnique()
+                        .HasFilter("[MemberCardID] IS NOT NULL");
+
+                    b.ToTable("User", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "952d2073-c0f1-481b-9638-29a888d6b246",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "f4149b4f-da9b-464b-be3f-6e80e446d2ef",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            PhoneNumber = "123123",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "7e60b44f-8003-4897-a5ec-602b0ff6bc43",
+                            TwoFactorEnabled = false,
+                            AccountID = "1",
+                            Address = "Viet Nam",
+                            FullName = "Nguyen Tri Thanh",
+                            IdentityCard = "123",
+                            Image = "122",
+                            MemberCardID = "1",
+                            Sex = 1
+                        });
                 });
 
-            modelBuilder.Entity("SSJD.Entities.EmployeeEntity.Employee", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
-                    b.HasOne("SSJD.Entities.GeneralEnity.Account", "Account")
-                        .WithOne("Employee")
-                        .HasForeignKey("SSJD.Entities.EmployeeEntity.Employee", "AccountID")
-                        .OnDelete(DeleteBehavior.Restrict)
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("SSJD.Entities.EmployeeEntity.Level", "Level")
-                        .WithOne("Employee")
-                        .HasForeignKey("SSJD.Entities.EmployeeEntity.Employee", "LevelID")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("SSJD.Entities.EmployeeEntity.Level", null)
-                        .WithMany("Employees")
-                        .HasForeignKey("LevelID1");
-
-                    b.HasOne("SSJD.Entities.EmployeeEntity.Position", "Position")
-                        .WithOne("Employee")
-                        .HasForeignKey("SSJD.Entities.EmployeeEntity.Employee", "PositionID")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("SSJD.Entities.EmployeeEntity.Position", null)
-                        .WithMany("Employees")
-                        .HasForeignKey("PositionID1");
-
-                    b.HasOne("SSJD.Entities.GeneralEntity.Role", "Role")
-                        .WithOne("Employee")
-                        .HasForeignKey("SSJD.Entities.EmployeeEntity.Employee", "RoleID")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("SSJD.Entities.GeneralEntity.Role", null)
-                        .WithMany("Employees")
-                        .HasForeignKey("RoleID1");
-
-                    b.Navigation("Account");
-
-                    b.Navigation("Level");
-
-                    b.Navigation("Position");
-
-                    b.Navigation("Role");
                 });
 
-            modelBuilder.Entity("SSJD.Entities.StoreEntity.Customer", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("SSJD.Entities.GeneralEnity.Account", "Account")
-                        .WithOne("Customer")
-                        .HasForeignKey("SSJD.Entities.StoreEntity.Customer", "AccountID")
-                        .OnDelete(DeleteBehavior.Restrict)
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SSJD.Entities.StoreEntity.MemberCard", "MemberCard")
-                        .WithOne("Customer")
-                        .HasForeignKey("SSJD.Entities.StoreEntity.Customer", "MemberCardID")
-                        .OnDelete(DeleteBehavior.Restrict)
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
 
-                    b.Navigation("Account");
-
-                    b.Navigation("MemberCard");
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("SSJD.Entities.StoreEntity.Order", b =>
                 {
-                    b.HasOne("SSJD.Entities.StoreEntity.Customer", "Customer")
+                    b.HasOne("SSJD.Entities.StoreEntity.User", "Customer")
                         .WithMany("Orders")
                         .HasForeignKey("CustomerID")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -718,48 +715,35 @@ namespace SSJD.DataAccess.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("SSJD.Entities.EmployeeEntity.Employee", b =>
+            modelBuilder.Entity("SSJD.Entities.StoreEntity.User", b =>
                 {
-                    b.Navigation("Contract");
-                });
-
-            modelBuilder.Entity("SSJD.Entities.EmployeeEntity.Level", b =>
-                {
-                    b.Navigation("Contract")
+                    b.HasOne("SSJD.Entities.GeneralEnity.Account", "Account")
+                        .WithOne("User")
+                        .HasForeignKey("SSJD.Entities.StoreEntity.User", "AccountID")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("Employee")
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                        .WithOne()
+                        .HasForeignKey("SSJD.Entities.StoreEntity.User", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Employees");
-                });
-
-            modelBuilder.Entity("SSJD.Entities.EmployeeEntity.Position", b =>
-                {
-                    b.Navigation("Contract")
+                    b.HasOne("SSJD.Entities.StoreEntity.MemberCard", "MemberCard")
+                        .WithOne("User")
+                        .HasForeignKey("SSJD.Entities.StoreEntity.User", "MemberCardID")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("Employee")
-                        .IsRequired();
+                    b.Navigation("Account");
 
-                    b.Navigation("Employees");
+                    b.Navigation("MemberCard");
                 });
 
             modelBuilder.Entity("SSJD.Entities.GeneralEnity.Account", b =>
                 {
-                    b.Navigation("Customer")
+                    b.Navigation("User")
                         .IsRequired();
-
-                    b.Navigation("Employee")
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("SSJD.Entities.GeneralEntity.Role", b =>
-                {
-                    b.Navigation("Employee")
-                        .IsRequired();
-
-                    b.Navigation("Employees");
                 });
 
             modelBuilder.Entity("SSJD.Entities.StoreEntity.Category", b =>
@@ -768,14 +752,9 @@ namespace SSJD.DataAccess.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("SSJD.Entities.StoreEntity.Customer", b =>
-                {
-                    b.Navigation("Orders");
-                });
-
             modelBuilder.Entity("SSJD.Entities.StoreEntity.MemberCard", b =>
                 {
-                    b.Navigation("Customer")
+                    b.Navigation("User")
                         .IsRequired();
                 });
 
@@ -798,6 +777,11 @@ namespace SSJD.DataAccess.Migrations
                 });
 
             modelBuilder.Entity("SSJD.Entities.StoreEntity.UnitShip", b =>
+                {
+                    b.Navigation("Orders");
+                });
+
+            modelBuilder.Entity("SSJD.Entities.StoreEntity.User", b =>
                 {
                     b.Navigation("Orders");
                 });

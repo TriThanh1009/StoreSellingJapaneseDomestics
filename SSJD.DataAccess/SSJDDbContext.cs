@@ -1,11 +1,12 @@
-﻿
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
-using SSJD.DataAccess.EmployeeConfigurations;
+using SSJD.DataAccess.Extension;
 using SSJD.DataAccess.GeneralConfigurations;
 using SSJD.DataAccess.StoreConfigurations;
-using SSJD.Entities.EmployeeEntity;
 using SSJD.Entities.GeneralEnity;
+using SSJD.Entities.GeneralEntity;
 using SSJD.Entities.StoreEntity;
 using System;
 using System.Collections.Generic;
@@ -15,19 +16,14 @@ using System.Threading.Tasks;
 
 namespace SSJD.DataAccess
 {
-    public class SSJDDbContext : DbContext
+    public class SSJDDbContext : IdentityDbContext<IdentityUser>
     {
         public SSJDDbContext(DbContextOptions options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new ContractConfiguration());
-            modelBuilder.ApplyConfiguration(new EmployeeConfiguration());
-            modelBuilder.ApplyConfiguration(new LevelConfiguration());
-            modelBuilder.ApplyConfiguration(new PositionConfiguration());
             modelBuilder.ApplyConfiguration(new AccountConfiguration());
-            modelBuilder.ApplyConfiguration(new RoleConfiguration());
-            modelBuilder.ApplyConfiguration(new CustomerConfiguration());
+            modelBuilder.ApplyConfiguration(new UserConfiguration());
             modelBuilder.ApplyConfiguration(new OrderConfiguration());
             modelBuilder.ApplyConfiguration(new OrderDetailConfiguration());
             modelBuilder.ApplyConfiguration(new ProductConfiguration());
@@ -35,7 +31,7 @@ namespace SSJD.DataAccess
             modelBuilder.ApplyConfiguration(new PromotionConfiguration());
             modelBuilder.ApplyConfiguration(new CategoryConfiguration());
             modelBuilder.ApplyConfiguration(new UnitShipConfiguration());
-            //modelBuilder.Seed();
+            modelBuilder.Seed();
             base.OnModelCreating(modelBuilder);
         }
 
@@ -46,11 +42,8 @@ namespace SSJD.DataAccess
         }
 
         
-        public DbSet<Employee> Employee { get; set; }
-        public DbSet<Level> Level { get; set; }
-        public DbSet<Position> Position { get; set; }
         public DbSet<Account> Account { get; set; }
-        public DbSet<Customer> Customer { get; set; }
+        public DbSet<User> User { get; set; }
         public DbSet<MemberCard> MemberCard { get; set; }
         public DbSet<Order> Order { get; set; }
         public DbSet<OrderDetail> OrderDetail { get; set; }
@@ -59,7 +52,6 @@ namespace SSJD.DataAccess
         public DbSet<Promotion> Promotion { get; set; }
         public DbSet<Category> Category { get; set; }
         public DbSet<UnitShip> UnitShip { get; set; }
-        public DbSet<Contract> Contract { get; set; }
 
     }
     

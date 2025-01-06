@@ -1,7 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.OpenApi.Models;
 using SSJD.DataAccess;
+using SSJD.Entities.StoreEntity;
 
 namespace StoreSellingJapaneseDomestics
 {
@@ -25,7 +28,7 @@ namespace StoreSellingJapaneseDomestics
 
             services.AddEndpointsApiExplorer();
             services.AddHttpContextAccessor();
-  
+            services.AddIdentity<IdentityUser,IdentityRole>().AddEntityFrameworkStores<SSJDDbContext>().AddDefaultTokenProviders();
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddControllersWithViews();
 

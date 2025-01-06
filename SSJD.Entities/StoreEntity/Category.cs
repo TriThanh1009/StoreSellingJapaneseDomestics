@@ -8,7 +8,7 @@ namespace SSJD.Entities.StoreEntity
 {
     public class Category
     {
-        public int ID { get; set; }
+        public string ID { get; set; }
         public string Name { get; set; }
 
         public Product Product { get; set; } 

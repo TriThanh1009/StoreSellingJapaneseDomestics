@@ -8,7 +8,7 @@ namespace SSJD.Entities.StoreEntity
 {
     public class UnitShip
     {
-        public int ID { get; set; }
+        public string ID { get; set; }
         public string Name { get; set; }
 
         public List<Order> Orders { get; } 

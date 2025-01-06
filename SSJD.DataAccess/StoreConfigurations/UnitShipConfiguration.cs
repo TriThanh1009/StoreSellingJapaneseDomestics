@@ -1,19 +1,19 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
-using SSJD.Entities.EmployeeEntity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SSJD.Entities.StoreEntity;
 
 namespace SSJD.DataAccess.StoreConfigurations
 {
-    public class UnitShipConfiguration : IEntityTypeConfiguration<Level>
+    public class UnitShipConfiguration : IEntityTypeConfiguration<UnitShip>
     {
-        public void Configure(EntityTypeBuilder<Level> builder)
+        public void Configure(EntityTypeBuilder<UnitShip> builder)
         {
-            builder.ToTable("Level");
+            builder.ToTable("UnitShip");
             builder.HasKey("ID");
             builder.Property("ID").IsRequired();
             builder.Property("Name").IsRequired().HasMaxLength(50);

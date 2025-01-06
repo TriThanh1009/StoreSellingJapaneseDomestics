@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.1.39" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.11" />
+    <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="9.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\SSJD.DataAccess\SSJD.DataAccess.csproj" />
     <ProjectReference Include="..\SSJD.Entities\SSJD.Entities.csproj" />
     <ProjectReference Include="..\SSJD.ViewModel\SSJD.ViewModel.csproj" />

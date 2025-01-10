@@ -1,37 +1,107 @@
-﻿using SSJD.Services.GeneralService.Base;
+﻿using Microsoft.EntityFrameworkCore;
+using SharpCompress.Common;
+using SSJD.DataAccess;
+using SSJD.Services.GeneralService.Base;
 using SSJD.ViewModel.GeneralViewModel.PageResult;
 using SSJD.ViewModel.StoreViewModel.Customer;
+using SSJD.ViewModel.StoreViewModel.User;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace SSJD.Services.StoreService.User
 {
-    public class UserService : IBaseService<SSJD.Entities.StoreEntity.User,UserViewModel>,IUserService
+    public class UserService : IUserService
     {
-        public Task Create(Entities.StoreEntity.User entity)
+        private readonly SSJDDbContext _context;
+        public UserService(SSJDDbContext context)
         {
-            throw new NotImplementedException();
+            _context = context; 
+        }
+        public async Task Create(UserRequestModel request)
+        {
+            var entity = new Entities.StoreEntity.User()
+            {
+                FullName = request.FullName,
+                PhoneNumber = request.PhoneNumber,
+                Address = request.Address,
+                IdentityCard = request.IdentityCard,
+                Email = request.Email,
+                AccountID = request.AccountID,
+                MemberCardID = request.MemberCardID,
+                Image = request.Image
+            };
+            _context.User.Add(entity);
+            await _context.SaveChangesAsync();
         }
 
-        public Task Delete(Entities.StoreEntity.User entity)
+        public async Task Delete(string id)
         {
-            throw new NotImplementedException();
+            var entity = await _context.User.FindAsync(id);
+            _context.User.Remove(entity);
+            await _context.SaveChangesAsync();
         }
 
-        public Task Edit(Entities.StoreEntity.User entity)
+        public async Task Edit(UserRequestModel request)
         {
-            throw new NotImplementedException();
+            var data = await _context.User.FindAsync(request.Id);
+            if (data != null)
+            {
+                data.FullName = request.FullName;
+                data.PhoneNumber = request.PhoneNumber;
+                data.Address = request.Address;
+                data.IdentityCard = request.IdentityCard;
+                data.Email = request.Email;
+                data.AccountID = request.AccountID;
+                data.MemberCardID = request.MemberCardID;
+                data.Image = request.Image;
+                _context.User.Update(data);
+                await _context.SaveChangesAsync();
+            }
+
         }
 
-        public Task<List<UserViewModel>> GetAll()
+        public async Task<List<UserViewModel>> GetAll()
         {
-            throw new NotImplementedException();
+            var query = from u in _context.User
+                        join a in _context.Account on u.AccountID equals a.ID
+                        join m in _context.MemberCard on u.MemberCardID equals m.ID
+                        select new { u, a,m };
+            var data = await query.Select(x => new UserViewModel()
+            {
+                FullName = x.u.FullName,
+                PhoneNumber = x.u.PhoneNumber ?? "",
+                Address = x.u.Address,
+                IdentityCard = x.u.IdentityCard,
+                Email = x.u.Email ?? "",
+                Account = x.a.UserName,
+                MemberCard = x.m.MemberClass,
+                Image = x.u.Image
+            }).ToListAsync();
+            return data;
         }
 
-        public Task<UserViewModel> GetByID(string id)
+        public async Task<UserRequestModel?> GetByID(string id)
+        {
+            var data = await _context.User.FindAsync(id);
+            var getdata = new UserRequestModel()
+            {
+                FullName = data.FullName,
+                PhoneNumber = data.PhoneNumber ?? "",
+                Address = data.Address,
+                IdentityCard = data.IdentityCard,
+                Email = data.Email ?? "",
+                AccountID = data.AccountID,
+                MemberCardID = data.MemberCardID,
+                Image = data.Image
+            };
+            return getdata;
+        }
+
+        public Task<List<UserRequestModel>> GetListByID(string id)
         {
             throw new NotImplementedException();
         }
@@ -40,5 +110,6 @@ namespace SSJD.Services.StoreService.User
         {
             throw new NotImplementedException();
         }
+
     }
 }

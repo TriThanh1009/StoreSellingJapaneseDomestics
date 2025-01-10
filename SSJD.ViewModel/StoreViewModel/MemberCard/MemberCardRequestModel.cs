@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SSJD.ViewModel.StoreViewModel.MemberCard
 {
-    public class MemberCardViewModel
+    public class MemberCardRequestModel
     {
         public string ID { get; set; } = "";
         public int Point { get; set; } = 0;

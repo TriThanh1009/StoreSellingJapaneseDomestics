@@ -9,6 +9,6 @@ namespace SSJD.ViewModel.GeneralViewModel.PageResult
 {
     public class PagedResult<T> :PagingRequestBase
     {
-        public List<T> Items { set; get; }
+        public List<T> Items { set; get; } = new List<T>();
     }
 }

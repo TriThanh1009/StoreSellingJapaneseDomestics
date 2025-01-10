@@ -6,14 +6,13 @@ using System.Threading.Tasks;
 
 namespace SSJD.ViewModel.StoreViewModel.OrderDetail
 {
-    public class OrderDetailViewModel
+    public class OrderDetailRequestModel
     {
         public string ID { get; set; } = "";
         public string OrderID { get; set; } = "";
-        public string UnitProduct { get; set; } = "";
-        public decimal UnitPrice { get; set; } = 0;
+        public string ProductID { get; set; } = "";
         public int Quantity { get; set; } = 0;
         public decimal Subtotal { get; set; } = 0;
-        public string Promotion { get; set; } = "";
+        public string PromotionID { get; set; } = "";
     }
 }

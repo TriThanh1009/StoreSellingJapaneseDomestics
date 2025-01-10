@@ -1,4 +1,5 @@
-﻿using SSJD.ViewModel.GeneralViewModel.PageResult;
+﻿using SSJD.Services.GeneralService.Base;
+using SSJD.ViewModel.GeneralViewModel.PageResult;
 using SSJD.ViewModel.StoreViewModel.ProductDetail;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SSJD.Services.StoreService.ProductDetail
 {
-    public interface IProductDetailService
+    public interface IProductDetailService : IBaseService<ProductDetailRequestModel, ProductDetailViewModel>
     {
         Task<PagedResult<ProductDetailViewModel>> GetProductDetailViewModel (ProductDetailPagingRequest request);
     }

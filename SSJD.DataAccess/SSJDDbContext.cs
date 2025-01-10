@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 using SSJD.DataAccess.Extension;
 using SSJD.DataAccess.GeneralConfigurations;
 using SSJD.DataAccess.StoreConfigurations;
-using SSJD.Entities.GeneralEnity;
 using SSJD.Entities.GeneralEntity;
 using SSJD.Entities.StoreEntity;
 using System;

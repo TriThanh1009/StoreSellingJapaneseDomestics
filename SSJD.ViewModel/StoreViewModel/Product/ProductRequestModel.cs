@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace SSJD.ViewModel.StoreViewModel.Product
 {
-    public class ProductViewModel
+    public class ProductRequestModel
     {
         public string ID { get; set; } = "";
         public string Name { get; set; } = "";
         public string Brand { get; set; } = "";
-        public string Category { get; set; } = "";
+        public string CategoryID { get; set; } = "";
         public decimal Price { get; set; } = 0;
         public int Stock { get; set; } = 0;
         public Active isActive { get; set; } = Active.No;

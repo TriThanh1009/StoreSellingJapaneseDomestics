@@ -1,5 +1,4 @@
-version: '3.8'
-
+version: "3.9"
 
 services:
   sdb:
@@ -12,12 +11,28 @@ services:
       - "1444:1433"
     networks:
       - demo-mynetwork
+  
+  ssjd-api:
+    container_name: ssjd-api
+    build:
+      context: ./
+      dockerfile: StoreSellingJapaneseDomestics\Dockerfile
+    ports:
+      - 3333:8080
+    networks:
+      - demo-mynetwork
+    environment:
+      ASPNETCORE_ENVIRONMENT : Staging
+    volumes:
+      - '../StoreSellingJapaneseDomestics/StoreSellingJapaneseDomestics:/app/data'
+    depends_on:
+      - sdb
 
   # mongodb:
   #   image: mongo:6.0
   #   container_name: mongodb_container
   #   ports:
-  #     - "27017:27017"
+  #     - "27017:27017" 
   #   environment:
   #     MONGO_INITDB_ROOT_USERNAME: admin
   #     MONGO_INITDB_ROOT_PASSWORD: password

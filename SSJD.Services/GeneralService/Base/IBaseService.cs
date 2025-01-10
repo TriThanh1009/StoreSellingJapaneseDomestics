@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 
 namespace SSJD.Services.GeneralService.Base
 {
-    public interface IBaseService<T,TViewModel> where T : class
+    public interface IBaseService<TRequestModel, TViewModel> where TRequestModel : class
     {
-        Task Create(T entity);
-        Task Edit(T entity);
-        Task Delete(T entity);
-        Task<TViewModel> GetByID(string id);
+        Task Create(TRequestModel request);
+        Task Edit(TRequestModel request);
+        Task Delete(string id);
+        Task<TRequestModel?> GetByID(string id);
+        Task<List<TRequestModel>> GetListByID(string id);
         Task<List<TViewModel>> GetAll();
     }
 }

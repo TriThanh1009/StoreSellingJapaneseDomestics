@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using SSJD.Entities.GeneralEnity;
 using SSJD.Entities.GeneralEntity;
 using SSJD.Entities.StoreEntity;
 using System;

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SSJD.Entities.StoreEntity
+namespace SSJD.ViewModel.StoreViewModel.ProductDetail
 {
-    public class ProductDetail
+    public class ProductDetailRequestModel
     {
         public string ID { get; set; } = "";
         public string ProductID { get; set; } = "";
@@ -14,7 +14,5 @@ namespace SSJD.Entities.StoreEntity
         public DateTime Warranty { get; set; } = DateTime.Now;
         public string Origin { get; set; } = "";
         public string AdditionalImage { get; set; } = "";
-
-        public Product Product { get; set; } 
     }
 }

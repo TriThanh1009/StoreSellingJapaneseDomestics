@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using SSJD.Entities.GeneralEnity;
+using SSJD.Entities.GeneralEntity;
 using System;
 using System.Collections.Generic;
 using System.Linq;

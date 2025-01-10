@@ -16,91 +16,91 @@ namespace SSJD.DataAccess.Migrations
             migrationBuilder.DeleteData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
-                keyValue: "0d2cb443-cfa1-4308-b4ae-f68694d73ee9");
+                keyValue: "5c321b49-7d26-4892-976c-6ff6282d37b2");
 
             migrationBuilder.DeleteData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
-                keyValue: "53ed45bb-5dd0-4f9c-b9ae-6896db00fa35");
+                keyValue: "b209c315-e88d-471b-982a-d2c8b49b90ca");
 
             migrationBuilder.DeleteData(
                 table: "User",
                 keyColumn: "Id",
-                keyValue: "17e6adf6-c756-41d3-9158-2c83678bb2a5");
+                keyValue: "2b9e005c-c9a0-4a11-8117-295b9503324b");
 
             migrationBuilder.DeleteData(
                 table: "AspNetUsers",
                 keyColumn: "Id",
-                keyValue: "17e6adf6-c756-41d3-9158-2c83678bb2a5");
+                keyValue: "2b9e005c-c9a0-4a11-8117-295b9503324b");
 
             migrationBuilder.AlterColumn<DateTime>(
                 name: "EndDate",
                 table: "Promotion",
                 type: "datetime2",
                 nullable: false,
-                defaultValue: new DateTime(2025, 1, 6, 18, 25, 38, 865, DateTimeKind.Local).AddTicks(6256),
+                defaultValue: new DateTime(2025, 1, 8, 21, 39, 37, 420, DateTimeKind.Local).AddTicks(2001),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
-                oldDefaultValue: new DateTime(2025, 1, 6, 18, 25, 27, 942, DateTimeKind.Local).AddTicks(2706));
+                oldDefaultValue: new DateTime(2025, 1, 8, 21, 39, 8, 985, DateTimeKind.Local).AddTicks(4208));
 
             migrationBuilder.AlterColumn<DateTime>(
                 name: "CreateDate",
                 table: "Promotion",
                 type: "datetime2",
                 nullable: false,
-                defaultValue: new DateTime(2025, 1, 6, 18, 25, 38, 865, DateTimeKind.Local).AddTicks(5854),
+                defaultValue: new DateTime(2025, 1, 8, 21, 39, 37, 420, DateTimeKind.Local).AddTicks(1517),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
-                oldDefaultValue: new DateTime(2025, 1, 6, 18, 25, 27, 942, DateTimeKind.Local).AddTicks(2394));
+                oldDefaultValue: new DateTime(2025, 1, 8, 21, 39, 8, 985, DateTimeKind.Local).AddTicks(3834));
 
             migrationBuilder.AlterColumn<DateTime>(
                 name: "Warranty",
                 table: "ProductDetail",
                 type: "datetime2",
                 nullable: false,
-                defaultValue: new DateTime(2025, 1, 6, 18, 25, 38, 865, DateTimeKind.Local).AddTicks(3033),
+                defaultValue: new DateTime(2025, 1, 8, 21, 39, 37, 419, DateTimeKind.Local).AddTicks(5959),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
-                oldDefaultValue: new DateTime(2025, 1, 6, 18, 25, 27, 941, DateTimeKind.Local).AddTicks(9261));
+                oldDefaultValue: new DateTime(2025, 1, 8, 21, 39, 8, 985, DateTimeKind.Local).AddTicks(132));
 
             migrationBuilder.AlterColumn<DateTime>(
                 name: "ShippingDate",
                 table: "Order",
                 type: "datetime2",
                 nullable: false,
-                defaultValue: new DateTime(2025, 1, 6, 18, 25, 38, 860, DateTimeKind.Local).AddTicks(8309),
+                defaultValue: new DateTime(2025, 1, 8, 21, 39, 37, 408, DateTimeKind.Local).AddTicks(6037),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
-                oldDefaultValue: new DateTime(2025, 1, 6, 18, 25, 27, 936, DateTimeKind.Local).AddTicks(5726));
+                oldDefaultValue: new DateTime(2025, 1, 8, 21, 39, 8, 971, DateTimeKind.Local).AddTicks(1848));
 
             migrationBuilder.AlterColumn<DateTime>(
                 name: "OrderDate",
                 table: "Order",
                 type: "datetime2",
                 nullable: false,
-                defaultValue: new DateTime(2025, 1, 6, 18, 25, 38, 857, DateTimeKind.Local).AddTicks(6710),
+                defaultValue: new DateTime(2025, 1, 8, 21, 39, 37, 404, DateTimeKind.Local).AddTicks(1953),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
-                oldDefaultValue: new DateTime(2025, 1, 6, 18, 25, 27, 928, DateTimeKind.Local).AddTicks(7211));
+                oldDefaultValue: new DateTime(2025, 1, 8, 21, 39, 8, 941, DateTimeKind.Local).AddTicks(8133));
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "52afbd4f-4e7f-4fec-85a1-9011e8d323d7", null, "Admin", null },
-                    { "9c7a9e9a-c24c-4eba-9c79-4135b40eccb0", null, "Customer", null }
+                    { "a0fd5499-b31e-4737-976a-52b3c99596bf", null, "Admin", null },
+                    { "dd81ce62-d468-4540-9675-00563beb14db", null, "Customer", null }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "952d2073-c0f1-481b-9638-29a888d6b246", 0, "f4149b4f-da9b-464b-be3f-6e80e446d2ef", null, false, false, null, null, null, null, "123123", false, "7e60b44f-8003-4897-a5ec-602b0ff6bc43", false, null });
+                values: new object[] { "10b10369-2b3f-40c9-8cbd-8faca4a3ee48", 0, "4ed2c47a-599a-45fe-8c2e-352fb35e4267", null, false, false, null, null, null, null, "123123", false, "97f3af96-7c47-4095-813f-71b4464bdda8", false, null });
 
             migrationBuilder.InsertData(
                 table: "User",
                 columns: new[] { "Id", "AccountID", "Address", "FullName", "IdentityCard", "Image", "MemberCardID", "Sex" },
-                values: new object[] { "952d2073-c0f1-481b-9638-29a888d6b246", "1", "Viet Nam", "Nguyen Tri Thanh", "123", "122", "1", 1 });
+                values: new object[] { "10b10369-2b3f-40c9-8cbd-8faca4a3ee48", "1", "Viet Nam", "Nguyen Tri Thanh", "123", "122", "1", 1 });
         }
 
         /// <inheritdoc />
@@ -109,91 +109,91 @@ namespace SSJD.DataAccess.Migrations
             migrationBuilder.DeleteData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
-                keyValue: "52afbd4f-4e7f-4fec-85a1-9011e8d323d7");
+                keyValue: "a0fd5499-b31e-4737-976a-52b3c99596bf");
 
             migrationBuilder.DeleteData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
-                keyValue: "9c7a9e9a-c24c-4eba-9c79-4135b40eccb0");
+                keyValue: "dd81ce62-d468-4540-9675-00563beb14db");
 
             migrationBuilder.DeleteData(
                 table: "User",
                 keyColumn: "Id",
-                keyValue: "952d2073-c0f1-481b-9638-29a888d6b246");
+                keyValue: "10b10369-2b3f-40c9-8cbd-8faca4a3ee48");
 
             migrationBuilder.DeleteData(
                 table: "AspNetUsers",
                 keyColumn: "Id",
-                keyValue: "952d2073-c0f1-481b-9638-29a888d6b246");
+                keyValue: "10b10369-2b3f-40c9-8cbd-8faca4a3ee48");
 
             migrationBuilder.AlterColumn<DateTime>(
                 name: "EndDate",
                 table: "Promotion",
                 type: "datetime2",
                 nullable: false,
-                defaultValue: new DateTime(2025, 1, 6, 18, 25, 27, 942, DateTimeKind.Local).AddTicks(2706),
+                defaultValue: new DateTime(2025, 1, 8, 21, 39, 8, 985, DateTimeKind.Local).AddTicks(4208),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
-                oldDefaultValue: new DateTime(2025, 1, 6, 18, 25, 38, 865, DateTimeKind.Local).AddTicks(6256));
+                oldDefaultValue: new DateTime(2025, 1, 8, 21, 39, 37, 420, DateTimeKind.Local).AddTicks(2001));
 
             migrationBuilder.AlterColumn<DateTime>(
                 name: "CreateDate",
                 table: "Promotion",
                 type: "datetime2",
                 nullable: false,
-                defaultValue: new DateTime(2025, 1, 6, 18, 25, 27, 942, DateTimeKind.Local).AddTicks(2394),
+                defaultValue: new DateTime(2025, 1, 8, 21, 39, 8, 985, DateTimeKind.Local).AddTicks(3834),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
-                oldDefaultValue: new DateTime(2025, 1, 6, 18, 25, 38, 865, DateTimeKind.Local).AddTicks(5854));
+                oldDefaultValue: new DateTime(2025, 1, 8, 21, 39, 37, 420, DateTimeKind.Local).AddTicks(1517));
 
             migrationBuilder.AlterColumn<DateTime>(
                 name: "Warranty",
                 table: "ProductDetail",
                 type: "datetime2",
                 nullable: false,
-                defaultValue: new DateTime(2025, 1, 6, 18, 25, 27, 941, DateTimeKind.Local).AddTicks(9261),
+                defaultValue: new DateTime(2025, 1, 8, 21, 39, 8, 985, DateTimeKind.Local).AddTicks(132),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
-                oldDefaultValue: new DateTime(2025, 1, 6, 18, 25, 38, 865, DateTimeKind.Local).AddTicks(3033));
+                oldDefaultValue: new DateTime(2025, 1, 8, 21, 39, 37, 419, DateTimeKind.Local).AddTicks(5959));
 
             migrationBuilder.AlterColumn<DateTime>(
                 name: "ShippingDate",
                 table: "Order",
                 type: "datetime2",
                 nullable: false,
-                defaultValue: new DateTime(2025, 1, 6, 18, 25, 27, 936, DateTimeKind.Local).AddTicks(5726),
+                defaultValue: new DateTime(2025, 1, 8, 21, 39, 8, 971, DateTimeKind.Local).AddTicks(1848),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
-                oldDefaultValue: new DateTime(2025, 1, 6, 18, 25, 38, 860, DateTimeKind.Local).AddTicks(8309));
+                oldDefaultValue: new DateTime(2025, 1, 8, 21, 39, 37, 408, DateTimeKind.Local).AddTicks(6037));
 
             migrationBuilder.AlterColumn<DateTime>(
                 name: "OrderDate",
                 table: "Order",
                 type: "datetime2",
                 nullable: false,
-                defaultValue: new DateTime(2025, 1, 6, 18, 25, 27, 928, DateTimeKind.Local).AddTicks(7211),
+                defaultValue: new DateTime(2025, 1, 8, 21, 39, 8, 941, DateTimeKind.Local).AddTicks(8133),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
-                oldDefaultValue: new DateTime(2025, 1, 6, 18, 25, 38, 857, DateTimeKind.Local).AddTicks(6710));
+                oldDefaultValue: new DateTime(2025, 1, 8, 21, 39, 37, 404, DateTimeKind.Local).AddTicks(1953));
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "0d2cb443-cfa1-4308-b4ae-f68694d73ee9", null, "Customer", null },
-                    { "53ed45bb-5dd0-4f9c-b9ae-6896db00fa35", null, "Admin", null }
+                    { "5c321b49-7d26-4892-976c-6ff6282d37b2", null, "Admin", null },
+                    { "b209c315-e88d-471b-982a-d2c8b49b90ca", null, "Customer", null }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "17e6adf6-c756-41d3-9158-2c83678bb2a5", 0, "e91a859f-2ae3-4bfc-8cda-1a62fcf7eb16", null, false, false, null, null, null, null, "123123", false, "81002f3e-03d0-4fea-a28e-6316a1176cd0", false, null });
+                values: new object[] { "2b9e005c-c9a0-4a11-8117-295b9503324b", 0, "ebbe7708-714d-475e-9770-ca54491b6241", null, false, false, null, null, null, null, "123123", false, "c9d9aa5b-5ee3-4dd2-8b82-858d4ff7d120", false, null });
 
             migrationBuilder.InsertData(
                 table: "User",
                 columns: new[] { "Id", "AccountID", "Address", "FullName", "IdentityCard", "Image", "MemberCardID", "Sex" },
-                values: new object[] { "17e6adf6-c756-41d3-9158-2c83678bb2a5", "1", "Viet Nam", "Nguyen Tri Thanh", "123", "122", "1", 1 });
+                values: new object[] { "2b9e005c-c9a0-4a11-8117-295b9503324b", "1", "Viet Nam", "Nguyen Tri Thanh", "123", "122", "1", 1 });
         }
     }
 }

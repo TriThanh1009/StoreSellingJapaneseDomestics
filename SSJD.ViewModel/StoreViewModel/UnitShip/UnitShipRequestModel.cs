@@ -4,12 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SSJD.ViewModel.StoreViewModel.Category
+namespace SSJD.ViewModel.StoreViewModel.UnitShip
 {
-    public class CategoryViewModel
+    public class UnitShipRequestModel
     {
         public string ID { get; set; } = "";
         public string Name { get; set; } = "";
-
     }
 }

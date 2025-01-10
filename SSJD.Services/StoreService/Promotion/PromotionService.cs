@@ -1,4 +1,8 @@
-﻿using SSJD.Services.GeneralService.Base;
+﻿using Azure.Core;
+using Microsoft.EntityFrameworkCore;
+using SharpCompress.Common;
+using SSJD.DataAccess;
+using SSJD.Services.GeneralService.Base;
 using SSJD.ViewModel.GeneralViewModel.PageResult;
 using SSJD.ViewModel.StoreViewModel.Promotion;
 using System;
@@ -6,32 +10,81 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace SSJD.Services.StoreService.Promotion
 {
-    public class PromotionService : IBaseService<SSJD.Entities.StoreEntity.Promotion,PromotionViewModel>,IPromotionService
+    public class PromotionService : IPromotionService
     {
-        public Task Create(Entities.StoreEntity.Promotion entity)
+        private readonly SSJDDbContext _context;
+        public PromotionService(SSJDDbContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
+        }
+        public async Task Create(PromotionRequestModel request)
+        {
+            var entity = new Entities.StoreEntity.Promotion()
+            {
+                ID = request.ID,
+                Name = request.Name,
+                CreateDate = request.CreateDate,
+                EndDate = request.EndDate,
+                PercentDiscount = request.PercentDiscount,
+            };
+            _context.Promotion.Add(entity);
+            await _context.SaveChangesAsync();
         }
 
-        public Task Delete(Entities.StoreEntity.Promotion entity)
+        public async Task Delete(string id)
         {
-            throw new NotImplementedException();
+            var entity = await _context.Promotion.FindAsync(id);
+            _context.Promotion.Remove(entity);
+            await _context.SaveChangesAsync();
         }
 
-        public Task Edit(Entities.StoreEntity.Promotion entity)
+        public async Task Edit(PromotionRequestModel request)
         {
-            throw new NotImplementedException();
+            var data = await _context.Promotion.FindAsync(request.ID);
+            if (data != null)
+            {
+                data.Name = request.Name;
+                data.CreateDate = request.CreateDate;
+                data.EndDate = request.EndDate;
+                data.PercentDiscount = request.PercentDiscount;
+                _context.Promotion.Update(data);
+                await _context.SaveChangesAsync();
+            }
         }
 
-        public Task<List<PromotionViewModel>> GetAll()
+        public async Task<List<PromotionViewModel>> GetAll()
         {
-            throw new NotImplementedException();
+            var query = from p in _context.Promotion select p;
+            var data = await query.Select(x => new PromotionViewModel()
+            {
+                ID = x.ID,
+                Name = x.Name,
+                CreateDate = x.CreateDate,
+                EndDate = x.EndDate,
+                PercentDiscount = x.PercentDiscount
+            }).ToListAsync();
+            return data;
         }
 
-        public Task<PromotionViewModel> GetByID(string id)
+        public async Task<PromotionRequestModel?> GetByID(string id)
+        {
+            var data = await _context.Promotion.FindAsync(id);
+            var getdata = new PromotionRequestModel()
+            {
+                ID = data.ID,
+                Name = data.Name,
+                CreateDate = data.CreateDate,
+                EndDate = data.EndDate,
+                PercentDiscount = data.PercentDiscount
+            };
+            return getdata;
+        }
+
+        public Task<List<PromotionRequestModel>> GetListByID(string id)
         {
             throw new NotImplementedException();
         }

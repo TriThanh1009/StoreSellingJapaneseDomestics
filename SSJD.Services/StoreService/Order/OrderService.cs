@@ -13,37 +13,52 @@ using System.Threading.Tasks;
 
 namespace SSJD.Services.StoreService.Order
 {
-    public class OrderService : IOrderService,IBaseService<SSJD.Entities.StoreEntity.Order, OrderViewModel>
+    public class OrderService : IOrderService
     {
         private readonly SSJDDbContext _context;
         public OrderService(SSJDDbContext context)
         {
             _context = context;
         }
-        public async Task Create(Entities.StoreEntity.Order entity)
+        public async Task Create(OrderRequestModel request)
         {
+            var entity = new Entities.StoreEntity.Order()
+            {
+                ID = request.ID,
+                OrderDate = request.OrderDate,
+                ShippingUnitID = request.ShippingUnitID,
+                ShippingDate = request.ShippingDate,
+                ShippingAddress = request.ShippingAddress,
+                OrderStatus = request.OrderStatus,
+                PaymentMethod = request.PaymentMethod,
+                PaymentStatus = request.PaymentStatus
+            };
             _context.Order.Add(entity);
             await _context.SaveChangesAsync();
         }
 
-        public async Task Delete(Entities.StoreEntity.Order entity)
+        public async Task Delete(string id)
         {
+            var entity = await _context.Order.FindAsync(id);
             _context.Order.Remove(entity);
             await _context.SaveChangesAsync();
         }
 
-        public async Task Edit(Entities.StoreEntity.Order entity)
+        public async Task Edit(OrderRequestModel request)
         {
-            var data = await _context.Order.FindAsync(entity.ID);
-            data.OrderDate = entity.OrderDate;
-            data.ShippingUnitID = entity.ShippingUnitID;
-            data.ShippingDate = entity.ShippingDate;
-            data.ShippingAddress = entity.ShippingAddress;
-            data.OrderStatus = entity.OrderStatus;
-            data.PaymentMethod = entity.PaymentMethod;
-            data.PaymentStatus = entity.PaymentStatus;
-            _context.Order.Update(data);
-            await _context.SaveChangesAsync();
+            var data = await _context.Order.FindAsync(request.ID);
+            if (data != null)
+            {
+                data.OrderDate = request.OrderDate;
+                data.ShippingUnitID = request.ShippingUnitID;
+                data.ShippingDate = request.ShippingDate;
+                data.ShippingAddress = request.ShippingAddress;
+                data.OrderStatus = request.OrderStatus;
+                data.PaymentMethod = request.PaymentMethod;
+                data.PaymentStatus = request.PaymentStatus;
+                _context.Order.Update(data);
+                await _context.SaveChangesAsync();
+            }
         }
 
         public async Task<List<OrderViewModel>> GetAll()
@@ -65,15 +80,15 @@ namespace SSJD.Services.StoreService.Order
             return data;
         }
 
-        public async Task<OrderViewModel> GetByID(string id)
+        public async Task<OrderRequestModel?> GetByID(string id)
         {
             var data = await _context.Order.FindAsync(id);
-            var getdata = new OrderViewModel()
+            var getdata = new OrderRequestModel()
             {
                 ID = data.ID,
-                Customer = data.CustomerID,
+                CustomerID = data.CustomerID,
                 OrderDate = data.OrderDate,
-                ShippingUnit = data.ShippingUnitID,
+                ShippingUnitID = data.ShippingUnitID,
                 ShippingDate = data.ShippingDate,
                 ShippingAddress = data.ShippingAddress,
                 OrderStatus = data.OrderStatus,
@@ -81,6 +96,11 @@ namespace SSJD.Services.StoreService.Order
                 PaymentStatus = data.PaymentStatus,
             };
             return getdata;
+        }
+
+        public Task<List<OrderRequestModel>> GetListByID(string id)
+        {
+            throw new NotImplementedException();
         }
 
         public Task<PagedResult<OrderViewModel>> GetOrderPaging(OrderPagingRequest request)

@@ -10,11 +10,9 @@ namespace StoreSellingJapaneseDomesticsAdmin
 {
     public class Startup
     {
-        private readonly DataServer _dataserver;
-        public Startup(IConfiguration configuration, DataServer dataserver)
+        public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-            _dataserver = dataserver;
         }
 
         public IConfiguration Configuration { get; }
@@ -23,7 +21,7 @@ namespace StoreSellingJapaneseDomesticsAdmin
             services.AddCors();
             services.AddControllers();
             services.AddDbContext<SSJDDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString(_dataserver.ConnecstringName))
+                options.UseSqlServer(Configuration.GetConnectionString(DataServer.ConnecstringName))
                 );
 
             services.AddEndpointsApiExplorer();

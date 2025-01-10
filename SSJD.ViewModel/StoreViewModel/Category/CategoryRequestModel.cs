@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace SSJD.ViewModel.StoreViewModel.Category
 {
-    public class CategoryViewModel
+    public class CategoryRequestModel
     {
         public string ID { get; set; } = "";
         public string Name { get; set; } = "";
-
     }
 }

@@ -11,7 +11,7 @@ namespace SSJD.Entities.StoreEntity
         public string ID { get; set; } = "";
         public int Point { get; set; } = 0;
         public string MemberClass { get; set; } = "";
-        public decimal Discount { get; set; } = 0;
+        public int Discount { get; set; } = 0;
 
         public User User { get; set; }
     }

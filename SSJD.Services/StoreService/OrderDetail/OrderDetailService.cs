@@ -71,7 +71,7 @@ namespace SSJD.Services.StoreService.OrderDetail
             return data;
         }
 
-        public async Task<OrderDetailViewModel?> GetByID(string id)
+        public async Task<OrderDetailRequestModel?> GetByID(string id)
         {
             throw new NotImplementedException();
         }

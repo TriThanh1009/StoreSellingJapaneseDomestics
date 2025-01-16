@@ -5,7 +5,7 @@ function Login(){
     return(
         <div className='container'>
             <div className='login d-flex flex-column justify-content-center align-items-center'>
-                <div className='login-title'>
+                <div className='title'>
                     <span>Login</span>
                 </div>
                 <div className='login-input'>

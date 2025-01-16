@@ -12,8 +12,8 @@ using SSJD.DataAccess;
 namespace SSJD.DataAccess.Migrations
 {
     [DbContext(typeof(SSJDDbContext))]
-    [Migration("20250108143910_Initial")]
-    partial class Initial
+    [Migration("20250113144834_DataSeed")]
+    partial class DataSeed
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -54,12 +54,12 @@ namespace SSJD.DataAccess.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "5c321b49-7d26-4892-976c-6ff6282d37b2",
+                            Id = "603cd653-5497-4ce7-bcc6-0e2f53600ee1",
                             Name = "Admin"
                         },
                         new
                         {
-                            Id = "b209c315-e88d-471b-982a-d2c8b49b90ca",
+                            Id = "61164300-673a-40f3-a8f5-07bab957673d",
                             Name = "Customer"
                         });
                 });
@@ -314,8 +314,8 @@ namespace SSJD.DataAccess.Migrations
                     b.Property<string>("ID")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<decimal>("Discount")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<int>("Discount")
+                        .HasColumnType("int");
 
                     b.Property<string>("MemberClass")
                         .IsRequired()
@@ -332,7 +332,7 @@ namespace SSJD.DataAccess.Migrations
                         new
                         {
                             ID = "1",
-                            Discount = 30m,
+                            Discount = 30,
                             MemberClass = "Gold",
                             Point = 2000
                         });
@@ -350,7 +350,7 @@ namespace SSJD.DataAccess.Migrations
                     b.Property<DateTime>("OrderDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 1, 8, 21, 39, 8, 941, DateTimeKind.Local).AddTicks(8133));
+                        .HasDefaultValue(new DateTime(2025, 1, 13, 21, 48, 31, 624, DateTimeKind.Local).AddTicks(1677));
 
                     b.Property<string>("OrderStatus")
                         .IsRequired()
@@ -374,7 +374,7 @@ namespace SSJD.DataAccess.Migrations
                     b.Property<DateTime>("ShippingDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 1, 8, 21, 39, 8, 971, DateTimeKind.Local).AddTicks(1848));
+                        .HasDefaultValue(new DateTime(2025, 1, 13, 21, 48, 31, 637, DateTimeKind.Local).AddTicks(3333));
 
                     b.Property<string>("ShippingUnitID")
                         .IsRequired()
@@ -382,7 +382,8 @@ namespace SSJD.DataAccess.Migrations
 
                     b.Property<decimal>("TotalPrice")
                         .HasMaxLength(50)
-                        .HasColumnType("decimal(18,2)");
+                        .HasPrecision(10, 2)
+                        .HasColumnType("decimal(10,2)");
 
                     b.HasKey("ID");
 
@@ -416,7 +417,8 @@ namespace SSJD.DataAccess.Migrations
 
                     b.Property<decimal>("Subtotal")
                         .HasMaxLength(20)
-                        .HasColumnType("decimal(18,2)");
+                        .HasPrecision(10, 2)
+                        .HasColumnType("decimal(10,2)");
 
                     b.HasKey("ID");
 
@@ -455,7 +457,8 @@ namespace SSJD.DataAccess.Migrations
 
                     b.Property<decimal>("Price")
                         .HasMaxLength(20)
-                        .HasColumnType("decimal(18,2)");
+                        .HasPrecision(10, 2)
+                        .HasColumnType("decimal(10,2)");
 
                     b.Property<int>("Stock")
                         .HasMaxLength(20)
@@ -501,7 +504,7 @@ namespace SSJD.DataAccess.Migrations
                     b.Property<DateTime>("Warranty")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 1, 8, 21, 39, 8, 985, DateTimeKind.Local).AddTicks(132));
+                        .HasDefaultValue(new DateTime(2025, 1, 13, 21, 48, 31, 656, DateTimeKind.Local).AddTicks(3293));
 
                     b.HasKey("ID");
 
@@ -519,20 +522,20 @@ namespace SSJD.DataAccess.Migrations
                     b.Property<DateTime>("CreateDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 1, 8, 21, 39, 8, 985, DateTimeKind.Local).AddTicks(3834));
+                        .HasDefaultValue(new DateTime(2025, 1, 13, 21, 48, 31, 656, DateTimeKind.Local).AddTicks(9571));
 
                     b.Property<DateTime>("EndDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 1, 8, 21, 39, 8, 985, DateTimeKind.Local).AddTicks(4208));
+                        .HasDefaultValue(new DateTime(2025, 1, 13, 21, 48, 31, 657, DateTimeKind.Local).AddTicks(732));
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<decimal>("PercentDiscount")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<int>("PercentDiscount")
+                        .HasColumnType("int");
 
                     b.HasKey("ID");
 
@@ -585,7 +588,7 @@ namespace SSJD.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("Sex")
+                    b.Property<int?>("Sex")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasDefaultValue(1);
@@ -603,14 +606,14 @@ namespace SSJD.DataAccess.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "2b9e005c-c9a0-4a11-8117-295b9503324b",
+                            Id = "f1043639-7efc-4181-a526-4aea5ffe25ff",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ebbe7708-714d-475e-9770-ca54491b6241",
+                            ConcurrencyStamp = "5279f791-8997-4346-b756-dfa95f2fef79",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumber = "123123",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "c9d9aa5b-5ee3-4dd2-8b82-858d4ff7d120",
+                            SecurityStamp = "7782c353-66e4-438e-bd13-1812df1c92df",
                             TwoFactorEnabled = false,
                             AccountID = "1",
                             Address = "Viet Nam",

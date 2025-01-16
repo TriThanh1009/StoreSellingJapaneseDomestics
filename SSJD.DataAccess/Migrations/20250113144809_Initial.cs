@@ -86,7 +86,7 @@ namespace SSJD.DataAccess.Migrations
                     ID = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Point = table.Column<int>(type: "int", nullable: false),
                     MemberClass = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Discount = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                    Discount = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -99,9 +99,9 @@ namespace SSJD.DataAccess.Migrations
                 {
                     ID = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 1, 8, 21, 39, 8, 985, DateTimeKind.Local).AddTicks(3834)),
-                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 1, 8, 21, 39, 8, 985, DateTimeKind.Local).AddTicks(4208)),
-                    PercentDiscount = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 1, 13, 21, 48, 7, 153, DateTimeKind.Local).AddTicks(9404)),
+                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 1, 13, 21, 48, 7, 154, DateTimeKind.Local).AddTicks(353)),
+                    PercentDiscount = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -234,7 +234,7 @@ namespace SSJD.DataAccess.Migrations
                     Name = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     Brand = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     CategoryID = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(18,2)", maxLength: 20, nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(10,2)", maxLength: 20, precision: 10, scale: 2, nullable: false),
                     Stock = table.Column<int>(type: "int", maxLength: 20, nullable: false),
                     isActive = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
                     Image = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false)
@@ -256,7 +256,7 @@ namespace SSJD.DataAccess.Migrations
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     FullName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Sex = table.Column<int>(type: "int", nullable: false, defaultValue: 1),
+                    Sex = table.Column<int>(type: "int", nullable: true, defaultValue: 1),
                     Address = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: false),
                     IdentityCard = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     AccountID = table.Column<string>(type: "nvarchar(450)", nullable: false),
@@ -293,7 +293,7 @@ namespace SSJD.DataAccess.Migrations
                     ID = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ProductID = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
-                    Warranty = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 1, 8, 21, 39, 8, 985, DateTimeKind.Local).AddTicks(132)),
+                    Warranty = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 1, 13, 21, 48, 7, 153, DateTimeKind.Local).AddTicks(2393)),
                     Origin = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     AdditionalImage = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false)
                 },
@@ -314,12 +314,12 @@ namespace SSJD.DataAccess.Migrations
                 {
                     ID = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     CustomerID = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 1, 8, 21, 39, 8, 941, DateTimeKind.Local).AddTicks(8133)),
+                    OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 1, 13, 21, 48, 7, 120, DateTimeKind.Local).AddTicks(8170)),
                     ShippingUnitID = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ShippingDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 1, 8, 21, 39, 8, 971, DateTimeKind.Local).AddTicks(1848)),
+                    ShippingDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 1, 13, 21, 48, 7, 131, DateTimeKind.Local).AddTicks(7113)),
                     ShippingAddress = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     OrderStatus = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    TotalPrice = table.Column<decimal>(type: "decimal(18,2)", maxLength: 50, nullable: false),
+                    TotalPrice = table.Column<decimal>(type: "decimal(10,2)", maxLength: 50, precision: 10, scale: 2, nullable: false),
                     PaymentMethod = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     PaymentStatus = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false)
                 },
@@ -348,7 +348,7 @@ namespace SSJD.DataAccess.Migrations
                     OrderID = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ProductID = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Quantity = table.Column<int>(type: "int", maxLength: 20, nullable: false),
-                    Subtotal = table.Column<decimal>(type: "decimal(18,2)", maxLength: 20, nullable: false),
+                    Subtotal = table.Column<decimal>(type: "decimal(10,2)", maxLength: 20, precision: 10, scale: 2, nullable: false),
                     PromotionID = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
@@ -402,24 +402,24 @@ namespace SSJD.DataAccess.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "5c321b49-7d26-4892-976c-6ff6282d37b2", null, "Admin", null },
-                    { "b209c315-e88d-471b-982a-d2c8b49b90ca", null, "Customer", null }
+                    { "0d34fec6-5286-41d7-a21d-119cc618b60e", null, "Customer", null },
+                    { "5cb7600e-9f31-4996-8995-efc695e315e0", null, "Admin", null }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "2b9e005c-c9a0-4a11-8117-295b9503324b", 0, "ebbe7708-714d-475e-9770-ca54491b6241", null, false, false, null, null, null, null, "123123", false, "c9d9aa5b-5ee3-4dd2-8b82-858d4ff7d120", false, null });
+                values: new object[] { "3daacdb4-1088-48f3-b8f0-036c37b1f796", 0, "135fee1b-f9ea-401b-96d6-c9526db52b75", null, false, false, null, null, null, null, "123123", false, "8c16daef-5cb6-4de6-9f7c-ce7f736c0209", false, null });
 
             migrationBuilder.InsertData(
                 table: "MemberCard",
                 columns: new[] { "ID", "Discount", "MemberClass", "Point" },
-                values: new object[] { "1", 30m, "Gold", 2000 });
+                values: new object[] { "1", 30, "Gold", 2000 });
 
             migrationBuilder.InsertData(
                 table: "User",
                 columns: new[] { "Id", "AccountID", "Address", "FullName", "IdentityCard", "Image", "MemberCardID", "Sex" },
-                values: new object[] { "2b9e005c-c9a0-4a11-8117-295b9503324b", "1", "Viet Nam", "Nguyen Tri Thanh", "123", "122", "1", 1 });
+                values: new object[] { "3daacdb4-1088-48f3-b8f0-036c37b1f796", "1", "Viet Nam", "Nguyen Tri Thanh", "123", "122", "1", 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

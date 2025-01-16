@@ -1,10 +1,9 @@
-﻿using Microsoft.AspNetCore;
-using Microsoft.EntityFrameworkCore;
-using StoreSellingJapaneseDomestics;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore;
 
 namespace StoreSellingJapaneseDomestics
 {
-    public static class ExtensionMethods
+    public static class ExtensionMethod
     {
         public static IHost MigrateDatabase<T>(this IHost host) where T : DbContext
         {

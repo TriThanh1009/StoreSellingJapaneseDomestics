@@ -22,7 +22,7 @@ namespace SSJD.DataAccess.StoreConfigurations
             builder.Property(x=>x.ShippingDate).HasDefaultValue(DateTime.Now);
             builder.Property(x => x.ShippingAddress).IsRequired().HasMaxLength(50);
             builder.Property(x => x.OrderStatus).IsRequired();
-            builder.Property(x => x.TotalPrice).IsRequired().HasMaxLength(50);
+            builder.Property(x => x.TotalPrice).IsRequired().HasMaxLength(50).HasPrecision(10, 2);
             builder.Property(x => x.PaymentMethod).IsRequired().HasMaxLength(20);
             builder.Property(x => x.PaymentStatus).IsRequired().HasMaxLength(20);
         }

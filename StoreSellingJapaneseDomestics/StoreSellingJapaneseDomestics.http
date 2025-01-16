@@ -1,0 +1,6 @@
+@StoreSellingJapaneseDomestics_HostAddress = http://localhost:5255
+
+GET {{StoreSellingJapaneseDomestics_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -12,6 +12,6 @@ namespace SSJD.ViewModel.StoreViewModel.Promotion
         public string Name { get; set; } = "";
         public DateTime CreateDate { get; set; } = DateTime.Now;
         public DateTime EndDate { get; set; } = DateTime.Now;
-        public decimal PercentDiscount { get; set; } = 0;
+        public int PercentDiscount { get; set; } = 0;
     }
 }

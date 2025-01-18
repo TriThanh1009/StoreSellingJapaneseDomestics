@@ -1,0 +1,17 @@
+.admin-container{
+    margin-left: 5cqh;
+    margin-right: 5rem;
+}
+.admin-header{
+}
+.account-image{
+    background-color: blue;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+}
+.header-search-input{
+    background-color: #C6BEEE;
+    width: 15rem;
+    border-radius: 15px;
+}

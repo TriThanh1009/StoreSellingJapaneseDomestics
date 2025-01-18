@@ -33,7 +33,7 @@ namespace StoreSellingJapaneseDomestics
             services.AddEndpointsApiExplorer();
             services.AddHttpContextAccessor();
             services.AddDbContext<SSJDDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("Data Source=sdb;Database=SSJDDB;User ID=sa;Password=Thanh@123456;TrustServerCertificate=True"))
+                options.UseSqlServer(Configuration.GetConnectionString("SSJDdb"))
 
                 );       //Declare
 

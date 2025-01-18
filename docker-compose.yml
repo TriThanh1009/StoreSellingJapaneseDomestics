@@ -3,14 +3,14 @@ version: "3.9"
 services:
   sdb:
     container_name: sdb
-    image: mcr.microsoft.com/mssql/server:2022-latest
+    image: mcr.microsoft.com/mssql/server:2019-latest
     environment:
       MSSQL_SA_PASSWORD: Thanh@123456
       ACCEPT_EULA: Y
     ports:
       - "1444:1433"
     networks:
-      - demo-mynetwork
+      - mynetwork
 
   ssjd-api:
     container_name: ssjd-api
@@ -20,7 +20,7 @@ services:
     ports:
       - 5255:8080
     networks:
-      - demo-mynetwork
+      - mynetwork
     environment:
       ASPNETCORE_ENVIRONMENT : Staging
     volumes:
@@ -29,8 +29,7 @@ services:
       - sdb
       
 networks:
-  demo-mynetwork:
-    external : true
+  mynetwork:
     driver : bridge
 
                       

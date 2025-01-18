@@ -3,8 +3,10 @@
 import './App.css'
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import routes from './NavStore/Routes/routes';
-import Layout from './NavStore/Layout/Layout';
+import Layout from './ShopComponent/NavStore/Layout/Layout';
+import routes from './ShopComponent/NavStore/routes';
+
+
 
 const App:React.FC=()=>{
   return (

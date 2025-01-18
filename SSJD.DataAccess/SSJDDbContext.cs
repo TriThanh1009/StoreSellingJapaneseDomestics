@@ -17,7 +17,7 @@ namespace SSJD.DataAccess
 {
     public class SSJDDbContext : IdentityDbContext<IdentityUser>
     {
-        public SSJDDbContext(DbContextOptions<SSJDDbContext> options) : base(options) { }
+        public SSJDDbContext(DbContextOptions options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -36,7 +36,7 @@ namespace SSJD.DataAccess
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data Source=localhost,1555;Database=SSJDDB;User ID=sa;Password=Thanh@123456;TrustServerCertificate=True")
+            optionsBuilder.UseSqlServer("Data Source=sdb;Database=SSJDDB;User ID=sa;Password=Thanh@123456;TrustServerCertificate=True")
                 .ConfigureWarnings(w => w.Ignore(RelationalEventId.PendingModelChangesWarning));
         }
 

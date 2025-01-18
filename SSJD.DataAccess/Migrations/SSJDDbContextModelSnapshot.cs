@@ -51,12 +51,12 @@ namespace SSJD.DataAccess.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "603cd653-5497-4ce7-bcc6-0e2f53600ee1",
+                            Id = "e146d555-2c32-475d-b0b9-2d6b5ffa2c06",
                             Name = "Admin"
                         },
                         new
                         {
-                            Id = "61164300-673a-40f3-a8f5-07bab957673d",
+                            Id = "198878f5-228e-420c-a6e6-092ab6e26caa",
                             Name = "Customer"
                         });
                 });
@@ -347,7 +347,7 @@ namespace SSJD.DataAccess.Migrations
                     b.Property<DateTime>("OrderDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 1, 13, 21, 48, 31, 624, DateTimeKind.Local).AddTicks(1677));
+                        .HasDefaultValue(new DateTime(2025, 1, 17, 20, 9, 5, 992, DateTimeKind.Local).AddTicks(1342));
 
                     b.Property<string>("OrderStatus")
                         .IsRequired()
@@ -371,7 +371,7 @@ namespace SSJD.DataAccess.Migrations
                     b.Property<DateTime>("ShippingDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 1, 13, 21, 48, 31, 637, DateTimeKind.Local).AddTicks(3333));
+                        .HasDefaultValue(new DateTime(2025, 1, 17, 20, 9, 5, 994, DateTimeKind.Local).AddTicks(3537));
 
                     b.Property<string>("ShippingUnitID")
                         .IsRequired()
@@ -501,7 +501,7 @@ namespace SSJD.DataAccess.Migrations
                     b.Property<DateTime>("Warranty")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 1, 13, 21, 48, 31, 656, DateTimeKind.Local).AddTicks(3293));
+                        .HasDefaultValue(new DateTime(2025, 1, 17, 20, 9, 5, 999, DateTimeKind.Local).AddTicks(5321));
 
                     b.HasKey("ID");
 
@@ -519,12 +519,12 @@ namespace SSJD.DataAccess.Migrations
                     b.Property<DateTime>("CreateDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 1, 13, 21, 48, 31, 656, DateTimeKind.Local).AddTicks(9571));
+                        .HasDefaultValue(new DateTime(2025, 1, 17, 20, 9, 5, 999, DateTimeKind.Local).AddTicks(7629));
 
                     b.Property<DateTime>("EndDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 1, 13, 21, 48, 31, 657, DateTimeKind.Local).AddTicks(732));
+                        .HasDefaultValue(new DateTime(2025, 1, 17, 20, 9, 5, 999, DateTimeKind.Local).AddTicks(7797));
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -603,14 +603,14 @@ namespace SSJD.DataAccess.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "f1043639-7efc-4181-a526-4aea5ffe25ff",
+                            Id = "dc8b4574-32a6-4c29-9134-46a2c004595b",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "5279f791-8997-4346-b756-dfa95f2fef79",
+                            ConcurrencyStamp = "57f6052d-5fdd-4a3c-8fe9-9425bf931bf7",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumber = "123123",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "7782c353-66e4-438e-bd13-1812df1c92df",
+                            SecurityStamp = "41513ab0-9ae2-48ed-8175-43fc8b655123",
                             TwoFactorEnabled = false,
                             AccountID = "1",
                             Address = "Viet Nam",

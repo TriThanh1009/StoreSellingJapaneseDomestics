@@ -21,13 +21,13 @@ namespace StoreSellingJapaneseDomestics.Controllers
             await _service.GetAll();
             return Ok();
         }
-        [HttpPost("CreateCategory")]
+        [HttpPost("CreateProduct")]
         public async Task<IActionResult> Create([FromBody] ProductRequestModel request)
         {
             await _service.Create(request);
             return Ok();
         }
-        [HttpPut("EditCategory")]
+        [HttpPut("EditProduct")]
         public async Task<IActionResult> Edit([FromBody] ProductRequestModel request)
         {
             await _service.Edit(request);

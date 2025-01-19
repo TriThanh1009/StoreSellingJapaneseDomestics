@@ -99,8 +99,8 @@ namespace SSJD.DataAccess.Migrations
                 {
                     ID = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 1, 17, 20, 8, 28, 110, DateTimeKind.Local).AddTicks(28)),
-                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 1, 17, 20, 8, 28, 110, DateTimeKind.Local).AddTicks(154)),
+                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 1, 19, 21, 46, 8, 148, DateTimeKind.Local).AddTicks(6002)),
+                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 1, 19, 21, 46, 8, 148, DateTimeKind.Local).AddTicks(6158)),
                     PercentDiscount = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -255,7 +255,7 @@ namespace SSJD.DataAccess.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    FullName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    FullName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Sex = table.Column<int>(type: "int", nullable: true, defaultValue: 1),
                     Address = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: false),
                     IdentityCard = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
@@ -293,7 +293,7 @@ namespace SSJD.DataAccess.Migrations
                     ID = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ProductID = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
-                    Warranty = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 1, 17, 20, 8, 28, 109, DateTimeKind.Local).AddTicks(8493)),
+                    Warranty = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 1, 19, 21, 46, 8, 148, DateTimeKind.Local).AddTicks(3912)),
                     Origin = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     AdditionalImage = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false)
                 },
@@ -314,9 +314,9 @@ namespace SSJD.DataAccess.Migrations
                 {
                     ID = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     CustomerID = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 1, 17, 20, 8, 28, 104, DateTimeKind.Local).AddTicks(3560)),
+                    OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 1, 19, 21, 46, 8, 141, DateTimeKind.Local).AddTicks(3913)),
                     ShippingUnitID = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ShippingDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 1, 17, 20, 8, 28, 106, DateTimeKind.Local).AddTicks(1141)),
+                    ShippingDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 1, 19, 21, 46, 8, 143, DateTimeKind.Local).AddTicks(7013)),
                     ShippingAddress = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     OrderStatus = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TotalPrice = table.Column<decimal>(type: "decimal(10,2)", maxLength: 50, precision: 10, scale: 2, nullable: false),
@@ -402,14 +402,14 @@ namespace SSJD.DataAccess.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "0a007bb0-3c01-4214-bc0a-1f5b28723f10", null, "Customer", null },
-                    { "64024452-44f9-44e1-bfa4-5a6678ab6a1a", null, "Admin", null }
+                    { "80da2dbf-d84e-4e92-a507-f19bd5beb2d1", null, "Admin", null },
+                    { "d73e7091-3eaa-4c5b-8faf-e982366fe18e", null, "Customer", null }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "b7671dac-c5cb-4b41-ac35-cdcc73d5b87b", 0, "cdf83f6c-a3de-4b0a-b5ab-767dcb3e9e2a", null, false, false, null, null, null, null, "123123", false, "16915e00-f20e-4421-a6c8-ec60aa196801", false, null });
+                values: new object[] { "393bd9fd-e9d2-4208-9e6a-5837af7fcd42", 0, "4b20603f-4472-4a94-87d6-d2df6f56eda6", null, false, false, null, null, null, null, "123123", false, "94b8783f-b3a1-454f-9778-b2799979f92f", false, "Nguyen Tri Thanh" });
 
             migrationBuilder.InsertData(
                 table: "MemberCard",
@@ -419,7 +419,7 @@ namespace SSJD.DataAccess.Migrations
             migrationBuilder.InsertData(
                 table: "User",
                 columns: new[] { "Id", "AccountID", "Address", "FullName", "IdentityCard", "Image", "MemberCardID", "Sex" },
-                values: new object[] { "b7671dac-c5cb-4b41-ac35-cdcc73d5b87b", "1", "Viet Nam", "Nguyen Tri Thanh", "123", "122", "1", 1 });
+                values: new object[] { "393bd9fd-e9d2-4208-9e6a-5837af7fcd42", "1", "Viet Nam", "", "123", "122", "1", 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

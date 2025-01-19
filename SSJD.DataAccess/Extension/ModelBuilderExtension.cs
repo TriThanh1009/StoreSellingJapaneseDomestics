@@ -15,7 +15,7 @@ namespace SSJD.DataAccess.Extension
         public static void Seed(this ModelBuilder modelbuilder)
         {
             modelbuilder.Entity<User>().HasData(
-                new User() { FullName = "Nguyen Tri Thanh",Sex = Entities.GeneralEntity.Sex.Male,PhoneNumber="123123", Address = "Viet Nam",IdentityCard="123",AccountID = "1",MemberCardID="1",Image="122"}
+                new User() { UserName = "Nguyen Tri Thanh",Sex = Entities.GeneralEntity.Sex.Male,PhoneNumber="123123", Address = "Viet Nam",IdentityCard="123",AccountID = "1",MemberCardID="1",Image="122"}
                 );
             modelbuilder.Entity<Account>().HasData(
                 new Account() { ID = "1",UserName="admin",Password="admin",PasswordCheck="admin",Email="admin@gmail.com"}

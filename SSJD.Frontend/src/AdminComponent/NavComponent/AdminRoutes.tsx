@@ -1,5 +1,6 @@
-import AdminAccountComponent from "../components/AdminAccountComponent/AdminAccountComponent";
-import AdminProductComponent from "../components/AdminProductComponent/AdminProductComponent";
+import AdminAccountComponent from "../components/AdminAccount/AdminAccountComponent/AdminAccountComponent";
+import AdminCategoryComponent from "../components/AdminCategory/AdminCategoryComponent/AdminCategoryComponent";
+import AdminProductComponent from "../components/AdminProduct/AdminProductComponent/AdminProductComponent";
 
 
 
@@ -7,11 +8,18 @@ import AdminProductComponent from "../components/AdminProductComponent/AdminProd
 interface RouteConfig{
     path:string;
     element: React.ReactNode;
+    children?:RouteConfig[];
 }
 
 const routes: RouteConfig[]=[
-    {path: '/admin/product',element:<AdminProductComponent/>},
+    {path: '/admin/product',element:<AdminProductComponent/>,
+        children:[
+            //{}
+        ]
+
+    },
     {path: '/admin/account',element:<AdminAccountComponent/>},
+    {path: '/admin/category',element:<AdminCategoryComponent/>},
 
 ]
 export default routes

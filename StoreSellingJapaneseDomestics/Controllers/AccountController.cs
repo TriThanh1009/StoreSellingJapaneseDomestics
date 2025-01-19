@@ -16,23 +16,11 @@ namespace StoreSellingJapaneseDomestics.Controllers
             _service = service;
             _configuration = configuration;
         }
-
-        [HttpGet("check-connection-string")]
-        public IActionResult GetConnectionString()
-        {
-            var connectionString = _configuration.GetConnectionString("SSJDdb");
-            return Ok(new { ConnectionString = connectionString });
-        }
         [HttpGet]
         public async Task<IActionResult> Get()
         {
             var data = await _service.GetAll();
             return Ok(data);
-        }
-        [HttpGet("getttt")]
-        public async Task<IActionResult> Gett()
-        {
-            return Ok("asdsad");
         }
         [HttpPost("CreateAccount")]
         public async Task<IActionResult> Create([FromBody] AccountRequestModel request)

@@ -1,7 +1,7 @@
-import React from "react"
 
 
-const AdminCategoryComponent:React.FC = () =>{
+const AdminUserComponent:React.FC = () =>{
+
     return (
                     <div className="card shadow mb-4">
                         <div className="card-header py-3">
@@ -11,7 +11,8 @@ const AdminCategoryComponent:React.FC = () =>{
                             <div className="table-responsive">
                                 <table className="table table-bordered" id="dataTable" width="100%" >
                                     <thead>
-                                        <tr className="text-center">
+                                        <tr className="">
+                                            <th>ID</th>
                                             <th>User Name</th>
                                             <th>Password</th>
                                             <th>Email</th>
@@ -19,9 +20,7 @@ const AdminCategoryComponent:React.FC = () =>{
                                     </thead>
 
                                     <tbody>
-                                        <tr>
-                                            
-                                        </tr>
+
                                     </tbody>
                                 </table>
                             </div>
@@ -32,4 +31,4 @@ const AdminCategoryComponent:React.FC = () =>{
 }
 
 
-export default AdminCategoryComponent
+export default AdminUserComponent

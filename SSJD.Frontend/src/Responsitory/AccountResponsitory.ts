@@ -3,11 +3,12 @@
 import axios from 'axios'
 
 
-const apiUrl = process.env.REACT_APP_API_URL;
+const apiUrl = import.meta.env.VITE_API_URL;
 
 
 export const getAccount = async()=>{
     const response = await axios.get(`${apiUrl}/Account`)
+    console.log(response.data)
     return response.data
 }
 

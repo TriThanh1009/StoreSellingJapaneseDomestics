@@ -51,12 +51,12 @@ namespace SSJD.DataAccess.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "af5ed956-5c18-4124-b166-73a622f04a57",
+                            Id = "3e089286-5e25-40a4-82ea-6c3f7c72f752",
                             Name = "Admin"
                         },
                         new
                         {
-                            Id = "18ba79ca-adec-4bbf-9599-b1b95c16af51",
+                            Id = "0c0b0edd-97ed-485e-8d92-175d1bd0f425",
                             Name = "Customer"
                         });
                 });
@@ -347,7 +347,7 @@ namespace SSJD.DataAccess.Migrations
                     b.Property<DateTime>("OrderDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 1, 19, 21, 50, 53, 988, DateTimeKind.Local).AddTicks(5639));
+                        .HasDefaultValue(new DateTime(2025, 1, 21, 0, 31, 33, 81, DateTimeKind.Local).AddTicks(801));
 
                     b.Property<string>("OrderStatus")
                         .IsRequired()
@@ -371,7 +371,7 @@ namespace SSJD.DataAccess.Migrations
                     b.Property<DateTime>("ShippingDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 1, 19, 21, 50, 53, 990, DateTimeKind.Local).AddTicks(5225));
+                        .HasDefaultValue(new DateTime(2025, 1, 21, 0, 31, 33, 82, DateTimeKind.Local).AddTicks(9014));
 
                     b.Property<string>("ShippingUnitID")
                         .IsRequired()
@@ -501,7 +501,7 @@ namespace SSJD.DataAccess.Migrations
                     b.Property<DateTime>("Warranty")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 1, 19, 21, 50, 53, 994, DateTimeKind.Local).AddTicks(4179));
+                        .HasDefaultValue(new DateTime(2025, 1, 21, 0, 31, 33, 86, DateTimeKind.Local).AddTicks(7651));
 
                     b.HasKey("ID");
 
@@ -519,12 +519,12 @@ namespace SSJD.DataAccess.Migrations
                     b.Property<DateTime>("CreateDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 1, 19, 21, 50, 53, 994, DateTimeKind.Local).AddTicks(5738));
+                        .HasDefaultValue(new DateTime(2025, 1, 21, 0, 31, 33, 86, DateTimeKind.Local).AddTicks(9051));
 
                     b.Property<DateTime>("EndDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 1, 19, 21, 50, 53, 994, DateTimeKind.Local).AddTicks(5892));
+                        .HasDefaultValue(new DateTime(2025, 1, 21, 0, 31, 33, 86, DateTimeKind.Local).AddTicks(9183));
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -567,10 +567,6 @@ namespace SSJD.DataAccess.Migrations
                         .HasMaxLength(60)
                         .HasColumnType("nvarchar(60)");
 
-                    b.Property<string>("FullName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("IdentityCard")
                         .IsRequired()
                         .HasMaxLength(20)
@@ -602,19 +598,18 @@ namespace SSJD.DataAccess.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "a30bca6e-4346-442a-83ec-18e05c162418",
+                            Id = "5dfa1df9-22b4-4d0c-bd32-9bd05240c512",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "8c320cdc-01bc-47b4-85e7-68d16275096d",
+                            ConcurrencyStamp = "cf56b58e-b3bf-49e8-ad66-8ce57e1d8069",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumber = "123123",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "bedb7d9f-7149-4c0d-8e58-3307c9d8f430",
+                            SecurityStamp = "a47f8128-bf88-49b1-8164-690341ad8e85",
                             TwoFactorEnabled = false,
                             UserName = "Nguyen Tri Thanh",
                             AccountID = "1",
                             Address = "Viet Nam",
-                            FullName = "",
                             IdentityCard = "123",
                             Image = "122",
                             MemberCardID = "1",

@@ -15,8 +15,9 @@ const AdminProductComponent:React.FC = () =>{
     })
     return (
                     <div className="card shadow mb-4">
-                        <div className="card-header py-3">
+                        <div className="card-header py-3 d-flex flex-row justify-content-between">
                             <h6 className="m-0 font-weight-bold text-primary">Product Table</h6>
+                            <button className="button-options">Create</button> 
                         </div>
                         <div className="card-body">
                             <div className="table-responsive">

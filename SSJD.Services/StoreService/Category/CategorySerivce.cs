@@ -53,8 +53,8 @@ namespace SSJD.Services.StoreService.Category
 
         public async Task<List<CategoryViewModel>> GetAll()
         {
-            var query = from p in _context.Category select  p;
-            var data = await query.Select(x => new CategoryViewModel
+            var query = from p in _context.Category select p;
+            var data = await query.Select(x => new CategoryViewModel()
             {
                 ID = x.ID,
                 Name = x.Name

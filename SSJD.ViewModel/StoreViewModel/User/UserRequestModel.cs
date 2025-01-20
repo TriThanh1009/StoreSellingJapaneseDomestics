@@ -10,8 +10,7 @@ namespace SSJD.ViewModel.StoreViewModel.User
 {
     public class UserRequestModel : IdentityUser
     {
-        
-        public string FullName { get; set; } = "";
+
         public Sex Sex { get; set; } = Sex.Male;
         public string Address { get; set; } = "";
         public string IdentityCard { get; set; } = "";

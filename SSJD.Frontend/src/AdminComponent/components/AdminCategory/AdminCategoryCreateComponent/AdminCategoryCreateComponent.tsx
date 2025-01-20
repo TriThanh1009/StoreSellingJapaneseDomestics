@@ -1,14 +1,12 @@
+
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react';
-import './AdminAccountCreateComponent.css'
 
 interface Props {
     onCancel: () => void; // Định nghĩa prop onCancel
   }
-const AdminAccountCreateComponent:React.FC<Props> = ({onCancel})=>{
+const AdminCategoryCreateComponent:React.FC<Props> = ({onCancel})=>{
     
-   
-
     return(
     <form className="form" >
         <div className="form-group row">
@@ -44,4 +42,4 @@ const AdminAccountCreateComponent:React.FC<Props> = ({onCancel})=>{
 
 
 
-export default AdminAccountCreateComponent
+export default AdminCategoryCreateComponent

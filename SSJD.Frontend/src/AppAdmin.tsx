@@ -7,12 +7,24 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 const AppAdmin:React.FC=()=>{
     return (
       <BrowserRouter>
-        <Routes>
-          {routes.map((route,index)=>(
-            <Route key={index} path={route.path} element={<AdminLayoutComponent>{route.element}</AdminLayoutComponent>}></Route>
-          ))}
-        </Routes>
-      </BrowserRouter>
+      <Routes>
+        {routes.map((route, index) => (
+          <Route
+            key={index}
+            path={route.path}
+            element={<AdminLayoutComponent>{route.element}</AdminLayoutComponent>}
+          >
+            {route.children?.map((child, childIndex) => (
+              <Route
+                key={childIndex}
+                path={child.path}
+                element={child.element}
+              />
+            ))}
+          </Route>
+        ))}
+      </Routes>
+    </BrowserRouter>
     )
   }
 

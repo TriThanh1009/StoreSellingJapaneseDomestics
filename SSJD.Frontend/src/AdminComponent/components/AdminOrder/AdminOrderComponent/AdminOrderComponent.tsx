@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
-import { OrderModel } from "../../../Model/Order/OrderModel"
-import { getOrder } from "../../../Responsitory/OrderResponsitory"
+import { OrderModel } from "../../../../Model/Order/OrderModel"
+import { getOrder } from "../../../../Responsitory/OrderResponsitory"
 
 
 const AdminOrderComponent:React.FC = () =>{
@@ -15,8 +15,9 @@ const AdminOrderComponent:React.FC = () =>{
     },[])
     return (
                     <div className="card shadow mb-4">
-                        <div className="card-header py-3">
-                            <h6 className="m-0 font-weight-bold text-primary">Account Table</h6>
+                        <div className="card-header py-3 d-flex flex-row justify-content-between">
+                            <h6 className="m-0 font-weight-bold text-primary">Order Table</h6>
+                            <button className="button-options">Create</button> 
                         </div>
                         <div className="card-body">
                             <div className="table-responsive">
@@ -24,9 +25,16 @@ const AdminOrderComponent:React.FC = () =>{
                                     <thead>
                                         <tr className="">
                                             <th>ID</th>
-                                            <th>User Name</th>
-                                            <th>Password</th>
-                                            <th>Email</th>
+                                            <th>Customer</th>
+                                            <th>Order Date</th>
+                                            <th>Shipping Unit</th>
+                                            <th>Shipping Date</th>
+                                            <th>ShippingAddress</th>
+                                            <th>OrderStatus</th>
+                                            <th>Total Price</th>
+                                            <th>Payment Method</th>
+                                            <th>Payment Status</th>
+                                            <th>Options</th>
                                         </tr>
                                     </thead>
 
@@ -43,7 +51,10 @@ const AdminOrderComponent:React.FC = () =>{
                                         <td>{orders.totalPrice}</td>
                                         <td>{orders.paymentMethod}</td>
                                         <td>{orders.paymentStatus}</td>
-
+                                        <td className="td-options d-flex flex-row gap-2">
+                                        <i className="bi bi-pen"></i>
+                                        <i className="bi bi-x-octagon"></i>
+                                        </td>
 
                                         </tr>
                                     ))}

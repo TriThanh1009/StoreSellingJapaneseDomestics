@@ -1,4 +1,5 @@
-﻿using SSJD.Entities.GeneralEntity;
+﻿using Microsoft.AspNetCore.Identity;
+using SSJD.Entities.GeneralEntity;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
@@ -8,10 +9,9 @@ using System.Threading.Tasks;
 
 namespace SSJD.ViewModel.StoreViewModel.Customer
 {
-    public class UserViewModel
+    public class UserViewModel : IdentityUser
     {
         public string Id { get; set; } =  "";
-        public string FullName { get; set; } = "";
         public Sex Sex { get; set; } = Sex.Male;
         public string PhoneNumber { get; set; } = "";
         public string Address { get; set; } = "";

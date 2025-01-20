@@ -64,7 +64,7 @@ namespace SSJD.Services.StoreService.Order
         public async Task<List<OrderViewModel>> GetAll()
         {
             var query = from p in _context.Order select p;
-            var data = await query.Select(x => new OrderViewModel
+            var data = await query.Select(x => new OrderViewModel()
             {
                 ID = x.ID,
                 Customer = x.CustomerID,

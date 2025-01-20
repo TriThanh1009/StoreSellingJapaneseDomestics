@@ -17,8 +17,8 @@ namespace StoreSellingJapaneseDomestics.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            await _service.GetAll();
-            return Ok();
+            var data = await _service.GetAll();
+            return Ok(data);
         }
         [HttpPost("CreateOrder")]
         public async Task<IActionResult> Create([FromBody] OrderRequestModel request)

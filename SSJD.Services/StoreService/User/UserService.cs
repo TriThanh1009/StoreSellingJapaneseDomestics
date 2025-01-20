@@ -25,7 +25,7 @@ namespace SSJD.Services.StoreService.User
         {
             var entity = new Entities.StoreEntity.User()
             {
-                FullName = request.FullName,
+                UserName = request.UserName,
                 PhoneNumber = request.PhoneNumber,
                 Address = request.Address,
                 IdentityCard = request.IdentityCard,
@@ -50,7 +50,7 @@ namespace SSJD.Services.StoreService.User
             var data = await _context.User.FindAsync(request.Id);
             if (data != null)
             {
-                data.FullName = request.FullName;
+                data.UserName = request.UserName;
                 data.PhoneNumber = request.PhoneNumber;
                 data.Address = request.Address;
                 data.IdentityCard = request.IdentityCard;
@@ -72,7 +72,7 @@ namespace SSJD.Services.StoreService.User
                         select new { u, a,m };
             var data = await query.Select(x => new UserViewModel()
             {
-                FullName = x.u.FullName,
+                UserName = x.u.UserName,
                 PhoneNumber = x.u.PhoneNumber ?? "",
                 Address = x.u.Address,
                 IdentityCard = x.u.IdentityCard,
@@ -89,7 +89,7 @@ namespace SSJD.Services.StoreService.User
             var data = await _context.User.FindAsync(id);
             var getdata = new UserRequestModel()
             {
-                FullName = data.FullName,
+                UserName = data.UserName,
                 PhoneNumber = data.PhoneNumber ?? "",
                 Address = data.Address,
                 IdentityCard = data.IdentityCard,

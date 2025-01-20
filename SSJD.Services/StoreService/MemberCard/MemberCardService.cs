@@ -57,7 +57,7 @@ namespace SSJD.Services.StoreService.MemberCard
         public async Task<List<MemberCardViewModel>> GetAll()
         {
             var query = from p in _context.MemberCard select p;
-            var data = await query.Select(x => new MemberCardViewModel
+            var data = await query.Select(x => new MemberCardViewModel()
             {
                 ID = x.ID,
                 Point = x.Point,

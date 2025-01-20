@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
-import { getAccount } from "../../../Responsitory/AccountResponsitory"
-import { MemberCardModel } from "../../../Model/MemberCard/MemberCardModel"
+import { MemberCardModel } from "../../../../Model/MemberCard/MemberCardModel"
+import { getAccount } from "../../../../Responsitory/AccountResponsitory"
 
 
 const AdminMemberCardComponent:React.FC = () =>{
@@ -15,8 +15,9 @@ const AdminMemberCardComponent:React.FC = () =>{
     },[])
     return (
                     <div className="card shadow mb-4">
-                        <div className="card-header py-3">
+                        <div className="card-header py-3 d-flex flex-row justify-content-between">
                             <h6 className="m-0 font-weight-bold text-primary">Member Card Table</h6>
+                            <button className="button-options">Create</button> 
                         </div>
                         <div className="card-body">
                             <div className="table-responsive">
@@ -27,16 +28,21 @@ const AdminMemberCardComponent:React.FC = () =>{
                                             <th>Point</th>
                                             <th>Member Class</th>
                                             <th>Discount</th>
+                                            <th>Options</th>
                                         </tr>
                                     </thead>
 
                                     <tbody>
                                     {Array.isArray(membercards) && membercards.map((membercard) => (
-                                        <tr key={membercard.id}>
+                                        <tr>
                                         <td>{membercard.id}</td>
                                         <td>{membercard.point}</td>
                                         <td>{membercard.memberClass}</td>
                                         <td>{membercard.discount}</td>
+                                        <td className="td-options d-flex flex-row gap-2">
+                                        <i className="bi bi-pen"></i>
+                                        <i className="bi bi-x-octagon"></i>
+                                        </td>
                                         </tr>
                                     ))}
                                         

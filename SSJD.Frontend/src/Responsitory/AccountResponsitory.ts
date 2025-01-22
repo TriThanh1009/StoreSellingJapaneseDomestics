@@ -18,16 +18,26 @@ export const getAccountByID = async(id : string)=>{
 }
 
 export const createAccount = async(data:any)=>{
-    const response = await axios.post(`${apiUrl}/Account/CreateAccount`)
+    console.log(data)
+    const response = await axios.post(`${apiUrl}/Account/CreateAccount`,JSON.stringify(data),{
+        headers:{
+            "Content-Type" : "application/json"
+        }
+    })
     return response.data
 }
 
 export const editAccount = async(data:any)=>{
-    const response = await axios.put(`${apiUrl}/Account/EditAccount`)
+    console.log(data) 
+    const response = await axios.put(`${apiUrl}/Account/EditAccount`,JSON.stringify(data),{
+        headers:{
+            "Content-Type" : "application/json"
+        }
+    })
     return response.data
 }
 
 export const deleteAccount = async(id : string)=>{
-    const response = await axios.delete(`${apiUrl}/Account?${id}`)
+    const response = await axios.delete(`${apiUrl}/Account?id=${id}`)
     return response.data
 }

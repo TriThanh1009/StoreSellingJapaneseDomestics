@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import { CategoryModel } from "../../../../Model/Category/CategoryModel"
 import { getCategory } from "../../../../Responsitory/CategoryResponsitory"
 import AdminCategoryCreateComponent from "../AdminCategoryCreateComponent/AdminCategoryCreateComponent"
-
+import clsx from 'clsx'
 
 const AdminCategoryComponent:React.FC = () =>{
     const[categorys,setcategorys] = useState<CategoryModel[]>()
@@ -26,9 +26,8 @@ const AdminCategoryComponent:React.FC = () =>{
         fetch()
     })
     return (
-        <div>
-
-                    <div className="card shadow mb-4">
+        <div className="d-flex flex-row">
+                    <div className={clsx("card shadow","col-md-12",{"col-xl-9":showformoptions})}>
                         <div className="card-header py-3 d-flex flex-row justify-content-between">
                             <h6 className="m-0 font-weight-bold text-primary">Category Table</h6>
                             <button className="button-options" onClick={clicktoshowFormoption}>Create</button> 
@@ -62,8 +61,10 @@ const AdminCategoryComponent:React.FC = () =>{
                             </div>
                         </div>
                     </div>
-                    {childpage}
-                </div>
+                    <div className={clsx("child-page",{"col-md-3":showformoptions})}>
+                        {childpage}
+                    </div>
+            </div>
     )
 }
 

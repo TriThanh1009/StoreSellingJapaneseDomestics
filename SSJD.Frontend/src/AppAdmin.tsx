@@ -3,7 +3,6 @@ import AdminLayoutComponent from "./AdminComponent/NavComponent/AdminLayoutCompo
 import routes from './AdminComponent/NavComponent/AdminRoutes'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
-
 const AppAdmin:React.FC=()=>{
     return (
       <BrowserRouter>

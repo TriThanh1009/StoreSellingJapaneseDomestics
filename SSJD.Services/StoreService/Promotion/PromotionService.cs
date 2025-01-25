@@ -25,7 +25,7 @@ namespace SSJD.Services.StoreService.Promotion
         {
             var entity = new Entities.StoreEntity.Promotion()
             {
-                ID = request.ID,
+                ID = Guid.NewGuid().ToString(),
                 Name = request.Name,
                 CreateDate = request.CreateDate,
                 EndDate = request.EndDate,
@@ -75,7 +75,6 @@ namespace SSJD.Services.StoreService.Promotion
             var data = await _context.Promotion.FindAsync(id);
             var getdata = new PromotionRequestModel()
             {
-                ID = data.ID,
                 Name = data.Name,
                 CreateDate = data.CreateDate,
                 EndDate = data.EndDate,

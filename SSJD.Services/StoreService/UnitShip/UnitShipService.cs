@@ -23,7 +23,7 @@ namespace SSJD.Services.StoreService.UnitShip
         {
             var entity = new Entities.StoreEntity.UnitShip()
             {
-                ID = request.ID,
+                ID = Guid.NewGuid().ToString(),
                 Name = request.Name
             };
             _context.UnitShip.Add(entity);
@@ -64,7 +64,6 @@ namespace SSJD.Services.StoreService.UnitShip
             var data = await _context.UnitShip.FindAsync(id);
             var getdata = new UnitShipRequestModel()
             {
-                ID = data.ID,
                 Name = data.Name,
             };
             return getdata;

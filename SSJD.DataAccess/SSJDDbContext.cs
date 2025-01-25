@@ -36,7 +36,7 @@ namespace SSJD.DataAccess
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data Source=localhost,1444;Database=SSJDDB;User ID=sa;Password=Thanh@123456;TrustServerCertificate=True")
+            optionsBuilder.UseSqlServer("Data Source=sdb;Database=SSJDDB;User ID=sa;Password=Thanh@123456;TrustServerCertificate=True")
                 .ConfigureWarnings(w => w.Ignore(RelationalEventId.PendingModelChangesWarning));
         }
 

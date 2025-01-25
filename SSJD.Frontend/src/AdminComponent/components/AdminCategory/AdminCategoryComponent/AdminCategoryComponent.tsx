@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react"
 import { CategoryModel } from "../../../../Model/Category/CategoryModel"
-import { getCategory } from "../../../../Responsitory/CategoryResponsitory"
-import AdminCategoryCreateComponent from "../AdminCategoryCreateComponent/AdminCategoryCreateComponent"
+import { deleteCategory, getCategory } from "../../../../Responsitory/CategoryResponsitory"
 import clsx from 'clsx'
+import AdminCategoryOptionsComponent from "../AdminCategoryOptionsComponent/AdminCategoryOptionsComponent"
 
 const AdminCategoryComponent:React.FC = () =>{
     const[categorys,setcategorys] = useState<CategoryModel[]>()
     const [showformoptions, setShowFormOptions] = useState(false);
     let childpage
+    const [getid,setgetid] = useState('');
     const clicktoshowFormoption = ()=>{
+        setgetid('')
         setShowFormOptions(true)
         console.log(showformoptions) 
     }
@@ -16,7 +18,7 @@ const AdminCategoryComponent:React.FC = () =>{
         setShowFormOptions(false)
     }
     if(showformoptions){
-        childpage = <AdminCategoryCreateComponent onCancel={onCancel} />
+        childpage = <AdminCategoryOptionsComponent selectedID={getid} onCancel={onCancel} />
     } else childpage = <div></div>
     useEffect(()=>{
         const fetch = async () =>{
@@ -25,6 +27,16 @@ const AdminCategoryComponent:React.FC = () =>{
         }
         fetch()
     })
+
+    const handleEdit = (id:string)=>{
+        setShowFormOptions(true)
+        setgetid(id)
+    }
+    const onDelete = async (id:string)=>{
+        await deleteCategory(id)
+        window.location.reload()
+    }
+
     return (
         <div className="d-flex flex-row">
                     <div className={clsx("card shadow","col-md-12",{"col-xl-9":showformoptions})}>
@@ -49,8 +61,8 @@ const AdminCategoryComponent:React.FC = () =>{
                                                 <td>{category.id}</td>
                                                 <td>{category.name}</td>
                                                 <td className="td-options d-flex flex-row gap-2">
-                                                <i className="bi bi-pen"></i>
-                                                <i className="bi bi-x-octagon"></i>
+                                                <i onClick={()=>handleEdit(category.id)} className="options-icon bi bi-pen"></i>
+                                                <i onClick={()=>onDelete(category.id)} className="options-icon bi bi-x-octagon"></i>
                                                 </td>
                                                 
                                             </tr>

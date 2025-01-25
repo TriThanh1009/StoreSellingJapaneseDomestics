@@ -23,7 +23,7 @@ namespace SSJD.Services.StoreService.ProductDetail
         {
             var entity = new Entities.StoreEntity.ProductDetail()
             {
-                ID = request.ID,
+                ID = Guid.NewGuid().ToString(),
                 ProductID = request.ProductID,
                 Description = request.Description,
                 Warranty = request.Warranty,
@@ -78,7 +78,6 @@ namespace SSJD.Services.StoreService.ProductDetail
             var data = await _context.ProductDetail.FindAsync(id);
             var getdata = new ProductDetailRequestModel()
             {
-                ID = data.ID,
                 ProductID = data.ProductID,
                 Description = data.Description,
                 Warranty = data.Warranty,

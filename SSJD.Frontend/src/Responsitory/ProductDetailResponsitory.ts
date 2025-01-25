@@ -17,7 +17,7 @@ export const getProductDetailByID = async(id : string)=>{
     return response.data
 }
 
-export const createCategory = async(data:any)=>{
+export const createProductDetail = async(data:any)=>{
     const response = await axios.post(`${apiUrl}/ProductDetail/CreateProductDetail`)
     return response.data
 }

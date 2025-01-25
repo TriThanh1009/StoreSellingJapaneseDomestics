@@ -2,7 +2,7 @@ import AdminAccountComponent from "../components/AdminAccount/AdminAccountCompon
 import AdminCategoryComponent from "../components/AdminCategory/AdminCategoryComponent/AdminCategoryComponent";
 import AdminMemberCardComponent from "../components/AdminMemberCard/AdminMemberCardComponent/AdminMemberCardComponent";
 import AdminOrderComponent from "../components/AdminOrder/AdminOrderComponent/AdminOrderComponent";
-import AdminOrderCreateComponent from "../components/AdminOrder/AdminOrderCreateComponent/AdminOrderCreateComponent";
+import AdminOrderCreateComponent from "../components/AdminOrder/AdminOrderOptionsComponent/AdminOrderOptionsComponent";
 import AdminProductComponent from "../components/AdminProduct/AdminProductComponent/AdminProductComponent";
 import AdminPromotionComponent from "../components/AdminPromotion/AdminPromotionComponent/AdminPromotionComponent";
 import AdminUnitShipComponent from "../components/AdminUnitShip/AdminUnitShipComponent/AdminUnitShipComponent";

@@ -23,7 +23,7 @@ namespace SSJD.Services.StoreService.OrderDetail
         {
             var entity = new Entities.StoreEntity.OrderDetail()
             {
-                ID = request.ID,
+                ID = Guid.NewGuid().ToString(),
                 OrderID = request.OrderID,
                 Quantity = request.Quantity,
                 Subtotal = request.Subtotal,
@@ -83,7 +83,6 @@ namespace SSJD.Services.StoreService.OrderDetail
                         select o;
             var data = await query.Select(x => new OrderDetailRequestModel()
             {
-                ID = x.ID,
                 OrderID = x.OrderID,
                 ProductID = x.ProductID,
                 Quantity = x.Quantity,

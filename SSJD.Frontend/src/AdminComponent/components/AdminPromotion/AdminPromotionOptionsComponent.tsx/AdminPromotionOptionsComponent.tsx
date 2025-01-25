@@ -2,24 +2,23 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useState } from 'react';
-import { AccountCreateModel } from '../../../../Model/Account/AccountCreateModel';
-import { createAccount, editAccount } from '../../../../Responsitory/AccountResponsitory';
-import './AdminAccountOptionsComponent.css'
+import { PromotionOptionsModel } from '../../../../Model/Promotion/PromotionOptionsModel';
+import { createPromotion, editPromotion } from '../../../../Responsitory/PromotionResponsitory';
 interface Props {
     onCancel: () => void; // Định nghĩa prop onCancel
-    selectedItemId: string;
+    selectedId: string;
   }
-const AdminAccountOptionsComponent:React.FC<Props> = ({onCancel, selectedItemId})=>{
-    const [accounts, setAccounts] = useState<AccountCreateModel>();
+const AdminPromotionOptionsComponent:React.FC<Props> = ({onCancel, selectedId})=>{
+    const [promotion, setpromotions] = useState<PromotionOptionsModel>();
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
-        if (selectedItemId) {
-            setAccounts(prev => ({
+        if (selectedId) {
+            setpromotions(prev => ({
                 ...prev,
-                id: selectedItemId,
+                id: selectedId,
             }));
         }
-        setAccounts((prev) => ({
+        setpromotions((prev) => ({
             ...prev,
             [name]: value,
         }));
@@ -31,11 +30,11 @@ const AdminAccountOptionsComponent:React.FC<Props> = ({onCancel, selectedItemId}
     
         try {
             // Use conditional logic to decide whether to create or edit
-            if (selectedItemId) {
-                await editAccount(accounts);
+            if (selectedId) {
+                await editPromotion(promotion);
                 alert('Edit Success!');
             } else {
-                await createAccount(accounts);
+                await createPromotion(promotion);
                 alert('Create Success!');
             }
             window.location.reload();  // Reload after success
@@ -51,34 +50,34 @@ const AdminAccountOptionsComponent:React.FC<Props> = ({onCancel, selectedItemId}
         <div className="form-group row" >
             <label className="col-sm-5 col-form-label">ID</label>
             <div className="col-sm-10">
-                {selectedItemId && <input type="text" id="id"  name="id" value={selectedItemId}   onChange={handleChange}  className="form-control" />}
-                {!selectedItemId && <input type="text" id="id"  name="id" onChange={handleChange}  className="form-control" />}
+                {selectedId && <input type="text" id="id"  name="id" value={selectedId}   onChange={handleChange}  className="form-control" />}
+                {!selectedId && <input type="text" id="id"  name="id" onChange={handleChange}  className="form-control" />}
             </div>
         </div>
         <div className="form-group row">
-            <label className="col-sm-5 col-form-label">User Name</label>
+            <label className="col-sm-5 col-form-label">Name</label>
             <div className="col-sm-10">
-                <input type="text" id="userName"  name="userName"  onChange={handleChange}   pattern="[a-zA-Z ]+"   className="form-control" />
+                <input type="text" id="name"  name="name"  onChange={handleChange}   pattern="[a-zA-Z ]+"   className="form-control" />
             </div>
         </div>
         <div className="form-group row">
-            <label className="col-sm-5 col-form-label">Password</label>
+            <label className="col-sm-5 col-form-label">Create Date</label>
             <div className="col-sm-10">
-                <input type="text" id="password"   name="password" onChange={handleChange}   className="form-control" />
+                <input type="text" id="createDate"   name="createDate" onChange={handleChange}   className="form-control" />
 
             </div>
         </div>
         <div className="form-group row">
-            <label className="col-sm-5 col-form-label">Password Check</label>
+            <label className="col-sm-5 col-form-label">End Date</label>
             <div className="col-sm-10">
-                <input type="text" id="passwordCheck"   name="passwordCheck"  onChange={handleChange}   className="form-control" />
+                <input type="text" id="endDate"   name="endDate"  onChange={handleChange}   className="form-control" />
 
             </div>
         </div>
         <div className="form-group row">
-            <label className="col-sm-5 col-form-label">Email</label>
+            <label className="col-sm-5 col-form-label">Discount Percent</label>
             <div className="col-sm-10">
-                <input type="text" id="email"   name="email"  onChange={handleChange}  className="form-control" />
+                <input type="text" id="percentDiscount"   name="percentDiscount"  onChange={handleChange}  className="form-control" />
 
             </div>
         </div>
@@ -96,4 +95,4 @@ const AdminAccountOptionsComponent:React.FC<Props> = ({onCancel, selectedItemId}
 
 
 
-export default AdminAccountOptionsComponent
+export default AdminPromotionOptionsComponent

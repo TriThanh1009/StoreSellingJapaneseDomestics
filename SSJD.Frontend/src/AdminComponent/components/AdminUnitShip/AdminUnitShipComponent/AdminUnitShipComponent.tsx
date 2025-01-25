@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react"
 import { UnitShipModel } from "../../../../Model/UnitShip/UnitShipModel"
-import { getUnitShip } from "../../../../Responsitory/UnitShipResponsitory"
-
+import { deleteUnitShip, getUnitShip } from "../../../../Responsitory/UnitShipResponsitory"
+import clsx from 'clsx'
+import AdminUnitShipOptionsComponent from "../AdminUnitShipOptionsComponent/AdminUnitShipOptionsComponent"
 
 
 const AdminUnitShipComponent:React.FC = () =>{
     const [unitships,setUnitShips] = useState<UnitShipModel[]>()
-
+    const [showformoptions, setShowFormOptions] = useState(false);
+    const [getid,setgetid] = useState('');
+    let childpage       
     useEffect(()=>{
         const fetch = async () =>{
             const data = await getUnitShip()
@@ -14,11 +17,31 @@ const AdminUnitShipComponent:React.FC = () =>{
         }
         fetch()
     },[])
+    const clicktoshowFormoption = ()=>{
+        setgetid('')
+        setShowFormOptions(true)
+    }
+    const onCancel = ()=>{
+        setShowFormOptions(false)
+    }
+    if(showformoptions){
+        childpage = <AdminUnitShipOptionsComponent selectedId={getid} onCancel={onCancel}/>
+    } else childpage = <div></div>
+    
+    const handleEdit = (id:string)=>{
+        setShowFormOptions(true)
+        setgetid(id)
+    }
+    const onDelete = async (id: string) =>{
+        await deleteUnitShip(id)
+        window.location.reload()
+    }
     return (
-                    <div className="card shadow mb-4">
+        <div>
+                    <div className={clsx("card shadow","col-md-12",{"col-xl-9":showformoptions})}>
                         <div className="card-header py-3 d-flex flex-row justify-content-between">
                             <h6 className="m-0 font-weight-bold text-primary">Unit Shipping Table</h6>
-                            <button className="button-options">Create</button> 
+                            <button className="button-options" onClick={clicktoshowFormoption}>Create</button> 
                         </div>
                         <div className="card-body">
                             <div className="table-responsive">
@@ -37,8 +60,8 @@ const AdminUnitShipComponent:React.FC = () =>{
                                         <td>{unitship.id}</td>
                                         <td>{unitship.name}</td>
                                         <td className="td-options d-flex flex-row gap-2">
-                                        <i className="bi bi-pen"></i>
-                                        <i className="bi bi-x-octagon"></i>
+                                        <i onClick={()=>handleEdit(unitship.id)} className="options-icon bi bi-pen"></i>
+                                        <i onClick={()=>onDelete(unitship.id)} className="options-icon bi bi-x-octagon"></i>
                                         </td>
                                         </tr>
                                     ))}
@@ -48,6 +71,10 @@ const AdminUnitShipComponent:React.FC = () =>{
                             </div>
                         </div>
                     </div>
+                    <div className={clsx("child-page",{"col-md-3":showformoptions})}>
+                                        {childpage}
+                        </div>
+                </div>
 
     )
 }

@@ -8,6 +8,7 @@ namespace SSJD.ViewModel.StoreViewModel.UnitShip
 {
     public class UnitShipRequestModel
     {
+        public string ID { get; set; } = "";
         public string Name { get; set; } = "";
     }
 }

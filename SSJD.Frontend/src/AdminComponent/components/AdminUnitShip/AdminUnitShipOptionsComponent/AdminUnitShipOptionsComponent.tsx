@@ -60,27 +60,6 @@ const AdminUnitShipOptionsComponent:React.FC<Props> = ({onCancel, selectedId})=>
                 <input type="text" id="name"  name="name"  onChange={handleChange}   pattern="[a-zA-Z ]+"   className="form-control" />
             </div>
         </div>
-        <div className="form-group row">
-            <label className="col-sm-5 col-form-label">Create Date</label>
-            <div className="col-sm-10">
-                <input type="text" id="createDate"   name="createDate" onChange={handleChange}   className="form-control" />
-
-            </div>
-        </div>
-        <div className="form-group row">
-            <label className="col-sm-5 col-form-label">End Date</label>
-            <div className="col-sm-10">
-                <input type="text" id="endDate"   name="endDate"  onChange={handleChange}   className="form-control" />
-
-            </div>
-        </div>
-        <div className="form-group row">
-            <label className="col-sm-5 col-form-label">Discount Percent</label>
-            <div className="col-sm-10">
-                <input type="text" id="percentDiscount"   name="percentDiscount"  onChange={handleChange}  className="form-control" />
-
-            </div>
-        </div>
         <div className='button-options-list d-flex flex-row gap-3' >
             <button type='submit' className="button-options">Accept</button>
             <button className="button-options" onClick={onCancel} >Cancel</button> 

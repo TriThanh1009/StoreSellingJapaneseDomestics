@@ -8,6 +8,7 @@ namespace SSJD.ViewModel.StoreViewModel.Category
 {
     public class CategoryRequestModel
     {
+        public string ID { get; set; } = "";
         public string Name { get; set; } = "";
     }
 }

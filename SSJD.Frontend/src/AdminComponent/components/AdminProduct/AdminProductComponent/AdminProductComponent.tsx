@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useState } from "react"
 import { ProductModel } from "../../../../Model/Product/ProductModel"
-import { getProduct } from "../../../../Responsitory/ProductResponsitory"
+import { deleteProduct, getProduct } from "../../../../Responsitory/ProductResponsitory"
 import AdminProductOptionsComponent from "../AdminProductOptionsComponent/AdminProductOptionsComponent"
 import './AdminProductComponent.css'
 
 const AdminProductComponent:React.FC = () =>{
     const [products,setproducts] = useState<ProductModel[]>()
-
+    const [getid,setgetid] = useState('');
      useEffect(()=>{
          const fetch = async()=>{
              const data = await getProduct()
@@ -20,14 +20,23 @@ const AdminProductComponent:React.FC = () =>{
     const [showformoptions, setShowFormOptions] = useState(false);
         let childpage
     const clicktoshowFormoption = ()=>{
+        setgetid('')
         setShowFormOptions(true)
         console.log(showformoptions) 
         }
+    const handleEdit = (id:string)=>{
+            setShowFormOptions(true)
+            setgetid(id)
+            }
+    const onDelete = async (id:string)=>{
+            await deleteProduct(id)
+            window.location.reload()
+            }
     const onCancel = ()=>{
         setShowFormOptions(false)
         }
     if(showformoptions){
-           childpage = <AdminProductOptionsComponent onCancel={onCancel} />
+           childpage = <AdminProductOptionsComponent selectedID={getid} onCancel={onCancel} />
         } else childpage = <div></div>
     return (
                     <div className="card shadow mb-4">
@@ -63,8 +72,8 @@ const AdminProductComponent:React.FC = () =>{
                                                 <td>{product.stock}</td>
                                                 <td>{product.isActive}</td>
                                                 <td>{product.image}</td>
-                                                <i className="options-icon bi bi-pen"></i>
-                                                <i className="options-icon bi bi-x-octagon"></i>
+                                                <i onClick={()=>handleEdit(product.id)} className="options-icon bi bi-pen"></i>
+                                                <i onClick={()=>onDelete(product.id)} className="options-icon bi bi-x-octagon"></i>
                                             </tr>
                                         ))} 
                                     </tbody>

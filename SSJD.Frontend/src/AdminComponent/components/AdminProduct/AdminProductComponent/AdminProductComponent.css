@@ -19,7 +19,7 @@
   }
   
   /* Form hiển thị phía trên */
-  form {
+  .form-zindex {
     position: fixed;
     top: 50%;
     left: 50%;
@@ -28,6 +28,6 @@
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    z-index: 1100; /* Đặt trên lớp overlay */
-  }
+    z-index: 1100; 
+  } 
   

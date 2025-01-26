@@ -1,6 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using SSJD.DataAccess;
 using SSJD.Services.GeneralService.Account;
@@ -13,6 +15,7 @@ using SSJD.Services.StoreService.ProductDetail;
 using SSJD.Services.StoreService.Promotion;
 using SSJD.Services.StoreService.UnitShip;
 using SSJD.Services.StoreService.User;
+using System.Text;
 
 namespace StoreSellingJapaneseDomestics
 {
@@ -67,6 +70,22 @@ namespace StoreSellingJapaneseDomestics
                 .AllowAnyHeader()
                 .AllowAnyOrigin();
             }));
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidIssuer = Configuration["Jwt:Issuer"],
+                    ValidAudience = Configuration["Jwt:Audience"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
+                };
+            });
             
         
         }

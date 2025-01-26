@@ -37,7 +37,7 @@ const AdminUnitShipComponent:React.FC = () =>{
         window.location.reload()
     }
     return (
-        <div>
+        <div className="d-flex flex-row">
                     <div className={clsx("card shadow","col-md-12",{"col-xl-9":showformoptions})}>
                         <div className="card-header py-3 d-flex flex-row justify-content-between">
                             <h6 className="m-0 font-weight-bold text-primary">Unit Shipping Table</h6>

@@ -8,6 +8,6 @@ import AppAdmin from './AppAdmin.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>  
-    <AppAdmin />
+    <App />
   </StrictMode>,
 )

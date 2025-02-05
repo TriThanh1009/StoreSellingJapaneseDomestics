@@ -4,7 +4,7 @@
 import './Header.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
-import logoimg from '../../Image/logo.jpg'
+import logoimg from '../../../Image/logo.jpg'
 import React, { useState } from 'react';
 
 const Header:React.FC=()=>{
@@ -18,7 +18,6 @@ const Header:React.FC=()=>{
     const handleclick = (name:any)=>{
         window.location.href=name;
     }
-    
 
 
     return(

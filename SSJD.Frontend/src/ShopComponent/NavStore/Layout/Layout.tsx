@@ -13,7 +13,7 @@ interface LayoutProps {
         <div className="store-header">
           <Header />
         </div>
-        <div className="content">
+        <div className="content flex-grow-1">
           {children}
         </div>
         <div className="store-footer">

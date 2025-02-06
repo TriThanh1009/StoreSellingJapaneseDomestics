@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react';
 import ItemCard from '../../ShareComponent/ItemCard/ItemCard';
+import { Outlet } from 'react-router-dom';
 
 const HomeComponent:React.FC = () =>{
   const itemslist = [
@@ -8,8 +9,6 @@ const HomeComponent:React.FC = () =>{
     { id: 2, name: "Item 2" },
     { id: 3, name: "Item 3" },
     { id: 4, name: "Item 4" },
-    { id: 5, name: "Item 5" },
-    { id: 6, name: "Item 6" },
   ];
   return (
     <div>
@@ -20,6 +19,7 @@ const HomeComponent:React.FC = () =>{
           </div>
         ))}
       </div>
+      <Outlet/>
     </div>
     
   )

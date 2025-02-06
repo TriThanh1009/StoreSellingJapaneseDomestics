@@ -13,7 +13,15 @@ const App:React.FC=()=>{
     <Router>
       <Routes>
         {routes.map((route,index)=>(
-          <Route key={index} path={route.path} element={<Layout>{route.element}</Layout>}></Route>
+          <Route key={index} path={route.path} element={<Layout>{route.element}</Layout>}>
+            {route.children?.map((child, childIndex) => (
+              <Route
+                key={childIndex}
+                path={child.path}
+                element={child.element}
+              />
+            ))}
+          </Route>
         ))}
       </Routes>
     </Router>

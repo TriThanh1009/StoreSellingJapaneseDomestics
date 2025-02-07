@@ -7,4 +7,5 @@ export interface ProductModel{
     stock : string
     isActive : string
     image : string
+    quantity : number
 }

@@ -20,6 +20,7 @@ namespace SSJD.DataAccess.StoreConfigurations
             builder.Property("Name").IsRequired().HasMaxLength(30);
             builder.Property("Brand").IsRequired().HasMaxLength(30);
             builder.HasOne(x => x.Category).WithOne(x => x.Product).HasForeignKey<Product>(x => x.CategoryID).OnDelete(DeleteBehavior.Restrict);
+            builder.Property("Size").IsRequired().HasMaxLength(30);
             builder.Property("Price").IsRequired().HasMaxLength(20).HasPrecision(10, 2);
             builder.Property("Stock").IsRequired().HasMaxLength(20);
             builder.Property("isActive").HasDefaultValue(Active.No);

@@ -11,14 +11,16 @@ namespace SSJD.Entities.StoreEntity
     {
         public string ID { get; set; } = "";
         public string Name { get; set; } = "";
-        public string Brand { get; set; } = "";
+        public string BrandID { get; set; } = "";
         public string CategoryID { get; set; } = "";
+        public int Size { get; set; } = 0;
         public decimal Price { get; set; } = 0;
         public int Stock { get; set; } = 0;
         public Active isActive { get; set; } = Active.No;
         public string Image { get; set; } = "";
 
-        public Category Category { get; set; } 
+        public Category Category { get; set; }
+        public Brand Brand { get; set; }
 
         public List<OrderDetail> OrderDetails { get; set; }
 

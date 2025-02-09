@@ -1,26 +1,36 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import './ItemCard.css'
 import logoimg from '../../../Image/logo.jpg'
-import { useCart } from "../../../Hooks/useCart"
+import { ProductModel } from "../../../Model/Product/ProductModel"
+import { getProduct } from "../../../Responsitories/ProductResponsitory"
 
 const ItemCard:React.FC = () =>{
-  const {addtoCard} = useCart()
+  // const {addtoCard} = useCart()
+    const [products,setproducts] = useState<ProductModel>()
+    useEffect(()=>{
+      const fetch = async() =>{
+        const data = await getProduct()
+        setproducts(data)
+      }
+      fetch()
+    },[])
+    
     return (
     <div className="card text-center mx-auto" style={{ width: "18rem", border: "2px solid black", borderRadius: "10px" }}>
       <div className="card-img p-3">
         <img src={logoimg} className="img-fluid" />
       </div>
+      { Array.isArray(products) && products.map((product)=>(
       <div className="card-body">
-        <h5 className="card-title">Brand Name</h5>
-        <p className="card-subtitle mb-2 text-muted">Ohuhu</p>
+        <h5 className="card-title">{product.name}</h5>
+        <p className="card-subtitle mb-2 text-muted">{product.brand}</p>
         <div className="card-text">
-          <p className="fw-bold text-danger">500.000 vnd</p>
+          <p className="fw-bold text-danger">{product.price} vnd</p>
           <div className="card-text-type-size d-flex flex-column">
             <div>
                 <label className="d-block text-start fw-bold">Types</label>
                 <ul className="list-unstyled text-start d-flex flex-row gap-2">
                     <li>Marker</li>
-                    <li>Pencil</li>
                 </ul>
             </div>
             <div>        
@@ -38,6 +48,7 @@ const ItemCard:React.FC = () =>{
           </button>
         </div>
       </div>
+    ))}
     </div>
     )
 }

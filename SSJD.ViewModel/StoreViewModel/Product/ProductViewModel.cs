@@ -13,6 +13,7 @@ namespace SSJD.ViewModel.StoreViewModel.Product
         public string Name { get; set; } = "";
         public string Brand { get; set; } = "";
         public string Category { get; set; } = "";
+        public int Size { get; set; } = 0;
         public decimal Price { get; set; } = 0;
         public int Stock { get; set; } = 0;
         public Active isActive { get; set; } = Active.No;

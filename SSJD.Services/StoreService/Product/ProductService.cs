@@ -25,8 +25,9 @@ namespace SSJD.Services.StoreService.Product
             {
                 ID = Guid.NewGuid().ToString(),
                 Name = request.Name,
-                Brand = request.Brand,
+                BrandID = request.BrandID,
                 CategoryID = request.CategoryID,
+                Size = request.Size,
                 Price = request.Price,
                 Stock = request.Stock,
                 isActive = request.isActive,
@@ -49,8 +50,9 @@ namespace SSJD.Services.StoreService.Product
             if (data != null)
             {
                 data.Name = request.Name;
-                data.Brand = request.Brand;
+                data.BrandID = request.BrandID;
                 data.CategoryID = request.CategoryID;
+                data.Size = request.Size;
                 data.Price = request.Price;
                 data.Stock = request.Stock;
                 data.isActive = request.isActive;
@@ -64,13 +66,15 @@ namespace SSJD.Services.StoreService.Product
         {
             var query = from p in _context.Product
                         join c in _context.Category on p.CategoryID equals c.ID
-                        select new { p, c };
+                        join b in _context.Brand on p.BrandID equals b.ID
+                        select new { p, c,b };
             var data = query.Select(x => new ProductViewModel()
             {
                 ID = x.p.ID,
                 Name = x.p.Name,
-                Brand = x.p.Brand,
+                Brand = x.b.Name,
                 Category = x.c.Name,
+                Size = x.p.Size,
                 Price = x.p.Price,
                 Stock = x.p.Stock,
                 isActive = x.p.isActive,
@@ -85,8 +89,9 @@ namespace SSJD.Services.StoreService.Product
             var getdata = new ProductRequestModel()
             {
                 Name = data.Name,
-                Brand = data.Brand,
+                BrandID = data.BrandID,
                 CategoryID = data.CategoryID,
+                Size = data.Size,
                 Price = data.Price,
                 Stock = data.Stock,
                 isActive = data.isActive,

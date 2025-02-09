@@ -42,6 +42,7 @@ namespace SSJD.DataAccess
 
         
         public DbSet<Account> Account { get; set; }
+        public DbSet<Brand> Brand { get; set; }
         public DbSet<User> User { get; set; }
         public DbSet<MemberCard> MemberCard { get; set; }
         public DbSet<Order> Order { get; set; }

@@ -59,5 +59,27 @@
     margin-top: 2px;
     margin-right: 10px;
 }
+.shopping-cart {
+    position: relative;
+    display: inline-block;
+  }
+  .shopping-cart .cart {
+    font-size: 30px; /* Kích thước icon */
+  }
+.shopping-cart-quantity {
+   position: absolute;
+    top: -1px; /* Điều chỉnh vị trí lên trên */
+    right: -1px; /* Điều chỉnh vị trí sang phải */
+    background-color: red; /* Màu nền */
+    color: white; /* Màu chữ */
+    border-radius: 50%; /* Làm tròn */
+    width: 20px; 
+    height: 20px; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: bold;
+  }
 
 

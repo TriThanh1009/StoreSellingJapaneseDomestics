@@ -11,10 +11,10 @@ type CardProps = {
 type CartContextType = {
   openCart: () => void;
   closeCart: () => void;
-  getItemQuantity: (productId: string) => number;
-  increaseCartQuantity: (productId: string) => void;
-  decreaseCartQuantity: (productId: string) => void;
-  removeFromCart: (productId: string) => void;
+  getItemQuantity: (productID: string) => number;
+  increaseCartQuantity: (productID: string) => void;
+  decreaseCartQuantity: (productID: string) => void;
+  removeFromCart: (productID: string) => void;
   cartQuantity: number;
   cart: OrderDetailModel[];
 };
@@ -40,36 +40,34 @@ export function CartProvider({ children }: CardProps) {
     return cart.find((item) => item.productID === productId)?.quantity || 0;
   }
 
-  function increaseCartQuantity(productId: string) {
+  function increaseCartQuantity(productID: string) {
     setCart((currItems) => {
-      if (currItems.find((item) => item.productID === productId) == null) {
-        return [...currItems, { productId, quantity: 1 }];
+      if (currItems.find((item) => item.productID === productID) == null) {
+        return [...currItems, { productID, quantity: 1 }];
       } else {
         return currItems.map((item) => {
-          if (item.productID === productId) {
+          if (item.productID === productID) {
             return { ...item, quantity: item.quantity + 1 };
           } else {
             return item;
-            
           }
         });
       }
     });
-    console.log(cart)
-    
   }
+  
   useEffect(() => {
     localStorage.setItem("shopping-cart", JSON.stringify(cart));
 
   }, [cart]);
   
-  function decreaseCartQuantity(productId: string) {
+  function decreaseCartQuantity(productID: string) {
     setCart((currItems) => {
-      if (currItems.find((item) => item.productID === productId)?.quantity === 1) {
-        return currItems.filter((item) => item.productID !== productId);
+      if (currItems.find((item) => item.productID === productID)?.quantity === 1) {
+        return currItems.filter((item) => item.productID !== productID);
       } else {
         return currItems.map((item) => {
-          if (item.id === productId) {
+          if (item.productID === productID) {
             return { ...item, quantity: item.quantity - 1 };
           } else {
             return item;
@@ -78,12 +76,14 @@ export function CartProvider({ children }: CardProps) {
       }
     });
   }
+  
 
-  function removeFromCart(id: string) {
+  function removeFromCart(productID: string) {
     setCart((currItems) => {
-      return currItems.filter((item) => item.productID !== id);
+      return currItems.filter((item) => item.productID !== productID);
     });
   }
+  
 
   return (
     <CartShoppingContext.Provider

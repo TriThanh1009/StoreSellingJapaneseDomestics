@@ -6,9 +6,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import logoimg from '../../../Image/logo.jpg'
 import React, { useState } from 'react';
+import { useShoppingCart } from '../../../Hooks/useShoppingCart';
+import CartComponent from '../../../Pages/ShopComponent/components/CartComponent/CartComponent';
 
 const Header:React.FC=()=>{
     const [openDropdown,setopenDropdown] = useState(null)
+    const {cartQuantity} = useShoppingCart()
     const handleMouseEnter = (dropdownname:any) => {
         setopenDropdown(dropdownname);
     };
@@ -18,6 +21,7 @@ const Header:React.FC=()=>{
     const handleclick = (name:any)=>{
         window.location.href=name;
     }
+    
 
 
     return(
@@ -101,6 +105,8 @@ const Header:React.FC=()=>{
             </div>
             <div className='shopping-cart'>
                 <i className='cart bi bi-cart2'></i>
+                <span className='shopping-cart-quantity'>{cartQuantity}</span>
+                
             </div>
             
         </div>

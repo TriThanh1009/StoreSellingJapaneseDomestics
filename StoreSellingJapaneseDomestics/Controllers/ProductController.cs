@@ -39,5 +39,12 @@ namespace StoreSellingJapaneseDomestics.Controllers
             await _service.Delete(id);
             return Ok();
         }
+
+        [HttpGet("GetProductByID")]
+        public async Task<IActionResult> GetByID(string id)
+        {
+            var data = await _service.GetByID(id);
+            return Ok(data);
+        }
     }
 }

@@ -1,25 +1,31 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import ItemCard from '../../../ShareComponent/ItemCard/ItemCard';
+import { ProductModel } from '../../../../Model/Product/ProductModel';
+import { getProduct } from '../../../../Responsitories/ProductResponsitory';
+import CardComponent from '../CartComponent/CartComponent';
 
 const HomeComponent:React.FC = () =>{
-  const itemslist = [
-    { id: 1, name: "Item 1" },
-    { id: 2, name: "Item 2" },
-    { id: 3, name: "Item 3" },
-    { id: 4, name: "Item 4" },
-  ];
+  const [products,setproducts] = useState<ProductModel[]>()
+      useEffect(()=>{
+        const fetch = async() =>{
+          const data = await getProduct()
+          setproducts(data)
+        }
+        fetch()
+      },[])
   return (
     <div>
       <div className="row g-2">
-        {itemslist.map((itemslist)=>(
-          <div className='col-3' key={itemslist.id}>
-            <ItemCard/>
+        { Array.isArray(products) && products.map((product)=>(
+          <div className='col-3' key={product.id}>
+            <ItemCard  products={product}/>
           </div>
         ))}
       </div>
       <Outlet/>
+
     </div>
     
   )

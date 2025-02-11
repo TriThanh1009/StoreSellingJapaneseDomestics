@@ -28,6 +28,6 @@ export const editOrderDetail = async(data:any)=>{
 }
 
 export const deleteOrderDetail = async(id : string)=>{
-    const response = await axios.delete(`${apiUrl}/OrderDetail?${id}`)
+    const response = await axios.delete(`${apiUrl}/OrderDetail?id=${id}`)
     return response.data
 }

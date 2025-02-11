@@ -75,10 +75,10 @@ namespace SSJD.Services.GeneralService.Account
             return data;
         }
 
-        public async Task<AccountRequestModel?> GetByID(string id)
+        public async Task<AccountViewModel?> GetByID(string id)
         {
             var data = await _context.Account.FindAsync(id);
-            var getdata = new AccountRequestModel()
+            var getdata = new AccountViewModel()
             {
                 ID = data.ID,
                 UserName = data.UserName,
@@ -89,7 +89,7 @@ namespace SSJD.Services.GeneralService.Account
             return getdata;
         }
 
-        public Task<List<AccountRequestModel>> GetListByID(string id)
+        public Task<List<AccountViewModel>> GetListByID(string id)
         {
             throw new NotImplementedException();
         }

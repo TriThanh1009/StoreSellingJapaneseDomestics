@@ -36,7 +36,7 @@ namespace StoreSellingJapaneseDomestics.Controllers
         }
 
         [HttpGet, Authorize]
-        public ActionResult<string> GetName()e
+        public ActionResult<string> GetName()
 
         {
             var userName = User.FindFirstValue(ClaimTypes.Name);

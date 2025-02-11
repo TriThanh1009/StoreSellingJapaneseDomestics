@@ -59,17 +59,17 @@ namespace SSJD.Services.StoreService.UnitShip
             return data;
         }
 
-        public async Task<UnitShipRequestModel?> GetByID(string id)
+        public async Task<UnitShipViewModel?> GetByID(string id)
         {
             var data = await _context.UnitShip.FindAsync(id);
-            var getdata = new UnitShipRequestModel()
+            var getdata = new UnitShipViewModel()
             {
                 Name = data.Name,
             };
             return getdata;
         }
 
-        public Task<List<UnitShipRequestModel>> GetListByID(string id)
+        public Task<List<UnitShipViewModel>> GetListByID(string id)
         {
             throw new NotImplementedException();
         }

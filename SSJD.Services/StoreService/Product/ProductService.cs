@@ -83,14 +83,24 @@ namespace SSJD.Services.StoreService.Product
             return data;
         }
 
-        public async Task<ProductRequestModel?> GetByID(string id)
+        public async Task<ProductViewModel?> GetByID(string id)
         {
+            var brand = (from p in _context.Product
+                         join b in _context.Brand on p.BrandID equals b.ID
+                         where p.ID == id
+                         select b.Name).First();
+            var category = (from p in _context.Product
+                         join c in _context.Category on p.CategoryID equals c.ID
+                         where p.ID == id
+                         select c.Name).First();
             var data = await _context.Product.FindAsync(id);
-            var getdata = new ProductRequestModel()
+
+            var getdata = new ProductViewModel()
             {
+                ID = data.ID,
                 Name = data.Name,
-                BrandID = data.BrandID,
-                CategoryID = data.CategoryID,
+                Brand = brand,
+                Category = category,
                 Size = data.Size,
                 Price = data.Price,
                 Stock = data.Stock,
@@ -100,7 +110,7 @@ namespace SSJD.Services.StoreService.Product
             return getdata;
         }
 
-        public Task<List<ProductRequestModel>> GetListByID(string id)
+        public Task<List<ProductViewModel>> GetListByID(string id)
         {
             throw new NotImplementedException();
         }

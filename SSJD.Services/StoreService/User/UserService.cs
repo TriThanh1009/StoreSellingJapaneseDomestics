@@ -72,6 +72,7 @@ namespace SSJD.Services.StoreService.User
                         select new { u, a,m };
             var data = await query.Select(x => new UserViewModel()
             {
+                Id = x.u.Id,
                 UserName = x.u.UserName,
                 PhoneNumber = x.u.PhoneNumber ?? "",
                 Address = x.u.Address,
@@ -84,24 +85,24 @@ namespace SSJD.Services.StoreService.User
             return data;
         }
 
-        public async Task<UserRequestModel?> GetByID(string id)
+        public async Task<UserViewModel?> GetByID(string id)
         {
             var data = await _context.User.FindAsync(id);
-            var getdata = new UserRequestModel()
+            var getdata = new UserViewModel()
             {
                 UserName = data.UserName,
                 PhoneNumber = data.PhoneNumber ?? "",
                 Address = data.Address,
                 IdentityCard = data.IdentityCard,
                 Email = data.Email ?? "",
-                AccountID = data.AccountID,
-                MemberCardID = data.MemberCardID,
+                Account = data.AccountID,
+                MemberCard = data.MemberCardID,
                 Image = data.Image
             };
             return getdata;
         }
 
-        public Task<List<UserRequestModel>> GetListByID(string id)
+        public Task<List<UserViewModel>> GetListByID(string id)
         {
             throw new NotImplementedException();
         }

@@ -25,6 +25,7 @@ namespace SSJD.Services.StoreService.Order
             var entity = new Entities.StoreEntity.Order()
             {
                 ID = Guid.NewGuid().ToString(),
+                UserID = request.UserID,
                 OrderDate = request.OrderDate,
                 ShippingUnitID = request.ShippingUnitID,
                 ShippingDate = request.ShippingDate,
@@ -67,7 +68,7 @@ namespace SSJD.Services.StoreService.Order
             var data = await query.Select(x => new OrderViewModel()
             {
                 ID = x.ID,
-                Customer = x.CustomerID,
+                User = x.UserID,
                 OrderDate = x.OrderDate,
                 ShippingUnit = x.ShippingUnitID,
                 ShippingDate = x.ShippingDate,
@@ -80,15 +81,15 @@ namespace SSJD.Services.StoreService.Order
             return data;
         }
 
-        public async Task<OrderRequestModel?> GetByID(string id)
+        public async Task<OrderViewModel?> GetByID(string id)
         {
             var data = await _context.Order.FindAsync(id);
-            var getdata = new OrderRequestModel()
+            var getdata = new OrderViewModel()
             {
                 ID = data.ID,
-                CustomerID = data.CustomerID,
+                User = data.UserID,
                 OrderDate = data.OrderDate,
-                ShippingUnitID = data.ShippingUnitID,
+                ShippingUnit = data.ShippingUnitID,
                 ShippingDate = data.ShippingDate,
                 ShippingAddress = data.ShippingAddress,
                 OrderStatus = data.OrderStatus,
@@ -98,7 +99,7 @@ namespace SSJD.Services.StoreService.Order
             return getdata;
         }
 
-        public Task<List<OrderRequestModel>> GetListByID(string id)
+        public Task<List<OrderViewModel>> GetListByID(string id)
         {
             throw new NotImplementedException();
         }

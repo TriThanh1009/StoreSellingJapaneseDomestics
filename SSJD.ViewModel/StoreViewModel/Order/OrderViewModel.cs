@@ -9,7 +9,7 @@ namespace SSJD.ViewModel.StoreViewModel.Order
     public class OrderViewModel
     {
         public string ID { get; set; } = "";
-        public string Customer { get; set; } = "";
+        public string User { get; set; } = "";
         public DateTime OrderDate { get; set; } = DateTime.Now;
         public string ShippingUnit { get; set; } = "";
         public DateTime ShippingDate { get; set; } = DateTime.Now;

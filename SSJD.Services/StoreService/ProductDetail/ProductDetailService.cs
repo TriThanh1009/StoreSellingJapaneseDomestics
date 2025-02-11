@@ -73,12 +73,12 @@ namespace SSJD.Services.StoreService.ProductDetail
             return data;
         }
 
-        public async Task<ProductDetailRequestModel?> GetByID(string id)
+        public async Task<ProductDetailViewModel?> GetByID(string id)
         {
             var data = await _context.ProductDetail.FindAsync(id);
-            var getdata = new ProductDetailRequestModel()
+            var getdata = new ProductDetailViewModel()
             {
-                ProductID = data.ProductID,
+                Product = data.ProductID,
                 Description = data.Description,
                 Warranty = data.Warranty,
                 Origin = data.Origin,
@@ -87,7 +87,7 @@ namespace SSJD.Services.StoreService.ProductDetail
             return getdata;
         }
 
-        public Task<List<ProductDetailRequestModel>> GetListByID(string id)
+        public Task<List<ProductDetailViewModel>> GetListByID(string id)
         {
             throw new NotImplementedException();
         }

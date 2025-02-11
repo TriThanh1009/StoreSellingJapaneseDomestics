@@ -5,9 +5,11 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
 import AppAdmin from './AppAdmin.tsx'
+import { CartProvider } from './Features/Context/CartShoppingContext.tsx'
 
 createRoot(document.getElementById('root')!).render(
-  <StrictMode>  
-    <App />
+  <StrictMode>
+    <CartProvider><App /></CartProvider>
+    
   </StrictMode>,
 )

@@ -62,10 +62,10 @@ namespace SSJD.Services.StoreService.Category
             return data;
         }
 
-        public async Task<CategoryRequestModel?> GetByID(string id)
+        public async Task<CategoryViewModel?> GetByID(string id)
         {
             var data = await _context.Category.FindAsync(id);
-            var getdata = new CategoryRequestModel()
+            var getdata = new CategoryViewModel()
             {
                 ID = data.ID,
                 Name = data.Name,
@@ -78,7 +78,7 @@ namespace SSJD.Services.StoreService.Category
             throw new NotImplementedException();
         }
 
-        public Task<List<CategoryRequestModel>> GetListByID(string id)
+        public Task<List<CategoryViewModel>> GetListByID(string id)
         {
             throw new NotImplementedException();
         }

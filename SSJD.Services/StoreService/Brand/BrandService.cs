@@ -64,10 +64,10 @@ namespace SSJD.Services.StoreService.Brand
             throw new NotImplementedException();
         }
 
-        public async Task<BrandRequestModel?> GetByID(string id)
+        public async Task<BrandViewModel?> GetByID(string id)
         {
             var data = await _context.Brand.FindAsync(id);
-            var getdata = new BrandRequestModel()
+            var getdata = new BrandViewModel()
             {
                 ID = data.ID,
                 Name = data.Name,
@@ -75,7 +75,7 @@ namespace SSJD.Services.StoreService.Brand
             return getdata;
         }
 
-        public Task<List<BrandRequestModel>> GetListByID(string id)
+        public Task<List<BrandViewModel>> GetListByID(string id)
         {
             throw new NotImplementedException();
         }

@@ -11,8 +11,8 @@ namespace SSJD.Services.GeneralService.Base
         Task Create(TRequestModel request);
         Task Edit(TRequestModel request);
         Task Delete(string id);
-        Task<TRequestModel?> GetByID(string id);
-        Task<List<TRequestModel>> GetListByID(string id);
+        Task<TViewModel?> GetByID(string id);
+        Task<List<TViewModel>> GetListByID(string id);
         Task<List<TViewModel>> GetAll();
     }
 }

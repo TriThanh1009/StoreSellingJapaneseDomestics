@@ -1,37 +1,41 @@
-import React, { useState } from "react"
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import React, { useEffect, useState } from "react"
 import { Button, Table } from "react-bootstrap";
+import { useShoppingCart } from "../../../../Hooks/useShoppingCart";
+import { ProductModel } from "../../../../Model/Product/ProductModel";
+import { getProductByID } from "../../../../Responsitories/ProductResponsitory";
+import { OrderDetailModel } from "../../../../Model/OrderDetail/OrderDetailModel";
 
 
-const CardComponent:React.FC = () =>{
-    const [cartItems,setCartItems] = useState([
-        {
-            id: 1,
-            name: "Timex Unisex Originals",
-            category: "Watches",
-            price: 79.0,
-            quantity: 3,
-          },
-          {
-            id: 2,
-            name: "Lumix camera lense",
-            category: "Electronics",
-            price: 79.0,
-            quantity: 3,
-          },
-          {
-            id: 3,
-            name: "Gray Nike running shoe",
-            category: "Fashion",
-            price: 79.0,
-            quantity: 3,
-          },
-    ])
-    
-      const handleRemove = (id: number) => {
-        const updateCart = cartItems.filter((item => item.id !==id))
-        setCartItems(updateCart)
-        alert(`Removed item with id: ${id}`);
-      };
+
+const CardComponent: React.FC = () => {
+  const {cart,removeFromCart} = useShoppingCart()
+  const [orders,setorder] = useState<OrderDetailModel[]>()
+  const [products,setproducts] = useState<ProductModel[]>()
+  useEffect(() => {
+    const fetchProducts = async () => {
+      if (cart.length === 0) return;
+
+      const productList = await Promise.all(
+        cart.map(async (item) => {
+          return await getProductByID(item.id);
+        })
+      );
+      setproducts(productList); 
+
+    };
+  
+    fetchProducts();
+  }, [cart]);
+
+  function handleRemove(id : string){
+    removeFromCart(id)
+    localStorage.removeItem("shopping-cart"); 
+    orders?.filter(item=>item.id ===id)
+
+    window.location.reload()
+  }
     return (
         <div className="container mt-4">
         <h2>Shopping Cart</h2>
@@ -45,24 +49,24 @@ const CardComponent:React.FC = () =>{
             </tr>
           </thead>
           <tbody>
-            {cartItems.map((item) => (
-              <tr key={item.id}>
+            {Array.isArray(products) && products.map((product) => (
+              <tr key={product.id}>
                 <td>
                   <div className="d-flex align-items-center">
                     <div>
-                      <strong>{item.name}</strong>
+                      <strong>{product.name}</strong>
                       <br />
-                      <small>Category: {item.category}</small>
+                      <small>Category: {product.category}</small>
                     </div>
                   </div>
                 </td>
-                <td>${item.price.toFixed(2)}</td>
-                <td>{item.quantity}</td>
+                <td>${product.price}</td>
+                <td>{product.price}</td>
                 <td>
                   <Button
                     variant="danger"
                     size="sm"
-                    onClick={() => handleRemove(item.id)}
+                    onClick={() => handleRemove(product.id)}
                   >
                     🗑️
                   </Button>

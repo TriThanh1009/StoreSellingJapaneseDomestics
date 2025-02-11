@@ -68,6 +68,18 @@ namespace SSJD.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Brand",
+                columns: table => new
+                {
+                    ID = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Brand", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Category",
                 columns: table => new
                 {
@@ -99,8 +111,8 @@ namespace SSJD.DataAccess.Migrations
                 {
                     ID = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 1, 21, 0, 31, 21, 462, DateTimeKind.Local).AddTicks(5297)),
-                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 1, 21, 0, 31, 21, 462, DateTimeKind.Local).AddTicks(5451)),
+                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 2, 10, 10, 3, 6, 922, DateTimeKind.Local).AddTicks(8069)),
+                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 2, 10, 10, 3, 6, 922, DateTimeKind.Local).AddTicks(8220)),
                     PercentDiscount = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -232,8 +244,9 @@ namespace SSJD.DataAccess.Migrations
                 {
                     ID = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
-                    Brand = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    BrandID = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     CategoryID = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Size = table.Column<int>(type: "int", maxLength: 30, nullable: false),
                     Price = table.Column<decimal>(type: "decimal(10,2)", maxLength: 20, precision: 10, scale: 2, nullable: false),
                     Stock = table.Column<int>(type: "int", maxLength: 20, nullable: false),
                     isActive = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
@@ -242,6 +255,12 @@ namespace SSJD.DataAccess.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Product", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_Product_Brand_BrandID",
+                        column: x => x.BrandID,
+                        principalTable: "Brand",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Product_Category_CategoryID",
                         column: x => x.CategoryID,
@@ -292,7 +311,7 @@ namespace SSJD.DataAccess.Migrations
                     ID = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ProductID = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
-                    Warranty = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 1, 21, 0, 31, 21, 462, DateTimeKind.Local).AddTicks(3672)),
+                    Warranty = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 2, 10, 10, 3, 6, 922, DateTimeKind.Local).AddTicks(6272)),
                     Origin = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     AdditionalImage = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false)
                 },
@@ -312,10 +331,10 @@ namespace SSJD.DataAccess.Migrations
                 columns: table => new
                 {
                     ID = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    CustomerID = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 1, 21, 0, 31, 21, 447, DateTimeKind.Local).AddTicks(8692)),
+                    UserID = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 2, 10, 10, 3, 6, 916, DateTimeKind.Local).AddTicks(7475)),
                     ShippingUnitID = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ShippingDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 1, 21, 0, 31, 21, 458, DateTimeKind.Local).AddTicks(4365)),
+                    ShippingDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 2, 10, 10, 3, 6, 918, DateTimeKind.Local).AddTicks(5408)),
                     ShippingAddress = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     OrderStatus = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TotalPrice = table.Column<decimal>(type: "decimal(10,2)", maxLength: 50, precision: 10, scale: 2, nullable: false),
@@ -332,8 +351,8 @@ namespace SSJD.DataAccess.Migrations
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Order_User_CustomerID",
-                        column: x => x.CustomerID,
+                        name: "FK_Order_User_UserID",
+                        column: x => x.UserID,
                         principalTable: "User",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -401,14 +420,24 @@ namespace SSJD.DataAccess.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "e73b9587-bb9c-4099-b85b-971689347b49", null, "Admin", null },
-                    { "fe773bd2-81b5-484b-bc85-fd4cb3c07d35", null, "Customer", null }
+                    { "0dbc9031-6989-4006-9013-6e236ba881af", null, "Customer", null },
+                    { "6801f9e3-c524-42a0-83eb-e6723554eef8", null, "Admin", null }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "94bb0740-5e89-4e1b-9091-c8fe2c8f65e2", 0, "57a60b5b-8518-43d4-87f4-61961883a725", null, false, false, null, null, null, null, "123123", false, "75fa0e6b-ab32-4fcb-a58f-7b793fc99800", false, "Nguyen Tri Thanh" });
+                values: new object[] { "1", 0, "896dad3b-eb4b-42ad-ad61-e8877f21ea03", null, false, false, null, null, null, null, "123123", false, "6403e92c-d239-42bc-8c13-be3cf8ec4488", false, "Nguyen Tri Thanh" });
+
+            migrationBuilder.InsertData(
+                table: "Brand",
+                columns: new[] { "ID", "Name" },
+                values: new object[] { "2", "ohuhu" });
+
+            migrationBuilder.InsertData(
+                table: "Category",
+                columns: new[] { "ID", "Name" },
+                values: new object[] { "2", "book" });
 
             migrationBuilder.InsertData(
                 table: "MemberCard",
@@ -418,7 +447,7 @@ namespace SSJD.DataAccess.Migrations
             migrationBuilder.InsertData(
                 table: "User",
                 columns: new[] { "Id", "AccountID", "Address", "IdentityCard", "Image", "MemberCardID", "Sex" },
-                values: new object[] { "94bb0740-5e89-4e1b-9091-c8fe2c8f65e2", "1", "Viet Nam", "123", "122", "1", 1 });
+                values: new object[] { "1", "1", "Viet Nam", "123", "122", "1", 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -460,14 +489,14 @@ namespace SSJD.DataAccess.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Order_CustomerID",
-                table: "Order",
-                column: "CustomerID");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Order_ShippingUnitID",
                 table: "Order",
                 column: "ShippingUnitID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Order_UserID",
+                table: "Order",
+                column: "UserID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_OrderDetail_OrderID",
@@ -487,10 +516,14 @@ namespace SSJD.DataAccess.Migrations
                 column: "ProductID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Product_BrandID",
+                table: "Product",
+                column: "BrandID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Product_CategoryID",
                 table: "Product",
-                column: "CategoryID",
-                unique: true);
+                column: "CategoryID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ProductDetail_ProductID",
@@ -551,6 +584,9 @@ namespace SSJD.DataAccess.Migrations
 
             migrationBuilder.DropTable(
                 name: "Promotion");
+
+            migrationBuilder.DropTable(
+                name: "Brand");
 
             migrationBuilder.DropTable(
                 name: "Category");

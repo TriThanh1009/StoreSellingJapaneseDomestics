@@ -70,10 +70,10 @@ namespace SSJD.Services.StoreService.Promotion
             return data;
         }
 
-        public async Task<PromotionRequestModel?> GetByID(string id)
+        public async Task<PromotionViewModel?> GetByID(string id)
         {
             var data = await _context.Promotion.FindAsync(id);
-            var getdata = new PromotionRequestModel()
+            var getdata = new PromotionViewModel()
             {
                 Name = data.Name,
                 CreateDate = data.CreateDate,
@@ -83,7 +83,7 @@ namespace SSJD.Services.StoreService.Promotion
             return getdata;
         }
 
-        public Task<List<PromotionRequestModel>> GetListByID(string id)
+        public Task<List<PromotionViewModel>> GetListByID(string id)
         {
             throw new NotImplementedException();
         }

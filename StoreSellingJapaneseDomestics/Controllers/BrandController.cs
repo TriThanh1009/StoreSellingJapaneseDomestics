@@ -13,12 +13,20 @@ namespace StoreSellingJapaneseDomestics.Controllers
         {
             _service = service;
         }
+
         [HttpGet]
         public async Task<IActionResult> Get()
         {
             var data = await _service.GetAll();
             return Ok(data);
         }
+        [HttpGet("get")]
+        public async Task<IActionResult> Gett()
+        {
+            var data = await _service.GetAll();
+            return Ok(data);
+        }
+
         [HttpPost("CreateBrand")]
         public async Task<IActionResult> Create([FromBody] BrandRequestModel request)
         {

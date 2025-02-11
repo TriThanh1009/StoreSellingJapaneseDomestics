@@ -1,11 +1,14 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using SSJD.DataAccess;
 using SSJD.Services.GeneralService.Account;
+using SSJD.Services.StoreService.Brand;
 using SSJD.Services.StoreService.Category;
 using SSJD.Services.StoreService.MemberCard;
 using SSJD.Services.StoreService.Order;
@@ -41,6 +44,7 @@ namespace StoreSellingJapaneseDomestics
                 );       //Declare
 
             services.AddTransient<IAccountService, AccountService>();
+            services.AddTransient<IBrandService, BrandService>();
             services.AddTransient<ICategoryService, CategorySerivce>();
             services.AddTransient<IMemberCardService, MemberCardService>();
             services.AddTransient<IOrderService, OrderService>();
@@ -52,7 +56,9 @@ namespace StoreSellingJapaneseDomestics
             services.AddTransient<IUserService, UserService>();
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddControllersWithViews();
-
+            services.AddIdentity<IdentityUser,IdentityRole>()
+                .AddEntityFrameworkStores<SSJDDbContext>()
+                .AddDefaultTokenProviders();
             services.AddSwaggerGen(options =>
             {
                 options.SwaggerDoc("v1", new OpenApiInfo { Title = "Swagger Timekeeping Solution", Version = "v1" });

@@ -25,12 +25,14 @@ namespace SSJD.Services.StoreService.OrderDetail
             {
                 ID = Guid.NewGuid().ToString(),
                 OrderID = request.OrderID,
+                ProductID = request.ProductID,
                 Quantity = request.Quantity,
                 Subtotal = request.Subtotal,
                 PromotionID = request.PromotionID,
             };
             _context.OrderDetail.Add(entity);
             await _context.SaveChangesAsync();
+
         }
 
         public async Task Delete(string id)
@@ -71,23 +73,23 @@ namespace SSJD.Services.StoreService.OrderDetail
             return data;
         }
 
-        public async Task<OrderDetailRequestModel?> GetByID(string id)
+        public async Task<OrderDetailViewModel?> GetByID(string id)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<List<OrderDetailRequestModel>> GetListByID(string id)
+        public async Task<List<OrderDetailViewModel>> GetListByID(string id)
         {
             var query = from o in _context.OrderDetail
                         where o.ID == id
                         select o;
-            var data = await query.Select(x => new OrderDetailRequestModel()
+            var data = await query.Select(x => new OrderDetailViewModel()
             {
                 OrderID = x.OrderID,
                 ProductID = x.ProductID,
                 Quantity = x.Quantity,
                 Subtotal = x.Subtotal,
-                PromotionID = x.PromotionID
+                Promotion = x.PromotionID
             }).ToListAsync();
             return data;
 

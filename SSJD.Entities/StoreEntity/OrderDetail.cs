@@ -15,9 +15,9 @@ namespace SSJD.Entities.StoreEntity
         public decimal Subtotal { get; set; } = 0;
         public string PromotionID { get; set; } = "";
 
-        
+         
 
-        public Order Order { get; } = new();
+        public Order Order { get; set; } 
         public List<Product> Product { get; set; }
 
         public Promotion Promotion { get; set; } 

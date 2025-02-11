@@ -68,7 +68,7 @@ const AdminProductComponent:React.FC = () =>{
                                                 <td>{product.id}</td>
                                                 <td>{product.name}</td>
                                                 <td>{product.brand}</td>
-                                                <td>{product.categoryID}</td>
+                                                <td>{product.category}</td>
                                                 <td>{product.price}</td>
                                                 <td>{product.stock}</td>
                                                 <td>{product.isActive}</td>

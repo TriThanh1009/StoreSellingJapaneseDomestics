@@ -12,7 +12,7 @@ using SSJD.DataAccess;
 namespace SSJD.DataAccess.Migrations
 {
     [DbContext(typeof(SSJDDbContext))]
-    [Migration("20250120173133_DataSeed")]
+    [Migration("20250210030315_DataSeed")]
     partial class DataSeed
     {
         /// <inheritdoc />
@@ -54,12 +54,12 @@ namespace SSJD.DataAccess.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "3e089286-5e25-40a4-82ea-6c3f7c72f752",
+                            Id = "8c7293fb-31ca-42b4-aeca-c5008ca3edde",
                             Name = "Admin"
                         },
                         new
                         {
-                            Id = "0c0b0edd-97ed-485e-8d92-175d1bd0f425",
+                            Id = "c405691c-e893-421e-88f7-c5d76164d8aa",
                             Name = "Customer"
                         });
                 });
@@ -294,6 +294,27 @@ namespace SSJD.DataAccess.Migrations
                         });
                 });
 
+            modelBuilder.Entity("SSJD.Entities.StoreEntity.Brand", b =>
+                {
+                    b.Property<string>("ID")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Brand");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = "2",
+                            Name = "ohuhu"
+                        });
+                });
+
             modelBuilder.Entity("SSJD.Entities.StoreEntity.Category", b =>
                 {
                     b.Property<string>("ID")
@@ -307,6 +328,13 @@ namespace SSJD.DataAccess.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Category", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            ID = "2",
+                            Name = "book"
+                        });
                 });
 
             modelBuilder.Entity("SSJD.Entities.StoreEntity.MemberCard", b =>
@@ -343,14 +371,10 @@ namespace SSJD.DataAccess.Migrations
                     b.Property<string>("ID")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("CustomerID")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<DateTime>("OrderDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 1, 21, 0, 31, 33, 81, DateTimeKind.Local).AddTicks(801));
+                        .HasDefaultValue(new DateTime(2025, 2, 10, 10, 3, 15, 481, DateTimeKind.Local).AddTicks(8881));
 
                     b.Property<string>("OrderStatus")
                         .IsRequired()
@@ -374,7 +398,7 @@ namespace SSJD.DataAccess.Migrations
                     b.Property<DateTime>("ShippingDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 1, 21, 0, 31, 33, 82, DateTimeKind.Local).AddTicks(9014));
+                        .HasDefaultValue(new DateTime(2025, 2, 10, 10, 3, 15, 483, DateTimeKind.Local).AddTicks(5778));
 
                     b.Property<string>("ShippingUnitID")
                         .IsRequired()
@@ -385,11 +409,15 @@ namespace SSJD.DataAccess.Migrations
                         .HasPrecision(10, 2)
                         .HasColumnType("decimal(10,2)");
 
+                    b.Property<string>("UserID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("ID");
 
-                    b.HasIndex("CustomerID");
-
                     b.HasIndex("ShippingUnitID");
+
+                    b.HasIndex("UserID");
 
                     b.ToTable("Order", (string)null);
                 });
@@ -436,10 +464,9 @@ namespace SSJD.DataAccess.Migrations
                     b.Property<string>("ID")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Brand")
+                    b.Property<string>("BrandID")
                         .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("CategoryID")
                         .IsRequired()
@@ -460,6 +487,10 @@ namespace SSJD.DataAccess.Migrations
                         .HasPrecision(10, 2)
                         .HasColumnType("decimal(10,2)");
 
+                    b.Property<int>("Size")
+                        .HasMaxLength(30)
+                        .HasColumnType("int");
+
                     b.Property<int>("Stock")
                         .HasMaxLength(20)
                         .HasColumnType("int");
@@ -471,8 +502,9 @@ namespace SSJD.DataAccess.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("CategoryID")
-                        .IsUnique();
+                    b.HasIndex("BrandID");
+
+                    b.HasIndex("CategoryID");
 
                     b.ToTable("Product", (string)null);
                 });
@@ -504,7 +536,7 @@ namespace SSJD.DataAccess.Migrations
                     b.Property<DateTime>("Warranty")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 1, 21, 0, 31, 33, 86, DateTimeKind.Local).AddTicks(7651));
+                        .HasDefaultValue(new DateTime(2025, 2, 10, 10, 3, 15, 487, DateTimeKind.Local).AddTicks(4319));
 
                     b.HasKey("ID");
 
@@ -522,12 +554,12 @@ namespace SSJD.DataAccess.Migrations
                     b.Property<DateTime>("CreateDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 1, 21, 0, 31, 33, 86, DateTimeKind.Local).AddTicks(9051));
+                        .HasDefaultValue(new DateTime(2025, 2, 10, 10, 3, 15, 487, DateTimeKind.Local).AddTicks(6090));
 
                     b.Property<DateTime>("EndDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 1, 21, 0, 31, 33, 86, DateTimeKind.Local).AddTicks(9183));
+                        .HasDefaultValue(new DateTime(2025, 2, 10, 10, 3, 15, 487, DateTimeKind.Local).AddTicks(6295));
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -601,14 +633,14 @@ namespace SSJD.DataAccess.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "5dfa1df9-22b4-4d0c-bd32-9bd05240c512",
+                            Id = "1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "cf56b58e-b3bf-49e8-ad66-8ce57e1d8069",
+                            ConcurrencyStamp = "f870228e-2bb4-4922-9f45-3698be41ad78",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumber = "123123",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "a47f8128-bf88-49b1-8164-690341ad8e85",
+                            SecurityStamp = "341ecc37-564a-42eb-9247-0cf6f480bbac",
                             TwoFactorEnabled = false,
                             UserName = "Nguyen Tri Thanh",
                             AccountID = "1",
@@ -688,21 +720,21 @@ namespace SSJD.DataAccess.Migrations
 
             modelBuilder.Entity("SSJD.Entities.StoreEntity.Order", b =>
                 {
-                    b.HasOne("SSJD.Entities.StoreEntity.User", "Customer")
-                        .WithMany("Orders")
-                        .HasForeignKey("CustomerID")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.HasOne("SSJD.Entities.StoreEntity.UnitShip", "UnitShip")
                         .WithMany("Orders")
                         .HasForeignKey("ShippingUnitID")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("Customer");
+                    b.HasOne("SSJD.Entities.StoreEntity.User", "User")
+                        .WithMany("Orders")
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("UnitShip");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("SSJD.Entities.StoreEntity.OrderDetail", b =>
@@ -726,11 +758,19 @@ namespace SSJD.DataAccess.Migrations
 
             modelBuilder.Entity("SSJD.Entities.StoreEntity.Product", b =>
                 {
-                    b.HasOne("SSJD.Entities.StoreEntity.Category", "Category")
-                        .WithOne("Product")
-                        .HasForeignKey("SSJD.Entities.StoreEntity.Product", "CategoryID")
+                    b.HasOne("SSJD.Entities.StoreEntity.Brand", "Brand")
+                        .WithMany("Product")
+                        .HasForeignKey("BrandID")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.HasOne("SSJD.Entities.StoreEntity.Category", "Category")
+                        .WithMany("Product")
+                        .HasForeignKey("CategoryID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Brand");
 
                     b.Navigation("Category");
                 });
@@ -777,10 +817,14 @@ namespace SSJD.DataAccess.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("SSJD.Entities.StoreEntity.Brand", b =>
+                {
+                    b.Navigation("Product");
+                });
+
             modelBuilder.Entity("SSJD.Entities.StoreEntity.Category", b =>
                 {
-                    b.Navigation("Product")
-                        .IsRequired();
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("SSJD.Entities.StoreEntity.MemberCard", b =>

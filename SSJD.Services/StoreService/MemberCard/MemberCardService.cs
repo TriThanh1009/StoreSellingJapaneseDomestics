@@ -67,10 +67,10 @@ namespace SSJD.Services.StoreService.MemberCard
             return data;
         }
 
-        public async Task<MemberCardRequestModel?> GetByID(string id)
+        public async Task<MemberCardViewModel?> GetByID(string id)
         {
             var data = await _context.MemberCard.FindAsync(id);
-            var getdata = new MemberCardRequestModel()
+            var getdata = new MemberCardViewModel()
             {
                 Point = data.Point,
                 MemberClass = data.MemberClass,
@@ -79,7 +79,7 @@ namespace SSJD.Services.StoreService.MemberCard
             return getdata;
         }
 
-        public Task<List<MemberCardRequestModel>> GetListByID(string id)
+        public Task<List<MemberCardViewModel>> GetListByID(string id)
         {
             throw new NotImplementedException();
         }

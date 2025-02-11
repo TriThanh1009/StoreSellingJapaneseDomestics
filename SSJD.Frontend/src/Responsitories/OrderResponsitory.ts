@@ -28,6 +28,6 @@ export const editOrder= async(data:any)=>{
 }
 
 export const deleteOrder = async(id : string)=>{
-    const response = await axios.delete(`${apiUrl}/Order?${id}`)
+    const response = await axios.delete(`${apiUrl}/Order?=${id}`)
     return response.data
 }

@@ -7,6 +7,7 @@ import ProductDetailComponent from '../../Pages/ShopComponent/components/Product
 import { ProfileComponent } from '../../Pages/ShopComponent/components/ProfileComponent/ProfileComponent';
 import Forgotpassword from '../../Pages/AuthenticateComponent/ForgotPassword/forgotpassword';
 import CartComponent from '../../Pages/ShopComponent/components/CartComponent/CartComponent';
+import CheckoutComponent from '../../Pages/ShopComponent/components/CheckoutComponent/CheckoutComponent';
 
 
 
@@ -25,5 +26,6 @@ const routes: RouteConfig[]=[
     {path:'/register',element:<Register/>},
     {path:'/profile',element:<ProfileComponent/>},
     {path:'/cart',element:<CartComponent/>},
+    {path:'/checkout',element:<CheckoutComponent/>},
 ]
 export default routes

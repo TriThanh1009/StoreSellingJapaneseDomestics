@@ -4,21 +4,21 @@ import React, { useEffect, useState } from "react"
 import { Button, Stack, Table } from "react-bootstrap";
 import { useShoppingCart } from "../../../../Hooks/useShoppingCart";
 import { getProductByID } from "../../../../Responsitories/ProductResponsitory";
-import { OderDetailwithProduct } from "../../../../Model/OderWithProduct/OrderWithProduct";
+import { OrderDetailwithProduct } from "../../../../Model/OderWithProduct/OrderWithProduct";
 import './CartComponent.css'
 
 
 
 const CardComponent: React.FC = () => {
   const {cart,removeFromCart,decreaseCartQuantity,increaseCartQuantity} = useShoppingCart()
-  const [orders,setorder] = useState<OderDetailwithProduct[]>()
+  const [orders,setorder] = useState<OrderDetailwithProduct[]>()
   //const [products,setproducts] = useState<ProductModel[]>()
   useEffect(() => {
     
     const fetchOrders = async () => {
       if (cart.length === 0) return;
   
-      const orderList: OderDetailwithProduct[] = await Promise.all(
+      const orderList: OrderDetailwithProduct[] = await Promise.all(
         cart.map(async (item) => {
           const product = await getProductByID(item.productID);
           return { 
@@ -68,7 +68,7 @@ const CardComponent: React.FC = () => {
                     </div>
                   </div>
                 </td>
-                <td>${order.product.price}</td>
+                <td>${(order.product.price * order.quantity)}</td>
                 <td className="">
                   <i  onClick={()=>decreaseCartQuantity(order.product.id)} className="bi bi-caret-left"></i>
                   <span className="mx-2">{order.quantity}</span>

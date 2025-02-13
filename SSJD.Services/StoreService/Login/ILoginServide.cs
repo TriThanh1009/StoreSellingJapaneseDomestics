@@ -14,7 +14,6 @@ namespace SSJD.Services.StoreService.Login
 
         Task<List<LoginRequestModel>> GetAll();
 
-        string GetMyName();
 
         string CreateToken(LoginRequestModel user);
     }

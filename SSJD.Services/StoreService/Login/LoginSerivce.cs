@@ -19,18 +19,15 @@ namespace SSJD.Services.StoreService.Login
     {
         private readonly SSJDDbContext _context;
         private IConfiguration _configuration;
-        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public LoginSerivce(SSJDDbContext context, IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
+        public LoginSerivce(SSJDDbContext context, IConfiguration configuration)
         {
             _context = context;
             _configuration = configuration;
-            _httpContextAccessor = httpContextAccessor;
         }
         public string CreateToken(LoginRequestModel user)
         {
-            List<Claim> claims = new List<Claim>
-            {
+            List<Claim> claims = new List<Claim> {
                 new Claim(ClaimTypes.Name, user.UserName),
                 new Claim(ClaimTypes.Actor, user.ID),
             };
@@ -38,7 +35,6 @@ namespace SSJD.Services.StoreService.Login
                 _configuration.GetSection("JwtBearer:Token").Value!));
 
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
-
             var token = new JwtSecurityToken(
                     claims: claims,
                     expires: DateTime.Now.AddDays(1),
@@ -65,10 +61,6 @@ namespace SSJD.Services.StoreService.Login
             return data;
         }
 
-        public string GetMyName()
-        {
-            throw new NotImplementedException();
-        }
 
         public async Task<LoginRequestModel> Login(LoginModel model)
         {

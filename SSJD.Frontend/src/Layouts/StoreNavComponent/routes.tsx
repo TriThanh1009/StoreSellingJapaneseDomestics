@@ -8,6 +8,7 @@ import { ProfileComponent } from '../../Pages/ShopComponent/components/ProfileCo
 import Forgotpassword from '../../Pages/AuthenticateComponent/ForgotPassword/forgotpassword';
 import CartComponent from '../../Pages/ShopComponent/components/CartComponent/CartComponent';
 import CheckoutComponent from '../../Pages/ShopComponent/components/CheckoutComponent/CheckoutComponent';
+import PaymentComponent from '../../Pages/ShopComponent/components/PaymentComponent/PaymentComponent';
 
 
 
@@ -27,5 +28,6 @@ const routes: RouteConfig[]=[
     {path:'/profile',element:<ProfileComponent/>},
     {path:'/cart',element:<CartComponent/>},
     {path:'/checkout',element:<CheckoutComponent/>},
+    {path:'/payment/:method',element:<PaymentComponent/>},
 ]
 export default routes

@@ -8,10 +8,12 @@ import logoimg from '../../../Image/logo.jpg'
 import React, { useState } from 'react';
 import { useShoppingCart } from '../../../Hooks/useShoppingCart';
 import CartComponent from '../../../Pages/ShopComponent/components/CartComponent/CartComponent';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 const Header:React.FC=()=>{
     const [openDropdown,setopenDropdown] = useState(null)
     const {cartQuantity} = useShoppingCart()
+    const navigate = useNavigate()
     const handleMouseEnter = (dropdownname:any) => {
         setopenDropdown(dropdownname);
     };
@@ -22,6 +24,9 @@ const Header:React.FC=()=>{
         window.location.href=name;
     }
     
+    function clicktocart(){
+        navigate(`/cart`)
+    }
 
 
     return(
@@ -103,7 +108,7 @@ const Header:React.FC=()=>{
             <div className='information'>
                 <i className="bi bi-person-fill"></i>
             </div>
-            <div className='shopping-cart'>
+            <div className='shopping-cart' onClick={()=>clicktocart()}>
                 <i className='cart bi bi-cart2'></i>
                 <span className='shopping-cart-quantity'>{cartQuantity}</span>
                 

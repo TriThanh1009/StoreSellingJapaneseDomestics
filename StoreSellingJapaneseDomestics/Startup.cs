@@ -10,6 +10,7 @@ using SSJD.DataAccess;
 using SSJD.Services.GeneralService.Account;
 using SSJD.Services.StoreService.Brand;
 using SSJD.Services.StoreService.Category;
+using SSJD.Services.StoreService.Login;
 using SSJD.Services.StoreService.MemberCard;
 using SSJD.Services.StoreService.Order;
 using SSJD.Services.StoreService.OrderDetail;
@@ -18,6 +19,7 @@ using SSJD.Services.StoreService.ProductDetail;
 using SSJD.Services.StoreService.Promotion;
 using SSJD.Services.StoreService.UnitShip;
 using SSJD.Services.StoreService.User;
+using Swashbuckle.AspNetCore.Filters;
 using System.Text;
 
 namespace StoreSellingJapaneseDomestics
@@ -36,12 +38,12 @@ namespace StoreSellingJapaneseDomestics
         {
             services.AddCors();
             services.AddControllers();
-            services.AddEndpointsApiExplorer();
-            services.AddHttpContextAccessor();
             services.AddDbContext<SSJDDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("SSJDdb"))
 
-                );       //Declare
+                );
+            services.AddEndpointsApiExplorer();
+            services.AddHttpContextAccessor();
 
             services.AddTransient<IAccountService, AccountService>();
             services.AddTransient<IBrandService, BrandService>();
@@ -54,11 +56,18 @@ namespace StoreSellingJapaneseDomestics
             services.AddTransient<IPromotionService, PromotionService>();
             services.AddTransient<IUnitShipService, UnitShipService>();
             services.AddTransient<IUserService, UserService>();
+            services.AddTransient<ILoginServide, LoginSerivce>();
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddControllersWithViews();
             services.AddIdentity<IdentityUser,IdentityRole>()
                 .AddEntityFrameworkStores<SSJDDbContext>()
                 .AddDefaultTokenProviders();
+            services.AddCors(o => o.AddPolicy("CorsPolicy", b =>
+            {
+                b.AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowAnyOrigin();
+            }));
             services.AddSwaggerGen(options =>
             {
                 options.SwaggerDoc("v1", new OpenApiInfo { Title = "Swagger Timekeeping Solution", Version = "v1" });
@@ -69,31 +78,28 @@ namespace StoreSellingJapaneseDomestics
                     Name = "Authorization",
                     Type = SecuritySchemeType.ApiKey
                 });
-            });
-            services.AddCors(o => o.AddPolicy("CorsPolicy", b =>
-            {
-                b.AllowAnyMethod()
-                .AllowAnyHeader()
-                .AllowAnyOrigin();
-            }));
-            services.AddAuthentication(options =>
-            {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(options =>
-            {
-                options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
-                {
-                    ValidateIssuer = true,
-                    ValidateAudience = true,
-                    ValidateLifetime = true,
-                    ValidIssuer = Configuration["Jwt:Issuer"],
-                    ValidAudience = Configuration["Jwt:Audience"],
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
-                };
+                options.OperationFilter<SecurityRequirementsOperationFilter>();
             });
             
-        
+            services
+                .AddAuthentication(options =>
+                {
+                    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                })
+                .AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    ValidateAudience = false,
+                    ValidateIssuer = false,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(
+                            Configuration.GetSection("JwtBearer:Token").Value!))
+                };
+           
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

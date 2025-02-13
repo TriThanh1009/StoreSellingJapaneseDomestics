@@ -27,6 +27,7 @@ namespace StoreSellingJapaneseDomestics.Controllers
             return Ok(model);
         }
 
+
         [HttpPost()]
         [AllowAnonymous]
         public async Task<IActionResult> Author([FromBody] LoginModel loginModel)
@@ -35,14 +36,16 @@ namespace StoreSellingJapaneseDomestics.Controllers
             return Ok(model);
         }
 
-        [HttpGet, Authorize]
+        [HttpGet, Authorize] 
         public ActionResult<string> GetName()
 
         {
+
             var userName = User.FindFirstValue(ClaimTypes.Name);
-            var role = User.FindFirstValue(ClaimTypes.Role);
             var id = User.FindFirstValue(ClaimTypes.Actor);
-            return Ok(new { userName, role, id });
+            return Ok(new {userName,id});
         }
+
+
     }
 }

@@ -13,6 +13,7 @@ namespace SSJD.Entities.StoreEntity
         public Sex? Sex { get; set; } 
         //public string PhoneNumber { get; set; }
         public string Address { get; set; } = "";
+
         public string IdentityCard { get; set; } = "";
         public string AccountID { get; set; } = "";
         //public string Email { get; set; }

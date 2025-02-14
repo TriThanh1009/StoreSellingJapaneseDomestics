@@ -23,7 +23,7 @@ namespace SSJD.Services.StoreService.Product
         {
             var entity = new Entities.StoreEntity.Product()
             {
-                ID = Guid.NewGuid().ToString(),
+                ID = request.ID,
                 Name = request.Name,
                 BrandID = request.BrandID,
                 CategoryID = request.CategoryID,

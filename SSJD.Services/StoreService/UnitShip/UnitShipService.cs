@@ -23,7 +23,7 @@ namespace SSJD.Services.StoreService.UnitShip
         {
             var entity = new Entities.StoreEntity.UnitShip()
             {
-                ID = Guid.NewGuid().ToString(),
+                ID = request.ID,
                 Name = request.Name
             };
             _context.UnitShip.Add(entity);

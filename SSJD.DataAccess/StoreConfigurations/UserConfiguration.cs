@@ -15,6 +15,7 @@ namespace SSJD.DataAccess.StoreConfigurations
         public void Configure(EntityTypeBuilder<User> builder)
         {
             builder.ToTable("User");
+            builder.Property("Id").IsRequired().HasMaxLength(50).HasDefaultValueSql("NEWID()"); ;
             builder.Property("Sex").HasDefaultValue(Sex.Male);
             builder.Property("PhoneNumber").IsRequired().HasDefaultValue(15);
             builder.Property("Address").IsRequired().HasMaxLength(60);

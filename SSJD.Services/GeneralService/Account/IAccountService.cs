@@ -15,5 +15,6 @@ namespace SSJD.Services.GeneralService.Account
     {
         Task<PagedResult<PagingRequestBase>> GetAccountPaging(AccountPagingRequest request);
 
+
     }
 }

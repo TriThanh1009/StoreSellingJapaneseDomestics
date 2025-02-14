@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SSJD.Services.StoreService.Login
 {
-    public interface ILoginServide
+    public interface ILoginService
     {
         Task<LoginRequestModel> Login(LoginModel loginModel);
 

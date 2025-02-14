@@ -15,17 +15,20 @@ namespace SSJD.DataAccess.Extension
         public static void Seed(this ModelBuilder modelbuilder)
         {
             modelbuilder.Entity<User>().HasData(
-                new User() {UserName = "Nguyen Tri Thanh",Sex = Entities.GeneralEntity.Sex.Male,PhoneNumber="123123", Address = "Viet Nam",IdentityCard="123",AccountID = "1",MemberCardID="1",Image="122"}
+                new User() {UserName = "Nguyen Tri Thanh",Sex = Entities.GeneralEntity.Sex.Male,PhoneNumber="123123", Address = "Viet Nam",IdentityCard="123",AccountID = "1",MemberCardID="1",Image="122"},
+                new User() {Id="1",UserName = "Nguyen Tri Thanh", Sex = Entities.GeneralEntity.Sex.Male, PhoneNumber = "123123", Address = "Viet Nam", IdentityCard = "123", AccountID = "2", MemberCardID = "2", Image = "122" }
                 );
             modelbuilder.Entity<Account>().HasData(
-                new Account() { ID = "1",UserName="admin",Password="admin",PasswordCheck="admin",Email="admin@gmail.com"}
+                new Account() { ID = "1",UserName="admin",Password="admin",PasswordCheck="admin",Email="admin@gmail.com"},
+                new Account() { ID = "2", UserName = "admin", Password = "admin", PasswordCheck = "admin", Email = "admin@gmail.com" }
                 );
             modelbuilder.Entity<MemberCard>().HasData(
-                new MemberCard() { ID = "1",Point=2000,MemberClass="Gold",Discount=30}
+                new MemberCard() { ID = "1",Point=2000,MemberClass="Gold",Discount=30},
+                new MemberCard() { ID = "2", Point = 2000, MemberClass = "Gold", Discount = 30 }
                 );
             modelbuilder.Entity<IdentityRole>().HasData(
-                new IdentityRole() {Name = "Admin"},
-                new IdentityRole() {Name = "Customer" }
+                new IdentityRole() {Name = "Admin",NormalizedName="ADMIN"},
+                new IdentityRole() {Name = "Customer",NormalizedName="CUSTOMER" }
                 );
             modelbuilder.Entity<Brand>().HasData(
                 new Brand() { ID = "2", Name = "ohuhu" }

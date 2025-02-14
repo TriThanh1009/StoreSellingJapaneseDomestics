@@ -11,7 +11,7 @@ namespace SSJD.ViewModel.StoreViewModel.Customer
 {
     public class UserViewModel : IdentityUser
     {
-        public string Id { get; set; } =  "";
+        public string Id { get; set; } = "";
         public Sex Sex { get; set; } = Sex.Male;
         public string PhoneNumber { get; set; } = "";
         public string Address { get; set; } = "";

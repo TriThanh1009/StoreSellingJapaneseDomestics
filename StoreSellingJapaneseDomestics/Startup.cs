@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using SSJD.DataAccess;
+using SSJD.Entities.StoreEntity;
 using SSJD.Services.GeneralService.Account;
 using SSJD.Services.StoreService.Brand;
 using SSJD.Services.StoreService.Category;
@@ -17,6 +18,7 @@ using SSJD.Services.StoreService.OrderDetail;
 using SSJD.Services.StoreService.Product;
 using SSJD.Services.StoreService.ProductDetail;
 using SSJD.Services.StoreService.Promotion;
+using SSJD.Services.StoreService.Role;
 using SSJD.Services.StoreService.UnitShip;
 using SSJD.Services.StoreService.User;
 using Swashbuckle.AspNetCore.Filters;
@@ -56,10 +58,13 @@ namespace StoreSellingJapaneseDomestics
             services.AddTransient<IPromotionService, PromotionService>();
             services.AddTransient<IUnitShipService, UnitShipService>();
             services.AddTransient<IUserService, UserService>();
-            services.AddTransient<ILoginServide, LoginSerivce>();
+            services.AddTransient<ILoginService, LoginSerivce>();
+            services.AddTransient<IRoleService, RoleService>();
+            services.AddTransient<RoleManager<IdentityRole>>();
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddControllersWithViews();
-            services.AddIdentity<IdentityUser,IdentityRole>()
+            services.AddIdentity<User,IdentityRole>()
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<SSJDDbContext>()
                 .AddDefaultTokenProviders();
             services.AddCors(o => o.AddPolicy("CorsPolicy", b =>

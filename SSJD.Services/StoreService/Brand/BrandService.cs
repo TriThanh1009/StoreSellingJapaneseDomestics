@@ -22,7 +22,7 @@ namespace SSJD.Services.StoreService.Brand
         {
             var entity = new SSJD.Entities.StoreEntity.Brand()
             {
-                ID = Guid.NewGuid().ToString(),
+                ID = request.ID,
                 Name = request.Name,
             };
             _context.Brand.Add(entity);

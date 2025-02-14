@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace SSJD.Services.StoreService.Login
 {
-    public class LoginSerivce : ILoginServide
+    public class LoginSerivce : ILoginService
     {
         private readonly SSJDDbContext _context;
         private IConfiguration _configuration;

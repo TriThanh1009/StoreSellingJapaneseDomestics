@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SSJD.Services.GeneralService.Account;
+using SSJD.Services.StoreService.Role;
 using SSJD.ViewModel.GeneralViewModel.Account;
 
 namespace StoreSellingJapaneseDomestics.Controllers
@@ -9,12 +10,11 @@ namespace StoreSellingJapaneseDomestics.Controllers
     [ApiController]
     public class AccountController : ControllerBase
     {
-        private readonly IConfiguration _configuration;
         private readonly IAccountService _service;
-        public AccountController(IAccountService service, IConfiguration configuration)
+        
+        public AccountController(IAccountService service)
         {
             _service = service;
-            _configuration = configuration;
         }
         [HttpGet]
         public async Task<IActionResult> Get()

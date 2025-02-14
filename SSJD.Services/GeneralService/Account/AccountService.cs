@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using SharpCompress.Common;
 using SSJD.DataAccess;
 using SSJD.Services.GeneralService.Base;
+using SSJD.Services.GeneralService.Role;
 using SSJD.ViewModel.GeneralViewModel.Account;
 using SSJD.ViewModel.GeneralViewModel.PageResult;
 using SSJD.ViewModel.GeneralViewModel.PageResultBase;
@@ -34,6 +35,8 @@ namespace SSJD.Services.GeneralService.Account
             _context.Account.Add(entity);
             await _context.SaveChangesAsync();
         }
+
+
 
         public async Task Delete(string id)
         {

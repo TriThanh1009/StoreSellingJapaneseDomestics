@@ -46,7 +46,7 @@ namespace SSJD.DataAccess.Migrations
                 name: "AspNetUsers",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Id = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false, defaultValueSql: "NEWID()"),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -111,8 +111,8 @@ namespace SSJD.DataAccess.Migrations
                 {
                     ID = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 2, 10, 10, 3, 6, 922, DateTimeKind.Local).AddTicks(8069)),
-                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 2, 10, 10, 3, 6, 922, DateTimeKind.Local).AddTicks(8220)),
+                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 2, 14, 8, 34, 58, 565, DateTimeKind.Local).AddTicks(1730)),
+                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 2, 14, 8, 34, 58, 565, DateTimeKind.Local).AddTicks(1881)),
                     PercentDiscount = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -159,7 +159,7 @@ namespace SSJD.DataAccess.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(50)", nullable: false),
                     ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -181,7 +181,7 @@ namespace SSJD.DataAccess.Migrations
                     LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ProviderKey = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ProviderDisplayName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    UserId = table.Column<string>(type: "nvarchar(50)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -198,7 +198,7 @@ namespace SSJD.DataAccess.Migrations
                 name: "AspNetUserRoles",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(50)", nullable: false),
                     RoleId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
@@ -222,7 +222,7 @@ namespace SSJD.DataAccess.Migrations
                 name: "AspNetUserTokens",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(50)", nullable: false),
                     LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Value = table.Column<string>(type: "nvarchar(max)", nullable: true)
@@ -273,7 +273,7 @@ namespace SSJD.DataAccess.Migrations
                 name: "User",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Id = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false, defaultValueSql: "NEWID()"),
                     Sex = table.Column<int>(type: "int", nullable: true, defaultValue: 1),
                     Address = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: false),
                     IdentityCard = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
@@ -311,7 +311,7 @@ namespace SSJD.DataAccess.Migrations
                     ID = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ProductID = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
-                    Warranty = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 2, 10, 10, 3, 6, 922, DateTimeKind.Local).AddTicks(6272)),
+                    Warranty = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 2, 14, 8, 34, 58, 564, DateTimeKind.Local).AddTicks(9637)),
                     Origin = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     AdditionalImage = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false)
                 },
@@ -331,10 +331,10 @@ namespace SSJD.DataAccess.Migrations
                 columns: table => new
                 {
                     ID = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    UserID = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 2, 10, 10, 3, 6, 916, DateTimeKind.Local).AddTicks(7475)),
+                    UserID = table.Column<string>(type: "nvarchar(50)", nullable: false),
+                    OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 2, 14, 8, 34, 58, 560, DateTimeKind.Local).AddTicks(2431)),
                     ShippingUnitID = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ShippingDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 2, 10, 10, 3, 6, 918, DateTimeKind.Local).AddTicks(5408)),
+                    ShippingDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 2, 14, 8, 34, 58, 561, DateTimeKind.Local).AddTicks(9134)),
                     ShippingAddress = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     OrderStatus = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TotalPrice = table.Column<decimal>(type: "decimal(10,2)", maxLength: 50, precision: 10, scale: 2, nullable: false),
@@ -413,21 +413,29 @@ namespace SSJD.DataAccess.Migrations
             migrationBuilder.InsertData(
                 table: "Account",
                 columns: new[] { "ID", "Email", "Password", "PasswordCheck", "UserName" },
-                values: new object[] { "1", "admin@gmail.com", "admin", "admin", "admin" });
+                values: new object[,]
+                {
+                    { "1", "admin@gmail.com", "admin", "admin", "admin" },
+                    { "2", "admin@gmail.com", "admin", "admin", "admin" }
+                });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "0dbc9031-6989-4006-9013-6e236ba881af", null, "Customer", null },
-                    { "6801f9e3-c524-42a0-83eb-e6723554eef8", null, "Admin", null }
+                    { "ab01b3f4-bc98-44ce-aef8-69791215b955", null, "Customer", "CUSTOMER" },
+                    { "bed61c95-31f0-459d-9c58-d6d376478532", null, "Admin", "ADMIN" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "1", 0, "896dad3b-eb4b-42ad-ad61-e8877f21ea03", null, false, false, null, null, null, null, "123123", false, "6403e92c-d239-42bc-8c13-be3cf8ec4488", false, "Nguyen Tri Thanh" });
+                values: new object[,]
+                {
+                    { "1", 0, "e1ecb6fe-048a-46c8-8986-fd3375891e44", null, false, false, null, null, null, null, "123123", false, "a3e05428-1b83-4957-bbd0-8a702227b3f0", false, "Nguyen Tri Thanh" },
+                    { "eeccb2a1-14bf-4b0a-a26c-5779b117bbd7", 0, "6f51daa3-45f8-43d6-a8f1-b93fcd21ab02", null, false, false, null, null, null, null, "123123", false, "83c5e278-a0b8-43ed-b28c-0f90a278d4b5", false, "Nguyen Tri Thanh" }
+                });
 
             migrationBuilder.InsertData(
                 table: "Brand",
@@ -442,12 +450,20 @@ namespace SSJD.DataAccess.Migrations
             migrationBuilder.InsertData(
                 table: "MemberCard",
                 columns: new[] { "ID", "Discount", "MemberClass", "Point" },
-                values: new object[] { "1", 30, "Gold", 2000 });
+                values: new object[,]
+                {
+                    { "1", 30, "Gold", 2000 },
+                    { "2", 30, "Gold", 2000 }
+                });
 
             migrationBuilder.InsertData(
                 table: "User",
                 columns: new[] { "Id", "AccountID", "Address", "IdentityCard", "Image", "MemberCardID", "Sex" },
-                values: new object[] { "1", "1", "Viet Nam", "123", "122", "1", 1 });
+                values: new object[,]
+                {
+                    { "1", "2", "Viet Nam", "123", "122", "2", 1 },
+                    { "eeccb2a1-14bf-4b0a-a26c-5779b117bbd7", "1", "Viet Nam", "123", "122", "1", 1 }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

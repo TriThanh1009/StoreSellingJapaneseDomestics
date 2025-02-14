@@ -23,7 +23,7 @@ namespace SSJD.Services.StoreService.OrderDetail
         {
             var entity = new Entities.StoreEntity.OrderDetail()
             {
-                ID = Guid.NewGuid().ToString(),
+                ID = request.ID,
                 OrderID = request.OrderID,
                 ProductID = request.ProductID,
                 Quantity = request.Quantity,

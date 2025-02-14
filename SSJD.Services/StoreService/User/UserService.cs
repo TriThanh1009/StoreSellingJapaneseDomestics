@@ -38,6 +38,7 @@ namespace SSJD.Services.StoreService.User
             await _context.SaveChangesAsync();
         }
 
+
         public async Task Delete(string id)
         {
             var entity = await _context.User.FindAsync(id);

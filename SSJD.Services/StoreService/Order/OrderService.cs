@@ -24,7 +24,7 @@ namespace SSJD.Services.StoreService.Order
         {
             var entity = new Entities.StoreEntity.Order()
             {
-                ID = Guid.NewGuid().ToString(),
+                ID = request.ID,
                 UserID = request.UserID,
                 OrderDate = request.OrderDate,
                 ShippingUnitID = request.ShippingUnitID,

@@ -11,10 +11,10 @@ namespace StoreSellingJapaneseDomestics.Controllers
     [ApiController]
     public class LoginController : ControllerBase
     {
-        private readonly ILoginServide _service;
+        private readonly ILoginService _service;
         private IConfiguration _configuration;
 
-        public LoginController(ILoginServide service, IConfiguration configuration)
+        public LoginController(ILoginService service, IConfiguration configuration)
         {
             _service = service;
             _configuration = configuration;

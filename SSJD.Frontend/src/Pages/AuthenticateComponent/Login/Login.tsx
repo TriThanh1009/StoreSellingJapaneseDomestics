@@ -2,7 +2,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import './Login.css'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { LoginAccess } from '../../../Responsitories/LoginRespository';
 import { LoginModel } from '../../../Model/Login/LoginModel';
 import { useNavigate } from 'react-router-dom';
@@ -18,16 +18,22 @@ function Login(){
         }));
         
     };
+    useEffect(() => {
+        const storedRole = localStorage.getItem("role");
+        if (storedRole) {
+            if (storedRole === "Admin") {
+                navigate("/admin");
+            } else if(storedRole === "Customer")  {
+                navigate("/home");
+            }
+        }
+    }, [])
+
 
     const handleSubmit = async (e:React.FormEvent)=>{
         e.preventDefault()
         await LoginAccess(account)
-        const role = localStorage.getItem("role");
-        if (role === "Admin") {
-        navigate("/admin");
-        } else {
-        navigate("/home"); // Hoặc trang chính của Customer
-        }
+        window.location.reload()
     }
 
 

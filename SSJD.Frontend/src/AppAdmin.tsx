@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import AdminLayoutComponent from "./Layouts/AdminNavComponent/AdminLayoutComponent/AdminLayoutComponent";
 import routes from "./Layouts/AdminNavComponent/AdminRoutes";
-import ProtectedRoute from "./Features/Protected/ProtectedRoute";
+
 
 const AppAdmin: React.FC = () => {
   return (
@@ -13,9 +13,7 @@ const AppAdmin: React.FC = () => {
           key={index}
           path={route.path}
           element={
-            <ProtectedRoute roleRequired="Admin">
               <AdminLayoutComponent>{route.element}</AdminLayoutComponent>
-            </ProtectedRoute>
           }
         >
           {route.children?.map((child, childIndex) => (

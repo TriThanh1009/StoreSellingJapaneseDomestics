@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 
 import React from 'react';
 import HomeComponent from '../../Pages/ShopComponent/components/HomeComponent/HomeComponent';
@@ -22,7 +23,7 @@ interface RouteConfig{
 const routes: RouteConfig[]=[
     {path: '/home',element:<HomeComponent/>},
     {path:'/home/productdetail',element:<ProductDetailComponent/>},
-    {path:'/login',element:<Login/>},
+    //{path:'/login',element:<Login/>},
     {path:'/forgot',element:<Forgotpassword/>},
     {path:'/register',element:<Register/>},
     {path:'/profile',element:<ProfileComponent/>},

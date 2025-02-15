@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using SSJD.Services.StoreService.Role;
 using SSJD.Services.StoreService.User;
 using SSJD.ViewModel.StoreViewModel.User;
@@ -13,6 +14,7 @@ namespace StoreSellingJapaneseDomestics.Controllers
     {
         private readonly IUserService _service;
         private readonly IRoleService _roleService;
+        
         public UserController(IUserService service, IRoleService roleService)
         {
             _service = service;
@@ -27,16 +29,15 @@ namespace StoreSellingJapaneseDomestics.Controllers
         [HttpPost("CreateUser")]
         public async Task<IActionResult> Create([FromBody] UserRequestModel request)
         {
-            await _service.Create(request);
-            await Task.Delay(1000);
-            await _roleService.AddRoletoUser(request.Id, "Customer");
+            var userid = await _service.CreateHasReturnID(request);
+            await _roleService.AddRoletoUser(userid, "Customer");
             return Ok();
         }
         [HttpPost("CreateUserByAdmin/{RoleName}")]
         public async Task<IActionResult> CreateByAdmin([FromBody] UserRequestModel request,string RoleName)
         {
-            await _service.Create(request);
-            await _roleService.AddRoletoUser(request.Id, RoleName);
+            var userid = await _service.CreateHasReturnID(request);
+            await _roleService.AddRoletoUser(userid, RoleName);
             return Ok();
         }
 

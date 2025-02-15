@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -29,7 +30,7 @@ namespace SSJD.Services.StoreService.Login
         {
             List<Claim> claims = new List<Claim> {
                 new Claim(ClaimTypes.Name, user.UserName),
-                new Claim(ClaimTypes.Actor, user.ID),
+                new Claim(ClaimTypes.Role, user.Role),
             };
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(
                 _configuration.GetSection("JwtBearer:Token").Value!));
@@ -50,13 +51,16 @@ namespace SSJD.Services.StoreService.Login
         {
             var query = from a in _context.Account
                         join u in _context.User on a.ID equals u.AccountID
-                        select new { u, a };
+                        join ur in _context.UserRoles on u.Id equals ur.UserId
+                        join r in _context.Roles on ur.RoleId equals r.Id
+                        select new { u, a,r };
             var data = await query.Select(x=> new LoginRequestModel()
             {
                 ID = x.a.ID,
                 UserName = x.u.UserName,
                 Account = x.a.UserName,
                 Password = x.a.Password,
+                Role = x.r.Name
             }).ToListAsync();
             return data;
         }

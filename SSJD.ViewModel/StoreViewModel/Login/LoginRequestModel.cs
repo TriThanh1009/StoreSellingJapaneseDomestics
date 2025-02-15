@@ -12,7 +12,7 @@ namespace SSJD.ViewModel.StoreViewModel.Login
         public string UserName { get; set; }
         public string Account { get; set; }
         public string Password { get; set; }
-
+        public string Role { get; set; }
         public string accessToken { get; set; }
     }
 }

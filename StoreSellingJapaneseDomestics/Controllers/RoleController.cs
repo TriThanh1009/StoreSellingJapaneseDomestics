@@ -45,6 +45,13 @@ namespace StoreSellingJapaneseDomestics.Controllers
             var data = await _service.FillUserByRole(roleName);
             return Ok(data);
         }
+        [HttpGet("GetRoleByAccount")]
+        public async Task<IActionResult> GetRoleByAccount(string AccountID)
+        {
+            var data = await _service.TakeRoleByAccount(AccountID);
+            return Ok(data);
+        }
+
 
         [HttpDelete("DeleteRole")]
         public async Task<IActionResult> DeleteRole(string name)

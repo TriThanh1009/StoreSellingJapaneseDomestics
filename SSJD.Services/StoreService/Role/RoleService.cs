@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using SSJD.DataAccess;
 using SSJD.Entities.StoreEntity;
 using System;
@@ -64,6 +65,18 @@ namespace SSJD.Services.StoreService.Role
         public async Task<List<string>> GetAllRole()
         {
             return await Task.FromResult(_roleManager.Roles.Select(x => x.Name).ToList());
+        }
+
+        public async Task<string> TakeRoleByAccount(string AccountID)
+        {
+            var query = from a in _context.Account
+                        join u in _context.User on a.ID equals u.AccountID
+                        join ur in _context.UserRoles on u.Id equals ur.UserId
+                        join r in _context.Roles on ur.RoleId equals r.Id
+                        where a.ID == AccountID
+                        select r.Name;
+            var data = await query.FirstOrDefaultAsync();
+            return data;
         }
     }
 }

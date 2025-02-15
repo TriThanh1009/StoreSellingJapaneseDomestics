@@ -1,4 +1,5 @@
-﻿using SSJD.Services.GeneralService.Base;
+﻿using SSJD.Entities.StoreEntity;
+using SSJD.Services.GeneralService.Base;
 using SSJD.ViewModel.GeneralViewModel.PageResult;
 using SSJD.ViewModel.StoreViewModel.Customer;
 using SSJD.ViewModel.StoreViewModel.User;
@@ -13,5 +14,7 @@ namespace SSJD.Services.StoreService.User
     public interface IUserService : IBaseService<UserRequestModel, UserViewModel>
     {
         Task<PagedResult<UserViewModel>> GetUserPaging(UserPagingRequest request);
+
+        Task<string> CreateHasReturnID(UserRequestModel request);
     }
 }

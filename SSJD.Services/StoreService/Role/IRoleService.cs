@@ -15,5 +15,7 @@ namespace SSJD.Services.StoreService.Role
         Task<string> CheckRoleUser(string UserID);
         Task<List<string>> FillUserByRole(string roleName);
 
+        Task<string> TakeRoleByAccount(string AccountID);
+
     }
 }

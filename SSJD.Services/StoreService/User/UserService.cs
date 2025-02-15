@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Azure.Core;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using SharpCompress.Common;
 using SSJD.DataAccess;
 using SSJD.Services.GeneralService.Base;
@@ -17,9 +19,11 @@ namespace SSJD.Services.StoreService.User
     public class UserService : IUserService
     {
         private readonly SSJDDbContext _context;
-        public UserService(SSJDDbContext context)
+        private readonly UserManager<SSJD.Entities.StoreEntity.User> _userManager;
+        public UserService(SSJDDbContext context, UserManager<SSJD.Entities.StoreEntity.User> userManager)
         {
             _context = context; 
+            _userManager = userManager;
         }
         public async Task Create(UserRequestModel request)
         {
@@ -38,6 +42,23 @@ namespace SSJD.Services.StoreService.User
             await _context.SaveChangesAsync();
         }
 
+        public async Task<string> CreateHasReturnID(UserRequestModel request)
+        {
+            var entity = new Entities.StoreEntity.User()
+            {
+                UserName = request.UserName,
+                PhoneNumber = request.PhoneNumber,
+                Address = request.Address,
+                IdentityCard = request.IdentityCard,
+                Email = request.Email,
+                AccountID = request.AccountID,
+                MemberCardID = request.MemberCardID,
+                Image = request.Image
+            };
+            _context.User.Add(entity);
+            await _context.SaveChangesAsync();
+            return entity.Id;
+        }
 
         public async Task Delete(string id)
         {
@@ -100,7 +121,7 @@ namespace SSJD.Services.StoreService.User
                 MemberCard = data.MemberCardID,
                 Image = data.Image
             };
-            return getdata;
+            return getdata; 
         }
 
         public Task<List<UserViewModel>> GetListByID(string id)

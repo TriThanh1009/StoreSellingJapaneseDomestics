@@ -8,6 +8,7 @@ import Login from "./Pages/AuthenticateComponent/Login/Login";
 import { CartProvider } from "./Features/Context/CartShoppingContext";
 import { createRoot } from "react-dom/client";
 import Register from "./Pages/AuthenticateComponent/Register/Register";
+import Forgotpassword from "./Pages/AuthenticateComponent/ForgotPassword/forgotpassword";
 
 const Main = () => {
   const [role, setRole] = useState(localStorage.getItem("role"));
@@ -34,6 +35,7 @@ const Main = () => {
           <Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/forgot" element={<Forgotpassword />} />
             {!accessToken ? (
               <Route path="*" element={<Navigate to="/login" replace />} />
             ) : role === "Admin" ? (

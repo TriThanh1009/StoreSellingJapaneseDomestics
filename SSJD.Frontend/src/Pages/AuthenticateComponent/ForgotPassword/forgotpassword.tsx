@@ -1,6 +1,11 @@
 import React from "react";
 import "./forgotpassword.css"
+import { useNavigate } from "react-router-dom";
 const Forgotpassword:React.FC=()=>{
+    const navigate = useNavigate()
+    function navtoLogin(){
+        navigate(`/Login`)
+    }
     return(
         <div className='container'>
             <div className='forgot d-flex flex-column justify-content-center align-items-center'>
@@ -15,7 +20,7 @@ const Forgotpassword:React.FC=()=>{
                         <button className='button-signin'>Submit</button>
                     </div>
                     <div className="forgot-cancel">
-                        <span className="forgot-cancel-item">Cancel</span>
+                        <span className="forgot-cancel-item" onClick={navtoLogin}>Cancel</span>
                     </div>
                 </div>
             </div>

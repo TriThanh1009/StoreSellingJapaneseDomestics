@@ -21,7 +21,6 @@ const Register:React.FC=()=>{
     })
     const handleChangeAccount = (e: React.ChangeEvent<HTMLInputElement>) => {
             const { name, value } = e.target;
-            console.log(value)
             setregister((prev) => ({
                 ...prev,
                 [name]: value,
@@ -38,14 +37,23 @@ const Register:React.FC=()=>{
             
         };
     const handleSubmit = async () => {
-        if(user){
-            const accountdata = await createAccount(register)
-            setTimeout(async () => {
-                user.accountID = accountdata
-                await createUser(user)
-            },100);
-
-        }   
+        if(register?.password === register?.passwordCheck){
+            if(user){
+                const accountdata = await createAccount(register)
+                setTimeout(async () => {
+                    user.accountID = accountdata
+                    await createUser(user)
+                    
+                },500);
+    
+            } 
+            alert("Create Success")
+            navtoLogin()
+        }
+        else if(register?.password !== register?.passwordCheck){
+            alert("Mật khẩu và Xác nhận mật khẩu không trùng khớp!");
+            return;
+        }
         };
     
     function navtoLogin(){
@@ -57,25 +65,23 @@ const Register:React.FC=()=>{
                 <div className='register-title'>
                     <span>Create Account</span>
                 </div>
-                <form onSubmit={handleSubmit}>
                 <div className='register-input'>
                     <div className='input-information d-flex flex-column justify-content-center gap-3'>
-                        <span>Full Name</span>
+                        <span>Họ và tên</span>
                         <input type='text' name="userName" onChange={handleChangeUser}></input>
-                        <span>User Name</span>
+                        <span>Tài khoản</span>
                         <input type='text' name="userName" onChange={handleChangeAccount}></input>
-                        <span>Password</span>
+                        <span>Mật khẩu</span>
                         <input type='password' name="password" onChange={handleChangeAccount}></input>
-                        <span>Repeat Password</span>
-                        <input type='password' name="repeatpassword" onChange={handleChangeAccount}></input>
+                        <span>Xác nhận mật khẩu</span>
+                        <input type='password' name="passwordCheck" onChange={handleChangeAccount}></input>
                         <span>Email</span>
                         <input type='text' placeholder='Your Email' name="email" onChange={handleChangeAccount}></input>
-                        <button className='button-signin'>Create</button>
+                        <button onClick={handleSubmit} className='button-signin'>Create</button>
                     </div>
                 </div>
-                </form>
                 <div className='register-forgotpassword d-flex flex-row gap-3'>
-                    <span onClick={handleSubmit} className='register-forgotpassword-items'>Already have an account</span>
+                    <span onClick={navtoLogin} className='register-forgotpassword-items'>Already have an account</span>
                 </div>
             </div>
 

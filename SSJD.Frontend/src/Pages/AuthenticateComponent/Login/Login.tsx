@@ -36,6 +36,14 @@ function Login(){
         window.location.reload()
     }
 
+    function navtoRegister(){
+        navigate(`/register`)
+    }
+
+    function navtoForgotpassword(){
+        navigate(`/forgot`)
+    }
+
 
      return(
         <div className='container'>
@@ -46,18 +54,18 @@ function Login(){
                 <form onSubmit={handleSubmit}>
                     <div className='login-input'>
                         <div className='input-information d-flex flex-column justify-content-center gap-3'>
-                            <span>Email</span>
+                            <span>Tài khoản</span>
                             <input type='text' name='username' onChange={handleChange} placeholder='Your Email'></input>
-                            <span>Password</span>
+                            <span>Mật khẩu</span>
                             <input type='password' name='password' onChange={handleChange}></input>
                             <button className='button-signin'>Sign In</button>
                         </div>
                     </div>
                 </form>
                 <div className='register-forgotpassword d-flex flex-row gap-3'>
-                    <span className='register-forgotpassword-items'>Forgot your password ?</span>
+                    <span className='register-forgotpassword-items' onClick={navtoForgotpassword}>Forgot your password ?</span>
                     <span>/</span>
-                    <span className='register-forgotpassword-items'>Register Account</span>
+                    <span className='register-forgotpassword-items' onClick={navtoRegister}>Register Account</span>
                 </div>
             </div>
         </div>

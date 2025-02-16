@@ -16,6 +16,7 @@ namespace SSJD.DataAccess.GeneralConfigurations
             builder.ToTable("Account");
             builder.HasKey(x => x.ID);
             builder.Property(x => x.ID).IsRequired();
+            builder.Property(x => x.UserName).IsRequired().HasMaxLength(128);
             builder.Property(x => x.Password).IsRequired().HasMaxLength(128);
             builder.Property(x => x.PasswordCheck).IsRequired().HasMaxLength(128);
             builder.Property(x => x.Email).IsRequired().HasMaxLength(128);

@@ -19,7 +19,7 @@ namespace SSJD.Services.StoreService.UnitShip
         {
             _context = context;
         }
-        public async Task Create(UnitShipRequestModel request)
+        public async Task<string> Create(UnitShipRequestModel request)
         {
             var entity = new Entities.StoreEntity.UnitShip()
             {
@@ -28,6 +28,7 @@ namespace SSJD.Services.StoreService.UnitShip
             };
             _context.UnitShip.Add(entity);
             await _context.SaveChangesAsync();
+            return entity.ID;
         }
 
         public async Task Delete(string id)

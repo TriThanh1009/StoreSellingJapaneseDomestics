@@ -8,7 +8,7 @@ namespace SSJD.Services.GeneralService.Base
 {
     public interface IBaseService<TRequestModel, TViewModel> where TRequestModel : class
     {
-        Task Create(TRequestModel request);
+        Task<string> Create (TRequestModel request);
         Task Edit(TRequestModel request);
         Task Delete(string id);
         Task<TViewModel?> GetByID(string id);

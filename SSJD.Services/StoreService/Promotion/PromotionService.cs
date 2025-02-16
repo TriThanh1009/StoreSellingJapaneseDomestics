@@ -21,7 +21,7 @@ namespace SSJD.Services.StoreService.Promotion
         {
             _context = context;
         }
-        public async Task Create(PromotionRequestModel request)
+        public async Task<string> Create(PromotionRequestModel request)
         {
             var entity = new Entities.StoreEntity.Promotion()
             {
@@ -33,6 +33,7 @@ namespace SSJD.Services.StoreService.Promotion
             };
             _context.Promotion.Add(entity);
             await _context.SaveChangesAsync();
+            return entity.ID;
         }
 
         public async Task Delete(string id)

@@ -39,7 +39,7 @@ const AdminAccountOptionsComponent:React.FC<Props> = ({onCancel, selectedItemId}
                 await createAccount(accounts);
                 alert('Create Success!');
             }
-            window.location.reload();  // Reload after success
+            //window.location.reload();  // Reload after success
         } catch (error) {
             alert('Error');
         }

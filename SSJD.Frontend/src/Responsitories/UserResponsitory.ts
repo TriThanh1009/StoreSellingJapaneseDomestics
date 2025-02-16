@@ -16,7 +16,13 @@ export const getUserByID = async(id : string)=>{
 }
 
 export const createUser = async(data:any)=>{
-    const response = await axios.post(`${apiUrl}/User/CreateUser`)
+    console.log(data)
+    const response = await axios.post(`${apiUrl}/User/CreateUser`,JSON.stringify(data),{
+        headers:{
+            "Content-Type" : "application/json"
+        }
+    })
+    console.log(response.data)
     return response.data
 }
 

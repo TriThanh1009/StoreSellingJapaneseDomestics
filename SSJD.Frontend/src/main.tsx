@@ -7,6 +7,7 @@ import AppAdmin from "./AppAdmin";
 import Login from "./Pages/AuthenticateComponent/Login/Login";
 import { CartProvider } from "./Features/Context/CartShoppingContext";
 import { createRoot } from "react-dom/client";
+import Register from "./Pages/AuthenticateComponent/Register/Register";
 
 const Main = () => {
   const [role, setRole] = useState(localStorage.getItem("role"));
@@ -32,6 +33,7 @@ const Main = () => {
         <CartProvider>
           <Routes>
             <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
             {!accessToken ? (
               <Route path="*" element={<Navigate to="/login" replace />} />
             ) : role === "Admin" ? (

@@ -20,7 +20,7 @@ namespace SSJD.Services.StoreService.MemberCard
         {
             _context = context;
         }
-        public async Task Create(MemberCardRequestModel request)
+        public async Task<string> Create(MemberCardRequestModel request)
         {
             var entity = new Entities.StoreEntity.MemberCard()
             {
@@ -31,6 +31,7 @@ namespace SSJD.Services.StoreService.MemberCard
             };
             _context.MemberCard.Add(entity);
             await _context.SaveChangesAsync();
+            return entity.ID;
         }
 
         public async Task Delete(string id)

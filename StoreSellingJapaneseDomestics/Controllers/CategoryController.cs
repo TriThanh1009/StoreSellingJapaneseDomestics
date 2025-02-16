@@ -23,8 +23,8 @@ namespace StoreSellingJapaneseDomestics.Controllers
         [HttpPost("CreateCategory")]
         public async Task<IActionResult> Create([FromBody] CategoryRequestModel request)
         {
-            await _service.Create(request);
-            return Ok();
+            var data = await _service.Create(request);
+            return Ok(data);
         }
         [HttpPut("EditCategory")]
         public async Task<IActionResult> Edit([FromBody] CategoryRequestModel request)

@@ -22,11 +22,11 @@ namespace SSJD.Services.GeneralService.Account
         {
             _context = context;
         }
-        public async Task Create(AccountRequestModel request)
+        public async Task<string> Create(AccountRequestModel request)
         {
             var entity = new SSJD.Entities.GeneralEntity.Account()
             {
-                ID = request.ID,
+                ID = Guid.NewGuid().ToString(),
                 UserName = request.UserName,
                 Password = request.Password,
                 PasswordCheck = request.PasswordCheck,
@@ -34,6 +34,7 @@ namespace SSJD.Services.GeneralService.Account
             };
             _context.Account.Add(entity);
             await _context.SaveChangesAsync();
+            return entity.ID;
         }
 
 

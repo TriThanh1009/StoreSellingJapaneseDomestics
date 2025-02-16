@@ -25,24 +25,7 @@ namespace SSJD.Services.StoreService.User
             _context = context; 
             _userManager = userManager;
         }
-        public async Task Create(UserRequestModel request)
-        {
-            var entity = new Entities.StoreEntity.User()
-            {
-                UserName = request.UserName,
-                PhoneNumber = request.PhoneNumber,
-                Address = request.Address,
-                IdentityCard = request.IdentityCard,
-                Email = request.Email,
-                AccountID = request.AccountID,
-                MemberCardID = request.MemberCardID,
-                Image = request.Image
-            };
-            _context.User.Add(entity);
-            await _context.SaveChangesAsync();
-        }
-
-        public async Task<string> CreateHasReturnID(UserRequestModel request)
+        public async Task<string> Create(UserRequestModel request)
         {
             var entity = new Entities.StoreEntity.User()
             {
@@ -59,6 +42,7 @@ namespace SSJD.Services.StoreService.User
             await _context.SaveChangesAsync();
             return entity.Id;
         }
+
 
         public async Task Delete(string id)
         {

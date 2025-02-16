@@ -20,7 +20,7 @@ namespace SSJD.Services.StoreService.Category
         {
             _context = context;
         }
-        public async Task Create(CategoryRequestModel request)
+        public async Task<string> Create(CategoryRequestModel request)
         {
             var entity = new SSJD.Entities.StoreEntity.Category()
             {
@@ -29,6 +29,7 @@ namespace SSJD.Services.StoreService.Category
             };
             _context.Category.Add(entity);
             await _context.SaveChangesAsync();
+            return entity.ID;
         }
 
         public async Task Delete(string id)

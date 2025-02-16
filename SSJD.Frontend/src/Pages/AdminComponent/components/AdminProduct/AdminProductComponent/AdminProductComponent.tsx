@@ -50,7 +50,6 @@ const AdminProductComponent:React.FC = () =>{
                                 <table className="table table-bordered" id="dataTable" width="100%" >
                                     <thead>
                                         <tr className="t">
-                                            <th>ID</th>
                                             <th>Name</th>
                                             <th>Brand</th>
                                             <th>Category</th>
@@ -65,7 +64,6 @@ const AdminProductComponent:React.FC = () =>{
                                     <tbody>
                                         {Array.isArray(products) && products.map((product)=>(
                                             <tr>
-                                                <td>{product.id}</td>
                                                 <td>{product.name}</td>
                                                 <td>{product.brand}</td>
                                                 <td>{product.category}</td>

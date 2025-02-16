@@ -8,7 +8,6 @@ const apiUrl = import.meta.env.VITE_API_URL;
 
 export const getAccount = async()=>{
     const response = await axios.get(`${apiUrl}/Account`)
-    console.log(response.data)
     return response.data
 }
 
@@ -24,11 +23,11 @@ export const createAccount = async(data:any)=>{
             "Content-Type" : "application/json"
         }
     })
+    
     return response.data
 }
 
 export const editAccount = async(data:any)=>{
-    console.log(data) 
     const response = await axios.put(`${apiUrl}/Account/EditAccount`,JSON.stringify(data),{
         headers:{
             "Content-Type" : "application/json"

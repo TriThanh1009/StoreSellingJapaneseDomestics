@@ -19,7 +19,7 @@ namespace SSJD.Services.StoreService.Product
         {
             _context = context;
         }
-        public async Task Create(ProductRequestModel request)
+        public async Task<string> Create(ProductRequestModel request)
         {
             var entity = new Entities.StoreEntity.Product()
             {
@@ -35,6 +35,7 @@ namespace SSJD.Services.StoreService.Product
             };
             _context.Product.Add(entity);
             await _context.SaveChangesAsync();
+            return entity.ID;
         }
 
         public async Task Delete(string id)

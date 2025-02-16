@@ -27,13 +27,16 @@ const Header:React.FC=()=>{
     function clicktocart(){
         navigate(`/cart`)
     }
+    function clicktohome(){
+        navigate(`/home`)
+    }
 
 
     return(
     <div className="container d-flex justify-content-between">
         <div className='header-row-left d-flex gap-5 justify-content-start align-items-center'>
             <div className="logo">
-                <img src={logoimg} ></img>
+                <img onClick={clicktohome} src={logoimg} ></img>
             </div>
             <div className='Title-Markers' 
                  onMouseEnter={() => handleMouseEnter('markers')}

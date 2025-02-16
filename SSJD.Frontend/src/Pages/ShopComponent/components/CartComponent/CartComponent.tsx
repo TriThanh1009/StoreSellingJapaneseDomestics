@@ -6,12 +6,14 @@ import { useShoppingCart } from "../../../../Hooks/useShoppingCart";
 import { getProductByID } from "../../../../Responsitories/ProductResponsitory";
 import { OrderDetailwithProduct } from "../../../../Model/OderWithProduct/OrderWithProduct";
 import './CartComponent.css'
+import { useNavigate } from "react-router-dom";
 
 
 
 const CardComponent: React.FC = () => {
   const {cart,removeFromCart,decreaseCartQuantity,increaseCartQuantity} = useShoppingCart()
   const [orders,setorder] = useState<OrderDetailwithProduct[]>()
+  const navigate = useNavigate()
   //const [products,setproducts] = useState<ProductModel[]>()
   useEffect(() => {
     
@@ -20,6 +22,7 @@ const CardComponent: React.FC = () => {
   
       const orderList: OrderDetailwithProduct[] = await Promise.all(
         cart.map(async (item) => {
+          console.log(item)
           const product = await getProductByID(item.productID);
           return { 
             product: product,  // Thông tin sản phẩm
@@ -27,12 +30,17 @@ const CardComponent: React.FC = () => {
           }; 
         })
       );
+      console.log(orders)
   
       setorder(orderList); // Cập nhật orders
     };
   
     fetchOrders();
   }, [cart]);
+
+  function NavToCheckout(){
+    navigate('/checkout')
+  }
 
   function handleRemove(id : string){
     console.log(id)
@@ -91,9 +99,9 @@ const CardComponent: React.FC = () => {
       </div>
       </Stack>
       <div className="shopping-cart-purchase d-flex justify-content-center align-items-center">
-           <a href="#" className="product-detail-quantity-add-to-card btn btn-pink text-white">
+           <button onClick={NavToCheckout} className="product-detail-quantity-add-to-card btn btn-pink text-white">
                  Thanh toán
-          </a>
+          </button>
               </div>
       </div>
 

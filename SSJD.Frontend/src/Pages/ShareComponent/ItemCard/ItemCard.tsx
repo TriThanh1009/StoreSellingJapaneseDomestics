@@ -5,17 +5,21 @@ import logoimg from '../../../Image/logo.jpg'
 import { ProductModel } from "../../../Model/Product/ProductModel"
 import { get } from "http"
 import { useShoppingCart } from "../../../Hooks/useShoppingCart"
+import { useNavigate } from "react-router-dom"
 
 interface props{
   products : ProductModel
 }
 
 const ItemCard:React.FC<props> = ({products}) =>{
-  const { getItemQuantity,increaseCartQuantity,decreaseCartQuantity,removeFromCart } = useShoppingCart()
-  const quantity = getItemQuantity(products.id)
+  const { increaseCartQuantity} = useShoppingCart()
+  const navigate = useNavigate()
+  function NavtoDetail(){
+    navigate(`/productdetail/${products.id}`);
+  }
     return (
     <div className="card text-center mx-auto" style={{ width: "18rem", border: "2px solid black", borderRadius: "10px" }}>
-      <div className="card-img p-3">
+      <div onClick={NavtoDetail} className="card-img p-3">
         <img src={logoimg} className="img-fluid" />
       </div>
       <div className="card-body">

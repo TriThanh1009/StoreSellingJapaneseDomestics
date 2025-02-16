@@ -25,8 +25,8 @@ namespace StoreSellingJapaneseDomestics.Controllers
         [HttpPost("CreateAccount")]
         public async Task<IActionResult> Create([FromBody] AccountRequestModel request)
         {
-            await _service.Create(request);
-            return Ok();
+            var data = await _service.Create(request);
+            return Ok(data);
         }
         [HttpPut("EditAccount")]
         public async Task<IActionResult> Edit([FromBody] AccountRequestModel request)

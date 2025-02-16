@@ -17,12 +17,12 @@ namespace SSJD.DataAccess.StoreConfigurations
             builder.ToTable("User");
             builder.Property("Id").IsRequired().HasMaxLength(50).HasDefaultValueSql("NEWID()"); ;
             builder.Property("Sex").HasDefaultValue(Sex.Male);
-            builder.Property("PhoneNumber").IsRequired().HasDefaultValue(15);
-            builder.Property("Address").IsRequired().HasMaxLength(60);
-            builder.Property("IdentityCard").IsRequired().HasMaxLength(20);
+            builder.Property("PhoneNumber").HasDefaultValue(15);
+            builder.Property("Address").HasMaxLength(60);
+            builder.Property("IdentityCard").HasMaxLength(20);
             builder.Property("Email").HasMaxLength(20);      
             builder.HasOne(x => x.Account).WithOne(x => x.User).HasForeignKey<User>(x => x.AccountID).OnDelete(DeleteBehavior.Restrict);
-            builder.HasOne(x => x.MemberCard).WithOne(x => x.User).HasForeignKey<User>(x => x.MemberCardID).OnDelete(DeleteBehavior.Restrict);
+            builder.HasOne(x => x.MemberCard).WithMany(x => x.User).HasForeignKey(x => x.MemberCardID);
         }
     }
 

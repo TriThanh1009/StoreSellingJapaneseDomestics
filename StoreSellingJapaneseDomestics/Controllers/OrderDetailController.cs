@@ -23,8 +23,8 @@ namespace StoreSellingJapaneseDomestics.Controllers
         [HttpPost("CreateOrderDetail")]
         public async Task<IActionResult> Create([FromBody] OrderDetailRequestModel request)
         {
-            await _service.Create(request);
-            return Ok();
+            var data = await _service.Create(request);
+            return Ok(data);
         }
         [HttpPut("EditOrderDetail")]
         public async Task<IActionResult> Edit([FromBody] OrderDetailRequestModel request)

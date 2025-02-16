@@ -4,8 +4,7 @@ import React, { useEffect, useState } from "react"
 import AdminMemberCardOptionsComponent from "../AdminMemberCardOptionsComponent/AdminMemberCardOptionsComponent"
 import clsx from 'clsx'
 import { MemberCardModel } from "../../../../../Model/MemberCard/MemberCardModel"
-import { getAccount } from "../../../../../Responsitories/AccountResponsitory"
-import { deleteMemberCard } from "../../../../../Responsitories/MemberCardResponsitory"
+import { deleteMemberCard, getMemberCard } from "../../../../../Responsitories/MemberCardResponsitory"
 
 const AdminMemberCardComponent:React.FC = () =>{
     const [membercards,setMembercards] = useState<MemberCardModel[]>()
@@ -14,7 +13,8 @@ const AdminMemberCardComponent:React.FC = () =>{
     const [getid,setgetid] = useState('');
     useEffect(()=>{
         const fetchaccount = async () =>{
-            const data = await getAccount()
+            const data = await getMemberCard()
+            console.log(data)
             setMembercards(data)
         }
         fetchaccount()
@@ -61,7 +61,7 @@ const AdminMemberCardComponent:React.FC = () =>{
 
                                     <tbody>
                                     {Array.isArray(membercards) && membercards.map((membercard) => (
-                                        <tr>
+                                        <tr key={membercard.id}>
                                         <td>{membercard.id}</td>
                                         <td>{membercard.point}</td>
                                         <td>{membercard.memberClass}</td>

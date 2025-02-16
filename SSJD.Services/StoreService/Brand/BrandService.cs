@@ -18,7 +18,7 @@ namespace SSJD.Services.StoreService.Brand
         {
             _context = context;
         }
-        public async Task Create(BrandRequestModel request)
+        public async Task<string> Create(BrandRequestModel request)
         {
             var entity = new SSJD.Entities.StoreEntity.Brand()
             {
@@ -27,6 +27,7 @@ namespace SSJD.Services.StoreService.Brand
             };
             _context.Brand.Add(entity);
             await _context.SaveChangesAsync();
+            return entity.ID;
         }
 
         public async Task Delete(string id)

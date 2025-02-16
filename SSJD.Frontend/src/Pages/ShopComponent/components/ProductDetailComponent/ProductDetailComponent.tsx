@@ -1,15 +1,39 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import img from '../../../../Image/logo.jpg'
 import './ProductDetailComponent.css'
+import { useNavigate, useParams } from "react-router-dom"
+import { ProductModel } from "../../../../Model/Product/ProductModel"
+import { getProductByID } from "../../../../Responsitories/ProductResponsitory"
+import { useShoppingCart } from "../../../../Hooks/useShoppingCart"
 const ProductDetailComponent:React.FC = () =>{
+    const {increaseCartQuantity} = useShoppingCart()
+    const {product} = useParams()
+    const [takeproduct,settakeproduct] = useState<ProductModel>() 
+    const navigate = useNavigate()
+    useEffect(()=>{
+        console.log(product)
+        const fetch = async() =>{
+            const data = await getProductByID(product)
+            settakeproduct(data)
+        }
+        fetch()
+    },[])
     const itemstip = [
         { id: 1, name: "Brush & Chisel" },
         { id: 2, name: "Brush & Fine" },
       ];
     const [count,setcount] = useState(1)
-    const increase = () => setcount(count+1)
+    const increase = () => {setcount(count+1)}
     const decrease = () => {if(count>1) setcount(count-1)}
+    const handleAddToCart = () => {
+        if (takeproduct?.id) {
+            for (let i = 0; i < count; i++) {
+                increaseCartQuantity(takeproduct.id);
+            }
+            navigate('/cart')
+        }
+    };
     return(
         <div>
             <div className="d-flex flex-row gap-5">
@@ -19,10 +43,10 @@ const ProductDetailComponent:React.FC = () =>{
                 </div>
                 <div className="col-6">
                     <div className="product-detail-brand">
-                        <span>Ohuhu Honolulu Colors</span>
+                        <span>{takeproduct?.name}</span>
                     </div>
                     <div className="product-detail-price">
-                        <span>6.274.000</span>
+                        <span>{takeproduct?.price}</span>
                     </div>
                     <div className="product-detail-description d-flex flex-column mt-3 gap-3">
                         <div className="d-flex gap-2">
@@ -55,9 +79,9 @@ const ProductDetailComponent:React.FC = () =>{
                         </div>
                     </div>
                     <div className="mt-5">
-                    <a href="#" className="product-detail-quantity-add-to-card btn btn-pink text-white">
+                    <button onClick={handleAddToCart} className="product-detail-quantity-add-to-card btn btn-pink text-white">
                         Add to Cart
-                    </a>
+                    </button>
                     </div>
                 </div>
             </div>

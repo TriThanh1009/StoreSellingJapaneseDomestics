@@ -30,8 +30,8 @@ namespace StoreSellingJapaneseDomestics.Controllers
         [HttpPost("CreateBrand")]
         public async Task<IActionResult> Create([FromBody] BrandRequestModel request)
         {
-            await _service.Create(request);
-            return Ok();
+            var data = await _service.Create(request);
+            return Ok(data);
         }
         [HttpPut("EdiBrand")]
         public async Task<IActionResult> Edit([FromBody] BrandRequestModel request)

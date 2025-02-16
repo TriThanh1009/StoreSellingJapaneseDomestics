@@ -13,6 +13,6 @@ namespace SSJD.Entities.StoreEntity
         public string MemberClass { get; set; } = "";
         public int Discount { get; set; } = 0;
 
-        public User User { get; set; }
+        public List<User> User { get; set; }
     }
 }

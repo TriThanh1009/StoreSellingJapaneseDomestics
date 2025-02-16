@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace SSJD.DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class DataSeed : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -18,7 +18,7 @@ namespace SSJD.DataAccess.Migrations
                 columns: table => new
                 {
                     ID = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    UserName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UserName = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
                     Password = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
                     PasswordCheck = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
                     Email = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false)
@@ -55,7 +55,7 @@ namespace SSJD.DataAccess.Migrations
                     PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     SecurityStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false, defaultValue: "15"),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true, defaultValue: "15"),
                     PhoneNumberConfirmed = table.Column<bool>(type: "bit", nullable: false),
                     TwoFactorEnabled = table.Column<bool>(type: "bit", nullable: false),
                     LockoutEnd = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
@@ -111,8 +111,8 @@ namespace SSJD.DataAccess.Migrations
                 {
                     ID = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 2, 14, 8, 34, 58, 565, DateTimeKind.Local).AddTicks(1730)),
-                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 2, 14, 8, 34, 58, 565, DateTimeKind.Local).AddTicks(1881)),
+                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 2, 15, 20, 27, 39, 186, DateTimeKind.Local).AddTicks(1529)),
+                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 2, 15, 20, 27, 39, 186, DateTimeKind.Local).AddTicks(1784)),
                     PercentDiscount = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -301,7 +301,7 @@ namespace SSJD.DataAccess.Migrations
                         column: x => x.MemberCardID,
                         principalTable: "MemberCard",
                         principalColumn: "ID",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -311,7 +311,7 @@ namespace SSJD.DataAccess.Migrations
                     ID = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ProductID = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
-                    Warranty = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 2, 14, 8, 34, 58, 564, DateTimeKind.Local).AddTicks(9637)),
+                    Warranty = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 2, 15, 20, 27, 39, 185, DateTimeKind.Local).AddTicks(9867)),
                     Origin = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     AdditionalImage = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false)
                 },
@@ -332,9 +332,9 @@ namespace SSJD.DataAccess.Migrations
                 {
                     ID = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     UserID = table.Column<string>(type: "nvarchar(50)", nullable: false),
-                    OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 2, 14, 8, 34, 58, 560, DateTimeKind.Local).AddTicks(2431)),
+                    OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 2, 15, 20, 27, 39, 181, DateTimeKind.Local).AddTicks(2935)),
                     ShippingUnitID = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ShippingDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 2, 14, 8, 34, 58, 561, DateTimeKind.Local).AddTicks(9134)),
+                    ShippingDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 2, 15, 20, 27, 39, 183, DateTimeKind.Local).AddTicks(293)),
                     ShippingAddress = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     OrderStatus = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TotalPrice = table.Column<decimal>(type: "decimal(10,2)", maxLength: 50, precision: 10, scale: 2, nullable: false),
@@ -424,8 +424,8 @@ namespace SSJD.DataAccess.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "ab01b3f4-bc98-44ce-aef8-69791215b955", null, "Customer", "CUSTOMER" },
-                    { "bed61c95-31f0-459d-9c58-d6d376478532", null, "Admin", "ADMIN" }
+                    { "79874087-7a28-41e1-b641-fea91d980384", null, "Customer", "CUSTOMER" },
+                    { "cd392ff7-12f9-49d9-98f1-006fa8816c50", null, "Admin", "ADMIN" }
                 });
 
             migrationBuilder.InsertData(
@@ -433,8 +433,8 @@ namespace SSJD.DataAccess.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "1", 0, "e1ecb6fe-048a-46c8-8986-fd3375891e44", null, false, false, null, null, null, null, "123123", false, "a3e05428-1b83-4957-bbd0-8a702227b3f0", false, "Nguyen Tri Thanh" },
-                    { "eeccb2a1-14bf-4b0a-a26c-5779b117bbd7", 0, "6f51daa3-45f8-43d6-a8f1-b93fcd21ab02", null, false, false, null, null, null, null, "123123", false, "83c5e278-a0b8-43ed-b28c-0f90a278d4b5", false, "Nguyen Tri Thanh" }
+                    { "1", 0, "e50a6a37-59c7-4043-a8fb-ef3b703aaf42", null, false, false, null, null, null, null, "123123", false, "c193dcdd-1959-4fe5-92f7-753766d53efb", false, "Nguyen Tri Thanh" },
+                    { "95476330-d900-43f4-8dc2-abf57a33d82e", 0, "a0998e42-ea89-4e06-8f66-8a7582a98af5", null, false, false, null, null, null, null, "123123", false, "976f25b8-09fd-4153-abba-c569e276b9f8", false, "Nguyen Tri Thanh" }
                 });
 
             migrationBuilder.InsertData(
@@ -462,7 +462,7 @@ namespace SSJD.DataAccess.Migrations
                 values: new object[,]
                 {
                     { "1", "2", "Viet Nam", "123", "122", "2", 1 },
-                    { "eeccb2a1-14bf-4b0a-a26c-5779b117bbd7", "1", "Viet Nam", "123", "122", "1", 1 }
+                    { "95476330-d900-43f4-8dc2-abf57a33d82e", "1", "Viet Nam", "123", "122", "1", 1 }
                 });
 
             migrationBuilder.CreateIndex(
@@ -557,9 +557,7 @@ namespace SSJD.DataAccess.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_User_MemberCardID",
                 table: "User",
-                column: "MemberCardID",
-                unique: true,
-                filter: "[MemberCardID] IS NOT NULL");
+                column: "MemberCardID");
         }
 
         /// <inheritdoc />

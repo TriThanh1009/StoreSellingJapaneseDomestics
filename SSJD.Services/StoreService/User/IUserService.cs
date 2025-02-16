@@ -15,6 +15,5 @@ namespace SSJD.Services.StoreService.User
     {
         Task<PagedResult<UserViewModel>> GetUserPaging(UserPagingRequest request);
 
-        Task<string> CreateHasReturnID(UserRequestModel request);
     }
 }

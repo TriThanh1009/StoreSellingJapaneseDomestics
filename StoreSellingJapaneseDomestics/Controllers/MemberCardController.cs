@@ -23,8 +23,8 @@ namespace StoreSellingJapaneseDomestics.Controllers
         [HttpPost("CreateMemberCard")]
         public async Task<IActionResult> Create([FromBody] MemberCardRequestModel request)
         {
-            await _service.Create(request);
-            return Ok();
+            var data = await _service.Create(request);
+            return Ok(data);
         }
         [HttpPut("EditMemberCard")]
         public async Task<IActionResult> Edit([FromBody] MemberCardRequestModel request)

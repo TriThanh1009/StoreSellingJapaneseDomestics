@@ -29,14 +29,14 @@ namespace StoreSellingJapaneseDomestics.Controllers
         [HttpPost("CreateUser")]
         public async Task<IActionResult> Create([FromBody] UserRequestModel request)
         {
-            var userid = await _service.CreateHasReturnID(request);
+            var userid = await _service.Create(request);
             await _roleService.AddRoletoUser(userid, "Customer");
-            return Ok();
+            return Ok(userid);
         }
         [HttpPost("CreateUserByAdmin/{RoleName}")]
         public async Task<IActionResult> CreateByAdmin([FromBody] UserRequestModel request,string RoleName)
         {
-            var userid = await _service.CreateHasReturnID(request);
+            var userid = await _service.Create(request);
             await _roleService.AddRoletoUser(userid, RoleName);
             return Ok();
         }

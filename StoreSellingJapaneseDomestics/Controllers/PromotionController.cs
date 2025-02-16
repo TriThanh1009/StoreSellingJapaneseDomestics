@@ -24,8 +24,8 @@ namespace StoreSellingJapaneseDomestics.Controllers
         [HttpPost("CreatePromotion")]
         public async Task<IActionResult> Create([FromBody] PromotionRequestModel request)
         {
-            await _service.Create(request);
-            return Ok();
+            var data = await _service.Create(request);
+            return Ok(data);
         }
         [HttpPut("EditPromotion")]
         public async Task<IActionResult> Edit([FromBody] PromotionRequestModel request)

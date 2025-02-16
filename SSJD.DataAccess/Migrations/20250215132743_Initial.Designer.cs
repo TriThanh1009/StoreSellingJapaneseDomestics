@@ -12,8 +12,8 @@ using SSJD.DataAccess;
 namespace SSJD.DataAccess.Migrations
 {
     [DbContext(typeof(SSJDDbContext))]
-    [Migration("20250214013504_DataSeed")]
-    partial class DataSeed
+    [Migration("20250215132743_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -54,13 +54,13 @@ namespace SSJD.DataAccess.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "067275d7-40f2-4612-aa6d-4bc23eb90ff7",
+                            Id = "9162d741-f522-446b-9021-20d9b1c4d70e",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "cb513d2a-fe14-417f-a52e-038f135796c1",
+                            Id = "dfd56e6a-5a46-4748-a6e3-50e2b71895ad",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         });
@@ -131,7 +131,6 @@ namespace SSJD.DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
-                        .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(max)")
                         .HasDefaultValue("15");
@@ -282,7 +281,8 @@ namespace SSJD.DataAccess.Migrations
 
                     b.Property<string>("UserName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.HasKey("ID");
 
@@ -394,7 +394,7 @@ namespace SSJD.DataAccess.Migrations
                     b.Property<DateTime>("OrderDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 2, 14, 8, 35, 4, 110, DateTimeKind.Local).AddTicks(5528));
+                        .HasDefaultValue(new DateTime(2025, 2, 15, 20, 27, 43, 523, DateTimeKind.Local).AddTicks(3545));
 
                     b.Property<string>("OrderStatus")
                         .IsRequired()
@@ -418,7 +418,7 @@ namespace SSJD.DataAccess.Migrations
                     b.Property<DateTime>("ShippingDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 2, 14, 8, 35, 4, 112, DateTimeKind.Local).AddTicks(3387));
+                        .HasDefaultValue(new DateTime(2025, 2, 15, 20, 27, 43, 525, DateTimeKind.Local).AddTicks(3774));
 
                     b.Property<string>("ShippingUnitID")
                         .IsRequired()
@@ -556,7 +556,7 @@ namespace SSJD.DataAccess.Migrations
                     b.Property<DateTime>("Warranty")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 2, 14, 8, 35, 4, 115, DateTimeKind.Local).AddTicks(2439));
+                        .HasDefaultValue(new DateTime(2025, 2, 15, 20, 27, 43, 529, DateTimeKind.Local).AddTicks(425));
 
                     b.HasKey("ID");
 
@@ -574,12 +574,12 @@ namespace SSJD.DataAccess.Migrations
                     b.Property<DateTime>("CreateDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 2, 14, 8, 35, 4, 115, DateTimeKind.Local).AddTicks(3979));
+                        .HasDefaultValue(new DateTime(2025, 2, 15, 20, 27, 43, 529, DateTimeKind.Local).AddTicks(2699));
 
                     b.Property<DateTime>("EndDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 2, 14, 8, 35, 4, 115, DateTimeKind.Local).AddTicks(4131));
+                        .HasDefaultValue(new DateTime(2025, 2, 15, 20, 27, 43, 529, DateTimeKind.Local).AddTicks(2867));
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -644,23 +644,21 @@ namespace SSJD.DataAccess.Migrations
                         .IsUnique()
                         .HasFilter("[AccountID] IS NOT NULL");
 
-                    b.HasIndex("MemberCardID")
-                        .IsUnique()
-                        .HasFilter("[MemberCardID] IS NOT NULL");
+                    b.HasIndex("MemberCardID");
 
                     b.ToTable("User", (string)null);
 
                     b.HasData(
                         new
                         {
-                            Id = "d0993e09-79a0-4a71-bf86-8fd462c2f682",
+                            Id = "a13003ba-b33e-455b-9bd7-80996bc2d92c",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "381ec344-7be6-45c0-a0b8-1302e09b2fc3",
+                            ConcurrencyStamp = "27385588-fa04-4e79-ae66-84acdbd788cc",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumber = "123123",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "476c07d2-acda-4962-b6c9-37ca2b35830e",
+                            SecurityStamp = "633a6ebd-ebf2-4a80-8e2a-092df7b753a0",
                             TwoFactorEnabled = false,
                             UserName = "Nguyen Tri Thanh",
                             AccountID = "1",
@@ -674,12 +672,12 @@ namespace SSJD.DataAccess.Migrations
                         {
                             Id = "1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "52745177-af2f-41c8-b8bd-685ca7a05663",
+                            ConcurrencyStamp = "03f41669-f2b4-4bb0-a0ea-d36a53f52872",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumber = "123123",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "54e61b43-5931-41ee-8306-6da4070b3675",
+                            SecurityStamp = "00c15649-0605-4dd6-b345-768870207f71",
                             TwoFactorEnabled = false,
                             UserName = "Nguyen Tri Thanh",
                             AccountID = "2",
@@ -840,9 +838,9 @@ namespace SSJD.DataAccess.Migrations
                         .IsRequired();
 
                     b.HasOne("SSJD.Entities.StoreEntity.MemberCard", "MemberCard")
-                        .WithOne("User")
-                        .HasForeignKey("SSJD.Entities.StoreEntity.User", "MemberCardID")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .WithMany("User")
+                        .HasForeignKey("MemberCardID")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Account");
@@ -868,8 +866,7 @@ namespace SSJD.DataAccess.Migrations
 
             modelBuilder.Entity("SSJD.Entities.StoreEntity.MemberCard", b =>
                 {
-                    b.Navigation("User")
-                        .IsRequired();
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("SSJD.Entities.StoreEntity.Order", b =>

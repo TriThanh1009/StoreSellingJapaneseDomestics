@@ -22,7 +22,7 @@ interface RouteConfig{
 
 const routes: RouteConfig[]=[
     {path: '/home',element:<HomeComponent/>},
-    {path:'/home/productdetail',element:<ProductDetailComponent/>},
+    {path:'productdetail/:product',element:<ProductDetailComponent/>},
     //{path:'/login',element:<Login/>},
     {path:'/forgot',element:<Forgotpassword/>},
     {path:'/register',element:<Register/>},

@@ -8,7 +8,6 @@ import { useShoppingCart } from '../../../../Hooks/useShoppingCart'
 import { getProductByID } from '../../../../Responsitories/ProductResponsitory'
 import logomomo from '../../../../Image/logo_momo.jpg'
 import logovcb from '../../../../Image/logo_vcb.jpg'
-import PaymentComponent from '../PaymentComponent/PaymentComponent'
 import { useNavigate } from 'react-router-dom'
 const CheckoutComponent:React.FC = () =>{
     const {cart} = useShoppingCart()

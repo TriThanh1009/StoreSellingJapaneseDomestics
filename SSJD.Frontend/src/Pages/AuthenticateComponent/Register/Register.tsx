@@ -25,6 +25,12 @@ const Register:React.FC=()=>{
                 ...prev,
                 [name]: value,
             }));
+            if(name == "email"){
+                setuser((prev) => ({
+                    ...prev,
+                    [name]: value,
+                }));
+            }
             
         };
     const handleChangeUser = (e: React.ChangeEvent<HTMLInputElement>) => {

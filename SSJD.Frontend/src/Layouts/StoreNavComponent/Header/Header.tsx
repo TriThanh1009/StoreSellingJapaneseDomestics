@@ -30,6 +30,9 @@ const Header:React.FC=()=>{
     function clicktohome(){
         navigate(`/home`)
     }
+    function clicktoprofile(){
+        navigate(`/profile`)
+    }
 
 
     return(
@@ -108,7 +111,7 @@ const Header:React.FC=()=>{
             <div className='search'>
                  <i className="bi bi-search"></i>
             </div>
-            <div className='information'>
+            <div onClick={clicktoprofile} className='information'>
                 <i className="bi bi-person-fill"></i>
             </div>
             <div className='shopping-cart' onClick={()=>clicktocart()}>

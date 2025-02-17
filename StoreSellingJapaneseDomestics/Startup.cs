@@ -9,6 +9,8 @@ using Microsoft.OpenApi.Models;
 using SSJD.DataAccess;
 using SSJD.Entities.StoreEntity;
 using SSJD.Services.GeneralService.Account;
+using SSJD.Services.GeneralService.Storage.FileStorage;
+using SSJD.Services.GeneralService.Storage.Swagger;
 using SSJD.Services.StoreService.Brand;
 using SSJD.Services.StoreService.Category;
 using SSJD.Services.StoreService.Login;
@@ -60,6 +62,7 @@ namespace StoreSellingJapaneseDomestics
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<ILoginService, LoginSerivce>();
             services.AddTransient<IRoleService, RoleService>();
+            services.AddTransient<IFileStorageService, FileStorageService>();
             services.AddTransient<RoleManager<IdentityRole>>();
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddControllersWithViews();
@@ -84,6 +87,7 @@ namespace StoreSellingJapaneseDomestics
                     Type = SecuritySchemeType.ApiKey
                 });
                 options.OperationFilter<SecurityRequirementsOperationFilter>();
+                options.OperationFilter<SwaggerFileOperationFilter>();
             });
             
             services

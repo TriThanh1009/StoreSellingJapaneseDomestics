@@ -53,6 +53,7 @@
 .information{
     margin-top: 3px;
     font-size: 2rem;
+    cursor: pointer;
 }
 .search{
     font-size: 1.5rem;

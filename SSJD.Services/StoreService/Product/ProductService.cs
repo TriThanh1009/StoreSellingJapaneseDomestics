@@ -2,6 +2,8 @@
 using SharpCompress.Common;
 using SSJD.DataAccess;
 using SSJD.Services.GeneralService.Base;
+using SSJD.Services.GeneralService.Storage.FileStorage;
+using SSJD.ViewModel.GeneralViewModel.File;
 using SSJD.ViewModel.GeneralViewModel.PageResult;
 using SSJD.ViewModel.StoreViewModel.Product;
 using System;
@@ -15,12 +17,27 @@ namespace SSJD.Services.StoreService.Product
     public class ProductService : IProductService
     {
         private readonly SSJDDbContext _context;
-        public ProductService(SSJDDbContext context)
+        private readonly IFileStorageService _fileStorageService;
+        public ProductService(SSJDDbContext context, IFileStorageService fileStorageService)
         {
             _context = context;
+            _fileStorageService = fileStorageService;
         }
         public async Task<string> Create(ProductRequestModel request)
         {
+            string imageUrl = null;
+            if (request.Image != null)
+            {
+                var fileName = $"{Guid.NewGuid()}{Path.GetExtension(request.Image.FileName)}";
+
+                // Lưu file vào thư mục
+                await _fileStorageService.SaveFileAsync(request.Image.OpenReadStream(), fileName);
+
+                // Lưu tên file vào database
+                imageUrl = fileName;
+
+            }
+
             var entity = new Entities.StoreEntity.Product()
             {
                 ID = request.ID,
@@ -31,7 +48,7 @@ namespace SSJD.Services.StoreService.Product
                 Price = request.Price,
                 Stock = request.Stock,
                 isActive = request.isActive,
-                Image = request.Image,
+                Image = imageUrl,
             };
             _context.Product.Add(entity);
             await _context.SaveChangesAsync();
@@ -57,7 +74,12 @@ namespace SSJD.Services.StoreService.Product
                 data.Price = request.Price;
                 data.Stock = request.Stock;
                 data.isActive = request.isActive;
-                data.Image = request.Image;
+                if (request.Image != null)
+                {
+                    var fileName = $"{Guid.NewGuid()}_{request.Image.FileName}";
+                    await _fileStorageService.SaveFileAsync(request.Image.OpenReadStream(), fileName);
+                    data.Image = fileName;
+                }
                 _context.Product.Update(data);
                 await _context.SaveChangesAsync();
             }

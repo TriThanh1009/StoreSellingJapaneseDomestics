@@ -1,4 +1,6 @@
-﻿using SSJD.Entities.GeneralEntity;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using SSJD.Entities.GeneralEntity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +19,7 @@ namespace SSJD.ViewModel.StoreViewModel.Product
         public decimal Price { get; set; } = 0;
         public int Stock { get; set; } = 0;
         public Active isActive { get; set; } = Active.No;
-        public string Image { get; set; } = "";
+        [FromForm]
+        public IFormFile Image { get; set; } = null;
     }
 }

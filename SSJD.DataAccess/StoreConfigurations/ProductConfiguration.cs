@@ -24,7 +24,7 @@ namespace SSJD.DataAccess.StoreConfigurations
             builder.Property("Price").IsRequired().HasMaxLength(20).HasPrecision(10, 2);
             builder.Property("Stock").IsRequired().HasMaxLength(20);
             builder.Property("isActive").HasDefaultValue(Active.No);
-            builder.Property("Image").HasMaxLength(30);
+            builder.Property("Image").HasMaxLength(100);
         }
     }
 }

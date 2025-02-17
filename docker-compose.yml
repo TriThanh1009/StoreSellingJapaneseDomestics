@@ -25,6 +25,7 @@ services:
       ASPNETCORE_ENVIRONMENT : Staging
     volumes:
       - '../StoreSellingJapaneseDomestics/StoreSellingJapaneseDomestics:/app/data'
+      - ./Uploads:/app/Uploads
     depends_on:
       - sdb
       

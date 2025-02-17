@@ -1,39 +1,57 @@
 ﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 
 namespace SSJD.Services.GeneralService.Storage.FileStorage
 {
-    public class FileStorageService : IFileStorageService
+    public class FileStorageService(IWebHostEnvironment environment) : IFileStorageService
     {
-
-        private readonly string _frontendImageFolder;
-        private readonly string FRONTEND_IMAGE_FOLDER = "../../SSJD.Frontend/src/Image";
-
-        public FileStorageService(IWebHostEnvironment webHostEnvironment)
+        public async Task<string> SaveFileAsync(IFormFile imageFile, string[] allowedFileExtensions)
         {
-            _frontendImageFolder = Path.GetFullPath(FRONTEND_IMAGE_FOLDER);
-            if (!Directory.Exists(_frontendImageFolder))
+            if (imageFile == null)
             {
-                Directory.CreateDirectory(_frontendImageFolder);
+                throw new ArgumentNullException(nameof(imageFile));
             }
-        }
-        public string GetFileUrl(string fileName)
-        {
-            return $"/{FRONTEND_IMAGE_FOLDER}/{fileName}";
+
+            var contentPath = environment.ContentRootPath;
+            var path = Path.Combine(contentPath, "Uploads");
+            // path = "c://projects/ImageManipulation.Ap/uploads" ,not exactly, but something like that
+
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+
+            // Check the allowed extenstions
+            var ext = Path.GetExtension(imageFile.FileName);
+            if (!allowedFileExtensions.Contains(ext))
+            {
+                throw new ArgumentException($"Only {string.Join(",", allowedFileExtensions)} are allowed.");
+            }
+
+            // generate a unique filename
+            var fileName = $"{Guid.NewGuid().ToString()}{ext}";
+            var fileNameWithPath = Path.Combine(path, fileName);
+            using var stream = new FileStream(fileNameWithPath, FileMode.Create);
+            await imageFile.CopyToAsync(stream);
+            return fileName;
         }
 
-        public async Task SaveFileAsync(Stream mediaBinaryStream, string fileName)
+
+        public void DeleteFile(string fileNameWithExtension)
         {
-            var filePath = Path.Combine(_frontendImageFolder, fileName);
-            using var output = new FileStream(filePath, FileMode.Create);
-            mediaBinaryStream.CopyToAsync(output);
-        }
-        public async Task DeleteFileAsync(string fileName)
-        {
-            var filePath = Path.Combine(_frontendImageFolder, fileName);
-            if (File.Exists(filePath))
+            if (string.IsNullOrEmpty(fileNameWithExtension))
             {
-                await Task.Run(() => File.Delete(filePath));
+                throw new ArgumentNullException(nameof(fileNameWithExtension));
             }
+            var contentPath = environment.ContentRootPath;
+            var path = Path.Combine(contentPath, $"Uploads", fileNameWithExtension);
+
+            if (!File.Exists(path))
+            {
+                throw new FileNotFoundException($"Invalid file path");
+            }
+            File.Delete(path);
         }
+
     }
 }

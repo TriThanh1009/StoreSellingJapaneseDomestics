@@ -25,18 +25,8 @@ namespace SSJD.Services.StoreService.Product
         }
         public async Task<string> Create(ProductRequestModel request)
         {
-            string imageUrl = null;
-            if (request.Image != null)
-            {
-                var fileName = $"{Guid.NewGuid()}{Path.GetExtension(request.Image.FileName)}";
-
-                // Lưu file vào thư mục
-                await _fileStorageService.SaveFileAsync(request.Image.OpenReadStream(), fileName);
-
-                // Lưu tên file vào database
-                imageUrl = fileName;
-
-            }
+            string[] allowedFileExtentions = [".jpg", ".jpeg", ".png"];
+            string createdImageName = await _fileStorageService.SaveFileAsync(request.Image, allowedFileExtentions);
 
             var entity = new Entities.StoreEntity.Product()
             {
@@ -48,7 +38,7 @@ namespace SSJD.Services.StoreService.Product
                 Price = request.Price,
                 Stock = request.Stock,
                 isActive = request.isActive,
-                Image = imageUrl,
+                Image = createdImageName,
             };
             _context.Product.Add(entity);
             await _context.SaveChangesAsync();
@@ -76,9 +66,9 @@ namespace SSJD.Services.StoreService.Product
                 data.isActive = request.isActive;
                 if (request.Image != null)
                 {
-                    var fileName = $"{Guid.NewGuid()}_{request.Image.FileName}";
-                    await _fileStorageService.SaveFileAsync(request.Image.OpenReadStream(), fileName);
-                    data.Image = fileName;
+                    string[] allowedFileExtentions = [".jpg", ".jpeg", ".png"];
+                    string createdImageName = await _fileStorageService.SaveFileAsync(request.Image, allowedFileExtentions);
+                    data.Image = createdImageName;
                 }
                 _context.Product.Update(data);
                 await _context.SaveChangesAsync();

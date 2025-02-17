@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using SSJD.DataAccess;
@@ -48,7 +49,7 @@ namespace StoreSellingJapaneseDomestics
                 );
             services.AddEndpointsApiExplorer();
             services.AddHttpContextAccessor();
-
+            services.AddTransient<SSJDDbContext>();
             services.AddTransient<IAccountService, AccountService>();
             services.AddTransient<IBrandService, BrandService>();
             services.AddTransient<ICategoryService, CategorySerivce>();
@@ -124,9 +125,19 @@ namespace StoreSellingJapaneseDomestics
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-            
 
-            app.UseStaticFiles();
+            app.UseHttpsRedirection();
+            var uploadsPath = Path.Combine(env.ContentRootPath, "Uploads");
+            if (!Directory.Exists(uploadsPath))
+            {
+                Directory.CreateDirectory(uploadsPath);
+            }
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(
+                       Path.Combine(env.ContentRootPath, "Uploads")),
+                RequestPath = "/Resources"
+            });
 
             app.UseRouting();
 

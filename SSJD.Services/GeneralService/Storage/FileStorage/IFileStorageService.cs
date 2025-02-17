@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,8 +9,7 @@ namespace SSJD.Services.GeneralService.Storage.FileStorage
 {
     public interface IFileStorageService
     {
-        string GetFileUrl(string fileName);
-        Task SaveFileAsync(Stream mediaBinaryStream, string fileName);
-        Task DeleteFileAsync(string fileName);
+        Task<string> SaveFileAsync(IFormFile imageFile, string[] allowedFileExtensions);
+        void DeleteFile(string fileNameWithExtension);
     }
 }

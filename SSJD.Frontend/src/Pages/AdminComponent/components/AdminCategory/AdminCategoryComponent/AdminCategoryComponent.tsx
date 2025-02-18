@@ -49,7 +49,7 @@ const AdminCategoryComponent:React.FC = () =>{
                             <div className="table-responsive">
                                 <table className="table table-bordered" id="dataTable" width="100%" >
                                     <thead>
-                                        <tr className="text-center">
+                                        <tr className="">
                                             <th>ID</th>
                                             <th>Name</th>
                                             <th>Options</th>

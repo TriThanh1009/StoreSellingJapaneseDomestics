@@ -1,10 +1,11 @@
 export interface ProductOptionsModel{
-    id? : string
-    name? : string
-    brand? : string
-    categoryID? : string
-    price? : string
-    stock? : string
+    ID? : string
+    Name? : string
+    BrandID? : string
+    CategoryID? : string
+    Size? : number
+    Price? : number
+    Stock? : number
     isActive? : string
-    image? : string
+    Image? : File | null
 }

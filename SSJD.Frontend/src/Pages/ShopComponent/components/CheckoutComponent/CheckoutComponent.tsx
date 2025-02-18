@@ -9,9 +9,12 @@ import { getProductByID } from '../../../../Responsitories/ProductResponsitory'
 import logomomo from '../../../../Image/logo_momo.jpg'
 import logovcb from '../../../../Image/logo_vcb.jpg'
 import { useNavigate } from 'react-router-dom'
+import { UserModel } from '../../../../Model/User/UserModel'
+import { getUserByID } from '../../../../Responsitories/UserResponsitory'
 const CheckoutComponent:React.FC = () =>{
     const {cart} = useShoppingCart()
     const [orders,setorders] = useState<OrderDetailwithProduct[]>()
+    const [user,setuser] = useState<UserModel>()
     const [total,settotal] = useState(0)
     const [selected, setSelected] = useState<string>("");
     const navigate = useNavigate()
@@ -28,13 +31,12 @@ const CheckoutComponent:React.FC = () =>{
               }; 
             })
           );
-      
-          setorders(orderList); // Cập nhật orders      
+          setorders(orderList); // Cập nhật orders  
+          
         };
       
         fetchOrders();
       }, [cart]);
-
       //tinh tong tien
       useEffect(() => {
         if (orders && orders.length > 0) {
@@ -42,6 +44,17 @@ const CheckoutComponent:React.FC = () =>{
             settotal(totalprice);
         }
     }, [orders]);
+    useEffect(()=>{
+        const fetch = async()=>{
+            const userid = localStorage.getItem('id')
+
+          if(userid){
+            const userdata = await getUserByID(userid)
+            setuser(userdata)
+          }
+        }
+        fetch()
+    })
 
     function paymentRoute(method : string){
         navigate(`/payment/${method}`);
@@ -54,10 +67,10 @@ const CheckoutComponent:React.FC = () =>{
                 </div>
                 <div className='login-input'>
                     <div className='input-information d-flex flex-column justify-content-center gap-3'>
-                        <input type='text' placeholder='Họ và tên'></input>
-                        <input type='text' placeholder='Đia chỉ'></input>   
-                        <input type='text' placeholder='Email'></input>
-                        <input type='text' placeholder='Số điện thoại'></input>
+                        <input type='text' placeholder={user?.userName}></input>
+                        <input type='text' placeholder={user?.address}></input>   
+                        <input type='text' placeholder={user?.email}></input>
+                        <input type='text' placeholder={user?.phoneNumber}></input>
                         <div className='checkout-payment-method d-flex flex-row gap-2'>
                         <img 
                             src={logomomo} 

@@ -136,7 +136,7 @@ namespace StoreSellingJapaneseDomestics
             {
                 FileProvider = new PhysicalFileProvider(
                        Path.Combine(env.ContentRootPath, "Uploads")),
-                RequestPath = "/Resources"
+                RequestPath = "/uploads"
             });
 
             app.UseRouting();

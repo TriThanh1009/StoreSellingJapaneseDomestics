@@ -4,12 +4,12 @@ import React from 'react';
 import HomeComponent from '../../Pages/ShopComponent/components/HomeComponent/HomeComponent';
 import Register from '../../Pages/AuthenticateComponent/Register/Register';
 import ProductDetailComponent from '../../Pages/ShopComponent/components/ProductDetailComponent/ProductDetailComponent';
-import { ProfileComponent } from '../../Pages/ShopComponent/components/ProfileComponent/ProfileComponent';
 import Forgotpassword from '../../Pages/AuthenticateComponent/ForgotPassword/forgotpassword';
 import CartComponent from '../../Pages/ShopComponent/components/CartComponent/CartComponent';
 import CheckoutComponent from '../../Pages/ShopComponent/components/CheckoutComponent/CheckoutComponent';
 import PaymentComponent from '../../Pages/ShopComponent/components/PaymentComponent/PaymentComponent';
 import Login from '../../Pages/AuthenticateComponent/Login/Login';
+import ProfileComponent from '../../Pages/ShopComponent/components/ProfileComponent/ProfileComponent';
 
 
 

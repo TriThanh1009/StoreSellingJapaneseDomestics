@@ -16,7 +16,7 @@ const Register:React.FC=()=>{
         address : "" ,
         identityCard : "" ,
         accountID: "" ,
-        memberCardID: "3",
+        memberCardID: "1",
         image: "" ,
     })
     const handleChangeAccount = (e: React.ChangeEvent<HTMLInputElement>) => {

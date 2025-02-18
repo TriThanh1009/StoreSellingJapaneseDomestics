@@ -29,7 +29,7 @@ namespace SSJD.Services.StoreService.Login
         public string CreateToken(LoginRequestModel user)
         {
             List<Claim> claims = new List<Claim> {
-                new Claim(ClaimTypes.Name, user.UserName),
+                new Claim(ClaimTypes.Actor, user.UserID),
                 new Claim(ClaimTypes.Role, user.Role),
             };
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(
@@ -57,7 +57,7 @@ namespace SSJD.Services.StoreService.Login
             var data = await query.Select(x=> new LoginRequestModel()
             {
                 ID = x.a.ID,
-                UserName = x.u.UserName,
+                UserID = x.u.Id,
                 Account = x.a.UserName,
                 Password = x.a.Password,
                 Role = x.r.Name

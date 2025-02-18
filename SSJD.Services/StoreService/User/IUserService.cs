@@ -15,5 +15,6 @@ namespace SSJD.Services.StoreService.User
     {
         Task<PagedResult<UserViewModel>> GetUserPaging(UserPagingRequest request);
 
+        Task<UserOrderProfile> GetUserProfileById(string id);
     }
 }

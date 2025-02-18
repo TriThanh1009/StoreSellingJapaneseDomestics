@@ -16,7 +16,11 @@ export const getProductByID = async(id? : string)=>{
 }
 
 export const createProduct = async(data:any)=>{
-    const response = await axios.post(`${apiUrl}/Product/CreateProduct`)
+    console.log(data)
+    const response = await axios.post(`${apiUrl}/Product/CreateProduct`,data,{
+        headers:{
+            "Content-Type" : "multipart/form-data"
+        }})
     return response.data
 }
 

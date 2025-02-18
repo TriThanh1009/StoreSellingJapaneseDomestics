@@ -5,8 +5,10 @@ import AdminProductOptionsComponent from "../AdminProductOptionsComponent/AdminP
 import './AdminProductComponent.css'
 import { deleteProduct, getProduct } from "../../../../../Responsitories/ProductResponsitory"
 import { ProductModel } from "../../../../../Model/Product/ProductModel"
-
+import logo from '../../../../../../../Uploads/61f60849-bd68-457b-8efa-30c90a3dfcdb.jpg'
+import { log } from "console"
 const AdminProductComponent:React.FC = () =>{
+    const apiUrl = import.meta.env.VITE_API_GET_IMG;
     const [products,setproducts] = useState<ProductModel[]>()
     const [getid,setgetid] = useState('');
      useEffect(()=>{
@@ -49,10 +51,11 @@ const AdminProductComponent:React.FC = () =>{
                             <div className="table-responsive">
                                 <table className="table table-bordered" id="dataTable" width="100%" >
                                     <thead>
-                                        <tr className="t">
+                                        <tr>
                                             <th>Name</th>
                                             <th>Brand</th>
                                             <th>Category</th>
+                                            <th>Size</th>
                                             <th>Price</th>
                                             <th>Stock</th>
                                             <th>Active</th>
@@ -63,16 +66,19 @@ const AdminProductComponent:React.FC = () =>{
 
                                     <tbody>
                                         {Array.isArray(products) && products.map((product)=>(
-                                            <tr>
+                                            <tr key={product.id}>
                                                 <td>{product.name}</td>
                                                 <td>{product.brand}</td>
                                                 <td>{product.category}</td>
+                                                <td>{product.size}</td>
                                                 <td>{product.price}</td>
                                                 <td>{product.stock}</td>
                                                 <td>{product.isActive}</td>
-                                                <td>{product.image}</td>
+                                                <td className="product-list-img"><img src={`apiUrl/${product.image}`}  /></td>
+                                                <td className="td-options d-flex flex-row gap-2">
                                                 <i onClick={()=>handleEdit(product.id)} className="options-icon bi bi-pen"></i>
                                                 <i onClick={()=>onDelete(product.id)} className="options-icon bi bi-x-octagon"></i>
+                                                </td>
                                             </tr>
                                         ))} 
                                     </tbody>

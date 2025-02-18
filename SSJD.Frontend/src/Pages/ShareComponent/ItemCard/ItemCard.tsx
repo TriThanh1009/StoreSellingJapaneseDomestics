@@ -20,7 +20,7 @@ const ItemCard:React.FC<props> = ({products}) =>{
     return (
     <div className="card text-center mx-auto" style={{ width: "18rem", border: "2px solid black", borderRadius: "10px" }}>
       <div onClick={NavtoDetail} className="card-img p-3">
-        <img src={logoimg} className="img-fluid" />
+        <img src={products.image} className="img-fluid" />
       </div>
       <div className="card-body">
         <h5 className="card-title">{products.name}</h5>

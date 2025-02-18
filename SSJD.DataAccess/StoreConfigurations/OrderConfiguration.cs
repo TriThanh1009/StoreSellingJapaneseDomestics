@@ -17,6 +17,9 @@ namespace SSJD.DataAccess.StoreConfigurations
             builder.HasKey("ID");
             builder.Property("ID").IsRequired();
             builder.HasOne(x => x.User).WithMany(x => x.Orders).HasForeignKey(x => x.UserID).OnDelete(DeleteBehavior.Restrict);
+            builder.Property(x => x.CustomerName).IsRequired().HasMaxLength(50);
+            builder.Property(x => x.CustomerAddress).IsRequired().HasMaxLength(50);
+            builder.Property(x => x.CustomerPhone).IsRequired().HasMaxLength(20);
             builder.Property(x => x.OrderDate).HasDefaultValue(DateTime.Now);
             builder.HasOne(x => x.UnitShip).WithMany(x => x.Orders).HasForeignKey(x => x.ShippingUnitID).OnDelete(DeleteBehavior.Restrict);
             builder.Property(x=>x.ShippingDate).HasDefaultValue(DateTime.Now);

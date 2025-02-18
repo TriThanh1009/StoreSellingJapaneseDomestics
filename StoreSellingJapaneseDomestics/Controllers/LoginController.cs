@@ -40,10 +40,9 @@ namespace StoreSellingJapaneseDomestics.Controllers
         public ActionResult<string> GetName()
 
         {
-
-            var userName = User.FindFirstValue(ClaimTypes.Name);
+            var id = User.FindFirstValue(ClaimTypes.Actor);
             var role = User.FindFirstValue(ClaimTypes.Role);
-            return Ok(new {userName, role });
+            return Ok(new {id, role });
         }
 
 

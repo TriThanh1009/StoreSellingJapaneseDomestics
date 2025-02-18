@@ -26,6 +26,21 @@ namespace StoreSellingJapaneseDomestics.Controllers
             var data = await _service.GetAll();
             return Ok(data);
         }
+
+        [HttpGet("GetByID/{id}")]
+        public async Task<IActionResult> GetByID(string id)
+        {
+            var data = await _service.GetByID(id);
+            return Ok(data);
+        }
+
+        [HttpGet("GetUserProfileById/{id}")]
+        public async Task<IActionResult> GetUserProfileById(string id)
+        {
+            var data = await _service.GetUserProfileById(id);
+            return Ok(data);
+        }
+
         [HttpPost("CreateUser")]
         public async Task<IActionResult> Create([FromBody] UserRequestModel request)
         {

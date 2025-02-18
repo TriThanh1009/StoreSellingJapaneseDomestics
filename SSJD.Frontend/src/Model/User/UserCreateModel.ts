@@ -6,6 +6,6 @@ export interface UserCreateModel{
     address? : string
     identityCard? : string
     accountID?: string,
-    memberCardID?: "3",
+    memberCardID?: "1",
     image?: string
 }

@@ -18,13 +18,14 @@ const AdminAccountOptionsComponent:React.FC<Props> = ({onCancel, selectedItemId}
             setAccounts(prev => ({
                 ...prev,
                 id: selectedItemId,
+                [name]: value,
             }));
         }
         setAccounts((prev) => ({
             ...prev,
             [name]: value,
         }));
-        
+        console.log(accounts)
     };
 
     const handleSubmit = async (e: React.FormEvent) => {

@@ -64,8 +64,8 @@ const AdminPromotionComponent:React.FC = () =>{
                                         <tr>
                                         <td>{promotion.id}</td>
                                         <td>{promotion.name}</td>
-                                        <td>{promotion.createDate.toLocaleDateString()}</td>
-                                        <td>{promotion.endDate.toLocaleDateString()}</td>
+                                        <td>{promotion.createDate.toString()}</td>
+                                        <td>{promotion.endDate.toString()}</td>
                                         <td>{promotion.percentDiscount}</td>
                                         <td className="td-options d-flex flex-row gap-2">
                                         <i onClick={()=>handleEdit(promotion.id)} className="options-icon bi bi-pen"></i>

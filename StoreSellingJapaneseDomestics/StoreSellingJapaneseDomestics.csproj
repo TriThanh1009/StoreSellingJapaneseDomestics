@@ -40,8 +40,4 @@
     <ProjectReference Include="..\SSJD.Services\SSJD.Services.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Uploads\" />
-  </ItemGroup>
-
 </Project>

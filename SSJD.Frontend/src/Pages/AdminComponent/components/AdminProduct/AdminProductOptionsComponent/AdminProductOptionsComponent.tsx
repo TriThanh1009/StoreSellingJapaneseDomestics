@@ -1,5 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unused-expressions */
+/* eslint-disable prefer-const */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ProductOptionsModel } from '../../../../../Model/Product/ProductOptionsModel';
 import { editProduct, createProduct } from '../../../../../Responsitories/ProductResponsitory';
 
@@ -10,26 +12,61 @@ interface Props {
 
 const AdminProductOptionsComponent:React.FC<Props> = ({onCancel,selectedID}) =>{
 const [product, setproduct] = useState<ProductOptionsModel>()
-    const handlechange = (e:React.ChangeEvent<HTMLInputElement>)=>{
-        const {name,value} = e.target
-        if(selectedID){
-            setproduct(prev=>({
-                ...prev,
-                id:selectedID
-            }))
+const [selectedFile, setSelectedFile] = useState<File | null>(null);
+
+    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        if (event.target.files && event.target.files[0]) {
+            setSelectedFile(event.target.files[0]);
         }
-        setproduct((prev)=>({
-            ...prev,
-            [name]:value,
-        }))
+    };
+    const handlechange = (e:React.ChangeEvent<HTMLInputElement>)=>{
+        const { name, value } = e.target;
+        if (selectedID) {
+            setproduct(prev => ({
+                ...prev,
+                ID : selectedID,
+                Image : selectedFile,
+                [name] : value
+            }));
+        }
+        else{
+            setproduct((prev) => ({
+                ...prev,
+                Image : selectedFile,
+                [name]: value,
+            }));
+        }
+
+        console.log(product)
     }
 
     const handlesubmit = async (e:React.FormEvent)=>{
         e.preventDefault()
         try{
-            if(selectedID) 
-                await editProduct(product)
-            await createProduct(product)
+            const formData = new FormData();
+        
+            if (product) {
+                Object.entries(product).forEach(([key, value]) => {
+                    if (key === "Image" && value instanceof File) {
+                        formData.append(key, value); // Đảm bảo file ảnh là dạng nhị phân
+                    } else if (["Price"].includes(key)) {
+                        formData.append(key, parseFloat(value as string).toString()); // Chuyển đổi số thực
+                    } else if (["Stock", "isActive", "Size"].includes(key)) {
+                        formData.append(key, parseInt(value as string).toString()); // Chuyển đổi số nguyên
+                    } else {
+                        formData.append(key, value as string); // Giữ nguyên các giá trị chuỗi
+                    }
+                });
+            }
+        for (let pair of formData.entries()) {
+            console.log(pair[0] + ', ' + pair[1]);
+        }
+
+        if (selectedID) {
+            await editProduct(formData);
+        } else {
+            await createProduct(formData);
+        }
         } catch (error) {
             alert('Error');
         }
@@ -43,26 +80,34 @@ const [product, setproduct] = useState<ProductOptionsModel>()
                 <div className="form-group row" >
                     <label className="col-sm-5 col-form-label">ID</label>
                     <div className="col-sm-10">
-                    <input type="text" id="id"  name="id" onChange={handlechange}  className="form-control" />
+                    {selectedID && <input type="text" id="ID"  name="ID" onChange={handlechange}  value={selectedID} className="form-control" />}
+                    {!selectedID && <input type="text" id="ID"  name="ID" onChange={handlechange}  className="form-control" />}
                     </div>
                 </div>
                 <div className="form-group row">
                     <label className="col-sm-5 col-form-label">Name</label>
                     <div className="col-sm-10">
-                        <input type="text" id="name"  name="name"  onChange={handlechange}   pattern="[a-zA-Z ]+"   className="form-control" />
+                        <input type="text" id="Name"  name="Name"  onChange={handlechange}   pattern="[a-zA-Z ]+"   className="form-control" />
                     </div>
                 </div>
                 <div className="form-group row">
                     <label className="col-sm-5 col-form-label">Brand</label>
                     <div className="col-sm-10">
-                        <input type="text" id="brand"   name="brand" onChange={handlechange} className="form-control" />
+                        <input type="text" id="BrandID"   name="BrandID" onChange={handlechange} className="form-control" />
 
                     </div>
                 </div>
                 <div className="form-group row">
                     <label className="col-sm-5 col-form-label">Category</label>
                     <div className="col-sm-10">
-                        <input type="text" id="categoryID"   name="categoryID" onChange={handlechange}   className="form-control" />
+                        <input type="text" id="CategoryID"   name="CategoryID" onChange={handlechange}   className="form-control" />
+
+                    </div>
+                </div>
+                <div className="form-group row">
+                    <label className="col-sm-5 col-form-label">Size</label>
+                    <div className="col-sm-10">
+                        <input type="text" id="Size"   name="Size" onChange={handlechange}   className="form-control" />
 
                     </div>
                 </div>
@@ -71,14 +116,14 @@ const [product, setproduct] = useState<ProductOptionsModel>()
                 <div className="form-group row">
                     <label className="col-sm-5 col-form-label">Price</label>
                     <div className="col-sm-10">
-                        <input type="text" id="price"   name="price" onChange={handlechange}   className="form-control" />
+                        <input type="text" id="Price"   name="Price" onChange={handlechange}   className="form-control" />
 
                     </div>
                 </div>
                 <div className="form-group row">
                     <label className="col-sm-5 col-form-label">Stock</label>
                     <div className="col-sm-10">
-                        <input type="text" id="stock"   name="stock"  onChange={handlechange}  className="form-control" />
+                        <input type="text" id="Stock"   name="Stock"  onChange={handlechange}  className="form-control" />
 
                     </div>
                 </div>
@@ -91,7 +136,7 @@ const [product, setproduct] = useState<ProductOptionsModel>()
                 <div className="form-group row">
                     <label className="col-sm-5 col-form-label">Image</label>
                     <div className="col-sm-10">
-                        <input type="text" id="image"   name="image" onChange={handlechange}   className="form-control" />
+                        <input type="file" id="Image"   name="Image" onChange={handleFileChange}   className="form-control" />
                     </div>
                 </div>
                 <div className='button-options-list d-flex flex-row gap-3' >

@@ -29,7 +29,7 @@ namespace SSJD.Services.StoreService.User
         {
             var entity = new Entities.StoreEntity.User()
             {
-                UserName = request.UserName,
+                UserName = request.UserName,            
                 PhoneNumber = request.PhoneNumber,
                 Address = request.Address,
                 IdentityCard = request.IdentityCard,
@@ -118,5 +118,28 @@ namespace SSJD.Services.StoreService.User
             throw new NotImplementedException();
         }
 
+        public async Task<UserOrderProfile> GetUserProfileById(string id)
+        {
+            var pointquery = (from p in _context.User
+                             join m in _context.MemberCard on p.MemberCardID equals m.ID
+                             where p.Id == id
+                             select m.Point).First();
+            var productname = (from p in _context.User
+                            join o in _context.Order on p.Id equals o.UserID
+                            join od in _context.OrderDetail on o.ID equals od.OrderID
+                            join pr in _context.Product on od.ProductID equals pr.ID
+                            where p.Id == id
+                            select pr.Name).First();
+
+           var data = await _context.User.FindAsync(id);
+           var getdata = new UserOrderProfile()
+            {
+                UserName = data.UserName,
+                Address = data.Address,
+                Point = pointquery,
+                ProductName = productname
+            };
+            return getdata;
+        }
     }
 }

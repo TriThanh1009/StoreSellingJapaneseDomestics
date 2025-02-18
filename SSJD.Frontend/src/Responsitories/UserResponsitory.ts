@@ -11,7 +11,12 @@ export const getUser = async()=>{
 }
 
 export const getUserByID = async(id : string)=>{
-    const response = await axios.get(`${apiUrl}/User/${id}`)
+    const response = await axios.get(`${apiUrl}/User/GetByID/${id}`)
+    return response.data
+}
+
+export const GetUserProfileById = async(id : string)=>{
+    const response = await axios.get(`${apiUrl}/User/GetUserProfileById/${id}`)
     return response.data
 }
 

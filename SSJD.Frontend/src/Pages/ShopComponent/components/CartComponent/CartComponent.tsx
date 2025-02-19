@@ -10,31 +10,32 @@ import { useNavigate } from "react-router-dom";
 
 
 
-const CardComponent: React.FC = () => {
+const CartComponent: React.FC = () => {
   const {cart,removeFromCart,decreaseCartQuantity,increaseCartQuantity} = useShoppingCart()
   const [orders,setorder] = useState<OrderDetailwithProduct[]>()
   const navigate = useNavigate()
   //const [products,setproducts] = useState<ProductModel[]>()
   useEffect(() => {
-    
     const fetchOrders = async () => {
-      if (cart.length === 0) return;
+      if (cart.length === 0){
+        setorder([])
+        return
+      } 
   
       const orderList: OrderDetailwithProduct[] = await Promise.all(
         cart.map(async (item) => {
-          console.log(item)
           const product = await getProductByID(item.productID);
           return { 
             product: product,  // Thông tin sản phẩm
-            quantity: item.quantity // Lấy quantity từ cart
+            quantity: item.quantity, // Lấy quantity từ cart
+            orderdetail : item
           }; 
-        })
+          
+        })      
       );
-      console.log(orders)
-  
       setorder(orderList); // Cập nhật orders
     };
-  
+    console.log(cart)
     fetchOrders();
   }, [cart]);
 
@@ -42,9 +43,9 @@ const CardComponent: React.FC = () => {
     navigate('/checkout')
   }
 
-  function handleRemove(id : string){
+  function handleRemove(id : string,headtype:string){
     console.log(id)
-    removeFromCart(id)
+    removeFromCart(id,headtype)
     localStorage.removeItem("shopping-cart"); 
     orders?.filter(item=>item.product.id ===id)
 
@@ -72,22 +73,26 @@ const CardComponent: React.FC = () => {
                     <div>
                       <strong>{order.product.name}</strong>
                       <br />
-                      <small>Category: {order.product.category}</small>
+                      <div className="d-flex flex-row gap-2">
+                        <small>Type: {order.product.category}</small>
+                        <small>Head: {order.orderdetail.headType}</small>
+                      </div>
+                      
                     </div>
                   </div>
                 </td>
                 <td>${(order.product.price * order.quantity)}</td>
                 <td className="">
-                  <i  onClick={()=>decreaseCartQuantity(order.product.id)} className="bi bi-caret-left"></i>
+                  <i  onClick={()=>decreaseCartQuantity(order.product.id,order.orderdetail.headType)} className="bi bi-caret-left"></i>
                   <span className="mx-2">{order.quantity}</span>
-                  <i onClick={()=>increaseCartQuantity(order.product.id)} className="bi bi-caret-right"></i>
+                  <i onClick={()=>increaseCartQuantity(order.product.id,order.orderdetail.headType)} className="bi bi-caret-right"></i>
                 </td>
                 
                 <td>
                   <Button
                     variant="danger"
                     size="sm"
-                    onClick={() => handleRemove(order.product.id)}
+                    onClick={() => handleRemove(order.product.id,order.orderdetail.headType)}
                   >
                     🗑️
                   </Button>
@@ -110,4 +115,4 @@ const CardComponent: React.FC = () => {
 
 
 
-export default CardComponent
+export default CartComponent

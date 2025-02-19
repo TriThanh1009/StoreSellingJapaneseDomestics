@@ -74,7 +74,7 @@ namespace SSJD.Services.StoreService.ProductDetail
             return data;
         }
 
-        public async Task<ProductDetailViewModel?> GetByID(string id)
+        public async Task<ProductDetailViewModel?> GetByID(string id) 
         {
             var data = await _context.ProductDetail.FindAsync(id);
             var getdata = new ProductDetailViewModel()
@@ -91,6 +91,19 @@ namespace SSJD.Services.StoreService.ProductDetail
         public Task<List<ProductDetailViewModel>> GetListByID(string id)
         {
             throw new NotImplementedException();
+        }
+
+        public ProductDetailViewModel GetByProductID(string id)
+        {
+            var description = (from p in _context.ProductDetail
+                                join pr in _context.Product on p.ProductID equals pr.ID
+                                where pr.ID == id
+                                select p.Description).First();
+            var getdata = new ProductDetailViewModel()
+            {
+                Description = description,
+            };
+            return getdata;
         }
 
         public Task<PagedResult<ProductDetailViewModel>> GetProductDetailViewModel(ProductDetailPagingRequest request)

@@ -2,8 +2,8 @@
 import React, { useEffect, useState } from 'react';
 
 import './ProfileComponent.css';
-import { GetUserProfileById } from '../../../../Responsitories/UserResponsitory';
-import { UserOrderProfile } from '../../../../Model/User/UserOrderProfile';
+import { GetUserProfileById } from '../../../../../Responsitories/UserResponsitory';
+import { UserOrderProfile } from '../../../../../Model/User/UserOrderProfile';
 
 
 const ProfileComponent:React.FC = () => {
@@ -31,6 +31,9 @@ const ProfileComponent:React.FC = () => {
         </div>
         <div>
             <button className='redeem-button'>Redeem Points</button>
+        </div>
+        <div>
+            <button className='redeem-button'>Edit Profile</button>
         </div>
       </div>
       <div className='profile-detail'>

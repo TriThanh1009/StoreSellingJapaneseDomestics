@@ -5,12 +5,14 @@ import './Header.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import logoimg from '../../../Image/logo.jpg'
+import logo from '../../../Image/chill.jpg'
 import React, { useState } from 'react';
 import { useShoppingCart } from '../../../Hooks/useShoppingCart';
 import CartComponent from '../../../Pages/ShopComponent/components/CartComponent/CartComponent';
 import { Navigate, useNavigate } from 'react-router-dom';
 
 const Header:React.FC=()=>{
+    const [showMenu, setShowMenu] = useState(false);
     const [openDropdown,setopenDropdown] = useState(null)
     const {cartQuantity} = useShoppingCart()
     const navigate = useNavigate()
@@ -23,6 +25,10 @@ const Header:React.FC=()=>{
     const handleclick = (name:any)=>{
         window.location.href=name;
     }
+    function LogoutFeature(){
+        localStorage.clear()
+        window.location.reload()
+      }
     
     function clicktocart(){
         navigate(`/cart`)
@@ -32,6 +38,7 @@ const Header:React.FC=()=>{
     }
     function clicktoprofile(){
         navigate(`/profile`)
+        setShowMenu(false)
     }
 
 
@@ -107,12 +114,23 @@ const Header:React.FC=()=>{
                 </div>
             </div>
         </div>
-        <div className='header-row-right d-flex justify-content-end align-items-center gap-2'>
+        <div className='header-row-right d-flex justify-content-end align-items-center gap-3'>
             <div className='search'>
                  <i className="bi bi-search"></i>
             </div>
-            <div onClick={clicktoprofile} className='information'>
-                <i className="bi bi-person-fill"></i>
+            <div className="account-container">
+                {/* Ảnh đại diện */}
+                <div className="account-image" onClick={() => setShowMenu(!showMenu)}>
+                    <img src={logo}  />
+                </div>
+
+                {/* Menu Logout */}
+                {showMenu && (
+                    <div className="dropdown-menu-logout d-flex flex-column gap-2">
+                    <button onClick={clicktoprofile} className="logout-button">Profile</button>   
+                    <button onClick={LogoutFeature} className="logout-button">Logout</button>
+                </div>
+                )}
             </div>
             <div className='shopping-cart' onClick={()=>clicktocart()}>
                 <i className='cart bi bi-cart2'></i>

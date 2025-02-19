@@ -12,10 +12,16 @@ export const getProductDetail = async()=>{
     return response.data
 }
 
-export const getProductDetailByID = async(id : string)=>{
+export const getProductDetailByID = async(id? : string)=>{
     const response = await axios.get(`${apiUrl}/ProductDetail/${id}`)
     return response.data
 }
+
+export const getdescriptionByproductID = async(id? : string)=>{
+    const response = await axios.get(`${apiUrl}/ProductDetail/GetDescriptionByProductID?id=${id}`)
+    return response.data
+}
+
 
 export const createProductDetail = async(data:any)=>{
     const response = await axios.post(`${apiUrl}/ProductDetail/CreateProductDetail`)

@@ -13,6 +13,8 @@ interface props{
 
 const ItemCard:React.FC<props> = ({products}) =>{
   const { increaseCartQuantity} = useShoppingCart()
+  const [selectheadtype, setselectheadtype] = useState<string>("");
+  const apiUrl = import.meta.env.VITE_API_GET_IMG;
   const navigate = useNavigate()
   function NavtoDetail(){
     navigate(`/productdetail/${products.id}`);
@@ -20,7 +22,7 @@ const ItemCard:React.FC<props> = ({products}) =>{
     return (
     <div className="card text-center mx-auto" style={{ width: "18rem", border: "2px solid black", borderRadius: "10px" }}>
       <div onClick={NavtoDetail} className="card-img p-3">
-        <img src={products.image} className="img-fluid" />
+        <img src={`${apiUrl}${products.image}`} className="img-fluid" />
       </div>
       <div className="card-body">
         <h5 className="card-title">{products.name}</h5>
@@ -29,10 +31,22 @@ const ItemCard:React.FC<props> = ({products}) =>{
           <p className="fw-bold text-danger">{products.price} vnd</p>
           <div className="card-text-type-size d-flex flex-column">
             <div>
-                <label className="d-block text-start fw-bold">Types</label>
-                <ul className="list-unstyled text-start d-flex flex-row gap-2">
-                    <li>{products.category}</li>
-                </ul>
+              <div className="d-flex flex-row gap-3"> 
+                <div> 
+                  <label className="d-block text-start fw-bold">Types</label>
+                  <div className="list-unstyled text-start d-flex flex-row gap-2">
+                      <span>{products.category}</span>             
+                  </div>
+                </div>
+                <div className="product-detail-tips-card d-flex flex-row gap-3 mt-3">
+                        <div onClick={() =>setselectheadtype('brushchisel')} className={`product-detail-tips-options-card ${selectheadtype === 'brushchisel' ? 'selected' : ''}`} >
+                            <span>Chisel</span>
+                        </div>
+                        <div onClick={() =>setselectheadtype('brushfine')} className={`product-detail-tips-options-card ${selectheadtype === 'brushfine' ? 'selected' : ''}`}>
+                            <span>Fine</span>
+                        </div>
+                  </div>
+              </div>
             </div>
             <div>        
                 <label className="d-block text-start fw-bold">Size</label>
@@ -43,7 +57,7 @@ const ItemCard:React.FC<props> = ({products}) =>{
           </div>
         </div>
         <div>
-          <button onClick={() => increaseCartQuantity(products.id)} className="card-add-to-card btn btn-pink text-white">
+          <button onClick={() => increaseCartQuantity(products.id,selectheadtype)} className="card-add-to-card btn btn-pink text-white">
             Add to Cart
           </button>
         </div>

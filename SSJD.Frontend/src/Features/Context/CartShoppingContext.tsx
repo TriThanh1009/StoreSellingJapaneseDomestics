@@ -9,12 +9,11 @@ type CardProps = {
 };
 
 type CartContextType = {
-  openCart: () => void;
-  closeCart: () => void;
+
   getItemQuantity: (productID: string) => number;
-  increaseCartQuantity: (productID: string) => void;
-  decreaseCartQuantity: (productID: string) => void;
-  removeFromCart: (productID: string) => void;
+  increaseCartQuantity: (productID: string,headType: string) => void;
+  decreaseCartQuantity: (productID: string,headType: string) => void;
+  removeFromCart: (productID: string,headType: string) => void;
   cartQuantity: number;
   cart: OrderDetailModel[];
 };
@@ -24,7 +23,6 @@ export const CartShoppingContext = createContext({} as CartContextType);
 
 // Định nghĩa Provider
 export function CartProvider({ children }: CardProps) {
-  const [isopen, setisopen] = useState(false);
   const [cart, setCart] = useState<OrderDetailModel[]>(() => {
     const savedCart = localStorage.getItem("shopping-cart");
     return savedCart ? JSON.parse(savedCart) : [];
@@ -33,20 +31,18 @@ export function CartProvider({ children }: CardProps) {
 
   const cartQuantity = cart.reduce((quantity, item) => item.quantity + quantity, 0);
 
-  const openCart = () => setisopen(true);
-  const closeCart = () => setisopen(false);
 
   function getItemQuantity(productId: string) {
     return cart.find((item) => item.productID === productId)?.quantity || 0;
   }
 
-  function increaseCartQuantity(productID: string) {
+  function increaseCartQuantity(productID: string, headType: string) {
     setCart((currItems) => {
-      if (currItems.find((item) => item.productID === productID) == null) {
-        return [...currItems, { productID, quantity: 1 }];
+      if (currItems.find((item) => item.productID === productID && item.headType === headType) == null) {
+        return [...currItems, { productID, headType, quantity: 1 }];
       } else {
         return currItems.map((item) => {
-          if (item.productID === productID) {
+          if (item.productID === productID && item.headType === headType) {
             return { ...item, quantity: item.quantity + 1 };
           } else {
             return item;
@@ -56,18 +52,19 @@ export function CartProvider({ children }: CardProps) {
     });
   }
   
+  
   useEffect(() => {
     localStorage.setItem("shopping-cart", JSON.stringify(cart));
 
   }, [cart]);
   
-  function decreaseCartQuantity(productID: string) {
+  function decreaseCartQuantity(productID: string , headType: string) {
     setCart((currItems) => {
-      if (currItems.find((item) => item.productID === productID)?.quantity === 1) {
-        return currItems.filter((item) => item.productID !== productID);
+      if (currItems.find((item) => item.productID === productID && item.headType === headType)?.quantity === 1) {
+        return currItems.filter((item) => !(item.productID === productID && item.headType === headType));
       } else {
         return currItems.map((item) => {
-          if (item.productID === productID) {
+          if (item.productID === productID && item.headType === headType) {
             return { ...item, quantity: item.quantity - 1 };
           } else {
             return item;
@@ -77,12 +74,12 @@ export function CartProvider({ children }: CardProps) {
     });
   }
   
+  
 
-  function removeFromCart(productID: string) {
-    setCart((currItems) => {
-      return currItems.filter((item) => item.productID !== productID);
-    });
+  function removeFromCart(productID: string, headType: string) {
+    setCart((currItems) => currItems.filter((item) => !(item.productID === productID && item.headType === headType)));
   }
+ 
   
 
   return (
@@ -92,8 +89,6 @@ export function CartProvider({ children }: CardProps) {
         increaseCartQuantity,
         decreaseCartQuantity,
         removeFromCart,
-        openCart,
-        closeCart,
         cart,
         cartQuantity,
       }}

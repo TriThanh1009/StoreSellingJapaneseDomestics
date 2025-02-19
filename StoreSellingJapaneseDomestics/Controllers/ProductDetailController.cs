@@ -20,6 +20,13 @@ namespace StoreSellingJapaneseDomestics.Controllers
             var data = await _service.GetAll();
             return Ok(data);
         }
+
+        [HttpGet("GetDescriptionByProductID")]
+        public async Task<IActionResult> GetDescription(string id)
+        {
+            var data = _service.GetByProductID(id);
+            return Ok(data);
+        }
         [HttpPost("CreateProductDetail")]
         public async Task<IActionResult> Create([FromBody] ProductDetailRequestModel request)
         {

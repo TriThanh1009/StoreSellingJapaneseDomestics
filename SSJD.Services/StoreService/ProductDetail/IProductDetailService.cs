@@ -12,5 +12,6 @@ namespace SSJD.Services.StoreService.ProductDetail
     public interface IProductDetailService : IBaseService<ProductDetailRequestModel, ProductDetailViewModel>
     {
         Task<PagedResult<ProductDetailViewModel>> GetProductDetailViewModel (ProductDetailPagingRequest request);
+        ProductDetailViewModel GetByProductID(string id);
     }
 }

@@ -9,7 +9,7 @@ import CartComponent from '../../Pages/ShopComponent/components/CartComponent/Ca
 import CheckoutComponent from '../../Pages/ShopComponent/components/CheckoutComponent/CheckoutComponent';
 import PaymentComponent from '../../Pages/ShopComponent/components/PaymentComponent/PaymentComponent';
 import Login from '../../Pages/AuthenticateComponent/Login/Login';
-import ProfileComponent from '../../Pages/ShopComponent/components/ProfileComponent/ProfileComponent';
+import ProfileComponent from '../../Pages/ShopComponent/components/ProfileComponent/ProfileHomeComponent/ProfileComponent';
 
 
 

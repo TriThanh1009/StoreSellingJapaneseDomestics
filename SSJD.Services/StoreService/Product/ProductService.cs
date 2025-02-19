@@ -113,7 +113,7 @@ namespace SSJD.Services.StoreService.Product
                 ID = data.ID,
                 Name = data.Name,
                 Brand = brand,
-                Category = category,
+                Category = category, 
                 Size = data.Size,
                 Price = data.Price,
                 Stock = data.Stock,

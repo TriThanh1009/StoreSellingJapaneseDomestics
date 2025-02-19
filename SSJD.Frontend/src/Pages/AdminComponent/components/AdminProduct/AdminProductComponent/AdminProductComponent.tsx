@@ -74,7 +74,7 @@ const AdminProductComponent:React.FC = () =>{
                                                 <td>{product.price}</td>
                                                 <td>{product.stock}</td>
                                                 <td>{product.isActive}</td>
-                                                <td className="product-list-img"><img src={`apiUrl/${product.image}`}  /></td>
+                                                <td className="product-list-img"><img src={`${apiUrl}${product.image}`}  /></td>
                                                 <td className="td-options d-flex flex-row gap-2">
                                                 <i onClick={()=>handleEdit(product.id)} className="options-icon bi bi-pen"></i>
                                                 <i onClick={()=>onDelete(product.id)} className="options-icon bi bi-x-octagon"></i>

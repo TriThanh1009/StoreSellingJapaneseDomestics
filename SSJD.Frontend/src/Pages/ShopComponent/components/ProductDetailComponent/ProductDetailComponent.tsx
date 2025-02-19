@@ -6,40 +6,44 @@ import { useNavigate, useParams } from "react-router-dom"
 import { ProductModel } from "../../../../Model/Product/ProductModel"
 import { getProductByID } from "../../../../Responsitories/ProductResponsitory"
 import { useShoppingCart } from "../../../../Hooks/useShoppingCart"
+import { ProductDetailModel } from "../../../../Model/ProductDetail/ProductDetailModel"
+import { getdescriptionByproductID} from "../../../../Responsitories/ProductDetailResponsitory"
 const ProductDetailComponent:React.FC = () =>{
     const {increaseCartQuantity} = useShoppingCart()
+    const apiUrl = import.meta.env.VITE_API_GET_IMG;
     const {product} = useParams()
-    const [takeproduct,settakeproduct] = useState<ProductModel>() 
+    const [takeproduct,settakeproduct] = useState<ProductModel>()
+    const [productdetail,setproductdetail] = useState<ProductDetailModel>()
+    const [selectheadtype, setselectheadtype] = useState<string>("");
     const navigate = useNavigate()
     useEffect(()=>{
-        console.log(product)
         const fetch = async() =>{
             const data = await getProductByID(product)
-            settakeproduct(data)
+            const descriptiondata = await getdescriptionByproductID(product)
+            settakeproduct(data)    
+            setproductdetail(descriptiondata)
+            
         }
         fetch()
+        console.log(selectheadtype)
     },[])
-    const itemstip = [
-        { id: 1, name: "Brush & Chisel" },
-        { id: 2, name: "Brush & Fine" },
-      ];
     const [count,setcount] = useState(1)
     const increase = () => {setcount(count+1)}
     const decrease = () => {if(count>1) setcount(count-1)}
     const handleAddToCart = () => {
         if (takeproduct?.id) {
             for (let i = 0; i < count; i++) {
-                increaseCartQuantity(takeproduct.id);
+                increaseCartQuantity(takeproduct.id,selectheadtype);
             }
             navigate('/cart')
         }
+
     };
     return(
         <div>
             <div className="d-flex flex-row gap-5">
                 <div className="product-detail-img col-6">
-                    <img src={img}></img>
-                    <img src={img}></img>
+                    <img src={`${apiUrl}${takeproduct?.image}`}></img>
                 </div>
                 <div className="col-6">
                     <div className="product-detail-brand">
@@ -50,21 +54,24 @@ const ProductDetailComponent:React.FC = () =>{
                     </div>
                     <div className="product-detail-description d-flex flex-column mt-3 gap-3">
                         <div className="d-flex gap-2">
-                            <i className="bi bi-flower3"></i>
-                            <span>Dual tips, double fun</span>
-                        </div>
-                        <div className="d-flex gap-2">
-                            <i className="bi bi-flower3"></i>
-                            <span>Easy blending, no smudging</span>
+                            <ul>            
+                            {productdetail?.description?.map((desc, index) => (
+                                <li key={index} className="d-flex gap-2">
+                                    <i className="bi bi-flower3"></i>
+                                    <span>{desc}</span>                                              
+                                </li>
+                            ))}
+                            </ul>
                         </div>
                         
                     </div>
                     <div className="product-detail-tips d-flex flex-row gap-3 mt-3">
-                        {itemstip.map((itemstip)=>(
-                            <div className="product-detail-tips-options">
-                                {itemstip.name}
-                            </div>
-                        ))}
+                        <div onClick={() =>setselectheadtype('brushchisel')} className={`product-detail-tips-options ${selectheadtype === 'brushchisel' ? 'selected' : ''}`} >
+                            <span>Brush & Chisel</span>
+                        </div>
+                        <div onClick={() =>setselectheadtype('brushfine')} className={`product-detail-tips-options ${selectheadtype === 'brushfine' ? 'selected' : ''}`}>
+                            <span>Brush & Fine</span>
+                        </div>
                     </div>
                     <div className="product-detail-availability d-flex flex-column mt-3 gap-2">
                         <span className="product-detail-availability-avai">Availability</span>

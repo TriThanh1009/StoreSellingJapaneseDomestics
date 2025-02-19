@@ -22,9 +22,11 @@ function Login(){
         const storedRole = localStorage.getItem("role");
         if (storedRole) {
             if (storedRole === "Admin") {
-                navigate("/admin");
+                navigate("/admin/account");
             } else if(storedRole === "Customer")  {
                 navigate("/home");
+            } else if(storedRole === null || storedRole === ""){
+                navigate("/login")
             }
         }
     }, [])

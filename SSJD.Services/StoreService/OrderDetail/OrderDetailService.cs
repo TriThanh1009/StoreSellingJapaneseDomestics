@@ -26,6 +26,7 @@ namespace SSJD.Services.StoreService.OrderDetail
                 ID = request.ID,
                 OrderID = request.OrderID,
                 ProductID = request.ProductID,
+                HeadType = request.HeadType,
                 Quantity = request.Quantity,
                 Subtotal = request.Subtotal,
                 PromotionID = request.PromotionID,
@@ -48,8 +49,10 @@ namespace SSJD.Services.StoreService.OrderDetail
             var data = await _context.OrderDetail.FindAsync(request.ID);
             if (data != null)
             {
+                data.ProductID = request.ProductID;
+                data.HeadType = request.HeadType;
                 data.Quantity = request.Quantity;
-                data.PromotionID = request.PromotionID;
+                data.PromotionID = request.PromotionID;          
                 _context.OrderDetail.Update(data);
                 await _context.SaveChangesAsync();
             }
@@ -66,7 +69,8 @@ namespace SSJD.Services.StoreService.OrderDetail
                 ID = x.o.ID,
                 OrderID = x.o.OrderID,
                 UnitProduct = x.p.Name,
-                UnitPrice = x.p.Price,
+                HeadType = x.o.HeadType,
+                UnitPrice = x.p.Price,         
                 Quantity = x.o.Quantity,
                 Subtotal = x.o.Subtotal,
                 Promotion = x.pr.Name,
@@ -88,6 +92,7 @@ namespace SSJD.Services.StoreService.OrderDetail
             {
                 OrderID = x.OrderID,
                 ProductID = x.ProductID,
+                HeadType = x.HeadType,
                 Quantity = x.Quantity,
                 Subtotal = x.Subtotal,
                 Promotion = x.PromotionID

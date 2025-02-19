@@ -3,7 +3,7 @@ import { OrderDetailModel } from "../OrderDetail/OrderDetailModel";
 import { ProductModel } from "../Product/ProductModel";
 
 export interface OrderDetailwithProduct {
-  orderdetail?: OrderDetailModel
+  orderdetail: OrderDetailModel
   product: ProductModel; // Thông tin sản phẩm
   quantity: number; // Số lượng từ car
 }

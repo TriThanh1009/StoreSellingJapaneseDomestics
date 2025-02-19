@@ -11,6 +11,7 @@ namespace SSJD.ViewModel.StoreViewModel.OrderDetail
         public string ID { get; set; } = "";
         public string OrderID { get; set; } = "";
         public string ProductID { get; set; } = "";
+        public string HeadType { get; set; } = "";
         public int Quantity { get; set; } = 0;
         public decimal Subtotal { get; set; } = 0;
         public string PromotionID { get; set; } = "";

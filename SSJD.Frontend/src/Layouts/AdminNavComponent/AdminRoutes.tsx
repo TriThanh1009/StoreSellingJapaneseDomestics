@@ -12,7 +12,7 @@ import CheckoutComponent from "../../Pages/ShopComponent/components/CheckoutComp
 import HomeComponent from "../../Pages/ShopComponent/components/HomeComponent/HomeComponent";
 import PaymentComponent from "../../Pages/ShopComponent/components/PaymentComponent/PaymentComponent";
 import ProductDetailComponent from "../../Pages/ShopComponent/components/ProductDetailComponent/ProductDetailComponent";
-import ProfileComponent from "../../Pages/ShopComponent/components/ProfileComponent/ProfileComponent";
+import ProfileComponent from "../../Pages/ShopComponent/components/ProfileComponent/ProfileHomeComponent/ProfileComponent";
 
 
 

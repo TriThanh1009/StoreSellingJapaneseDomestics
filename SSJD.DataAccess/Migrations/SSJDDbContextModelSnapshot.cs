@@ -51,13 +51,13 @@ namespace SSJD.DataAccess.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "1e8a5ac8-54d7-432a-9f38-91183065164e",
+                            Id = "fdde72db-0a2a-421c-9479-95c8387efb20",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "3830cad6-e32b-479b-a903-7c8bc756aa3c",
+                            Id = "d04f4a6b-caa6-442f-a8e8-bafc9fb0e8e9",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         });
@@ -367,7 +367,7 @@ namespace SSJD.DataAccess.Migrations
                     b.Property<DateTime>("OrderDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 2, 18, 18, 21, 6, 68, DateTimeKind.Local).AddTicks(3505));
+                        .HasDefaultValue(new DateTime(2025, 2, 19, 15, 1, 55, 956, DateTimeKind.Local).AddTicks(3644));
 
                     b.Property<string>("OrderStatus")
                         .IsRequired()
@@ -391,7 +391,7 @@ namespace SSJD.DataAccess.Migrations
                     b.Property<DateTime>("ShippingDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 2, 18, 18, 21, 6, 70, DateTimeKind.Local).AddTicks(727));
+                        .HasDefaultValue(new DateTime(2025, 2, 19, 15, 1, 55, 958, DateTimeKind.Local).AddTicks(1957));
 
                     b.Property<string>("ShippingUnitID")
                         .IsRequired()
@@ -419,6 +419,11 @@ namespace SSJD.DataAccess.Migrations
                 {
                     b.Property<string>("ID")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("HeadType")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.Property<string>("OrderID")
                         .IsRequired()
@@ -512,10 +517,14 @@ namespace SSJD.DataAccess.Migrations
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
-                    b.Property<string>("Description")
+                    b.PrimitiveCollection<string>("Description")
                         .IsRequired()
                         .HasMaxLength(150)
                         .HasColumnType("nvarchar(150)");
+
+                    b.Property<string>("HeadType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Origin")
                         .IsRequired()
@@ -529,7 +538,7 @@ namespace SSJD.DataAccess.Migrations
                     b.Property<DateTime>("Warranty")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 2, 18, 18, 21, 6, 73, DateTimeKind.Local).AddTicks(1366));
+                        .HasDefaultValue(new DateTime(2025, 2, 19, 15, 1, 55, 961, DateTimeKind.Local).AddTicks(2211));
 
                     b.HasKey("ID");
 
@@ -547,12 +556,12 @@ namespace SSJD.DataAccess.Migrations
                     b.Property<DateTime>("CreateDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 2, 18, 18, 21, 6, 73, DateTimeKind.Local).AddTicks(2911));
+                        .HasDefaultValue(new DateTime(2025, 2, 19, 15, 1, 55, 961, DateTimeKind.Local).AddTicks(4033));
 
                     b.Property<DateTime>("EndDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 2, 18, 18, 21, 6, 73, DateTimeKind.Local).AddTicks(3032));
+                        .HasDefaultValue(new DateTime(2025, 2, 19, 15, 1, 55, 961, DateTimeKind.Local).AddTicks(4198));
 
                     b.Property<string>("Name")
                         .IsRequired()

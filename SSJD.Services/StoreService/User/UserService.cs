@@ -61,8 +61,6 @@ namespace SSJD.Services.StoreService.User
                 data.Address = request.Address;
                 data.IdentityCard = request.IdentityCard;
                 data.Email = request.Email;
-                data.AccountID = request.AccountID;
-                data.MemberCardID = request.MemberCardID;
                 data.Image = request.Image;
                 _context.User.Update(data);
                 await _context.SaveChangesAsync();
@@ -123,19 +121,21 @@ namespace SSJD.Services.StoreService.User
             var pointquery = (from p in _context.User
                              join m in _context.MemberCard on p.MemberCardID equals m.ID
                              where p.Id == id
-                             select m.Point).First();
+                             select m.Point).FirstOrDefault();
             var productname = (from p in _context.User
                             join o in _context.Order on p.Id equals o.UserID
                             join od in _context.OrderDetail on o.ID equals od.OrderID
                             join pr in _context.Product on od.ProductID equals pr.ID
                             where p.Id == id
-                            select pr.Name).First();
+                            select pr.Name).FirstOrDefault();
 
            var data = await _context.User.FindAsync(id);
-           var getdata = new UserOrderProfile()
+            var getdata = new UserOrderProfile()
             {
                 UserName = data.UserName,
                 Address = data.Address,
+                PhoneNumber = data.PhoneNumber,
+                Email = data.Email,
                 Point = pointquery,
                 ProductName = productname
             };

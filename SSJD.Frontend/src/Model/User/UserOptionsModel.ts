@@ -1,4 +1,5 @@
-export interface UserCreateModel{
+export interface UserOptionsModel{
+    id? : string
     userName? : string
     email? : string
     phoneNumber? : string

@@ -32,7 +32,13 @@ export const createUser = async(data:any)=>{
 }
 
 export const editUser = async(data:any)=>{
-    const response = await axios.put(`${apiUrl}/User/EditUser`)
+    console.log(data)
+    const response = await axios.put(`${apiUrl}/User/EditUser`,JSON.stringify(data),{
+        headers:{
+            "Content-Type" : "application/json"
+        }
+    })
+    console.log(response.data)
     return response.data
 }
 

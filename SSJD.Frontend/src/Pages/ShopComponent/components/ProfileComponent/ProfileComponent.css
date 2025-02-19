@@ -22,3 +22,17 @@
     border-top:1px solid black;
     padding: 20px 20px 20px 0px;
 }
+.profile-detail-edit input{
+    border:none;
+    border-bottom: 1px solid black;
+    width: 20rem;
+    outline: none ;
+}
+.profile-detail-edit button{
+    color: white;
+    background-color: gray;
+    height: 3rem;
+    width: 20rem;
+    border-radius: 5px;
+    font-size: 20px;
+}

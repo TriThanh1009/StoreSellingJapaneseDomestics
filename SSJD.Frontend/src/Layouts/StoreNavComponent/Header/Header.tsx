@@ -12,107 +12,69 @@ import CartComponent from '../../../Pages/ShopComponent/components/CartComponent
 import { Navigate, useNavigate } from 'react-router-dom';
 
 const Header:React.FC=()=>{
-    const [showMenu, setShowMenu] = useState(false);
+    const [showMenu, setShowMenu] = useState("");
     const [openDropdown,setopenDropdown] = useState(null)
     const {cartQuantity} = useShoppingCart()
     const navigate = useNavigate()
-    const handleMouseEnter = (dropdownname:any) => {
-        setopenDropdown(dropdownname);
-    };
-    const handleMouseLeave = () => {
-        setopenDropdown(null);
-    };
-    const handleclick = (name:any)=>{
-        window.location.href=name;
-    }
     function LogoutFeature(){
         localStorage.clear()
         window.location.reload()
       }
-    
-    function clicktocart(){
-        navigate(`/cart`)
+      const handleMenuClick = (menu: string) => {
+        setShowMenu(prev => (prev === menu ? "" : menu));
+    };
+    function clicktonav(nav: string){
+        navigate(`/${nav}`)
+        setShowMenu("")
     }
-    function clicktohome(){
-        navigate(`/home`)
-    }
-    function clicktoprofile(){
-        navigate(`/profile`)
-        setShowMenu(false)
-    }
+
 
 
     return(
     <div className="container d-flex justify-content-between">
         <div className='header-row-left d-flex gap-5 justify-content-start align-items-center'>
             <div className="logo">
-                <img onClick={clicktohome} src={logoimg} ></img>
+                <img onClick={()=>clicktonav("home")} src={logoimg} ></img>
             </div>
-            <div className='Title-Markers' 
-                 onMouseEnter={() => handleMouseEnter('markers')}
-                 onMouseLeave={handleMouseLeave}>
-                <span className='title' aria-expanded={openDropdown === 'markers' ? 'true' : 'false'}>
-                    Markers
-                </span>
-                <i className="bi bi-arrow-down-short"></i>
-                <div 
-                    className={`dropdown-menu ${openDropdown === 'markers' ? 'show' : ''} Dropdown-Markers`}
-                    onMouseEnter={() => handleMouseEnter('markers')}  
-                    onMouseLeave={handleMouseLeave}  
-                >
-                    <div className='d-flex flex-column'>
-                        <ul className='list-dropdown-marker d-flex flex-column gap-4 justify-content-center align-items-center' style={{ listStyleType: 'none', padding: 0, margin: 0 }}>
-                            <a className='link-drop' href=''>Alcohol-Base Markers</a>
-                            <a className='link-drop' href=''>Water-Base Markers</a>
-                        </ul>
-                    </div>
+            <div>
+        <div className="options-dropdown-container">
+                <div className="" onClick={() => handleMenuClick("markers")}>
+                <span className='title' /> Markers
                 </div>
-            </div>
-            <div className="Title-ArtPaints" 
-                 onMouseEnter={() => handleMouseEnter('artPaints')}
-                 onMouseLeave={handleMouseLeave}>
-                <span className='title' aria-expanded={openDropdown === 'artPaints' ? 'true' : 'false'}>
-                    Art and Paints
-                </span>
-                <i className="bi bi-arrow-down-short"></i>
-                <div 
-                    className={`dropdown-menu ${openDropdown === 'artPaints' ? 'show' : ''} Dropdown-ArtPaints`}
-                    onMouseEnter={() => handleMouseEnter('artPaints')}  
-                    onMouseLeave={handleMouseLeave}  
-                >
-                    <div className='d-flex flex-column'>
-                        <ul className='list-dropdown-marker d-flex flex-column gap-4 justify-content-center align-items-center' style={{ listStyleType: 'none', padding: 0, margin: 0 }}>
-                            <a className='link-drop' href=''>Acrylic Paints</a>
-                            <a className='link-drop' href=''>Oil Paints</a>
-                        </ul>
-                    </div>
+                {showMenu ==="markers" && (
+                <div className="options-dropdown-menu-logout d-flex flex-column gap-2">
+                    <button onClick={()=>clicktonav("")} className="logout-button"></button>   
+                    <button onClick={LogoutFeature} className="logout-button"></button>
                 </div>
+                )}
             </div>
-            <div className='Title-Hotsale'>
-                <span className='title' onClick={handleclick}> Hot Selling
-                </span>
-            </div>
-            <div className="Title-Support" 
-                 onMouseEnter={() => handleMouseEnter('Support')}
-                 onMouseLeave={handleMouseLeave}>
-                <span className='title' aria-expanded={openDropdown === 'Support' ? 'true' : 'false'}>
-                    Support
-                </span>
-                <i className="bi bi-arrow-down-short"></i>
-                <div 
-                    className={`dropdown-menu ${openDropdown === 'Support' ? 'show' : ''} Dropdown-Support`}
-                    onMouseEnter={() => handleMouseEnter('Support')}  
-                    onMouseLeave={handleMouseLeave}  
-                >
-                    <div className='d-flex flex-column'>
-                        <ul className='list-dropdown-marker d-flex flex-column gap-4 justify-content-center align-items-center' style={{ listStyleType: 'none', padding: 0, margin: 0 }}>
-                            <a className='link-drop' href=''>Facebook</a>
-                            <a className='link-drop' href=''>Zalo</a>
-                            <a className='link-drop' href=''>Instagram</a>
-                        </ul>
-                    </div>
+        </div>
+        <div>
+            <div className="options-dropdown-container">
+                <div className="account-image" onClick={() => handleMenuClick("artpaint")}>
+                <span className='title' /> Arts and Paints
                 </div>
+                {showMenu ==="artpaint" && (
+                    <div className="options-dropdown-menu-logout d-flex flex-column gap-2">
+                    <button onClick={()=>clicktonav("")} className="logout-button"></button>   
+                    <button onClick={LogoutFeature} className="logout-button"></button>
+                </div>
+                )}
             </div>
+        </div>
+        <div>
+            <div className="options-dropdown-container">
+                <div className="" onClick={() => handleMenuClick("support")}>
+                <span className='title' /> Support
+                </div>
+                {showMenu ==="support" && (
+                <div className="options-dropdown-menu-logout d-flex flex-column gap-2">
+                    <button onClick={() => window.location.href = "https://www.facebook.com/Turtleeeeeeeeeeee/"}  className="logout-button">Facebook</button>   
+                    <button onClick={()=>clicktonav("")} className="logout-button">Instagram</button>
+                </div>
+                )}
+            </div>
+        </div>
         </div>
         <div className='header-row-right d-flex justify-content-end align-items-center gap-3'>
             <div className='search'>
@@ -120,19 +82,19 @@ const Header:React.FC=()=>{
             </div>
             <div className="account-container">
                 {/* Ảnh đại diện */}
-                <div className="account-image" onClick={() => setShowMenu(!showMenu)}>
+                <div className="account-image" onClick={() => handleMenuClick("logout")}>
                     <img src={logo}  />
                 </div>
 
                 {/* Menu Logout */}
-                {showMenu && (
+                {showMenu==="logout" && (
                     <div className="dropdown-menu-logout d-flex flex-column gap-2">
-                    <button onClick={clicktoprofile} className="logout-button">Profile</button>   
+                    <button onClick={()=>clicktonav("profile")} className="logout-button">Profile</button>   
                     <button onClick={LogoutFeature} className="logout-button">Logout</button>
                 </div>
                 )}
             </div>
-            <div className='shopping-cart' onClick={()=>clicktocart()}>
+            <div className='shopping-cart' onClick={()=>clicktonav("cart")}>
                 <i className='cart bi bi-cart2'></i>
                 <span className='shopping-cart-quantity'>{cartQuantity}</span>
                 

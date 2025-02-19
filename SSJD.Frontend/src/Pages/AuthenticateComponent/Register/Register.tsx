@@ -4,12 +4,13 @@ import './Register.css'
 import { useNavigate } from "react-router-dom";
 import { AccountCreateModel } from "../../../Model/Account/AccountCreateModel";
 import { createAccount } from "../../../Responsitories/AccountResponsitory";
-import { UserCreateModel } from "../../../Model/User/UserCreateModel";
+import { UserOptionsModel } from "../../../Model/User/UserOptionsModel";
 import { createUser } from "../../../Responsitories/UserResponsitory";
 const Register:React.FC=()=>{
     const navigate = useNavigate()
     const [register,setregister] = useState<AccountCreateModel>()
-    const [user,setuser] = useState<UserCreateModel>({
+    const [user,setuser] = useState<UserOptionsModel>({
+        id : "",
         email : "" ,
         phoneNumber : "" ,
         sex : 0,

@@ -85,4 +85,25 @@
     font-weight: bold;
   }
 
-
+  .options-dropdown-container {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+  }
+  
+  
+  /* Menu dropdown */
+  .options-dropdown-menu-logout {
+    position: absolute;
+    top: 30px;
+    right: 0; /* Căn phải theo ảnh */
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    min-width: 120px;
+    text-align: center;
+    display: block;
+    z-index: 1000; /* Đảm bảo nằm trên các phần tử khác */
+  }

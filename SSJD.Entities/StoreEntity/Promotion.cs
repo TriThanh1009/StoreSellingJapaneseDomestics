@@ -14,7 +14,7 @@ namespace SSJD.Entities.StoreEntity
         public DateTime EndDate { get; set; } = DateTime.Now;
         public int PercentDiscount { get; set; } = 0;
 
-        public OrderDetail OrderDetail { get; set; }
+        public List<OrderDetail> OrderDetail { get; set; }
 
     }
 }

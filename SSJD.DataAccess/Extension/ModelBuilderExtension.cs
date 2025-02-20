@@ -21,7 +21,15 @@ namespace SSJD.DataAccess.Extension
                 new IdentityRole() { Name = "Admin", NormalizedName = "ADMIN" },
                 new IdentityRole() { Name = "Customer", NormalizedName = "CUSTOMER" }
                 );
-
+            modelbuilder.Entity<Promotion>().HasData(
+                new Promotion() { ID = "1",Name="None",CreateDate=DateTime.Now,EndDate = DateTime.Now,PercentDiscount=0 }
+                );
+            modelbuilder.Entity<Brand>().HasData(
+                new Brand() { ID = "1", Name = "Ohuhu" }
+                );
+            modelbuilder.Entity<Category>().HasData(
+                new Category() { ID = "1", Name = "Marker" }
+                );
         }
     }
 }

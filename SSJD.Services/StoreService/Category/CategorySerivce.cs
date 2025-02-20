@@ -24,7 +24,7 @@ namespace SSJD.Services.StoreService.Category
         {
             var entity = new SSJD.Entities.StoreEntity.Category()
             {
-                ID = request.ID,
+                ID = Guid.NewGuid().ToString(),
                 Name = request.Name,
             };
             _context.Category.Add(entity);

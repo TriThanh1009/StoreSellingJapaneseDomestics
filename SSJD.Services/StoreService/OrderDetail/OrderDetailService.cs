@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.SignalR;
+using Microsoft.EntityFrameworkCore;
 using SharpCompress.Common;
 using SSJD.DataAccess;
 using SSJD.Services.GeneralService.Base;
@@ -23,7 +24,7 @@ namespace SSJD.Services.StoreService.OrderDetail
         {
             var entity = new Entities.StoreEntity.OrderDetail()
             {
-                ID = request.ID,
+                ID = Guid.NewGuid().ToString(),
                 OrderID = request.OrderID,
                 ProductID = request.ProductID,
                 HeadType = request.HeadType,

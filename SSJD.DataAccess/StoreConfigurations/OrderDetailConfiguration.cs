@@ -21,7 +21,7 @@ namespace SSJD.DataAccess.StoreConfigurations
             builder.Property("HeadType").IsRequired().HasMaxLength(30);
             builder.Property("Quantity").IsRequired().HasMaxLength(20);
             builder.Property("Subtotal").IsRequired().HasMaxLength(20).HasPrecision(10, 2);
-            builder.HasOne(x => x.Promotion).WithOne(x => x.OrderDetail).HasForeignKey<OrderDetail>(x => x.PromotionID).OnDelete(DeleteBehavior.Restrict);
+            builder.HasOne(x => x.Promotion).WithMany(x => x.OrderDetail).HasForeignKey(x => x.PromotionID);
         }
     }
 }

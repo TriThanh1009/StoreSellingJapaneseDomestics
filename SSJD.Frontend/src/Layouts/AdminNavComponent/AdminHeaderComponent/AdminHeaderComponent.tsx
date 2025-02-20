@@ -1,11 +1,30 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import  './AdminHeaderComponent.css';
 import logo from '../../../Image/chill.jpg'
+import { signalRService } from '../../../Responsitories/SignalrResponsitory';
 const AdminHeaderComponent:React.FC = ()=>{
   const [showMenu, setShowMenu] = useState(false);
-
+  const [notifications, setNotifications] = useState<string[]>([]);
+  const [unreadCount, setUnreadCount] = useState(0);
+  const [showNotifications, setShowNotifications] = useState(false); // Điều khiển hiển thị danh sách
+  
+  useEffect(()=>{
+    signalRService.startConnection()
+    signalRService.listenForNotifications((data)=>{
+      setNotifications((prev)=>[data,...prev])
+      setUnreadCount((prev)=>prev+1)
+      alert(`${data}`)
+      console.log(data)
+    })
+    
+    return ()=> signalRService.removeListener()
+  })
+  function handlebellclick(){
+    setShowNotifications((prev)=>!prev)
+    setUnreadCount(0)
+  }
   function LogoutFeature(){
     localStorage.clear()
     window.location.reload()
@@ -20,8 +39,21 @@ const AdminHeaderComponent:React.FC = ()=>{
           </div>
         </div>
         <div className='admin-header-right d-flex flex-row justify-content-center align-items-center gap-3'>
-          <div> 
-          <i className="bi bi-bell"></i>
+        <div className="notification-container">
+          <div className="notification-icon" onClick={handlebellclick}>
+            <i className="bi bi-bell"></i>
+            {unreadCount > 0 && (
+              <span className="notification-badge">{unreadCount}</span>
+            )}
+          </div>
+
+            {showNotifications && (
+              <ul className="notification-list">
+                {notifications.map((noti, index) => (
+                  <li key={index}>{noti}</li>
+                ))}
+              </ul>
+            )}
           </div>
           <div>
             Thanh
@@ -37,8 +69,8 @@ const AdminHeaderComponent:React.FC = ()=>{
             <div className="dropdown-menu-logout">
               <button onClick={() => LogoutFeature()} className="logout-button">Logout</button>
             </div>
-      )}
-    </div>
+          )}
+        </div>
         </div>
       </div>
     </div>

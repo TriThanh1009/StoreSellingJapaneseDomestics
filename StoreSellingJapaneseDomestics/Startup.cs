@@ -24,6 +24,8 @@ using SSJD.Services.StoreService.Promotion;
 using SSJD.Services.StoreService.Role;
 using SSJD.Services.StoreService.UnitShip;
 using SSJD.Services.StoreService.User;
+using StoreSellingJapaneseDomestics;
+using StoreSellingJapaneseDomestics.Services;
 using Swashbuckle.AspNetCore.Filters;
 using System.Text;
 
@@ -75,8 +77,12 @@ namespace StoreSellingJapaneseDomestics
             {
                 b.AllowAnyMethod()
                 .AllowAnyHeader()
-                .AllowAnyOrigin();
+                //.AllowAnyOrigin()
+                .AllowCredentials()
+                .SetIsOriginAllowed((host) => true);
             }));
+            services.AddSignalRCore();
+            services.AddSignalR();
             services.AddSwaggerGen(options =>
             {
                 options.SwaggerDoc("v1", new OpenApiInfo { Title = "Swagger Timekeeping Solution", Version = "v1" });
@@ -159,6 +165,8 @@ namespace StoreSellingJapaneseDomestics
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapHub<OrderHub>("/orderhub");
+                    
                 endpoints.MapControllers();
             });
         }

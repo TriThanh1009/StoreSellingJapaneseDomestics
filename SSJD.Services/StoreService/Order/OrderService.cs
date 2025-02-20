@@ -22,9 +22,10 @@ namespace SSJD.Services.StoreService.Order
         }
         public async Task<string> Create(OrderRequestModel request)
         {
+
             var entity = new Entities.StoreEntity.Order()
             {
-                ID = request.ID,
+                ID = Guid.NewGuid().ToString(),
                 UserID = request.UserID,
                 CustomerName = request.CustomerName,
                 CustomerAddress = request.CustomerAddress,

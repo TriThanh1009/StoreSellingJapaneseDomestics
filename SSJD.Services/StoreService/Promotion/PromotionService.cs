@@ -25,7 +25,7 @@ namespace SSJD.Services.StoreService.Promotion
         {
             var entity = new Entities.StoreEntity.Promotion()
             {
-                ID = request.ID,
+                ID = Guid.NewGuid().ToString(),
                 Name = request.Name,
                 CreateDate = request.CreateDate,
                 EndDate = request.EndDate,

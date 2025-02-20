@@ -30,7 +30,7 @@ namespace SSJD.Services.StoreService.Product
 
             var entity = new Entities.StoreEntity.Product()
             {
-                ID = request.ID,
+                ID = Guid.NewGuid().ToString(),
                 Name = request.Name,
                 BrandID = request.BrandID,
                 CategoryID = request.CategoryID,

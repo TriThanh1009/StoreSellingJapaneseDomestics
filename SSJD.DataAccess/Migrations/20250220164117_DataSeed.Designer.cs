@@ -12,8 +12,8 @@ using SSJD.DataAccess;
 namespace SSJD.DataAccess.Migrations
 {
     [DbContext(typeof(SSJDDbContext))]
-    [Migration("20250219080151_Ininital")]
-    partial class Ininital
+    [Migration("20250220164117_DataSeed")]
+    partial class DataSeed
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -54,13 +54,13 @@ namespace SSJD.DataAccess.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "9af98741-517d-46ba-a0e6-d06624d8c9e5",
+                            Id = "79511f8b-71e7-4d47-a1ec-9a9436723428",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "16d1a409-32a7-409b-ba39-1620ffeaccf3",
+                            Id = "305ceaf1-f603-4c0f-9387-2188095649f4",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         });
@@ -301,6 +301,13 @@ namespace SSJD.DataAccess.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Brand");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = "1",
+                            Name = "Ohuhu"
+                        });
                 });
 
             modelBuilder.Entity("SSJD.Entities.StoreEntity.Category", b =>
@@ -316,6 +323,13 @@ namespace SSJD.DataAccess.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Category", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            ID = "1",
+                            Name = "Marker"
+                        });
                 });
 
             modelBuilder.Entity("SSJD.Entities.StoreEntity.MemberCard", b =>
@@ -370,7 +384,7 @@ namespace SSJD.DataAccess.Migrations
                     b.Property<DateTime>("OrderDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 2, 19, 15, 1, 51, 596, DateTimeKind.Local).AddTicks(9349));
+                        .HasDefaultValue(new DateTime(2025, 2, 20, 23, 41, 16, 660, DateTimeKind.Local).AddTicks(3353));
 
                     b.Property<string>("OrderStatus")
                         .IsRequired()
@@ -394,7 +408,7 @@ namespace SSJD.DataAccess.Migrations
                     b.Property<DateTime>("ShippingDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 2, 19, 15, 1, 51, 599, DateTimeKind.Local).AddTicks(907));
+                        .HasDefaultValue(new DateTime(2025, 2, 20, 23, 41, 16, 662, DateTimeKind.Local).AddTicks(568));
 
                     b.Property<string>("ShippingUnitID")
                         .IsRequired()
@@ -454,8 +468,7 @@ namespace SSJD.DataAccess.Migrations
                     b.HasIndex("OrderID")
                         .IsUnique();
 
-                    b.HasIndex("PromotionID")
-                        .IsUnique();
+                    b.HasIndex("PromotionID");
 
                     b.ToTable("OrderDetail", (string)null);
                 });
@@ -541,7 +554,7 @@ namespace SSJD.DataAccess.Migrations
                     b.Property<DateTime>("Warranty")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 2, 19, 15, 1, 51, 602, DateTimeKind.Local).AddTicks(2816));
+                        .HasDefaultValue(new DateTime(2025, 2, 20, 23, 41, 16, 664, DateTimeKind.Local).AddTicks(9847));
 
                     b.HasKey("ID");
 
@@ -559,12 +572,12 @@ namespace SSJD.DataAccess.Migrations
                     b.Property<DateTime>("CreateDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 2, 19, 15, 1, 51, 602, DateTimeKind.Local).AddTicks(4508));
+                        .HasDefaultValue(new DateTime(2025, 2, 20, 23, 41, 16, 665, DateTimeKind.Local).AddTicks(1490));
 
                     b.Property<DateTime>("EndDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 2, 19, 15, 1, 51, 602, DateTimeKind.Local).AddTicks(4628));
+                        .HasDefaultValue(new DateTime(2025, 2, 20, 23, 41, 16, 665, DateTimeKind.Local).AddTicks(1622));
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -577,6 +590,16 @@ namespace SSJD.DataAccess.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Promotion", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            ID = "1",
+                            CreateDate = new DateTime(2025, 2, 20, 23, 41, 16, 666, DateTimeKind.Local).AddTicks(5038),
+                            EndDate = new DateTime(2025, 2, 20, 23, 41, 16, 666, DateTimeKind.Local).AddTicks(5142),
+                            Name = "None",
+                            PercentDiscount = 0
+                        });
                 });
 
             modelBuilder.Entity("SSJD.Entities.StoreEntity.UnitShip", b =>
@@ -728,9 +751,9 @@ namespace SSJD.DataAccess.Migrations
                         .IsRequired();
 
                     b.HasOne("SSJD.Entities.StoreEntity.Promotion", "Promotion")
-                        .WithOne("OrderDetail")
-                        .HasForeignKey("SSJD.Entities.StoreEntity.OrderDetail", "PromotionID")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .WithMany("OrderDetail")
+                        .HasForeignKey("PromotionID")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Order");
@@ -828,8 +851,7 @@ namespace SSJD.DataAccess.Migrations
 
             modelBuilder.Entity("SSJD.Entities.StoreEntity.Promotion", b =>
                 {
-                    b.Navigation("OrderDetail")
-                        .IsRequired();
+                    b.Navigation("OrderDetail");
                 });
 
             modelBuilder.Entity("SSJD.Entities.StoreEntity.UnitShip", b =>

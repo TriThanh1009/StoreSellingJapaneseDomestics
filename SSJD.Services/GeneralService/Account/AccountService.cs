@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using SharpCompress.Common;
 using SSJD.DataAccess;
+using SSJD.Entities.GeneralEntity;
 using SSJD.Services.GeneralService.Base;
 using SSJD.Services.GeneralService.Role;
 using SSJD.ViewModel.GeneralViewModel.Account;

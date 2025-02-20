@@ -24,7 +24,7 @@ namespace SSJD.Services.StoreService.MemberCard
         {
             var entity = new Entities.StoreEntity.MemberCard()
             {
-                ID = request.ID,
+                ID = Guid.NewGuid().ToString(),
                 Point = request.Point,
                 MemberClass = request.MemberClass,
                 Discount = request.Discount

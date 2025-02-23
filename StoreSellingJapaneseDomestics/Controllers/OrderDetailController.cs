@@ -32,8 +32,8 @@ namespace StoreSellingJapaneseDomestics.Controllers
         {
 
             var data = await _service.Create(request);
-            var productname = await _productservice.GetByID(request.ProductID);
-            await _hubContext.Clients.All.SendAsync("ReceiveOrder", $"Khách hàng đã đặt: {productname.Name} - {request.Quantity} cái.");
+            var product = await _productservice.GetByID(request.ProductID);
+            await _hubContext.Clients.All.SendAsync("ReceiveOrder", $"Khách hàng đã đặt: {product.Name} - {request.Quantity} cái.");
             return Ok(data);
         }
         [HttpPut("EditOrderDetail")]

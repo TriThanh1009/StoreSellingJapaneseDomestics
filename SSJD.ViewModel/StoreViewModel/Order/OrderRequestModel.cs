@@ -11,11 +11,9 @@ namespace SSJD.ViewModel.StoreViewModel.Order
         public string ID { get; set; } = "";
         public string UserID { get; set; } = "";
         public string CustomerName { get; set; } = "";
-        public string CustomerAddress { get; set; } = "";
         public string CustomerPhone { get; set; } = "";
         public DateTime OrderDate { get; set; } = DateTime.Now;
         public string ShippingUnitID { get; set; } = "";
-        public DateTime ShippingDate { get; set; } = DateTime.Now;
         public string ShippingAddress { get; set; } = "";
         public string OrderStatus { get; set; } = "";
         public decimal TotalPrice { get; set; } = 0;

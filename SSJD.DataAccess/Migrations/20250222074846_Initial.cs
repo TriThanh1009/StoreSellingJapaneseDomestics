@@ -111,8 +111,8 @@ namespace SSJD.DataAccess.Migrations
                 {
                     ID = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 2, 20, 23, 39, 30, 725, DateTimeKind.Local).AddTicks(5073)),
-                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 2, 20, 23, 39, 30, 725, DateTimeKind.Local).AddTicks(5199)),
+                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 2, 22, 14, 48, 46, 501, DateTimeKind.Local).AddTicks(9823)),
+                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 2, 22, 14, 48, 46, 501, DateTimeKind.Local).AddTicks(9944)),
                     PercentDiscount = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -312,7 +312,7 @@ namespace SSJD.DataAccess.Migrations
                     ProductID = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     HeadType = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
-                    Warranty = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 2, 20, 23, 39, 30, 725, DateTimeKind.Local).AddTicks(3442)),
+                    Warranty = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 2, 22, 14, 48, 46, 501, DateTimeKind.Local).AddTicks(8217)),
                     Origin = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     AdditionalImage = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false)
                 },
@@ -334,11 +334,10 @@ namespace SSJD.DataAccess.Migrations
                     ID = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     UserID = table.Column<string>(type: "nvarchar(50)", nullable: false),
                     CustomerName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    CustomerAddress = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     CustomerPhone = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 2, 20, 23, 39, 30, 720, DateTimeKind.Local).AddTicks(4146)),
+                    OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 2, 22, 14, 48, 46, 496, DateTimeKind.Local).AddTicks(9458)),
                     ShippingUnitID = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ShippingDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 2, 20, 23, 39, 30, 722, DateTimeKind.Local).AddTicks(2352)),
+                    ShippingDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 2, 22, 14, 48, 46, 498, DateTimeKind.Local).AddTicks(9281)),
                     ShippingAddress = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     OrderStatus = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TotalPrice = table.Column<decimal>(type: "decimal(10,2)", maxLength: 50, precision: 10, scale: 2, nullable: false),
@@ -420,14 +419,29 @@ namespace SSJD.DataAccess.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "6b681cd5-2ae5-4736-965c-cf1c320b2ce1", null, "Customer", "CUSTOMER" },
-                    { "e88e58d7-ae64-4404-a24b-f0af17e78bf0", null, "Admin", "ADMIN" }
+                    { "214f8357-d5fb-4b98-8c77-a08d14c07840", null, "Customer", "CUSTOMER" },
+                    { "29e392d8-6a79-4105-b15e-e70d5b6affad", null, "Admin", "ADMIN" }
                 });
+
+            migrationBuilder.InsertData(
+                table: "Brand",
+                columns: new[] { "ID", "Name" },
+                values: new object[] { "1", "Ohuhu" });
+
+            migrationBuilder.InsertData(
+                table: "Category",
+                columns: new[] { "ID", "Name" },
+                values: new object[] { "1", "Marker" });
 
             migrationBuilder.InsertData(
                 table: "MemberCard",
                 columns: new[] { "ID", "Discount", "MemberClass", "Point" },
                 values: new object[] { "1", 30, "None Class", 0 });
+
+            migrationBuilder.InsertData(
+                table: "Promotion",
+                columns: new[] { "ID", "CreateDate", "EndDate", "Name", "PercentDiscount" },
+                values: new object[] { "1", new DateTime(2025, 2, 22, 14, 48, 46, 503, DateTimeKind.Local).AddTicks(5579), new DateTime(2025, 2, 22, 14, 48, 46, 503, DateTimeKind.Local).AddTicks(5709), "None", 0 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

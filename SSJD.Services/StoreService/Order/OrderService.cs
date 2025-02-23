@@ -28,11 +28,9 @@ namespace SSJD.Services.StoreService.Order
                 ID = Guid.NewGuid().ToString(),
                 UserID = request.UserID,
                 CustomerName = request.CustomerName,
-                CustomerAddress = request.CustomerAddress,
                 CustomerPhone = request.CustomerPhone,
                 OrderDate = request.OrderDate,
                 ShippingUnitID = request.ShippingUnitID,
-                ShippingDate = request.ShippingDate,
                 ShippingAddress = request.ShippingAddress,
                 OrderStatus = request.OrderStatus,
                 PaymentMethod = request.PaymentMethod,
@@ -56,11 +54,9 @@ namespace SSJD.Services.StoreService.Order
             if (data != null)
             {
                 data.CustomerName = request.CustomerName;
-                data.CustomerAddress = request.CustomerAddress;
                 data.CustomerPhone = request.CustomerPhone;
                 data.OrderDate = request.OrderDate;
                 data.ShippingUnitID = request.ShippingUnitID;
-                data.ShippingDate = request.ShippingDate;
                 data.ShippingAddress = request.ShippingAddress;
                 data.OrderStatus = request.OrderStatus;
                 data.PaymentMethod = request.PaymentMethod;
@@ -78,11 +74,9 @@ namespace SSJD.Services.StoreService.Order
                 ID = x.ID,
                 User = x.UserID,
                 CustomerName = x.CustomerName,
-                CustomerAddress = x.CustomerAddress,
                 CustomerPhone = x.CustomerPhone,
                 OrderDate = x.OrderDate,
                 ShippingUnit = x.ShippingUnitID,
-                ShippingDate = x.ShippingDate,
                 ShippingAddress = x.ShippingAddress,
                 OrderStatus = x.OrderStatus,
                 PaymentMethod = x.PaymentMethod,
@@ -100,11 +94,9 @@ namespace SSJD.Services.StoreService.Order
                 ID = data.ID,
                 User = data.UserID,
                 CustomerName = data.CustomerName,
-                CustomerAddress = data.CustomerAddress,
                 CustomerPhone = data.CustomerPhone,
                 OrderDate = data.OrderDate,
                 ShippingUnit = data.ShippingUnitID,
-                ShippingDate = data.ShippingDate,
                 ShippingAddress = data.ShippingAddress,
                 OrderStatus = data.OrderStatus,
                 PaymentMethod = data.PaymentMethod,

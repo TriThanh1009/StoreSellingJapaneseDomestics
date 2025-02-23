@@ -12,7 +12,7 @@ using SSJD.DataAccess;
 namespace SSJD.DataAccess.Migrations
 {
     [DbContext(typeof(SSJDDbContext))]
-    [Migration("20250220164117_DataSeed")]
+    [Migration("20250222074913_DataSeed")]
     partial class DataSeed
     {
         /// <inheritdoc />
@@ -54,13 +54,13 @@ namespace SSJD.DataAccess.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "79511f8b-71e7-4d47-a1ec-9a9436723428",
+                            Id = "bcb616f4-a899-4a0e-9101-57aba2d37e64",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "305ceaf1-f603-4c0f-9387-2188095649f4",
+                            Id = "319fbc26-89fc-4d11-94a7-5b5a1a7bc7bf",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         });
@@ -366,11 +366,6 @@ namespace SSJD.DataAccess.Migrations
                     b.Property<string>("ID")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("CustomerAddress")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
                     b.Property<string>("CustomerName")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -384,7 +379,7 @@ namespace SSJD.DataAccess.Migrations
                     b.Property<DateTime>("OrderDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 2, 20, 23, 41, 16, 660, DateTimeKind.Local).AddTicks(3353));
+                        .HasDefaultValue(new DateTime(2025, 2, 22, 14, 49, 13, 565, DateTimeKind.Local).AddTicks(5673));
 
                     b.Property<string>("OrderStatus")
                         .IsRequired()
@@ -408,7 +403,7 @@ namespace SSJD.DataAccess.Migrations
                     b.Property<DateTime>("ShippingDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 2, 20, 23, 41, 16, 662, DateTimeKind.Local).AddTicks(568));
+                        .HasDefaultValue(new DateTime(2025, 2, 22, 14, 49, 13, 567, DateTimeKind.Local).AddTicks(3970));
 
                     b.Property<string>("ShippingUnitID")
                         .IsRequired()
@@ -554,7 +549,7 @@ namespace SSJD.DataAccess.Migrations
                     b.Property<DateTime>("Warranty")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 2, 20, 23, 41, 16, 664, DateTimeKind.Local).AddTicks(9847));
+                        .HasDefaultValue(new DateTime(2025, 2, 22, 14, 49, 13, 570, DateTimeKind.Local).AddTicks(3828));
 
                     b.HasKey("ID");
 
@@ -572,12 +567,12 @@ namespace SSJD.DataAccess.Migrations
                     b.Property<DateTime>("CreateDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 2, 20, 23, 41, 16, 665, DateTimeKind.Local).AddTicks(1490));
+                        .HasDefaultValue(new DateTime(2025, 2, 22, 14, 49, 13, 570, DateTimeKind.Local).AddTicks(5509));
 
                     b.Property<DateTime>("EndDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 2, 20, 23, 41, 16, 665, DateTimeKind.Local).AddTicks(1622));
+                        .HasDefaultValue(new DateTime(2025, 2, 22, 14, 49, 13, 570, DateTimeKind.Local).AddTicks(5664));
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -595,8 +590,8 @@ namespace SSJD.DataAccess.Migrations
                         new
                         {
                             ID = "1",
-                            CreateDate = new DateTime(2025, 2, 20, 23, 41, 16, 666, DateTimeKind.Local).AddTicks(5038),
-                            EndDate = new DateTime(2025, 2, 20, 23, 41, 16, 666, DateTimeKind.Local).AddTicks(5142),
+                            CreateDate = new DateTime(2025, 2, 22, 14, 49, 13, 571, DateTimeKind.Local).AddTicks(8789),
+                            EndDate = new DateTime(2025, 2, 22, 14, 49, 13, 571, DateTimeKind.Local).AddTicks(8886),
                             Name = "None",
                             PercentDiscount = 0
                         });

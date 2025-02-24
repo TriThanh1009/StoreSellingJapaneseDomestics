@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
@@ -6,9 +7,11 @@ import { useEffect, useState } from 'react';
 import { LoginAccess } from '../../../Responsitories/LoginRespository';
 import { LoginModel } from '../../../Model/Login/LoginModel';
 import { useNavigate } from 'react-router-dom';
+import { jwtDecode } from 'jwt-decode';
 
 function Login(){
     const [account,setaccount] = useState<LoginModel>() 
+    const [accessToken, setAccessToken] = useState(localStorage.getItem("accessToken"));
     const navigate = useNavigate()
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -19,17 +22,31 @@ function Login(){
         
     };
     useEffect(() => {
-        const storedRole = localStorage.getItem("role");
-        if (storedRole) {
-            if (storedRole === "Admin") {
-                navigate("/admin/account");
-            } else if(storedRole === "Customer")  {
-                navigate("/home");
-            } else if(storedRole === null || storedRole === ""){
-                navigate("/login")
+        if(accessToken){
+            const decodeToken = jwtDecode<{ [key: string]: any }>(accessToken);
+            const getrole = decodeToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+            if (getrole) {
+                if (getrole === "Admin") {
+                    navigate("/admin/account");
+                } else if(getrole === "Customer")  {
+                    navigate("/home");
+                } else if(getrole === null || getrole === ""){
+                    navigate("/login")
+                }
             }
         }
     }, [])
+    useEffect(() => {
+        const handleStorageChange = () => {
+          setAccessToken(localStorage.getItem("accessToken"));
+        };
+      
+        window.addEventListener("storage", handleStorageChange);
+      
+        return () => {
+          window.removeEventListener("storage", handleStorageChange);
+        };
+      }, []);
 
 
     const handleSubmit = async (e:React.FormEvent)=>{

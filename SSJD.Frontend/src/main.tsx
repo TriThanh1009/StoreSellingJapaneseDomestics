@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react-hooks/rules-of-hooks */
 import { StrictMode } from "react"; // ✅ Import StrictMode
 import { useEffect, useState } from "react";
@@ -9,14 +10,27 @@ import { CartProvider } from "./Features/Context/CartShoppingContext";
 import { createRoot } from "react-dom/client";
 import Register from "./Pages/AuthenticateComponent/Register/Register";
 import Forgotpassword from "./Pages/AuthenticateComponent/ForgotPassword/forgotpassword";
+import { jwtDecode } from "jwt-decode";
 
 const Main = () => {
   const [role, setRole] = useState(localStorage.getItem("role"));
   const [accessToken, setAccessToken] = useState(localStorage.getItem("accessToken"));
-
+  useEffect(() => {
+    if (accessToken) {
+      try {
+        const decodeToken = jwtDecode<{ [key: string]: any }>(accessToken);
+        const getrole = decodeToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+        setRole(getrole); 
+      } catch (error) {
+        console.error("Lỗi khi giải mã token:", error);
+        setRole(null);
+      }
+    } else {
+      setRole(null);
+    }
+  }, [accessToken]) //Chỉ chạy khi accessToken thay đổi
   useEffect(() => {
     const handleStorageChange = () => {
-      setRole(localStorage.getItem("role"));
       setAccessToken(localStorage.getItem("accessToken"));
     };
   

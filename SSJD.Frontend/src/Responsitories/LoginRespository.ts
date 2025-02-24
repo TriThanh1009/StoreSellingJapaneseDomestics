@@ -15,10 +15,7 @@ export const LoginAccess = async(login? : LoginModel)=>{
     })
     const accessToken = response.data.accessToken
     const userid = response.data.userID
-    const decodeToken = jwtDecode<{[key:string]:any}>(accessToken)
-    const role = decodeToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"]
     localStorage.setItem("accessToken",accessToken)
-    localStorage.setItem("role",role)
     localStorage.setItem("id",userid)
 }
 

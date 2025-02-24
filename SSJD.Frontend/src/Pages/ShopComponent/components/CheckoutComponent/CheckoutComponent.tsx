@@ -8,7 +8,7 @@ import { useShoppingCart } from '../../../../Hooks/useShoppingCart'
 import { getProductByID } from '../../../../Responsitories/ProductResponsitory'
 import logomomo from '../../../../Image/logo_momo.jpg'
 import logovcb from '../../../../Image/logo_vcb.jpg'
-import { useNavigate } from 'react-router-dom'
+import { data, useNavigate } from 'react-router-dom'
 import { UserModel } from '../../../../Model/User/UserModel'
 import { getUserByID } from '../../../../Responsitories/UserResponsitory'
 import { it } from 'node:test'
@@ -20,7 +20,7 @@ const CheckoutComponent:React.FC = () =>{
     const {cart} = useShoppingCart()
     const [orderswdetail,setorderswdetail] = useState<OrderDetailwithProduct[]>()
     const [order,setorder] = useState<OrderCreateModel>()
-    const [orderdetail,setordetail] = useState<OrderDetailCreateModel>()
+    const [orderdetail,setorderdetail] = useState<OrderDetailCreateModel>()
     const [user,setuser] = useState<UserModel>()
     const [total,settotal] = useState(0)
     const [selected, setSelected] = useState<string>("");
@@ -71,8 +71,9 @@ const CheckoutComponent:React.FC = () =>{
             setorder((prev)=>({
                 ...prev,
                 userID : userid,
-                orderDate : new Date(),
+                orderDate : new Date().toISOString(),
                 orderStatus : "1",
+                shippingUnitID : "f277ef57-3b5c-46f1-8fe8-d0c178d09ea8",
                 totalPrice : total,
                 paymentMethod : selected,
                 paymentStatus : "0",
@@ -80,28 +81,32 @@ const CheckoutComponent:React.FC = () =>{
             }))
         }
         
-        console.log(order)
     };
 
-
-    const orderAccept = async (method : string)=>{
-        if(order){
-            const orderdata = await createOrder(order)
-            orderswdetail?.map((data)=>{
-                setordetail((prev) => ({
-                    ...prev, // Giữ lại dữ liệu cũ nếu có
+    
+    const orderAccept = async (method: string) => {
+        if (order) {
+            const orderdata = await createOrder(order);
+            if (orderdata) {
+                const orderDetails = orderswdetail?.map((detaildata) => ({
+                    
                     orderID: orderdata,
-                    productID: data.product.id,
-                    headType: data.orderdetail.headType, 
-                    quantity: data.quantity,
-                    subtotal : data.product.price,
-                    promotionID : "1" 
+                    productID: detaildata.product.id,
+                    headType: detaildata.orderdetail.headType,
+                    quantity: detaildata.quantity,
+                    subtotal: detaildata.product.price,
+                    promotionID: "1",
                 }));
-            })
-            await createOrderDetail(orderdetail)
+                if(orderDetails){
+                    orderDetails.forEach(async element => {
+                            await createOrderDetail(element);
+                    }); 
+                }
+            }
         }
         navigate(`/payment/${method}`);
-    }
+    };
+    
 
     return(
         <div className='container d-flex flex-row gap-5'>
@@ -111,9 +116,9 @@ const CheckoutComponent:React.FC = () =>{
                 </div>
                 <div className='login-input'>
                     <div className='input-information d-flex flex-column justify-content-center gap-3'>
-                        <input type='text' name='customerName' onChange={handleOrderChange} placeholder={user?.userName}></input>
-                        <input type='text' name='shippingAddress' placeholder={user?.address}></input>   
-                        <input type='text' name='customerPhone' placeholder={user?.phoneNumber}></input>
+                        <input type='text' name='customerName' onChange={handleOrderChange} placeholder="Họ và tên"></input>
+                        <input type='text' name='shippingAddress' onChange={handleOrderChange} placeholder="Địa chỉ"></input>   
+                        <input type='text' name='customerPhone' onChange={handleOrderChange} placeholder="Số điện thoại"></input>
                         <div className='checkout-payment-method d-flex flex-row gap-2'>
                         <img 
                             src={logomomo} 

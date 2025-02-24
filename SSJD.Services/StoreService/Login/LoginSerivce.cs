@@ -27,8 +27,9 @@ namespace SSJD.Services.StoreService.Login
             _configuration = configuration;
         }
         public string CreateToken(LoginRequestModel user)
-        {
+        { 
             List<Claim> claims = new List<Claim> {
+                new Claim(ClaimTypes.Sid, user.ID),
                 new Claim(ClaimTypes.Actor, user.UserID),
                 new Claim(ClaimTypes.Role, user.Role),
             };

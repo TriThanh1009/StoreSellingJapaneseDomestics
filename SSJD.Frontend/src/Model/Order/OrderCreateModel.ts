@@ -2,9 +2,8 @@ export interface OrderCreateModel{
     userID? : string
     customerName? : string
     customerPhone? :string
-    orderDate? : Date
-    shippingUnitID? : "1"
-    shippingDate? : Date
+    orderDate? : string
+    shippingUnitID? : string
     shippingAddress? : string
     orderStatus? : string
     totalPrice? : number

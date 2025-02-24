@@ -18,6 +18,7 @@ export const getOrderDetailByID = async(id : string)=>{
 }
 
 export const createOrderDetail = async(data:any)=>{
+    console.log(data)
     const response = await axios.post(`${apiUrl}/OrderDetail/CreateOrderDetail`,JSON.stringify(data),{
         headers:{
             "Content-Type" : "application/json"

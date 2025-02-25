@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import './ItemCard.css'
 import logoimg from '../../../Image/logo.jpg'
 import { ProductModel } from "../../../Model/Product/ProductModel"
@@ -16,6 +17,19 @@ const ItemCard:React.FC<props> = ({products}) =>{
   const [selectheadtype, setselectheadtype] = useState<string>("");
   const apiUrl = import.meta.env.VITE_API_GET_IMG;
   const navigate = useNavigate()
+  const typeRef = useRef<HTMLDivElement | null>(null);
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (typeRef.current && !typeRef.current.contains(event.target as Node)) {
+        setselectheadtype(""); // Reset khi click ra ngoài
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
   function NavtoDetail(){
     navigate(`/productdetail/${products.id}`);
   }
@@ -38,7 +52,7 @@ const ItemCard:React.FC<props> = ({products}) =>{
                       <span>{products.category}</span>             
                   </div>
                 </div>
-                <div className="product-detail-tips-card d-flex flex-row gap-3 mt-3">
+                <div ref={typeRef} className="product-detail-tips-card d-flex flex-row gap-3 mt-3">
                         <div onClick={() =>setselectheadtype('brushchisel')} className={`product-detail-tips-options-card ${selectheadtype === 'brushchisel' ? 'selected' : ''}`} >
                             <span>Chisel</span>
                         </div>
@@ -57,8 +71,13 @@ const ItemCard:React.FC<props> = ({products}) =>{
           </div>
         </div>
         <div>
-          <button onClick={() => increaseCartQuantity(products.id,selectheadtype)} className="card-add-to-card btn btn-pink text-white">
-            Add to Cart
+          <button onClick={() =>{
+                if(!selectheadtype){
+                  alert('Vui lòng chọn kiểu đầu bút')
+                  return
+                }
+                increaseCartQuantity(products.id,selectheadtype)}}  className="card-add-to-card btn btn-pink text-white">
+                Add to Cart
           </button>
         </div>
       </div>

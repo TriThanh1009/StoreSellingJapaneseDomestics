@@ -4,6 +4,7 @@ using SharpCompress.Common;
 using SSJD.DataAccess;
 using SSJD.Services.GeneralService.Base;
 using SSJD.ViewModel.GeneralViewModel.PageResult;
+using SSJD.ViewModel.StoreViewModel.Order;
 using SSJD.ViewModel.StoreViewModel.OrderDetail;
 using System;
 using System.Collections.Generic;
@@ -35,6 +36,25 @@ namespace SSJD.Services.StoreService.OrderDetail
             _context.OrderDetail.Add(entity);
             await _context.SaveChangesAsync();
             return entity.ID;
+
+        }
+
+        public async Task<int> CreateList(List<OrderDetailRequestModel> request)
+        {
+            var OrderID = request.Select(request => request.OrderID).FirstOrDefault();
+            var entity =  request.Select(x => new Entities.StoreEntity.OrderDetail()
+            {
+                ID = Guid.NewGuid().ToString(),
+                OrderID = OrderID,
+                ProductID = x.ProductID,
+                HeadType = x.HeadType,
+                Quantity = x.Quantity,
+                Subtotal = x.Subtotal,
+                PromotionID = x.PromotionID,
+            }).ToList();
+            _context.OrderDetail.AddRange(entity);
+            await _context.SaveChangesAsync();
+            return entity.Count;
 
         }
 
@@ -102,9 +122,69 @@ namespace SSJD.Services.StoreService.OrderDetail
 
         }
 
-        public Task<PagedResult<OrderDetailViewModel>> GetOrderDetailPaging(OrderDetailPagingRequest request)
+        public async Task<PagedResult<OrderDetailViewModel>> GetOrderDetailPaging(OrderDetailPagingRequest request)
         {
-            throw new NotImplementedException();
-        }     
+            var query = from p in _context.OrderDetail select new { p };
+            if (!string.IsNullOrEmpty(request.Keyword))
+            {
+                query = query.Where(x => x.p.ID.Contains(request.Keyword) || x.p.OrderID.Contains(request.Keyword));
+            }
+            int totalRow = await query.CountAsync();
+            var data = await query.OrderBy(x => Convert.ToInt32(x.p.ID)).Skip((request.PageIndex - 1) * request.PageSize)
+                .Take(request.PageSize)
+                .Select(x => new OrderDetailViewModel()
+                {
+                    ID = x.p.ID,
+                    OrderID = x.p.OrderID,
+                    ProductID = x.p.ProductID,
+                    HeadType = x.p.HeadType,
+                    Quantity = x.p.Quantity,
+                    Subtotal = x.p.Subtotal,
+                    Promotion = x.p.PromotionID
+                }).ToListAsync();
+            var pagedView = new PagedResult<OrderDetailViewModel>()
+            {
+                TotalRecords = totalRow,
+                PageIndex = request.PageIndex,
+                PageSize = request.PageSize,
+                Items = data
+            };
+            return pagedView;
+        }
+
+        public async Task<List<OrderDetailListViewModel>> ListByOrderID()
+        {
+            var query = from o in _context.OrderDetail
+                        join p in _context.Product on o.ProductID equals p.ID
+                        join pr in _context.Promotion on o.PromotionID equals pr.ID into promotionJoin
+                        from pr in promotionJoin.DefaultIfEmpty()
+                        select new
+                        {
+                            o.OrderID,
+                            OrderDetail = new OrderDetailViewModel()
+                            {
+                                ID = o.ID,
+                                OrderID = o.OrderID,
+                                UnitProduct = p.Name,
+                                HeadType = o.HeadType,
+                                UnitPrice = p.Price,
+                                Quantity = o.Quantity,
+                                Subtotal = o.Subtotal,
+                                Promotion = pr.Name
+                            }
+                        };
+
+            var groupedData = await query
+                .GroupBy(x => x.OrderID)
+                .Select(g => new OrderDetailListViewModel
+                {
+                    OrderID = g.Key,
+                    OrderDetails = g.Select(x => x.OrderDetail).ToList()
+                })
+                .ToListAsync();
+
+            return groupedData;
+        }
+
     }
 }

@@ -22,7 +22,7 @@ namespace SSJD.Entities.StoreEntity
 
         public User User { get; set; } 
         public UnitShip UnitShip { get; set; } 
-        public OrderDetail OrderDetail { get; set; }
+        public List<OrderDetail> OrderDetail { get; set; }
 
     }
 }

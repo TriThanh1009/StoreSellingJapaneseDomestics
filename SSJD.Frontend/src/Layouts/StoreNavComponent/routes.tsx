@@ -29,6 +29,6 @@ const routes: RouteConfig[]=[
     {path:'/profile',element:<ProfileComponent/>},
     {path:'/cart',element:<CartComponent/>},
     {path:'/checkout',element:<CheckoutComponent/>},
-    {path:'/payment/:method',element:<PaymentComponent/>},
+    {path:'/payment/:amount',element:<PaymentComponent/>},
 ]
 export default routes

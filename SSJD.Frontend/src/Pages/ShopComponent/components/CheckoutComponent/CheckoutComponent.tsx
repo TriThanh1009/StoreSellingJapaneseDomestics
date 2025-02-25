@@ -14,13 +14,11 @@ import { getUserByID } from '../../../../Responsitories/UserResponsitory'
 import { it } from 'node:test'
 import { OrderCreateModel } from '../../../../Model/Order/OrderCreateModel'
 import { createOrder, getOrderByID } from '../../../../Responsitories/OrderResponsitory'
-import { OrderDetailCreateModel } from '../../../../Model/OrderDetail/OrderDetailCreateModel'
-import { createOrderDetail } from '../../../../Responsitories/OrderDetailResponsitory'
+import { CreateListOrderDetail, createOrderDetail } from '../../../../Responsitories/OrderDetailResponsitory'
 const CheckoutComponent:React.FC = () =>{
     const {cart} = useShoppingCart()
     const [orderswdetail,setorderswdetail] = useState<OrderDetailwithProduct[]>()
     const [order,setorder] = useState<OrderCreateModel>()
-    const [orderdetail,setorderdetail] = useState<OrderDetailCreateModel>()
     const [user,setuser] = useState<UserModel>()
     const [total,settotal] = useState(0)
     const [selected, setSelected] = useState<string>("");
@@ -48,8 +46,8 @@ const CheckoutComponent:React.FC = () =>{
       }, [cart]);
       //tinh tong tien
       useEffect(() => {
-        if (orderswdetail && orderswdetail.length > 0) {
-            const totalprice = orderswdetail.reduce((sum, order) => sum + Number(order.product.price) * order.quantity, 0);
+        if (orderswdetail && orderswdetail.length > 0) { //sum = bien tich luy, order = gia tri hien tai //Number(order.product.price) * order.quantity, 0 : tong tien cho san pham
+            const totalprice = orderswdetail.reduce((sum, order) => sum + Number(order.product.price) * order.quantity, 0); //reduce: duyet qua tung phan tu va cong don gia tri
             settotal(totalprice);
         }
     }, [orderswdetail]);
@@ -73,7 +71,7 @@ const CheckoutComponent:React.FC = () =>{
                 userID : userid,
                 orderDate : new Date().toISOString(),
                 orderStatus : "1",
-                shippingUnitID : "f277ef57-3b5c-46f1-8fe8-d0c178d09ea8",
+                shippingUnitID : "1",
                 totalPrice : total,
                 paymentMethod : selected,
                 paymentStatus : "0",
@@ -84,12 +82,11 @@ const CheckoutComponent:React.FC = () =>{
     };
 
     
-    const orderAccept = async (method: string) => {
+    const orderAccept = async (amount: number) => {
         if (order) {
             const orderdata = await createOrder(order);
             if (orderdata) {
-                const orderDetails = orderswdetail?.map((detaildata) => ({
-                    
+                const orderDetails = orderswdetail?.map((detaildata) => ({ //Duyet qua tung object ==> result : array
                     orderID: orderdata,
                     productID: detaildata.product.id,
                     headType: detaildata.orderdetail.headType,
@@ -97,14 +94,16 @@ const CheckoutComponent:React.FC = () =>{
                     subtotal: detaildata.product.price,
                     promotionID: "1",
                 }));
-                if(orderDetails){
-                    orderDetails.forEach(async element => {
-                            await createOrderDetail(element);
-                    }); 
-                }
+                await CreateListOrderDetail(orderDetails)
+                // if(orderDetails){
+                //     orderDetails.forEach(async element => {
+                //             await createOrderDetail(element);
+                //     }); 
+                // }
             }
         }
-        navigate(`/payment/${method}`);
+        console.log(amount)
+        navigate(`/payment/${amount}`);
     };
     
 
@@ -134,7 +133,7 @@ const CheckoutComponent:React.FC = () =>{
                                 <i className="bi bi-chevron-left"></i>
                                 <span>Trở về giỏ hàng</span>
                             </div>
-                            <button className='checkout-button' onClick={()=> orderAccept(selected)}>Xác nhận mua hàng</button>
+                            <button className='checkout-button' onClick={()=> orderAccept(total)}>Xác nhận mua hàng</button>
                         </div>
                         
                     </div>

@@ -12,5 +12,8 @@ namespace SSJD.Services.StoreService.OrderDetail
     public interface IOrderDetailService : IBaseService<OrderDetailRequestModel, OrderDetailViewModel>
     {
         Task<PagedResult<OrderDetailViewModel>> GetOrderDetailPaging(OrderDetailPagingRequest request);
+        Task<int> CreateList(List<OrderDetailRequestModel> request);
+
+        Task<List<OrderDetailListViewModel>> ListByOrderID();
     }
 }

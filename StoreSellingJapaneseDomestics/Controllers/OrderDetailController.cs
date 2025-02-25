@@ -27,6 +27,12 @@ namespace StoreSellingJapaneseDomestics.Controllers
             var data = await _service.GetAll();
             return Ok(data);
         }
+        [HttpGet("ListByOrder")]
+        public async Task<IActionResult> ListByOrder()
+        {
+            var data = await _service.ListByOrderID();
+            return Ok(data);
+        }
         [HttpPost("CreateOrderDetail")]
         public async Task<IActionResult> Create([FromBody] OrderDetailRequestModel request)
         {
@@ -34,6 +40,16 @@ namespace StoreSellingJapaneseDomestics.Controllers
             var data = await _service.Create(request);
             var product = await _productservice.GetByID(request.ProductID);
             await _hubContext.Clients.All.SendAsync("ReceiveOrder", $"Khách hàng đã đặt: {product.Name} - {request.Quantity} cái.");
+            return Ok(data);
+        }
+        [HttpPost("CreateListOrderDetail")]
+        public async Task<IActionResult> CreateList([FromBody] List<OrderDetailRequestModel> request)
+        {
+            var productid = request.Select(x => x.ProductID).FirstOrDefault();
+            var quantity = request.Select(x=>x.Quantity).FirstOrDefault();
+            var data = await _service.CreateList(request);
+            var product = await _productservice.GetByID(productid);
+            await _hubContext.Clients.All.SendAsync("ReceiveOrder", $"Khách hàng đã đặt: {product.Name} - {quantity} cái.");
             return Ok(data);
         }
         [HttpPut("EditOrderDetail")]

@@ -27,6 +27,16 @@ export const createOrderDetail = async(data:any)=>{
     return response.data
 }
 
+export const CreateListOrderDetail = async(data:any)=>{
+    console.log(data)
+    const response = await axios.post(`${apiUrl}/OrderDetail/CreateListOrderDetail`,JSON.stringify(data),{
+        headers:{
+            "Content-Type" : "application/json"
+        }
+    })
+    return response.data
+}
+
 export const editOrderDetail = async(data:any)=>{
     const response = await axios.put(`${apiUrl}/OrderDetail/EditOrderDetail`)
     return response.data

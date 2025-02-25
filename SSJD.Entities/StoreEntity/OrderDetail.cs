@@ -19,7 +19,7 @@ namespace SSJD.Entities.StoreEntity
          
 
         public Order Order { get; set; } 
-        public List<Product> Product { get; set; }
+        public Product Product { get; set; }
 
         public Promotion Promotion { get; set; } 
     }

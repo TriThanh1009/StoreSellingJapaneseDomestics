@@ -5,6 +5,7 @@ import AdminOrderComponent from "../../Pages/AdminComponent/components/AdminOrde
 import AdminProductComponent from "../../Pages/AdminComponent/components/AdminProduct/AdminProductComponent/AdminProductComponent";
 import AdminPromotionComponent from "../../Pages/AdminComponent/components/AdminPromotion/AdminPromotionComponent/AdminPromotionComponent";
 import AdminUnitShipComponent from "../../Pages/AdminComponent/components/AdminUnitShip/AdminUnitShipComponent/AdminUnitShipComponent";
+import AdminUserComponent from "../../Pages/AdminComponent/components/AdminUser/AdminUserComponent/AdminUserComponent";
 import Forgotpassword from "../../Pages/AuthenticateComponent/ForgotPassword/forgotpassword";
 import Register from "../../Pages/AuthenticateComponent/Register/Register";
 import CartComponent from "../../Pages/ShopComponent/components/CartComponent/CartComponent";
@@ -33,6 +34,7 @@ const routes: RouteConfig[]=[
       {path: '/admin/order',element: <AdminOrderComponent />,},
       {path: '/admin/promotion',element: <AdminPromotionComponent />,},
       {path: '/admin/unitship', element: <AdminUnitShipComponent />,},
+      {path: '/admin/user', element: <AdminUserComponent />,},
     //////
 
       ////Customer

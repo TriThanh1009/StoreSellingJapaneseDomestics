@@ -1,9 +1,9 @@
 export interface OrderModel{
     id : string
-    customerID : string
+    customerName : string
+    customerPhone : string
     orderDate : Date
-    shippingUnitID : string
-    shippingDate : Date
+    shippingUnit : string
     shippingAddress : string
     orderStatus : string
     totalPrice : number

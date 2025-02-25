@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import './AdminSideBarComponent.css'
 
 const AdminSideBarComponent:React.FC = ()=>{
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -11,12 +11,12 @@ const AdminSideBarComponent:React.FC = ()=>{
     return(
         <ul className="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
       {/* Sidebar - Brand */}
-      <a className="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+      <div className="sidebar-brand d-flex align-items-center justify-content-center">
         <div className="sidebar-brand-icon rotate-n-15">
           <i className="fas fa-laugh-wink"></i>
         </div>
-        <div className="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
-      </a>
+        <div className="sidebar-brand-text mx-3">Store</div>
+      </div>
 
 
       {/* Divider */}
@@ -47,6 +47,7 @@ const AdminSideBarComponent:React.FC = ()=>{
           <Link to="/admin/Order">Order</Link>
           <Link to="/admin/promotion">Promotion</Link>
           <Link to="/admin/unitship">Unit Shipping</Link>
+          <Link to="/admin/user">User</Link>
         </div>
       )}
 

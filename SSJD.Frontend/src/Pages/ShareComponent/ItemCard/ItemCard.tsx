@@ -72,10 +72,6 @@ const ItemCard:React.FC<props> = ({products}) =>{
         </div>
         <div>
           <button onClick={() =>{
-                if(!selectheadtype){
-                  alert('Vui lòng chọn kiểu đầu bút')
-                  return
-                }
                 increaseCartQuantity(products.id,selectheadtype)}}  className="card-add-to-card btn btn-pink text-white">
                 Add to Cart
           </button>

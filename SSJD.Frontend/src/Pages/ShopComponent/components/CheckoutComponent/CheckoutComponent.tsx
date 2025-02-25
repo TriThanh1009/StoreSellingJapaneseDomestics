@@ -118,7 +118,7 @@ const CheckoutComponent:React.FC = () =>{
                         <input type='text' name='customerName' onChange={handleOrderChange} placeholder="Họ và tên"></input>
                         <input type='text' name='shippingAddress' onChange={handleOrderChange} placeholder="Địa chỉ"></input>   
                         <input type='text' name='customerPhone' onChange={handleOrderChange} placeholder="Số điện thoại"></input>
-                        <div className='checkout-payment-method d-flex flex-row gap-2'>
+                        {/* <div className='checkout-payment-method d-flex flex-row gap-2'>
                         <img 
                             src={logomomo} 
                             alt="momo" 
@@ -127,7 +127,7 @@ const CheckoutComponent:React.FC = () =>{
                         />
                             <img src={logovcb} alt='vcb' className={`payment-img ${selected === 'vcb' ? 'selected' : ''}`} 
                             onClick={() => setSelected('vcb')} />
-                        </div>
+                        </div> */}
                         <div className="d-flex justify-content-between align-items-center">
                             <div className='checkout-return-cart'>
                                 <i className="bi bi-chevron-left"></i>

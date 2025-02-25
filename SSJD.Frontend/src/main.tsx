@@ -56,7 +56,7 @@ const Main = () => {
               <Route path="*" element={<AppAdmin />} />
             ) : role === "Customer" ? (
               <Route path="*" element={<App />} />
-            ): <Route path="*" element={<Navigate to="/login" replace />} />}
+            ): <Route path="*" element={<App />} />}
           </Routes>
         </CartProvider>
       </BrowserRouter>

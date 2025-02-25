@@ -55,7 +55,6 @@ const AdminAccountComponent:React.FC = () =>{
                                 <table className="table table-bordered" id="dataTable" width="100%" >
                                     <thead>
                                         <tr className="">
-                                            <th>ID</th>
                                             <th>User Name</th>
                                             <th>Password</th>
                                             <th>Email</th>
@@ -66,7 +65,6 @@ const AdminAccountComponent:React.FC = () =>{
                                     <tbody>
                                     {Array.isArray(accounts) && accounts.map((account) => (
                                         <tr key={account.id}>
-                                        <td>{account.id}</td>
                                         <td>{account.userName}</td>
                                         <td>{account.password}</td>
                                         <td>{account.email}</td>

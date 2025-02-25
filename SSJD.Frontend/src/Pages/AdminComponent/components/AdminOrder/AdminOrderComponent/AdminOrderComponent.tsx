@@ -25,11 +25,10 @@ const AdminOrderComponent:React.FC = () =>{
                                 <table className="table table-bordered" id="dataTable" width="100%" >
                                     <thead>
                                         <tr className="">
-                                            <th>ID</th>
                                             <th>Customer</th>
+                                            <th>Phone Number</th>
                                             <th>Order Date</th>
                                             <th>Shipping Unit</th>
-                                            <th>Shipping Date</th>
                                             <th>ShippingAddress</th>
                                             <th>OrderStatus</th>
                                             <th>Total Price</th>
@@ -40,18 +39,17 @@ const AdminOrderComponent:React.FC = () =>{
                                     </thead>
 
                                     <tbody>
-                                    {Array.isArray(orders) && orders.map((orders) => (
+                                    {Array.isArray(orders) && orders.map((order) => (
                                         <tr>
-                                        <td>{orders.id}</td>
-                                        <td>{orders.customerID}</td>
-                                        <td>{orders.orderDate.toLocaleDateString()}</td>
-                                        <td>{orders.shippingUnitID}</td>
-                                        <td>{orders.shippingDate.toLocaleDateString()}</td>
-                                        <td>{orders.shippingAddress}</td>
-                                        <td>{orders.orderStatus}</td>
-                                        <td>{orders.totalPrice}</td>
-                                        <td>{orders.paymentMethod}</td>
-                                        <td>{orders.paymentStatus}</td>
+                                        <td>{order.customerName}</td>
+                                        <td>{order.customerPhone}</td>
+                                        <td>{order.orderDate.toString().split("T")[0]}</td>
+                                        <td>{order.shippingUnit}</td>
+                                        <td>{order.shippingAddress}</td>
+                                        <td>{order.orderStatus}</td>
+                                        <td>{order.totalPrice}</td>
+                                        <td>{order.paymentMethod}</td>
+                                        <td>{order.paymentStatus}</td>
                                         <td className="td-options d-flex flex-row gap-2">
                                         <i className="bi bi-pen"></i>
                                         <i className="bi bi-x-octagon"></i>

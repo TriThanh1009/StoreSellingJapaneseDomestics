@@ -21,7 +21,7 @@ namespace SSJD.DataAccess.StoreConfigurations
             builder.Property("Address").HasMaxLength(60);
             builder.Property("IdentityCard").HasMaxLength(20);
             builder.Property("Email").HasMaxLength(20);      
-            builder.HasOne(x => x.Account).WithOne(x => x.User).HasForeignKey<User>(x => x.AccountID).OnDelete(DeleteBehavior.Restrict);
+            builder.HasOne(x => x.Account).WithOne(x => x.User).HasForeignKey<User>(x => x.AccountID);
             builder.HasOne(x => x.MemberCard).WithMany(x => x.User).HasForeignKey(x => x.MemberCardID);
         }
     }

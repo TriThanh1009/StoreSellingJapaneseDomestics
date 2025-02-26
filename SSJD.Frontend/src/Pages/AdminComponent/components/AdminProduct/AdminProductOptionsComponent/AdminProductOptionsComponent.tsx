@@ -162,7 +162,11 @@ const [categorys,setcategorys] = useState<CategoryModel[]>()
                 <div className="form-group row">
                     <label className="col-sm-5 col-form-label">Active</label>
                     <div className="col-sm-10">
-                        <input type="text" id="isActive"   name="isActive"  onChange={handlechange}  className="form-control" />
+                    <select id="CategoryID" name='CategoryID' onChange={handlechange} className='form-control'>
+                            <option value="">-- Tình trạng -- </option>
+                            <option value="0">Hết hàng</option>
+                            <option value="1">Còn hàng</option>
+                        </select>
                     </div>
                 </div>
                 <div className="form-group row">

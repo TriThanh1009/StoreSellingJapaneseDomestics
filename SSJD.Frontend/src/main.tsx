@@ -2,7 +2,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { StrictMode } from "react"; // ✅ Import StrictMode
 import { useEffect, useState } from "react";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import App from "./App";
 import AppAdmin from "./AppAdmin";
 import Login from "./Pages/AuthenticateComponent/Login/Login";
@@ -13,20 +13,20 @@ import Forgotpassword from "./Pages/AuthenticateComponent/ForgotPassword/forgotp
 import { jwtDecode } from "jwt-decode";
 
 const Main = () => {
-  const [role, setRole] = useState(localStorage.getItem("role"));
+  const [role, setRole] = useState("");
   const [accessToken, setAccessToken] = useState(localStorage.getItem("accessToken"));
   useEffect(() => {
     if (accessToken) {
       try {
         const decodeToken = jwtDecode<{ [key: string]: any }>(accessToken);
         const getrole = decodeToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
-        setRole(getrole); 
+        setRole(getrole);
       } catch (error) {
         console.error("Lỗi khi giải mã token:", error);
-        setRole(null);
+        setRole("");
       }
     } else {
-      setRole(null);
+      setRole("");
     }
   }, [accessToken]) //Chỉ chạy khi accessToken thay đổi
   useEffect(() => {
@@ -35,12 +35,17 @@ const Main = () => {
     };
   
     window.addEventListener("storage", handleStorageChange);
-  
+    const interval = setInterval(() => {
+      const newToken = localStorage.getItem("accessToken");
+      if (newToken !== accessToken) {
+        setAccessToken(newToken);
+      }
+    }, 3000);
     return () => {
       window.removeEventListener("storage", handleStorageChange);
+      clearInterval(interval);
     };
   }, []);
-  
 
   return (
     <StrictMode>
@@ -50,15 +55,12 @@ const Main = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/forgot" element={<Forgotpassword />} />
-            <Route path="*" element={<App />} />
-            {!accessToken ? (
-              <Route path="*" element={<Navigate to="/login" replace />} />
-            ) : role === "Admin" ? (
+              {role === "Admin" ? (
               <Route path="*" element={<AppAdmin />} />
-            ) : role === "Customer" ? (
+            ) : (
               <Route path="*" element={<App />} />
-            ): <Route path="*" element={<App />} />}
-          </Routes>
+            )}
+                  </Routes>
         </CartProvider>
       </BrowserRouter>
     </StrictMode>

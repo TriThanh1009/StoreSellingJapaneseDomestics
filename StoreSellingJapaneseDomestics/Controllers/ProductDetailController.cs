@@ -24,7 +24,7 @@ namespace StoreSellingJapaneseDomestics.Controllers
         [HttpGet("GetDescriptionByProductID")]
         public async Task<IActionResult> GetDescription(string id)
         {
-            var data = _service.GetByProductID(id);
+            var data = await _service.GetByProductID(id);
             return Ok(data);
         }
         [HttpPost("CreateProductDetail")]

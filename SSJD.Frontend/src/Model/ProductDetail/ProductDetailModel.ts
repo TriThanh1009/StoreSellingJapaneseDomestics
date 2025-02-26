@@ -1,8 +1,6 @@
 export interface ProductDetailModel{
-    id? : string
     productID? : string
     description? : string[]
-    warranty? : Date
+    warranty : Date
     origin? : string
-    additionalImage? : string
 }

@@ -89,18 +89,20 @@ namespace SSJD.Services.StoreService.ProductDetail
             throw new NotImplementedException();
         }
 
-        public ProductDetailViewModel GetByProductID(string id)
+        public async Task<ProductDetailViewModel> GetByProductID(string productid)
         {
-            var description = (from p in _context.ProductDetail
-                                join pr in _context.Product on p.ProductID equals pr.ID
-                                where pr.ID == id
-                                select p.Description).First();
-            var getdata = new ProductDetailViewModel()
-            {
-                Description = description,
-            };
-            return getdata;
+            var query = from p in _context.ProductDetail
+                        where p.ProductID == productid
+                        select new ProductDetailViewModel()
+                        {
+                            Description = p.Description,
+                            Warranty = p.Warranty,
+                            Origin = p.Origin
+                        };
+
+            return await query.FirstOrDefaultAsync();
         }
+
 
         public Task<PagedResult<ProductDetailViewModel>> GetProductDetailViewModel(ProductDetailPagingRequest request)
         {

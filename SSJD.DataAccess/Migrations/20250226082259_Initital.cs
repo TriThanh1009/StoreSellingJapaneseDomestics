@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace SSJD.DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class Initital : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -111,8 +111,8 @@ namespace SSJD.DataAccess.Migrations
                 {
                     ID = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 2, 25, 14, 15, 30, 5, DateTimeKind.Local).AddTicks(6233)),
-                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 2, 25, 14, 15, 30, 5, DateTimeKind.Local).AddTicks(6387)),
+                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 2, 26, 15, 22, 58, 906, DateTimeKind.Local).AddTicks(7674)),
+                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 2, 26, 15, 22, 58, 906, DateTimeKind.Local).AddTicks(7830)),
                     PercentDiscount = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -289,7 +289,7 @@ namespace SSJD.DataAccess.Migrations
                         column: x => x.AccountID,
                         principalTable: "Account",
                         principalColumn: "ID",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_User_AspNetUsers_Id",
                         column: x => x.Id,
@@ -312,9 +312,8 @@ namespace SSJD.DataAccess.Migrations
                     ProductID = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     HeadType = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
-                    Warranty = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 2, 25, 14, 15, 30, 5, DateTimeKind.Local).AddTicks(4538)),
-                    Origin = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
-                    AdditionalImage = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false)
+                    Warranty = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 2, 26, 15, 22, 58, 906, DateTimeKind.Local).AddTicks(5985)),
+                    Origin = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -335,13 +334,13 @@ namespace SSJD.DataAccess.Migrations
                     UserID = table.Column<string>(type: "nvarchar(50)", nullable: false),
                     CustomerName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     CustomerPhone = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 2, 25, 14, 15, 30, 1, DateTimeKind.Local).AddTicks(7804)),
+                    OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 2, 26, 15, 22, 58, 902, DateTimeKind.Local).AddTicks(6188)),
                     ShippingUnitID = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ShippingAddress = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     OrderStatus = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TotalPrice = table.Column<decimal>(type: "decimal(10,2)", maxLength: 50, precision: 10, scale: 2, nullable: false),
                     PaymentMethod = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    PaymentStatus = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false)
+                    PaymentStatus = table.Column<int>(type: "int", maxLength: 20, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -351,13 +350,13 @@ namespace SSJD.DataAccess.Migrations
                         column: x => x.ShippingUnitID,
                         principalTable: "UnitShip",
                         principalColumn: "ID",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Order_User_UserID",
                         column: x => x.UserID,
                         principalTable: "User",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -400,8 +399,8 @@ namespace SSJD.DataAccess.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "216e27d9-2200-4593-a4e5-20c2363e8296", null, "Admin", "ADMIN" },
-                    { "860ccba2-f310-40ea-87fc-fc14c64b0775", null, "Customer", "CUSTOMER" }
+                    { "82809fa2-9560-4381-aba6-b6d386399d84", null, "Customer", "CUSTOMER" },
+                    { "cb7a1571-06e8-4769-b744-3d97b7cbd832", null, "Admin", "ADMIN" }
                 });
 
             migrationBuilder.InsertData(
@@ -422,7 +421,7 @@ namespace SSJD.DataAccess.Migrations
             migrationBuilder.InsertData(
                 table: "Promotion",
                 columns: new[] { "ID", "CreateDate", "EndDate", "Name", "PercentDiscount" },
-                values: new object[] { "1", new DateTime(2025, 2, 25, 14, 15, 30, 6, DateTimeKind.Local).AddTicks(9204), new DateTime(2025, 2, 25, 14, 15, 30, 6, DateTimeKind.Local).AddTicks(9304), "None", 0 });
+                values: new object[] { "1", new DateTime(2025, 2, 26, 15, 22, 58, 908, DateTimeKind.Local).AddTicks(795), new DateTime(2025, 2, 26, 15, 22, 58, 908, DateTimeKind.Local).AddTicks(893), "None", 0 });
 
             migrationBuilder.InsertData(
                 table: "UnitShip",

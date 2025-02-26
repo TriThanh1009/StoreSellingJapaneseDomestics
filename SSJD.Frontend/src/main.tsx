@@ -50,6 +50,7 @@ const Main = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/forgot" element={<Forgotpassword />} />
+            <Route path="*" element={<App />} />
             {!accessToken ? (
               <Route path="*" element={<Navigate to="/login" replace />} />
             ) : role === "Admin" ? (

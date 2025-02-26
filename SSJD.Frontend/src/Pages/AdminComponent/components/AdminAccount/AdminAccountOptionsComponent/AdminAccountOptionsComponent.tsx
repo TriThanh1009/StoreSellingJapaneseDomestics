@@ -49,7 +49,7 @@ const AdminAccountOptionsComponent:React.FC<Props> = ({onCancel, selectedItemId}
 
 
     return(
-    <form className="form" onSubmit={handleSubmit} >
+    <form className="form" >
         <div className="form-group row" >
             <label className="col-sm-5 col-form-label">ID</label>
             <div className="col-sm-10">
@@ -85,7 +85,7 @@ const AdminAccountOptionsComponent:React.FC<Props> = ({onCancel, selectedItemId}
             </div>
         </div>
         <div className='button-options-list d-flex flex-row gap-3' >
-            <button type='submit' className="button-options">Accept</button>
+            <button onSubmit={handleSubmit} type='submit' className="button-options">Accept</button>
             <button className="button-options" onClick={onCancel} >Cancel</button> 
         </div>
         

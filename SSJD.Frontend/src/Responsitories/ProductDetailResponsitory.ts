@@ -24,7 +24,12 @@ export const getdescriptionByproductID = async(id? : string)=>{
 
 
 export const createProductDetail = async(data:any)=>{
-    const response = await axios.post(`${apiUrl}/ProductDetail/CreateProductDetail`)
+
+    const response = await axios.post(`${apiUrl}/ProductDetail/CreateProductDetail`,JSON.stringify(data),{
+        headers:{
+            "Content-Type" : "application/json"
+        }
+    })
     return response.data
 }
 

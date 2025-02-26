@@ -42,7 +42,7 @@ const ItemCard:React.FC<props> = ({products}) =>{
         <h5 className="card-title">{products.name}</h5>
         <p className="card-subtitle mb-2 text-muted">{products.brand}</p>
         <div className="card-text">
-          <p className="fw-bold text-danger">{products.price} vnd</p>
+          <p className="fw-bold text-danger">{products.price.toLocaleString("vi-VN")} vnd</p>
           <div className="card-text-type-size d-flex flex-column">
             <div>
               <div className="d-flex flex-row gap-3"> 

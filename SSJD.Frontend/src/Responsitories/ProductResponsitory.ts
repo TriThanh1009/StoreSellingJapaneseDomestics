@@ -19,7 +19,8 @@ export const createProduct = async(data:any)=>{
     console.log(data)
     const response = await axios.post(`${apiUrl}/Product/CreateProduct`,data,{
         headers:{
-            "Content-Type" : "multipart/form-data"
+            "Content-Type" : "multipart/form-data",
+            "Accept": "application/json"
         }})
     return response.data
 }
@@ -30,6 +31,6 @@ export const editProduct = async(data:any)=>{
 }
 
 export const deleteProduct = async(id : string)=>{
-    const response = await axios.delete(`${apiUrl}/Product?${id}`)
+    const response = await axios.delete(`${apiUrl}/Product?id=${id}`)
     return response.data
 }

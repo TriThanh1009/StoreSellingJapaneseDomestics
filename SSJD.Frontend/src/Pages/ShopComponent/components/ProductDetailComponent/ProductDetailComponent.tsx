@@ -50,7 +50,7 @@ const ProductDetailComponent:React.FC = () =>{
                         <span>{takeproduct?.name}</span>
                     </div>
                     <div className="product-detail-price">
-                        <span>{takeproduct?.price}</span>
+                        <span>{takeproduct?.price.toLocaleString("vi-VN")}</span>
                     </div>
                     <div className="product-detail-description d-flex flex-column mt-3 gap-3">
                         <div className="d-flex gap-2">

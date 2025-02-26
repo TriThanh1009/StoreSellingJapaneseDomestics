@@ -33,7 +33,7 @@ const AdminProductComponent:React.FC = () =>{
         }
     const clicktoshowformdetail = (id : string) =>{
         setgetid(id)
-        setshowformdetail(true)
+        setshowformdetail(prev => !prev)
     }
     const handleEdit = (id:string)=>{
             setShowFormOptions(true)
@@ -86,15 +86,15 @@ const AdminProductComponent:React.FC = () =>{
                                                 <td>{product.brand}</td>
                                                 <td>{product.category}</td>
                                                 <td>{product.size}</td>
-                                                <td>{product.price}</td>
+                                                <td>{product.price.toLocaleString("vi-VN")}</td>
                                                 <td>{product.stock}</td>
-                                                <td>{product.isActive}</td>
+                                                <td>{product.isActive === "1" ? "Còn hàng" : "Hết hàng"}</td>
                                                 <td className="product-list-img"><img src={`${apiUrl}${product.image}`}  /></td>
                                                 <td className="td-options d-flex flex-row gap-2">
                                                 <i onClick={()=>handleEdit(product.id)} className="options-icon bi bi-pen"></i>
                                                 <i onClick={()=>onDelete(product.id)} className="options-icon bi bi-x-octagon"></i>                                              
                                                 </td>
-                                                <td><button onClick={()=>clicktoshowformdetail(product.id)}>Detail</button></td>
+                                                <td><button className="btn btn-primary" onClick={()=>clicktoshowformdetail(product.id)}>Detail</button></td>
                                             </tr>
                                         ))} 
                                     </tbody>

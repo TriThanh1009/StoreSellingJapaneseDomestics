@@ -51,13 +51,13 @@ namespace SSJD.DataAccess.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "11da4b8d-f72a-4d37-9f5c-f2394f162920",
+                            Id = "8b2debd2-0005-4235-b9a6-444545c03391",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "eea29d66-8934-4ade-9a89-11eb332a7612",
+                            Id = "aaad981f-302c-4648-a182-52961567c593",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         });
@@ -361,7 +361,7 @@ namespace SSJD.DataAccess.Migrations
                     b.Property<DateTime>("OrderDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 2, 25, 14, 15, 40, 515, DateTimeKind.Local).AddTicks(7330));
+                        .HasDefaultValue(new DateTime(2025, 2, 26, 15, 23, 5, 355, DateTimeKind.Local).AddTicks(2417));
 
                     b.Property<string>("OrderStatus")
                         .IsRequired()
@@ -372,10 +372,9 @@ namespace SSJD.DataAccess.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
-                    b.Property<string>("PaymentStatus")
-                        .IsRequired()
+                    b.Property<int>("PaymentStatus")
                         .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasColumnType("int");
 
                     b.Property<string>("ShippingAddress")
                         .IsRequired()
@@ -501,11 +500,6 @@ namespace SSJD.DataAccess.Migrations
                     b.Property<string>("ID")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("AdditionalImage")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
-
                     b.PrimitiveCollection<string>("Description")
                         .IsRequired()
                         .HasMaxLength(150)
@@ -527,7 +521,7 @@ namespace SSJD.DataAccess.Migrations
                     b.Property<DateTime>("Warranty")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 2, 25, 14, 15, 40, 519, DateTimeKind.Local).AddTicks(7890));
+                        .HasDefaultValue(new DateTime(2025, 2, 26, 15, 23, 5, 359, DateTimeKind.Local).AddTicks(1826));
 
                     b.HasKey("ID");
 
@@ -545,12 +539,12 @@ namespace SSJD.DataAccess.Migrations
                     b.Property<DateTime>("CreateDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 2, 25, 14, 15, 40, 519, DateTimeKind.Local).AddTicks(9572));
+                        .HasDefaultValue(new DateTime(2025, 2, 26, 15, 23, 5, 359, DateTimeKind.Local).AddTicks(3530));
 
                     b.Property<DateTime>("EndDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 2, 25, 14, 15, 40, 519, DateTimeKind.Local).AddTicks(9699));
+                        .HasDefaultValue(new DateTime(2025, 2, 26, 15, 23, 5, 359, DateTimeKind.Local).AddTicks(3688));
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -568,8 +562,8 @@ namespace SSJD.DataAccess.Migrations
                         new
                         {
                             ID = "1",
-                            CreateDate = new DateTime(2025, 2, 25, 14, 15, 40, 521, DateTimeKind.Local).AddTicks(4050),
-                            EndDate = new DateTime(2025, 2, 25, 14, 15, 40, 521, DateTimeKind.Local).AddTicks(4155),
+                            CreateDate = new DateTime(2025, 2, 26, 15, 23, 5, 360, DateTimeKind.Local).AddTicks(8681),
+                            EndDate = new DateTime(2025, 2, 26, 15, 23, 5, 360, DateTimeKind.Local).AddTicks(8773),
                             Name = "None",
                             PercentDiscount = 0
                         });
@@ -693,13 +687,13 @@ namespace SSJD.DataAccess.Migrations
                     b.HasOne("SSJD.Entities.StoreEntity.UnitShip", "UnitShip")
                         .WithMany("Orders")
                         .HasForeignKey("ShippingUnitID")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("SSJD.Entities.StoreEntity.User", "User")
                         .WithMany("Orders")
                         .HasForeignKey("UserID")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("UnitShip");
@@ -769,7 +763,7 @@ namespace SSJD.DataAccess.Migrations
                     b.HasOne("SSJD.Entities.GeneralEntity.Account", "Account")
                         .WithOne("User")
                         .HasForeignKey("SSJD.Entities.StoreEntity.User", "AccountID")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)

@@ -4,6 +4,10 @@
 import { useEffect, useState } from 'react';
 import { ProductOptionsModel } from '../../../../../Model/Product/ProductOptionsModel';
 import { editProduct, createProduct } from '../../../../../Responsitories/ProductResponsitory';
+import { BrandModel } from '../../../../../Model/Brand/BrandModel';
+import { getBrand } from '../../../../../Responsitories/BrandResponsitory';
+import { CategoryModel } from '../../../../../Model/Category/CategoryModel';
+import { getCategory } from '../../../../../Responsitories/CategoryResponsitory';
 
 interface Props {
     onCancel: () => void; // Định nghĩa prop onCancels
@@ -13,13 +17,32 @@ interface Props {
 const AdminProductOptionsComponent:React.FC<Props> = ({onCancel,selectedID}) =>{
 const [product, setproduct] = useState<ProductOptionsModel>()
 const [selectedFile, setSelectedFile] = useState<File | null>(null);
+const [brands,setbrands] = useState<BrandModel[]>()
+const [categorys,setcategorys] = useState<CategoryModel[]>()
+
+    useEffect(()=>{
+        getbrand()
+        getcategory()
+    })
+
+    const getbrand = async() =>{
+        const data = await getBrand()
+            setbrands(data)
+        
+    }
+    const getcategory = async() =>{
+        const data = await getCategory()
+        setcategorys(data)
+        
+    }
+
 
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target.files && event.target.files[0]) {
             setSelectedFile(event.target.files[0]);
         }
     };
-    const handlechange = (e:React.ChangeEvent<HTMLInputElement>)=>{
+    const handlechange = (e:React.ChangeEvent<HTMLInputElement | HTMLSelectElement>)=>{
         const { name, value } = e.target;
         if (selectedID) {
             setproduct(prev => ({
@@ -28,6 +51,7 @@ const [selectedFile, setSelectedFile] = useState<File | null>(null);
                 Image : selectedFile,
                 [name] : value
             }));
+            
         }
         else{
             setproduct((prev) => ({
@@ -37,7 +61,7 @@ const [selectedFile, setSelectedFile] = useState<File | null>(null);
             }));
         }
 
-        console.log(product)
+        console.log(product?.CategoryID,product?.BrandID)
     }
 
     const handlesubmit = async (e:React.FormEvent)=>{
@@ -83,30 +107,32 @@ const [selectedFile, setSelectedFile] = useState<File | null>(null);
             <h1 className='text-center'>Create</h1>
         <div className='d-flex flex-row'>
             <div>
-                <div className="form-group row" >
-                    <label className="col-sm-5 col-form-label">ID</label>
-                    <div className="col-sm-10">
-                    {selectedID && <input type="text" id="ID"  name="ID" onChange={handlechange}  value={selectedID} className="form-control" />}
-                    {!selectedID && <input type="text" id="ID"  name="ID" onChange={handlechange}  className="form-control" />}
-                    </div>
-                </div>
                 <div className="form-group row">
                     <label className="col-sm-5 col-form-label">Name</label>
                     <div className="col-sm-10">
-                        <input type="text" id="Name"  name="Name"  onChange={handlechange}   pattern="[a-zA-Z ]+"   className="form-control" />
+                        <input type="text" id="Name"  name="Name"  onChange={handlechange}    className="form-control" />
                     </div>
                 </div>
                 <div className="form-group row">
                     <label className="col-sm-5 col-form-label">Brand</label>
                     <div className="col-sm-10">
-                        <input type="text" id="BrandID"   name="BrandID" onChange={handlechange} className="form-control" />
-
-                    </div>
+                        <select id="BrandID" name="BrandID" onChange={handlechange} className="form-control">
+                            <option value="">-- Chọn thương hiệu --</option>
+                            {brands?.map((brand) => (
+                                <option key={brand.id} value={brand.id}>{brand.name}</option>
+                            ))}
+                        </select>
+                </div>
                 </div>
                 <div className="form-group row">
                     <label className="col-sm-5 col-form-label">Category</label>
                     <div className="col-sm-10">
-                        <input type="text" id="CategoryID"   name="CategoryID" onChange={handlechange}   className="form-control" />
+                        <select id="CategoryID" name='CategoryID' onChange={handlechange} className='form-control'>
+                            <option value="">-- Chọn loại bút -- </option>
+                            {categorys?.map((category)=>(
+                                <option key={category.id} value={category.id}>{category.name}</option>
+                            ))}
+                        </select>
 
                     </div>
                 </div>

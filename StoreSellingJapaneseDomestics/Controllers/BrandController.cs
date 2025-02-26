@@ -6,6 +6,8 @@ using SSJD.ViewModel.StoreViewModel.Category;
 
 namespace StoreSellingJapaneseDomestics.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class BrandController : Controller
     {
         private readonly IBrandService _service;
@@ -16,12 +18,6 @@ namespace StoreSellingJapaneseDomestics.Controllers
 
         [HttpGet]
         public async Task<IActionResult> Get()
-        {
-            var data = await _service.GetAll();
-            return Ok(data);
-        }
-        [HttpGet("get")]
-        public async Task<IActionResult> Gett()
         {
             var data = await _service.GetAll();
             return Ok(data);

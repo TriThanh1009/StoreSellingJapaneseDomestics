@@ -7,9 +7,14 @@ import { deleteProduct, getProduct } from "../../../../../Responsitories/Product
 import { ProductModel } from "../../../../../Model/Product/ProductModel"
 import logo from '../../../../../../../Uploads/61f60849-bd68-457b-8efa-30c90a3dfcdb.jpg'
 import { log } from "console"
+import AdminProductDetailOptionsComponent from "../../AdminProductDetailComponent/AdminProductDetailOptionsComponent"
 const AdminProductComponent:React.FC = () =>{
     const apiUrl = import.meta.env.VITE_API_GET_IMG;
     const [products,setproducts] = useState<ProductModel[]>()
+    const [showformoptions, setShowFormOptions] = useState(false);
+    const [showformdetail,setshowformdetail] = useState(false)
+    let childpage
+    let formdetail
     const [getid,setgetid] = useState('');
      useEffect(()=>{
          const fetch = async()=>{
@@ -20,13 +25,16 @@ const AdminProductComponent:React.FC = () =>{
          }
          fetch()
      })
-    const [showformoptions, setShowFormOptions] = useState(false);
-        let childpage
+    
     const clicktoshowFormoption = ()=>{
         setgetid('')
         setShowFormOptions(true)
         console.log(showformoptions) 
         }
+    const clicktoshowformdetail = (id : string) =>{
+        setgetid(id)
+        setshowformdetail(true)
+    }
     const handleEdit = (id:string)=>{
             setShowFormOptions(true)
             setgetid(id)
@@ -35,12 +43,18 @@ const AdminProductComponent:React.FC = () =>{
             await deleteProduct(id)
             window.location.reload()
             }
-    const onCancel = ()=>{
+    const onOptionsCancel = ()=>{
         setShowFormOptions(false)
         }
+    const onDetailFormCancel = () =>{
+        setshowformdetail(false)
+    }
     if(showformoptions){
-           childpage = <AdminProductOptionsComponent selectedID={getid} onCancel={onCancel} />
+        childpage = <AdminProductOptionsComponent selectedID={getid} onCancel={onOptionsCancel} />
         } else childpage = <div></div>
+    if(showformdetail){
+        formdetail = <AdminProductDetailOptionsComponent productID={getid} onCancel={onDetailFormCancel}/>
+    }
     return (
                     <div className="card shadow mb-4">
                         <div className="card-header py-3 d-flex flex-row justify-content-between">
@@ -61,6 +75,7 @@ const AdminProductComponent:React.FC = () =>{
                                             <th>Active</th>
                                             <th>Image</th>
                                             <th>Options</th>
+                                            <th>Detail</th>
                                         </tr>
                                     </thead>
 
@@ -77,8 +92,9 @@ const AdminProductComponent:React.FC = () =>{
                                                 <td className="product-list-img"><img src={`${apiUrl}${product.image}`}  /></td>
                                                 <td className="td-options d-flex flex-row gap-2">
                                                 <i onClick={()=>handleEdit(product.id)} className="options-icon bi bi-pen"></i>
-                                                <i onClick={()=>onDelete(product.id)} className="options-icon bi bi-x-octagon"></i>
+                                                <i onClick={()=>onDelete(product.id)} className="options-icon bi bi-x-octagon"></i>                                              
                                                 </td>
+                                                <td><button onClick={()=>clicktoshowformdetail(product.id)}>Detail</button></td>
                                             </tr>
                                         ))} 
                                     </tbody>
@@ -87,6 +103,9 @@ const AdminProductComponent:React.FC = () =>{
                         </div>
                         <div className="detail-page">
                                 {childpage}
+                        </div>
+                        <div className="detail-page">
+                                {formdetail}
                         </div>
                     </div>
 

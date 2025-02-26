@@ -28,7 +28,6 @@ namespace SSJD.Services.StoreService.ProductDetail
                 Description = request.Description,
                 Warranty = request.Warranty,
                 Origin = request.Origin,
-                AdditionalImage = request.AdditionalImage,
             };
             _context.ProductDetail.Add(entity);
             await _context.SaveChangesAsync();
@@ -51,7 +50,6 @@ namespace SSJD.Services.StoreService.ProductDetail
                 data.Description = request.Description;
                 data.Warranty = request.Warranty;
                 data.Origin = request.Origin;
-                data.AdditionalImage = request.AdditionalImage;
                 _context.ProductDetail.Update(data);
                 await _context.SaveChangesAsync();
             }
@@ -69,7 +67,6 @@ namespace SSJD.Services.StoreService.ProductDetail
                 Description = x.pd.Description,
                 Warranty = x.pd.Warranty,
                 Origin = x.pd.Origin,
-                AdditionalImage = x.pd.AdditionalImage
             }).ToListAsync();
             return data;
         }
@@ -83,7 +80,6 @@ namespace SSJD.Services.StoreService.ProductDetail
                 Description = data.Description,
                 Warranty = data.Warranty,
                 Origin = data.Origin,
-                AdditionalImage = data.AdditionalImage,
             };
             return getdata;
         }

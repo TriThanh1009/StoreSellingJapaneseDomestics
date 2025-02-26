@@ -58,6 +58,12 @@ const [selectedFile, setSelectedFile] = useState<File | null>(null);
                     }
                 });
             }
+            /*else if (key === "descriptions" && Array.isArray(value)) {
+                value.forEach((desc) => {
+                    formData.append(key, desc); // Thêm từng phần tử
+                });
+            }
+            */ //neu kieu du lieu la chuoi string
         for (let pair of formData.entries()) {
             console.log(pair[0] + ', ' + pair[1]);
         }

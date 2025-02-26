@@ -1,8 +1,7 @@
-export interface ProductDetailModel{
-    id? : string
+export interface ProductDetailCreateModel{
     productID? : string
     description? : string[]
     warranty? : Date
     origin? : string
-    additionalImage? : string
+    additionalImage? : File | null
 }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SharpCompress.Common;
 using SSJD.DataAccess;
+using SSJD.Entities.GeneralEntity;
 using SSJD.Entities.StoreEntity;
 using SSJD.Services.GeneralService.Base;
 using SSJD.ViewModel.GeneralViewModel.PageResult;
@@ -20,6 +21,14 @@ namespace SSJD.Services.StoreService.Order
         {
             _context = context;
         }
+
+        public async Task ChangePaymentStatus(string OrderID)
+        {
+            var order = await _context.Order.FindAsync(OrderID);
+            order.PaymentStatus = order.PaymentStatus == Active.Yes ? Active.No : Active.Yes;
+            await _context.SaveChangesAsync();
+        }
+
         public async Task<string> Create(OrderRequestModel request)
         {
 

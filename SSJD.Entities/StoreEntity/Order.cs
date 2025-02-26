@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SSJD.Entities.GeneralEntity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,7 +19,7 @@ namespace SSJD.Entities.StoreEntity
         public string OrderStatus { get; set; } = "";
         public decimal TotalPrice { get; set; } = 0;
         public string PaymentMethod { get; set; } = "";
-        public string PaymentStatus { get; set; } = "";
+        public Active PaymentStatus { get; set; } = Active.No;
 
         public User User { get; set; } 
         public UnitShip UnitShip { get; set; } 

@@ -38,5 +38,11 @@ namespace StoreSellingJapaneseDomestics.Controllers
             await _service.Delete(id);
             return Ok();
         }
+        [HttpPost("ChangePaymentStatus")]
+        public async Task<IActionResult> ChangePaymentStatus(string OrderID)
+        {
+            await _service.ChangePaymentStatus(OrderID);
+            return Ok();
+        }
     }
 }

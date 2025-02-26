@@ -20,7 +20,6 @@ namespace SSJD.DataAccess.StoreConfigurations
             builder.Property("Description").IsRequired().HasMaxLength(150);
             builder.Property("Warranty").HasDefaultValue(DateTime.Now);
             builder.Property("Origin").IsRequired().HasMaxLength(30);
-            builder.Property("AdditionalImage").IsRequired().HasMaxLength(30);
         }
     }
 }

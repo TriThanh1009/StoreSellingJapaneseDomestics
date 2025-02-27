@@ -14,7 +14,7 @@ const AdminProductDetailOptionsComponent:React.FC<props> = ({productID,onCancel}
     const [detaildata,setdetaildata] = useState<ProductDetailModel>()
     const [formedit,setformedit] = useState(false)
     useEffect(()=>{
-        getDetaildata()
+        fetch()
     },[])
     const handleChange = (e : React.ChangeEvent<HTMLInputElement>)=>{
         const {name,value} = e.target
@@ -25,7 +25,7 @@ const AdminProductDetailOptionsComponent:React.FC<props> = ({productID,onCancel}
         }))
         console.log(productdetail)
     }
-    const getDetaildata = async() =>{
+    const fetch = async() =>{
         if(productID){
             const data =  await getdescriptionByproductID(productID)
             setdetaildata(data)

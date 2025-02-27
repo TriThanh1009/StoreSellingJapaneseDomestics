@@ -14,12 +14,12 @@ const AdminAccountComponent:React.FC = () =>{
     let childpage
 
     useEffect(()=>{
-        const fetchaccount = async () =>{
-            const data = await getAccount()
-            setAccounts(data)
-        }
-        fetchaccount()
+        fetch()
     },[])
+    const fetch = async () =>{
+        const data = await getAccount()
+        setAccounts(data)
+    }
 
     const clicktoshowFormoption = ()=>{
         setgetid('')

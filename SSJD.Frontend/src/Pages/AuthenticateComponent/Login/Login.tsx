@@ -25,6 +25,7 @@ function Login(){
         if(accessToken){
             const decodeToken = jwtDecode<{ [key: string]: any }>(accessToken);
             const getrole = decodeToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+            console.log(getrole)
             if (getrole) {
                 if (getrole === "Admin") {
                     navigate("/admin/account");

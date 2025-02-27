@@ -17,14 +17,14 @@ const AdminProductComponent:React.FC = () =>{
     let formdetail
     const [getid,setgetid] = useState('');
      useEffect(()=>{
-         const fetch = async()=>{
-             const data = await getProduct()
-             if(data)
-                 setproducts(data)
-            
-         }
          fetch()
      })
+     const fetch = async()=>{
+        const data = await getProduct()
+        if(data)
+            setproducts(data)
+       
+    }
     
     const clicktoshowFormoption = ()=>{
         setgetid('')

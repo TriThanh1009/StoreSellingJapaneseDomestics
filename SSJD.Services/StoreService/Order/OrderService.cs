@@ -42,6 +42,7 @@ namespace SSJD.Services.StoreService.Order
                 ShippingUnitID = request.ShippingUnitID,
                 ShippingAddress = request.ShippingAddress,
                 OrderStatus = request.OrderStatus,
+                TotalPrice = request.TotalPrice,
                 PaymentMethod = request.PaymentMethod,
                 PaymentStatus = request.PaymentStatus
             };
@@ -68,6 +69,7 @@ namespace SSJD.Services.StoreService.Order
                 data.ShippingUnitID = request.ShippingUnitID;
                 data.ShippingAddress = request.ShippingAddress;
                 data.OrderStatus = request.OrderStatus;
+                data.TotalPrice = request.TotalPrice;
                 data.PaymentMethod = request.PaymentMethod;
                 data.PaymentStatus = request.PaymentStatus;
                 _context.Order.Update(data);
@@ -88,6 +90,7 @@ namespace SSJD.Services.StoreService.Order
                 ShippingUnit = x.ShippingUnitID,
                 ShippingAddress = x.ShippingAddress,
                 OrderStatus = x.OrderStatus,
+                TotalPrice = x.TotalPrice,
                 PaymentMethod = x.PaymentMethod,
                 PaymentStatus = x.PaymentStatus,
                 
@@ -108,6 +111,7 @@ namespace SSJD.Services.StoreService.Order
                 ShippingUnit = data.ShippingUnitID,
                 ShippingAddress = data.ShippingAddress,
                 OrderStatus = data.OrderStatus,
+                TotalPrice = data.TotalPrice,
                 PaymentMethod = data.PaymentMethod,
                 PaymentStatus = data.PaymentStatus,
             };

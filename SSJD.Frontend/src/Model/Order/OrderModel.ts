@@ -8,5 +8,5 @@ export interface OrderModel{
     orderStatus : string
     totalPrice : number
     paymentMethod : string
-    paymentStatus : string
+    paymentStatus : number
 }

@@ -36,7 +36,6 @@ const Register:React.FC=()=>{
         };
     const handleChangeUser = (e: React.ChangeEvent<HTMLInputElement>) => {
             const { name, value } = e.target;
-            console.log(value)
             setuser((prev) => ({
                 ...prev,
                 [name]: value,

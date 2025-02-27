@@ -12,13 +12,12 @@ const AdminMemberCardComponent:React.FC = () =>{
     let childpage
     const [getid,setgetid] = useState('');
     useEffect(()=>{
-        const fetchaccount = async () =>{
-            const data = await getMemberCard()
-            console.log(data)
-            setMembercards(data)
-        }
-        fetchaccount()
+        fetch()
     },[])
+    const fetch = async () =>{
+        const data = await getMemberCard()
+        setMembercards(data)
+    }
     const clicktoshowFormoption = ()=>{
         setgetid('')
         setShowFormOptions(true)

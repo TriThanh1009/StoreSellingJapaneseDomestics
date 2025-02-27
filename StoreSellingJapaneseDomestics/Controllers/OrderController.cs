@@ -20,6 +20,12 @@ namespace StoreSellingJapaneseDomestics.Controllers
             var data = await _service.GetAll();
             return Ok(data);
         }
+        [HttpGet("GetByID/{id}")]
+        public async Task<IActionResult> GetByID(string id)
+        {
+            var data = await _service.GetByID(id);
+            return Ok(data);
+        }
         [HttpPost("CreateOrder")]
         public async Task<IActionResult> Create([FromBody] OrderRequestModel request)
         {
@@ -38,7 +44,7 @@ namespace StoreSellingJapaneseDomestics.Controllers
             await _service.Delete(id);
             return Ok();
         }
-        [HttpPost("ChangePaymentStatus")]
+        [HttpPut("ChangePaymentStatus")]
         public async Task<IActionResult> ChangePaymentStatus(string OrderID)
         {
             await _service.ChangePaymentStatus(OrderID);

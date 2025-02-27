@@ -3,5 +3,4 @@ export interface ProductDetailCreateModel{
     description? : string[]
     warranty? : Date
     origin? : string
-    additionalImage? : File | null
 }

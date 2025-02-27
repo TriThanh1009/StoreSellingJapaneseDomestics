@@ -52,15 +52,14 @@ const CheckoutComponent:React.FC = () =>{
         }
     }, [orderswdetail]);
     useEffect(()=>{
-        const fetch = async()=>{
-
-          if(userid){
-            const userdata = await getUserByID(userid)
-            setuser(userdata)
-          }
-        }
-        fetch()
+        fetchuserid()
     })
+    const fetchuserid = async()=>{
+        if(userid){
+          const userdata = await getUserByID(userid)
+          setuser(userdata)
+        }
+      }
 
     const handleOrderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 
@@ -73,8 +72,8 @@ const CheckoutComponent:React.FC = () =>{
                 orderStatus : "1",
                 shippingUnitID : "1",
                 totalPrice : total,
-                paymentMethod : selected,
-                paymentStatus : "0",
+                paymentMethod : "VietQR",
+                paymentStatus :0,
                 [name] : value 
             }))
         }
@@ -157,7 +156,7 @@ const CheckoutComponent:React.FC = () =>{
                     ))}
                         <div className='checkout-product-total '>
                                 <span className='checkout-product-total-title'>Tổng tiền: </span>
-                                <span className='checkout-product-total-price'>{total} VND</span>
+                                <span className='checkout-product-total-price'>{total.toLocaleString("vi-VN")} VND</span>
                         </div>
                 </div>
                 

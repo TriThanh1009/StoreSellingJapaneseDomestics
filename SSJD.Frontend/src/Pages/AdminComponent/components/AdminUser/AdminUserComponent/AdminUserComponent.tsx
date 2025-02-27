@@ -12,12 +12,12 @@ const AdminUserComponent:React.FC = () =>{
     const [getid,setgetid] = useState('');
     let childpage       
     useEffect(()=>{
-        const fetch = async () =>{
-            const data = await getUser()
-            setusers(data)
-        }
         fetch()
     },[])
+    const fetch = async () =>{
+        const data = await getUser()
+        setusers(data)
+    }
     const clicktoshowFormoption = ()=>{
         setgetid('')
         setShowFormOptions(true)

@@ -13,12 +13,12 @@ const AdminPromotionComponent:React.FC = () =>{
     const [getid,setgetid] = useState('');
     let childpage
     useEffect(()=>{
-        const fetch = async () =>{
-            const data = await getPromotion()
-            setPromotions(data)
-        }
         fetch()
     },[])
+    const fetch = async () =>{
+        const data = await getPromotion()
+        setPromotions(data)
+    }
     const clicktoshowFormoption = ()=>{
         setgetid('')
         setShowFormOptions(true)

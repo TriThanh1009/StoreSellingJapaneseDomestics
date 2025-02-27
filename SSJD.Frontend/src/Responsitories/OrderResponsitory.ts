@@ -13,7 +13,7 @@ export const getOrder = async()=>{
 }
 
 export const getOrderByID = async(id : string)=>{
-    const response = await axios.get(`${apiUrl}/Order/${id}`)
+    const response = await axios.get(`${apiUrl}/Order/GetByID/${id}`)
     return response.data
 }
 
@@ -24,6 +24,12 @@ export const createOrder = async(data:any)=>{
             "Content-Type" : "application/json"
         }
     })
+    return response.data
+}
+
+export const ChangePaymentStatus = async(orderid : string)=>{
+    console.log(orderid)
+    const response = await axios.put(`${apiUrl}/Order/ChangePaymentStatus?OrderID=${orderid}`)
     return response.data
 }
 

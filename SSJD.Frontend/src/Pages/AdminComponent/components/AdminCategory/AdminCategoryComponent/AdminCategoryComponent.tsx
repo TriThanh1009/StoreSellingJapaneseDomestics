@@ -22,12 +22,12 @@ const AdminCategoryComponent:React.FC = () =>{
         childpage = <AdminCategoryOptionsComponent selectedID={getid} onCancel={onCancel} />
     } else childpage = <div></div>
     useEffect(()=>{
-        const fetch = async () =>{
-            const data = await getCategory()
-            setcategorys(data)
-        }
         fetch()
     })
+    const fetch = async () =>{
+        const data = await getCategory()
+        setcategorys(data)
+    }
 
     const handleEdit = (id:string)=>{
         setShowFormOptions(true)

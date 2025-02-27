@@ -12,12 +12,12 @@ const AdminUnitShipComponent:React.FC = () =>{
     const [getid,setgetid] = useState('');
     let childpage       
     useEffect(()=>{
-        const fetch = async () =>{
-            const data = await getUnitShip()
-            setUnitShips(data)
-        }
         fetch()
     },[])
+    const fetch = async () =>{
+        const data = await getUnitShip()
+        setUnitShips(data)
+    }
     const clicktoshowFormoption = ()=>{
         setgetid('')
         setShowFormOptions(true)

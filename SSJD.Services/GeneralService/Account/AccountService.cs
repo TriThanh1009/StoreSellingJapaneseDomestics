@@ -61,9 +61,31 @@ namespace SSJD.Services.GeneralService.Account
             }
         }
 
-        public Task<PagedResult<PagingRequestBase>> GetAccountPaging(AccountPagingRequest request)
+        public async Task<PagedResult<AccountViewModel>> GetAccountPaging(AccountPagingRequest request)
         {
-            throw new NotImplementedException();
+            var query = from p in _context.Account select p;
+            if (!string.IsNullOrEmpty(request.Keyword))
+            {
+                query = query.Where(x => x.UserName.Contains(request.Keyword) || x.Email.Contains(request.Keyword));
+            }
+            var totalRow = await query.CountAsync();
+            var data = await query.Skip((request.PageIndex- 1) * request.PageSize)
+                                  .Take(request.PageSize)
+                                  .Select(x => new AccountViewModel()
+                                    {
+                                        UserName = x.UserName,
+                                        Password = x.Password,
+                                        PasswordCheck = x.PasswordCheck,
+                                        Email = x.Email,
+                                    }).ToListAsync();
+            var pagedView = new PagedResult<AccountViewModel>()
+            {
+                TotalRecords = totalRow,
+                PageSize = request.PageSize,
+                PageIndex = request.PageIndex,
+                Items = data
+            };
+            return pagedView;
         }
 
         public async Task<List<AccountViewModel>> GetAll()

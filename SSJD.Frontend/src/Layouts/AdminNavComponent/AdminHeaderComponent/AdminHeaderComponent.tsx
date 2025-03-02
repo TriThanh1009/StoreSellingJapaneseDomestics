@@ -4,19 +4,19 @@ import React, { useEffect, useState } from 'react';
 import  './AdminHeaderComponent.css';
 import logo from '../../../Image/chill.jpg'
 import { signalRService } from '../../../Responsitories/SignalrResponsitory';
+import { useNavigate } from 'react-router-dom';
 const AdminHeaderComponent:React.FC = ()=>{
   const [showMenu, setShowMenu] = useState(false);
   const [notifications, setNotifications] = useState<string[]>([]);
   const [unreadCount, setUnreadCount] = useState(0);
   const [showNotifications, setShowNotifications] = useState(false); // Điều khiển hiển thị danh sách
-  
+  const navigate = useNavigate()
   useEffect(()=>{
     signalRService.startConnection()
     signalRService.listenForNotifications((data)=>{
       setNotifications((prev)=>[data,...prev])
       setUnreadCount((prev)=>prev+1)
       alert(`${data}`)
-      console.log(data)
     })
     
     return ()=> signalRService.removeListener()
@@ -27,7 +27,7 @@ const AdminHeaderComponent:React.FC = ()=>{
   }
   function LogoutFeature(){
     localStorage.clear()
-    window.location.reload()
+    navigate('/login')
   }
   return (
     <div className='admin-container'>

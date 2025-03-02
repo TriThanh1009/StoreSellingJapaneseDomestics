@@ -9,6 +9,7 @@ import { UserOptionsModel } from '../../../../Model/User/UserOptionsModel';
 
 const ProfileComponent:React.FC = () => {
   const userId = localStorage.getItem('id');
+  const apiUrl = import.meta.env.VITE_API_GET_IMG;
   const [profile,setprofile] = useState<UserOrderProfile>()
   const [user,setuser] = useState<UserOptionsModel>({
           id : userId?? '',
@@ -63,28 +64,34 @@ const ProfileComponent:React.FC = () => {
             {/* <button className='redeem-button'>Redeem Points</button> */}
         </div>
         <div>
-            <button onClick={editprofilebutton} className='redeem-button'>Edit Profile</button>
+            <button onClick={editprofilebutton} className='redeem-button'>Cập nhật thông tin</button>
         </div>
       </div>
       <div className='profile-detail'>
         <div className='content-title'>Account Details</div>
         <div className='profile-detail-infor d-flex flex-column gap-2'>
-          {!formEdituser && <span>User Name :  {profile?.userName}</span>}   
-          {!formEdituser &&<span>Phone:  {profile?.phoneNumber}</span>}  
-          {!formEdituser &&<span>Address: {profile?.address}</span>}
+          {!formEdituser && 
+          <div className='d-flex flex-column gap-2'>
+            <span>User Name :  {profile?.userName}</span> 
+            <span>Phone:  {profile?.phoneNumber}</span>
+            <span>Address: {profile?.address}</span>
+          </div>}
           {formEdituser && <form onSubmit={editsubmit} className='profile-detail-edit d-flex flex-column gap-2'>
-            <input type='text' placeholder='Your Name' name='userName' onChange={handleChange}></input>
-            <input type='text' placeholder='Phone Number' name='phoneNumber' onChange={handleChange}></input>
-            <input type='text' placeholder='Your Address' name='address' onChange={handleChange}></input>
+            <input type='text' placeholder='Họ và tên' name='userName' onChange={handleChange}></input>
+            <input type='text' placeholder='Số điện thoại' name='phoneNumber' onChange={handleChange}></input>
+            <input type='text' placeholder='Địa chỉ' name='address' onChange={handleChange}></input>
+            {/* <input type='text' placeholder='Căn cước công dân' name='identityCard' onChange={handleChange}></input> */}
             <button >Accept</button>
           </form>
           }     
         </div>
       </div>
       <div className='order-history'>
-        <span className='order-history-title'>Order History</span>
+        <span className='order-history-title'>Lịch sử đơn hàng</span>
         <div className='order-history-detail'>
             <span>{profile?.productName} </span>
+            <img src={`${apiUrl}${profile?.productImg}`}></img>
+            <span>{`${apiUrl}${profile?.productImg}`}</span>
         </div>
       </div>
     </div>

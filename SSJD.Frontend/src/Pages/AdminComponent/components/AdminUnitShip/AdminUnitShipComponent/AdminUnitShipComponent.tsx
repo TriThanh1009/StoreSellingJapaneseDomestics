@@ -49,8 +49,7 @@ const AdminUnitShipComponent:React.FC = () =>{
                                 <table className="table table-bordered" id="dataTable" width="100%" >
                                     <thead>
                                         <tr className="">
-                                            <th>ID</th>
-                                            <th>Name</th>
+                                            <th>Đơn vị vận chuyển</th>
                                             <th>Options</th>
                                         </tr>
                                     </thead>
@@ -58,7 +57,6 @@ const AdminUnitShipComponent:React.FC = () =>{
                                     <tbody>
                                     {Array.isArray(unitships) && unitships.map((unitship) => (
                                         <tr>
-                                        <td>{unitship.id}</td>
                                         <td>{unitship.name}</td>
                                         <td className="td-options d-flex flex-row gap-2">
                                         <i onClick={()=>handleEdit(unitship.id)} className="options-icon bi bi-pen"></i>

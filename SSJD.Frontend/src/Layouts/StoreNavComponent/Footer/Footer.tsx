@@ -1,16 +1,36 @@
-import React from 'react'
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import React, { useEffect, useState } from 'react'
 import './Footer.css'
+import { UserModel } from '../../../Model/User/UserModel'
+import { getUserByID } from '../../../Responsitories/UserResponsitory';
 const Footer:React.FC=()=>{
+    const [userid, setuserid] = useState(localStorage.getItem("id"));
+    const [user,setuser] = useState<UserModel>()
+
+    useEffect(()=>{
+            fetchdatabyuserid()
+        })
+    
+    const fetchdatabyuserid = async() =>{
+        if(userid){
+            const data = await getUserByID(userid)
+            setuser(data)
+        }
+            
+    }
     return(
         <div className="container footer-margin">
                 <div className='d-flex flex-column justify-content-center align-items-center register-email gap-2'>
-                    <span>
-                    Bạn có thể gửi email đăng kí để có nhiều ưu đãi và dễ dàng được tư vấn
-                    </span>
-                    <div className='email-input'>
-                        <input className='email-footer' type='text' placeholder='Your Email'  />
+                    {user && 
+                    <div className='footer-user-name'>
+                        <span>Welcome, {user?.userName}</span>
+                    </div>}  
+                    {!user && <div>
                         <button className='sign-up-button'>Sign Up</button>
-                    </div>
+                    </div>}
+                    <span>
+                    Bạn có thể gửi thắc mắc qua zalo để có nhiều ưu đãi và dễ dàng được tư vấn
+                    </span>                  
                     <span>
                         Chúng tôi luôn mang đến những sản phẩm chính hãng và tuyệt vời nhất đến từ Ohuhu
                     </span>

@@ -128,9 +128,37 @@ namespace SSJD.Services.StoreService.Product
             throw new NotImplementedException();
         }
 
-        public Task<PagedResult<ProductViewModel>> GetProductPaging(ProductPagingRequest request)
+        public async Task<PagedResult<ProductViewModel>> GetProductPaging(ProductPagingRequest request)
         {
-            throw new NotImplementedException();
+            var query = from p in _context.Product select p;
+            if (!string.IsNullOrEmpty(request.Keyword))
+            {
+                query = query.Where(x => x.Name.Contains(request.Keyword));
+            }
+            var totalRow = await query.CountAsync();
+            var data = await query.Skip((request.PageIndex - 1) * request.PageSize)
+                .Take(request.PageSize)
+                .Select(x => new ProductViewModel()
+                {
+                    Name = x.Name,
+                    Brand = x.BrandID,
+                    Category = x.CategoryID,
+                    Size = x.Size,
+                    Price = x.Price,
+                    Stock = x.Stock,
+                    isActive = x.isActive,
+                    Image = x.Image,
+                }).ToListAsync();
+            var pagedView = new PagedResult<ProductViewModel>()
+            {
+                TotalRecords = totalRow,
+                PageSize = request.PageSize,
+                PageIndex = request.PageIndex,
+                Items = data
+            };
+            return pagedView;
+
+
         }
     }
 }

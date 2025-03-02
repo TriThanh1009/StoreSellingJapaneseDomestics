@@ -9,6 +9,6 @@ namespace SSJD.ViewModel.GeneralViewModel.Account
 {
     public class AccountPagingRequest : PagingRequestBase
     {
-        public string keyword { get; set; } = String.Empty;
+        public string Keyword { get; set; } = String.Empty;
     }
 }

@@ -50,10 +50,9 @@ const AdminMemberCardComponent:React.FC = () =>{
                                 <table className="table table-bordered" id="dataTable" width="100%" >
                                     <thead>
                                         <tr className="">
-                                            <th>ID</th>
-                                            <th>Point</th>
-                                            <th>Member Class</th>
-                                            <th>Discount</th>
+                                            <th>Điểm</th>
+                                            <th>Hạng thành viên</th>
+                                            <th>Giảm giá</th>
                                             <th>Options</th>
                                         </tr>
                                     </thead>
@@ -61,7 +60,6 @@ const AdminMemberCardComponent:React.FC = () =>{
                                     <tbody>
                                     {Array.isArray(membercards) && membercards.map((membercard) => (
                                         <tr key={membercard.id}>
-                                        <td>{membercard.id}</td>
                                         <td>{membercard.point}</td>
                                         <td>{membercard.memberClass}</td>
                                         <td>{membercard.discount}</td>

@@ -21,6 +21,12 @@ namespace StoreSellingJapaneseDomestics.Controllers
             var data = await _service.GetAll();
             return Ok(data);
         }
+        [HttpGet("GetUnitShipPaging")]
+        public async Task<IActionResult> GetUnitShipPaging([FromQuery] UnitShipPagingRequest request)
+        {
+            var data = await _service.GetUnitShipPaging(request);
+            return Ok(data);
+        }
         [HttpPost("CreateUnitShip")]
         public async Task<IActionResult> Create([FromBody] UnitShipRequestModel request)
         {

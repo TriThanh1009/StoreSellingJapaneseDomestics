@@ -50,16 +50,14 @@ const AdminCategoryComponent:React.FC = () =>{
                                 <table className="table table-bordered" id="dataTable" width="100%" >
                                     <thead>
                                         <tr className="">
-                                            <th>ID</th>
-                                            <th>Name</th>
+                                            <th>Tên loại bút</th>
                                             <th>Options</th>
                                         </tr>
                                     </thead>
 
                                     <tbody>
                                         {Array.isArray(categorys) && categorys.map((category)=>(
-                                            <tr>
-                                                <td>{category.id}</td>
+                                            <tr key={category.id}>
                                                 <td>{category.name}</td>
                                                 <td className="td-options d-flex flex-row gap-2">
                                                 <i onClick={()=>handleEdit(category.id)} className="options-icon bi bi-pen"></i>

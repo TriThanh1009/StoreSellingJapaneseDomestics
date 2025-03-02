@@ -49,14 +49,14 @@ const AdminUserComponent:React.FC = () =>{
                                 <table className="table table-bordered" id="dataTable" width="100%" >
                                     <thead>
                                         <tr className="">
-                                            <th>User Name</th>
-                                            <th>Address</th>
-                                            <th>Phone</th>
-                                            <th>Sex</th>
-                                            <th>Identity Card</th>
+                                            <th>Tên người dùng</th>
+                                            <th>Địa chỉ</th>
+                                            <th>Số điện thoại</th>
+                                            <th>Giới tính</th>
+                                            <th>Căn cước công dân</th>
                                             <th>Email</th>
-                                            <th>Account</th>
-                                            <th>Member Card</th>
+                                            <th>Tài khoản</th>
+                                            <th>Hạng thành viên</th>
                                             <th>Options</th>
                                         </tr>
                                     </thead>

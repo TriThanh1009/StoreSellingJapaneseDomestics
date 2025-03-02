@@ -6,21 +6,37 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import logoimg from '../../../Image/logo.jpg'
 import logo from '../../../Image/chill.jpg'
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useShoppingCart } from '../../../Hooks/useShoppingCart';
 import CartComponent from '../../../Pages/ShopComponent/components/CartComponent/CartComponent';
 import { Navigate, useNavigate } from 'react-router-dom';
+import { UserModel } from '../../../Model/User/UserModel';
+import { getUserByID } from '../../../Responsitories/UserResponsitory';
 
 const Header:React.FC=()=>{
     const [showMenu, setShowMenu] = useState("");
     const [openDropdown,setopenDropdown] = useState(null)
+    const [userid, setuserid] = useState(localStorage.getItem("id"));
+    const [user,setuser] = useState<UserModel>()
     const {cartQuantity} = useShoppingCart()
     const navigate = useNavigate()
+    useEffect(()=>{
+        fetchdatabyuserid()
+    })
+
+    const fetchdatabyuserid = async() =>{
+        if(userid){
+            const data = await getUserByID(userid)
+            setuser(data)
+        }
+        
+    }
+
     function LogoutFeature(){
         localStorage.clear()
-        window.location.reload()
+        navigate('/login')
       }
-      const handleMenuClick = (menu: string) => {
+    const handleMenuClick = (menu: string) => {
         setShowMenu(prev => (prev === menu ? "" : menu));
     };
     function clicktonav(nav: string){
@@ -88,9 +104,14 @@ const Header:React.FC=()=>{
 
                 {/* Menu Logout */}
                 {showMenu==="logout" && (
-                    <div className="dropdown-menu-logout d-flex flex-column gap-2">
-                    <button onClick={()=>clicktonav("profile")} className="logout-button">Profile</button>   
-                    <button onClick={LogoutFeature} className="logout-button">Logout</button>
+                    <div>
+                        {user &&
+                        <div className="dropdown-menu-logout d-flex flex-column gap-2">
+                            <button onClick={()=>clicktonav("profile")} className="logout-button">Profile</button>   
+                            <button onClick={LogoutFeature} className="logout-button">Logout</button>
+                        </div> 
+                        }
+                        {!user && <button onClick={()=>clicktonav("register")} className="logout-button">Register</button>}
                 </div>
                 )}
             </div>

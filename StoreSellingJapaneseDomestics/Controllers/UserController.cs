@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SSJD.Services.StoreService.Role;
 using SSJD.Services.StoreService.User;
+using SSJD.ViewModel.StoreViewModel.Customer;
 using SSJD.ViewModel.StoreViewModel.User;
 
 
@@ -24,6 +25,12 @@ namespace StoreSellingJapaneseDomestics.Controllers
         public async Task<IActionResult> Get()
         {
             var data = await _service.GetAll();
+            return Ok(data);
+        }
+        [HttpGet("GetUserPaging")]
+        public async Task<IActionResult> GetUserPaging([FromQuery] UserPagingRequest request)
+        {
+            var data = await _service.GetUserPaging(request);
             return Ok(data);
         }
 

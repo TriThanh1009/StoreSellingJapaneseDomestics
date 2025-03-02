@@ -4,4 +4,5 @@ export interface UserOrderProfile{
     address: string
     phoneNumber : string
     productName : string
+    productImg : string
 }

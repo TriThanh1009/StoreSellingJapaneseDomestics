@@ -50,11 +50,10 @@ const AdminPromotionComponent:React.FC = () =>{
                                 <table className="table table-bordered" id="dataTable" width="100%" >
                                     <thead>
                                         <tr className="">
-                                            <th>ID</th>
-                                            <th>Name</th>
-                                            <th>Create Date</th>
-                                            <th>End Date</th>
-                                            <th>Percent Discount</th>
+                                            <th>Tên mã</th>
+                                            <th>Ngày tạo</th>
+                                            <th>Ngày kết thúc</th>
+                                            <th>Phần trăm giảm giá</th>
                                             <th>Options</th>
                                         </tr>
                                     </thead>
@@ -62,7 +61,6 @@ const AdminPromotionComponent:React.FC = () =>{
                                     <tbody>
                                     {Array.isArray(promotions) && promotions.map((promotion) => (
                                         <tr>
-                                        <td>{promotion.id}</td>
                                         <td>{promotion.name}</td>
                                         <td>{promotion.createDate.toString().split("T")[0]}</td>
                                         <td>{promotion.endDate.toString().split("T")[0]}</td>

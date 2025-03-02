@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SSJD.ViewModel.GeneralViewModel.PageResult
 {
-    public class PagedResult<T> :PagingRequestBase
+    public class PagedResult<T> :PagedResultBase
     {
         public List<T> Items { set; get; } = new List<T>();
     }

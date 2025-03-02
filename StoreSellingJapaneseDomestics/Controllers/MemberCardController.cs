@@ -20,6 +20,12 @@ namespace StoreSellingJapaneseDomestics.Controllers
             var data = await _service.GetAll();
             return Ok(data);
         }
+        [HttpGet("GetMemberCardPaging")]
+        public async Task<IActionResult> GetMemberCardPaging([FromQuery] MemberCardPagingRequest request)
+        {
+            var data = await _service.GetMemberCardPaging(request);
+            return Ok(data);
+        }
         [HttpPost("CreateMemberCard")]
         public async Task<IActionResult> Create([FromBody] MemberCardRequestModel request)
         {

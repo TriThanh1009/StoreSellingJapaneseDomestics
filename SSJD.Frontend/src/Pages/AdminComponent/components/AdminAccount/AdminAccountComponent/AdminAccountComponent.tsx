@@ -55,10 +55,10 @@ const AdminAccountComponent:React.FC = () =>{
                                 <table className="table table-bordered" id="dataTable" width="100%" >
                                     <thead>
                                         <tr className="">
-                                            <th>User Name</th>
-                                            <th>Password</th>
+                                            <th>Tài khoản</th>
+                                            <th>Mật khẩu</th>
                                             <th>Email</th>
-                                            <th>options</th>
+                                            <th>Options</th>
                                         </tr>
                                     </thead>
 

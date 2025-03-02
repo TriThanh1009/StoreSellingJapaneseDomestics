@@ -15,13 +15,14 @@ interface props{
 const ItemCard:React.FC<props> = ({products}) =>{
   const { increaseCartQuantity} = useShoppingCart()
   const [selectheadtype, setselectheadtype] = useState<string>("");
+  const [showAlert, setShowAlert] = useState(false);
   const apiUrl = import.meta.env.VITE_API_GET_IMG;
   const navigate = useNavigate()
   const typeRef = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (typeRef.current && !typeRef.current.contains(event.target as Node)) {
-        setselectheadtype(""); // Reset khi click ra ngoài
+        setselectheadtype(""); 
       }
     };
 
@@ -30,11 +31,26 @@ const ItemCard:React.FC<props> = ({products}) =>{
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+  
+  const addtocart = () => {
+    setShowAlert(true);
+    increaseCartQuantity(products.id,selectheadtype)
+    setTimeout(() => {
+      setShowAlert(false);
+    }, 5000);
+  }
+
   function NavtoDetail(){
     navigate(`/productdetail/${products.id}`);
   }
     return (
+      
     <div className="card text-center mx-auto" style={{ width: "18rem", border: "2px solid black", borderRadius: "10px" }}>
+      {showAlert && (
+        <div className="custom-alert">
+          Đã thêm sản phẩm vào giỏ hàng
+        </div>
+      )}
       <div onClick={NavtoDetail} className="card-img p-3">
         <img src={`${apiUrl}${products.image}`} className="img-fluid" />
       </div>
@@ -72,9 +88,10 @@ const ItemCard:React.FC<props> = ({products}) =>{
         </div>
         <div>
           <button onClick={() =>{
-                increaseCartQuantity(products.id,selectheadtype)}}  className="card-add-to-card btn btn-pink text-white">
+                addtocart()}}  className="card-add-to-card btn btn-pink text-white">
                 Add to Cart
           </button>
+          
         </div>
       </div>
     </div>

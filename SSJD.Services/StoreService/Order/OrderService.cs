@@ -123,9 +123,38 @@ namespace SSJD.Services.StoreService.Order
             throw new NotImplementedException();
         }
 
-        public Task<PagedResult<OrderViewModel>> GetOrderPaging(OrderPagingRequest request)
+        public async Task<PagedResult<OrderViewModel>> GetOrderPaging(OrderPagingRequest request)
         {
-            throw new NotImplementedException();
+            var query = from p in _context.Order select p;
+            if(!string.IsNullOrEmpty(request.Keyword))
+            {
+                query = query.Where(x => x.CustomerName.Contains(request.Keyword) || x.CustomerPhone.Contains(request.Keyword));
+            }
+            var totalRow = await query.CountAsync();
+            var data = await query.Skip((request.PageIndex - 1) * request.PageSize)
+                .Take(request.PageSize)
+                .Select(x => new OrderViewModel()
+                {
+                    ID = x.ID,
+                    User = x.UserID,
+                    CustomerName = x.CustomerName,
+                    CustomerPhone = x.CustomerPhone,
+                    OrderDate = x.OrderDate,
+                    ShippingUnit = x.ShippingUnitID,
+                    ShippingAddress = x.ShippingAddress,
+                    OrderStatus = x.OrderStatus,
+                    TotalPrice = x.TotalPrice,
+                    PaymentMethod = x.PaymentMethod,
+                    PaymentStatus = x.PaymentStatus,
+                }).ToListAsync();
+            var pagedView = new PagedResult<OrderViewModel>()
+            {
+                TotalRecords = totalRow,
+                PageSize = request.PageSize,
+                PageIndex = request.PageIndex,
+                Items = data
+            };
+            return pagedView;
         }
     }
 }

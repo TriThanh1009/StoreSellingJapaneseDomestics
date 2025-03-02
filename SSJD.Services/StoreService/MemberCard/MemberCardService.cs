@@ -85,9 +85,26 @@ namespace SSJD.Services.StoreService.MemberCard
             throw new NotImplementedException();
         }
 
-        public Task<PagedResult<MemberCardViewModel>> GetMemberCardPaging(MemberCardPagingRequest request)
+        public async Task<PagedResult<MemberCardViewModel>> GetMemberCardPaging(MemberCardPagingRequest request)
         {
-            throw new NotImplementedException();
+            var query = from p in _context.MemberCard select p;
+            var data = query.Skip((request.PageIndex - 1) * request.PageSize)
+                .Take(request.PageSize)
+                .Select(x => new MemberCardViewModel()
+                {
+                    ID = x.ID,
+                    Point = x.Point,
+                    MemberClass = x.MemberClass,
+                    Discount = x.Discount
+                }).ToList();
+            var pagedView = new PagedResult<MemberCardViewModel>()
+            {
+                TotalRecords = data.Count,
+                PageSize = request.PageSize,
+                PageIndex = request.PageIndex,
+                Items = data
+            };
+            return pagedView;
         }
     }
 }

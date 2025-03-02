@@ -6,6 +6,7 @@ using SSJD.DataAccess;
 using SSJD.Services.GeneralService.Base;
 using SSJD.ViewModel.GeneralViewModel.PageResult;
 using SSJD.ViewModel.StoreViewModel.Customer;
+using SSJD.ViewModel.StoreViewModel.Product;
 using SSJD.ViewModel.StoreViewModel.User;
 using System;
 using System.Collections.Generic;
@@ -111,35 +112,66 @@ namespace SSJD.Services.StoreService.User
             throw new NotImplementedException();
         }
 
-        public Task<PagedResult<UserViewModel>> GetUserPaging(UserPagingRequest request)
+        public async Task<PagedResult<UserViewModel>> GetUserPaging(UserPagingRequest request)
         {
-            throw new NotImplementedException();
+            var query = from p in _context.User select p;
+            if(!string.IsNullOrEmpty(request.Keyword))
+            {
+                query = query.Where(x => x.UserName.Contains(request.Keyword) || x.PhoneNumber.Contains(request.Keyword) || x.Address.Contains(request.Keyword) || x.IdentityCard.Contains(request.Keyword) || x.Email.Contains(request.Keyword));
+            }
+            var totalRow = await query.CountAsync();
+            var data = await query.Skip((request.PageIndex - 1) * request.PageSize)
+                .Take(request.PageSize)
+                .Select(x => new UserViewModel()
+                {
+                    UserName = x.UserName,
+                    PhoneNumber = x.PhoneNumber ?? "",
+                    Address = x.Address,
+                    IdentityCard = x.IdentityCard,
+                    Email = x.Email ?? "",
+                    Account = x.AccountID,
+                    MemberCard = x.MemberCardID,
+                    Image = x.Image
+                }).ToListAsync();
+            var pagedView = new PagedResult<UserViewModel>()
+            {
+                TotalRecords = totalRow,
+                PageSize = request.PageSize,
+                PageIndex = request.PageIndex,
+                Items = data
+            };
+            return pagedView;
         }
 
         public async Task<UserOrderProfile> GetUserProfileById(string id)
         {
-            var pointquery = (from p in _context.User
-                             join m in _context.MemberCard on p.MemberCardID equals m.ID
+            var productlist= (from p in _context.User                      
+                             join o in _context.Order on p.Id equals o.UserID
+                             join od in _context.OrderDetail on o.ID equals od.OrderID
+                             join pr in _context.Product on od.ProductID equals pr.ID
                              where p.Id == id
-                             select m.Point).FirstOrDefault();
-            var productname = (from p in _context.User
-                            join o in _context.Order on p.Id equals o.UserID
-                            join od in _context.OrderDetail on o.ID equals od.OrderID
-                            join pr in _context.Product on od.ProductID equals pr.ID
-                            where p.Id == id
-                            select pr.Name).FirstOrDefault();
+                             group new { pr, od,o } by new { pr.ID, pr.Name, pr.Image} into g
+                             select new ProductForUserProfile
+                             {
+                                 ProductName = g.Key.Name,
+                                 ProductImage = g.Key.Image,
+                                 OrderDate = g.Select(x=>x.o.OrderDate).FirstOrDefault(),
 
-           var data = await _context.User.FindAsync(id);
-            var getdata = new UserOrderProfile()
-            {
-                UserName = data.UserName,
-                Address = data.Address,
-                PhoneNumber = data.PhoneNumber,
-                Email = data.Email,
-                Point = pointquery,
-                ProductName = productname
-            };
-            return getdata;
+                             }).ToList();
+
+            var userProfile = (from p in _context.User
+                               join m in _context.MemberCard on p.MemberCardID equals m.ID
+                               where p.Id == id
+                               select new UserOrderProfile()
+                               {
+                                   UserName = p.UserName,
+                                   Address = p.Address,
+                                   PhoneNumber = p.PhoneNumber,
+                                   Email = p.Email,
+                                   Point = m.Point,
+                                   Product = productlist
+                               }).FirstOrDefault();
+            return userProfile;
         }
     }
 }

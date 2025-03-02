@@ -21,6 +21,12 @@ namespace StoreSellingJapaneseDomestics.Controllers
             var data = await _service.GetAll();
             return Ok(data);
         }
+        [HttpGet("GetPromotionPaging")]
+        public async Task<IActionResult> GetPromotionPaging([FromQuery] PromotionPagingRequest request)
+        {
+            var data = await _service.GetPromotionPaging(request);
+            return Ok(data);
+        }
         [HttpPost("CreatePromotion")]
         public async Task<IActionResult> Create([FromBody] PromotionRequestModel request)
         {

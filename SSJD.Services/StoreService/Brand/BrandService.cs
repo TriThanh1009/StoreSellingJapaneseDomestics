@@ -60,9 +60,28 @@ namespace SSJD.Services.StoreService.Brand
             return data;
         }
 
-        public Task<PagedResult<BrandViewModel>> GetBrandPaging(BrandPagingRequest request)
+        public async Task<PagedResult<BrandViewModel>> GetBrandPaging(BrandPagingRequest request)
         {
-            throw new NotImplementedException();
+            var query = from p in _context.Brand select p;
+            if (!string.IsNullOrEmpty(request.Keyword))
+            {
+                query = query.Where(x => x.Name.Contains(request.Keyword));
+            }
+            var totalRow = await query.CountAsync();
+            var data = await query.Skip((request.PageIndex - 1) * request.PageSize)
+                .Take(request.PageSize)
+                .Select(x => new BrandViewModel()
+                {
+                    Name = x.Name
+                }).ToListAsync();
+            var pagedView = new PagedResult<BrandViewModel>()
+            {
+                TotalRecords = totalRow,
+                PageSize = request.PageSize,
+                PageIndex = request.PageIndex,
+                Items = data
+            };
+            return pagedView;
         }
 
         public async Task<BrandViewModel?> GetByID(string id)

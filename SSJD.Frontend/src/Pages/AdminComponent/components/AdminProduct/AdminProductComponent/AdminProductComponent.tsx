@@ -66,16 +66,16 @@ const AdminProductComponent:React.FC = () =>{
                                 <table className="table table-bordered" id="dataTable" width="100%" >
                                     <thead>
                                         <tr>
-                                            <th>Name</th>
-                                            <th>Brand</th>
-                                            <th>Category</th>
-                                            <th>Size</th>
-                                            <th>Price</th>
-                                            <th>Stock</th>
-                                            <th>Active</th>
-                                            <th>Image</th>
+                                            <th>Tên sản phẩm</th>
+                                            <th>Thương hiệu</th>
+                                            <th>Thể loại</th>
+                                            <th>Số lượng bút</th>
+                                            <th>Giá tiền</th>
+                                            <th>Tồn kho</th>
+                                            <th>Trạng thái</th>
+                                            <th>Hình ảnh</th>
                                             <th>Options</th>
-                                            <th>Detail</th>
+                                            <th>Chi tiết</th>
                                         </tr>
                                     </thead>
 

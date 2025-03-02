@@ -26,6 +26,12 @@ namespace StoreSellingJapaneseDomestics.Controllers
             var data = await _service.GetByID(id);
             return Ok(data);
         }
+        [HttpGet("GetOrderPaging")]
+        public async Task<IActionResult> GetOrderPaging([FromQuery] OrderPagingRequest request)
+        {
+            var data = await _service.GetOrderPaging(request);
+            return Ok(data);
+        }
         [HttpPost("CreateOrder")]
         public async Task<IActionResult> Create([FromBody] OrderRequestModel request)
         {

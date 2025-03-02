@@ -6,6 +6,7 @@
     color: white;
     background-color: black;
     height: 3rem;
+    width: 10rem;
     border-radius: 5px;
 }
 .email-footer{
@@ -14,8 +15,9 @@
     margin-right: 2px;
     border-radius: 20px;
 }
-.email-input{
-    padding: 5px;
+.footer-user-name{
+    font-weight: bold;
+    font-size: 30px;
 }
 .information{
     padding-top: 5%;

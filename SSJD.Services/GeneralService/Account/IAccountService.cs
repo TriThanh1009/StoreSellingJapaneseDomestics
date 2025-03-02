@@ -13,7 +13,7 @@ namespace SSJD.Services.GeneralService.Account
 {
     public interface IAccountService : IBaseService<AccountRequestModel,AccountViewModel>
     {
-        Task<PagedResult<PagingRequestBase>> GetAccountPaging(AccountPagingRequest request);
+        Task<PagedResult<AccountViewModel>> GetAccountPaging(AccountPagingRequest request);
 
     }
 }

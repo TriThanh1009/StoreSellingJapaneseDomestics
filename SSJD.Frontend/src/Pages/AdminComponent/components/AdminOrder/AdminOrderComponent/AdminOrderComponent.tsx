@@ -3,12 +3,13 @@ import React, { useEffect, useState } from "react"
 import { OrderModel } from "../../../../../Model/Order/OrderModel"
 import { ChangePaymentStatus, getOrder, getOrderByID } from "../../../../../Responsitories/OrderResponsitory"
 import  './AdminOrderComponent.css'
-import switchoff from "../../../../../Image/switch-off.png"
-import switchon from "../../../../../Image/switch-on.png"
+import failure from "../../../../../Image/failure.png"
+import success from "../../../../../Image/success.png"
 
 const AdminOrderComponent:React.FC = () =>{
     const [orders,setorders] = useState<OrderModel[]>()
-    const [status, setStatus] = useState(0);
+    const [status, setStatus] = useState<{ [key: string]: number }>({});
+
     useEffect(()=>{
         fetch()
     },[])
@@ -17,13 +18,11 @@ const AdminOrderComponent:React.FC = () =>{
         setorders(data)
     }
 
-        const changepaymentstatus = () =>{     
-            orders?.map(async (item)=>{
-                await ChangePaymentStatus(item.id)
-                const updatepayment = await getOrderByID(item.id)
-                setStatus(updatepayment.paymentStatus)
-                console.log(status)
-            })
+        const changepaymentstatus =  async(id : string) =>{     
+            await ChangePaymentStatus(id)
+            const updatepayment = await getOrderByID(id)
+            setStatus(updatepayment.paymentStatus)
+            window.location.reload()
         }
     
     return (
@@ -37,22 +36,22 @@ const AdminOrderComponent:React.FC = () =>{
                                 <table className="table table-bordered" id="dataTable" width="100%" >
                                     <thead>
                                         <tr className="">
-                                            <th>Customer</th>
-                                            <th>Phone Number</th>
-                                            <th>Order Date</th>
-                                            <th>Shipping Unit</th>
-                                            <th>ShippingAddress</th>
-                                            <th>OrderStatus</th>
-                                            <th>Total Price</th>
-                                            <th>Payment Method</th>
-                                            <th>Payment Status</th>
+                                            <th>Khách hàng</th>
+                                            <th>Số điện thoại</th>
+                                            <th>Ngày đặt hàng</th>
+                                            <th>Đơn vị vận chuyển</th>
+                                            <th>Địa chỉ</th>
+                                            <th>Trạng thái đơn hàng</th>
+                                            <th>Tổng tiền</th>
+                                            <th>Phương thức thanh toán</th>
+                                            <th>Trạng thái thanh toán</th>
                                             <th>Options</th>
                                         </tr>
                                     </thead>
 
                                     <tbody>
                                     {Array.isArray(orders) && orders.map((order) => (
-                                        <tr>
+                                        <tr key={order.id}>
                                         <td>{order.customerName}</td>
                                         <td>{order.customerPhone}</td>
                                         <td>{order.orderDate.toString().split("T")[0]}</td>
@@ -61,9 +60,9 @@ const AdminOrderComponent:React.FC = () =>{
                                         <td>{order.orderStatus==="1" ? "Thành công" : "Thất bại"} </td>
                                         <td>{order.totalPrice}</td>
                                         <td>{order.paymentMethod}</td>
-                                        <td><img className="switch-options" src={status === 1 ? switchoff : switchon} //Vì mặc định stastua  useState(0); nên cái này nó phải ngược, khi nào tìm được cách sẽ fix
-                                                                            onClick={changepaymentstatus} 
-                                                                            style={{ cursor: "pointer" }}/>
+                                        <td><img className="switch-options" src={(status[order.id] ?? order.paymentStatus) === 1 ? success : failure} //Vì mặc định stastua  useState(0); nên cái này nó phải ngược, khi nào tìm được cách sẽ fix
+                                                                            onClick={()=>changepaymentstatus(order.id)}
+                                                                            style={{ cursor: "pointer" }}/>{(status[order.id] ?? order.paymentStatus) === 1 ? "Đã thanh toán" : "Chưa thanh toán"}
                                         </td> 
                                         <td className="td-options d-flex flex-row gap-2">
                                         <i className="bi bi-pen"></i>

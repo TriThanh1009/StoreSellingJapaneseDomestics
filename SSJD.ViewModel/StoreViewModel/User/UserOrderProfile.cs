@@ -1,5 +1,6 @@
 ﻿using SSJD.Entities.StoreEntity;
 using SSJD.ViewModel.StoreViewModel.OrderDetail;
+using SSJD.ViewModel.StoreViewModel.Product;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace SSJD.ViewModel.StoreViewModel.User
         public string Address { get; set; }
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
-        public string ProductName { get; set; }
+        public List<ProductForUserProfile> Product { get; set; }
 
 
     }

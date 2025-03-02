@@ -4,9 +4,10 @@ import React, { useEffect, useState } from "react"
 import { Button, Stack, Table } from "react-bootstrap";
 import { useShoppingCart } from "../../../../Hooks/useShoppingCart";
 import { getProductByID } from "../../../../Responsitories/ProductResponsitory";
-import { OrderDetailwithProduct } from "../../../../Model/OderWithProduct/OrderWithProduct";
+
 import './CartComponent.css'
 import { useNavigate } from "react-router-dom";
+import { OrderDetailwithProduct } from "../../../../Model/RelationshipModel/OrderWithProduct/OrderWithProduct";
 
 
 
@@ -16,28 +17,29 @@ const CartComponent: React.FC = () => {
   const navigate = useNavigate()
   //const [products,setproducts] = useState<ProductModel[]>()
   useEffect(() => {
-    const fetchOrders = async () => {
-      if (cart.length === 0){
-        setorder([])
-        return
-      } 
-  
-      const orderList: OrderDetailwithProduct[] = await Promise.all(
-        cart.map(async (item) => {
-          const product = await getProductByID(item.productID);
-          return { 
-            product: product,  // Thông tin sản phẩm
-            quantity: item.quantity, // Lấy quantity từ cart
-            orderdetail : item
-          }; 
-          
-        })      
-      );
-      setorder(orderList); // Cập nhật orders
-    };
-    console.log(cart)
-    fetchOrders();
+    fetchOrders()
   }, [cart]);
+  const fetchOrders = async () => {
+    if (cart.length === 0){
+      setorder([])
+      return
+    } 
+
+    const orderList: OrderDetailwithProduct[] = await Promise.all(
+      cart.map(async (item) => {
+        const product = await getProductByID(item.productID);
+        return { 
+          product: product,  // Thông tin sản phẩm
+          quantity: item.quantity, // Lấy quantity từ cart
+          orderdetail : item
+        }; 
+        
+      })      
+    );
+    setorder(orderList); // Cập nhật orders
+  };
+  console.log(cart)
+  fetchOrders();
 
   function NavToCheckout(){
     navigate('/checkout')

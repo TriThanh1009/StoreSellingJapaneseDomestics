@@ -22,6 +22,12 @@ namespace StoreSellingJapaneseDomestics.Controllers
             var data = await _service.GetAll();
             return Ok(data);
         }
+        [HttpGet("GetAccountPaging")]
+        public async Task<IActionResult> GetAccountPaging([FromQuery] AccountPagingRequest request)
+        {
+            var data = await _service.GetAccountPaging(request);
+            return Ok(data);
+        }
         [HttpPost("CreateAccount")]
         public async Task<IActionResult> Create([FromBody] AccountRequestModel request)
         {

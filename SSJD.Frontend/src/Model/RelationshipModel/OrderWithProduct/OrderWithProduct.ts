@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { OrderDetailModel } from "../OrderDetail/OrderDetailModel";
-import { ProductModel } from "../Product/ProductModel";
+
+import { OrderDetailModel } from "../../OrderDetail/OrderDetailModel";
+import { ProductModel } from "../../Product/ProductModel";
+
 
 export interface OrderDetailwithProduct {
   orderdetail: OrderDetailModel

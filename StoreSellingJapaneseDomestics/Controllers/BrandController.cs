@@ -22,6 +22,12 @@ namespace StoreSellingJapaneseDomestics.Controllers
             var data = await _service.GetAll();
             return Ok(data);
         }
+        [HttpGet("GetBrandPaging")]
+        public async Task<IActionResult> GetBrandPaging([FromQuery] BrandPagingRequest request)
+        {
+            var data = await _service.GetBrandPaging(request);
+            return Ok(data);
+        }
 
         [HttpPost("CreateBrand")]
         public async Task<IActionResult> Create([FromBody] BrandRequestModel request)

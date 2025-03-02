@@ -24,14 +24,15 @@ const ProfileComponent:React.FC = () => {
       })
   const [formEdituser,setformEdituser] = useState(false)
   useEffect(() => {
-    const fetch = async () => {
-      if (userId) {
-        const data = await GetUserProfileById(userId);
-        if(data) setprofile(data);
-      }
-    };
-    fetch();
-  });
+    fetch()
+  },[profile]);
+  const fetch = async () => {
+    if(userId){
+      const profiledata = await GetUserProfileById(userId)
+      setprofile(profiledata)
+    }
+    console.log(profile?.product)
+  };
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
           const { name, value } = e.target;
           setuser((prev) => ({
@@ -88,11 +89,13 @@ const ProfileComponent:React.FC = () => {
       </div>
       <div className='order-history'>
         <span className='order-history-title'>Lịch sử đơn hàng</span>
-        <div className='order-history-detail'>
-            <span>{profile?.productName} </span>
-            <img src={`${apiUrl}${profile?.productImg}`}></img>
-            <span>{`${apiUrl}${profile?.productImg}`}</span>
+        {Array.isArray(profile?.product) && profile.product.map((prod)=>(    
+        <div className='order-history-detail d-flex flex-column gap-2'>
+            <span>{prod.orderDate.toString().split("T")[0]}</span> 
+            <span>{prod.productName}</span>
+            <img className='product-list-img' src={`${apiUrl}${prod.productImage}`}></img>
         </div>
+        ))}
       </div>
     </div>
 </div>

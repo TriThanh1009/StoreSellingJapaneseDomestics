@@ -33,7 +33,7 @@ const ItemCard:React.FC<props> = ({products}) =>{
   }, []);
   
   const addtocart = () => {
-    setShowAlert(true);
+    console.log(selectheadtype)
     increaseCartQuantity(products.id,selectheadtype)
     setTimeout(() => {
       setShowAlert(false);
@@ -68,7 +68,7 @@ const ItemCard:React.FC<props> = ({products}) =>{
                       <span>{products.category}</span>             
                   </div>
                 </div>
-                <div ref={typeRef} className="product-detail-tips-card d-flex flex-row gap-3 mt-3">
+                <div  className="product-detail-tips-card d-flex flex-row gap-3 mt-3">
                         <div onClick={() =>setselectheadtype('brushchisel')} className={`product-detail-tips-options-card ${selectheadtype === 'brushchisel' ? 'selected' : ''}`} >
                             <span>Chisel</span>
                         </div>

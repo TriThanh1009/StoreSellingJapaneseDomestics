@@ -14,6 +14,6 @@ namespace SSJD.Services.StoreService.OrderDetail
         Task<PagedResult<OrderDetailViewModel>> GetOrderDetailPaging(OrderDetailPagingRequest request);
         Task<int> CreateList(List<OrderDetailRequestModel> request);
 
-        Task<List<OrderDetailListViewModel>> ListByOrderID();
+        Task<List<OrderDetailListViewModel>> ListByOrderID(string orderid);
     }
 }

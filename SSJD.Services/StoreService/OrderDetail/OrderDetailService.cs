@@ -152,12 +152,13 @@ namespace SSJD.Services.StoreService.OrderDetail
             return pagedView;
         }
 
-        public async Task<List<OrderDetailListViewModel>> ListByOrderID()
+        public async Task<List<OrderDetailListViewModel>> ListByOrderID(string orderid)
         {
             var query = from o in _context.OrderDetail
                         join p in _context.Product on o.ProductID equals p.ID
                         join pr in _context.Promotion on o.PromotionID equals pr.ID into promotionJoin
                         from pr in promotionJoin.DefaultIfEmpty()
+                        where o.OrderID == orderid
                         select new
                         {
                             o.OrderID,

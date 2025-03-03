@@ -3,7 +3,7 @@
 import './CheckoutComponent.css'
 import img from '../../../../Image/logo.jpg'
 import React, { useEffect, useState } from 'react'
-import { OrderDetailwithProduct } from '../../../../Model/OderWithProduct/OrderWithProduct'
+
 import { useShoppingCart } from '../../../../Hooks/useShoppingCart'
 import { getProductByID } from '../../../../Responsitories/ProductResponsitory'
 import logomomo from '../../../../Image/logo_momo.jpg'
@@ -15,6 +15,7 @@ import { it } from 'node:test'
 import { OrderCreateModel } from '../../../../Model/Order/OrderCreateModel'
 import { createOrder, getOrderByID } from '../../../../Responsitories/OrderResponsitory'
 import { CreateListOrderDetail, createOrderDetail } from '../../../../Responsitories/OrderDetailResponsitory'
+import { OrderDetailwithProduct } from '../../../../Model/RelationshipModel/OrderWithProduct/OrderWithProduct'
 const CheckoutComponent:React.FC = () =>{
     const {cart} = useShoppingCart()
     const [orderswdetail,setorderswdetail] = useState<OrderDetailwithProduct[]>()
@@ -101,7 +102,7 @@ const CheckoutComponent:React.FC = () =>{
                 // }
             }
         }
-        console.log(amount)
+        localStorage.removeItem('shopping-cart')
         navigate(`/payment/${amount}`);
     };
     

@@ -12,6 +12,7 @@ const PaymentComponent = () => {
         const fetchqr = async () =>{
             const url = `https://img.vietqr.io/image/vcb-1017965388-qr_only.png?amount=${amount}&addInfo=1`
             setqrurl(url)
+            localStorage.removeItem('shopping-cart')
         }
         fetchqr()
     },[amount])

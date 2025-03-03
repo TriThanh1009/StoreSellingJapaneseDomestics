@@ -31,7 +31,7 @@ const ProfileComponent:React.FC = () => {
       const profiledata = await GetUserProfileById(userId)
       setprofile(profiledata)
     }
-    console.log(profile?.product)
+    
   };
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
           const { name, value } = e.target;

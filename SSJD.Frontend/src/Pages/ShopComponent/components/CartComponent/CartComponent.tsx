@@ -38,8 +38,6 @@ const CartComponent: React.FC = () => {
     );
     setorder(orderList); // Cập nhật orders
   };
-  console.log(cart)
-  fetchOrders();
 
   function NavToCheckout(){
     navigate('/checkout')

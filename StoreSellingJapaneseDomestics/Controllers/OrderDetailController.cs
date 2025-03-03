@@ -27,10 +27,10 @@ namespace StoreSellingJapaneseDomestics.Controllers
             var data = await _service.GetAll();
             return Ok(data);
         }
-        [HttpGet("ListByOrder")]
-        public async Task<IActionResult> ListByOrder()
+        [HttpGet("ListByOrder/{id}")]
+        public async Task<IActionResult> ListByOrder(string id)
         {
-            var data = await _service.ListByOrderID();
+            var data = await _service.ListByOrderID(id);
             return Ok(data);
         }
         [HttpPost("CreateOrderDetail")]

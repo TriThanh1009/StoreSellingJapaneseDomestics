@@ -7,7 +7,7 @@ import { deleteProduct, getProduct } from "../../../../../Responsitories/Product
 import { ProductModel } from "../../../../../Model/Product/ProductModel"
 import logo from '../../../../../../../Uploads/61f60849-bd68-457b-8efa-30c90a3dfcdb.jpg'
 import { log } from "console"
-import AdminProductDetailOptionsComponent from "../../AdminProductDetailComponent/AdminProductDetailOptionsComponent"
+import AdminProductDetailOptionsComponent from "../AdminProductDetailComponent/AdminProductDetailOptionsComponent"
 const AdminProductComponent:React.FC = () =>{
     const apiUrl = import.meta.env.VITE_API_GET_IMG;
     const [products,setproducts] = useState<ProductModel[]>()
@@ -49,12 +49,15 @@ const AdminProductComponent:React.FC = () =>{
     const onDetailFormCancel = () =>{
         setshowformdetail(false)
     }
+
     if(showformoptions){
         childpage = <AdminProductOptionsComponent selectedID={getid} onCancel={onOptionsCancel} />
         } else childpage = <div></div>
     if(showformdetail){
         formdetail = <AdminProductDetailOptionsComponent productID={getid} onCancel={onDetailFormCancel}/>
     }
+
+    
     return (
                     <div className="card shadow mb-4">
                         <div className="card-header py-3 d-flex flex-row justify-content-between">

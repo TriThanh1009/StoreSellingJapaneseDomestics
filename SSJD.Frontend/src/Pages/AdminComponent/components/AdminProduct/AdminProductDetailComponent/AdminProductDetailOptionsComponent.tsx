@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useState } from "react"
-import { ProductDetailCreateModel } from "../../../../Model/ProductDetail/ProductDetailCreateModel"
-import { createProductDetail, editProductDetail, getdescriptionByproductID } from "../../../../Responsitories/ProductDetailResponsitory"
-import { ProductDetailModel } from "../../../../Model/ProductDetail/ProductDetailModel"
+import { ProductDetailCreateModel } from "../../../../../Model/ProductDetail/ProductDetailCreateModel"
+import { createProductDetail, editProductDetail, getdescriptionByproductID } from "../../../../../Responsitories/ProductDetailResponsitory"
+import { ProductDetailModel } from "../../../../../Model/ProductDetail/ProductDetailModel"
 import './AdminProductDetailOptions.css'
 interface props{
     onCancel: () =>void
@@ -58,39 +58,34 @@ const AdminProductDetailOptionsComponent:React.FC<props> = ({productID,onCancel}
     return(
         <div className="d-flex flex-row">
                 <div>
-                    { !formedit &&
-                    <form className="form form-zindex">
-                    <div>   
+                    {!formedit &&
+                    <div className="form form-zindex">   
                            
                         <div className="form-group row"  >
-                                <label className="col-sm-5 col-form-label label-detail">Description</label>
+                                <label className="col-sm-8 col-form-label label-detail">Description</label>
                                 <div className="col-sm-12">
                                     {detaildata && <span>{Array.isArray(detaildata.description) ? detaildata.description.join(", ") : detaildata.description}</span>}
                                 </div>
                             </div>
                             <div className="form-group row">
-                                <label className="col-sm-5 col-form-label label-detail">Warranty</label>
+                                <label className="col-sm-8 col-form-label label-detail">Warranty</label>
                                 <div className="col-sm-12">
                                 {detaildata && (<span>{detaildata.warranty.toString().split("T")[0]}</span>)}
                                 </div>
                             </div>
                             <div className="form-group row">
-                                <label className="col-sm-5 col-form-label label-detail">Origin</label>
+                                <label className="col-sm-8 col-form-label label-detail">Origin</label>
                                 <div className="col-sm-12">
                                 {detaildata && <span>{detaildata.origin}</span>}
                                 </div>
                             </div>
                             <div className="d-flex justify-content-between">
                                 <div className="button-options-list d-flex flex-row gap-3">
-                                    <button onSubmit={handleSubmit} type='submit' className="button-options">Accept</button>
+                                    <button onClick={clicktoedit} type='submit' className="button-options">Edit</button>
                                     <button className="button-options" onClick={onCancel} >Cancel</button> 
                                 </div>  
-                                <div onClick={clicktoedit}>
-                                <button className="btn btn-light" >Edit</button> 
-                                </div>
                             </div>   
                         </div>
-                    </form>
                     }
                 </div>
                 <div>

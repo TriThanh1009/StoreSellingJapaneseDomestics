@@ -5,10 +5,14 @@ import { ChangePaymentStatus, getOrder, getOrderByID } from "../../../../../Resp
 import  './AdminOrderComponent.css'
 import failure from "../../../../../Image/failure.png"
 import success from "../../../../../Image/success.png"
+import AdminOrderDetailComponent from "../AdminOrderDetailComponent/AdminOrderDetailComponent"
 
 const AdminOrderComponent:React.FC = () =>{
     const [orders,setorders] = useState<OrderModel[]>()
     const [status, setStatus] = useState<{ [key: string]: number }>({});
+    const [showformdetail,setshowformdetail] = useState(false)
+    const [getorderid,setorderid] = useState("")
+    let formdetail
 
     useEffect(()=>{
         fetch()
@@ -18,18 +22,30 @@ const AdminOrderComponent:React.FC = () =>{
         setorders(data)
     }
 
-        const changepaymentstatus =  async(id : string) =>{     
-            await ChangePaymentStatus(id)
-            const updatepayment = await getOrderByID(id)
-            setStatus(updatepayment.paymentStatus)
-            window.location.reload()
-        }
+    function clicktoshowformdetail(id: string){
+        setorderid(id)
+        setshowformdetail(prev => !prev)
+    }
+    function onDetailCancel(){
+        setshowformdetail(false)
+    }
+
+    const changepaymentstatus =  async(id : string) =>{     
+        await ChangePaymentStatus(id)
+        const updatepayment = await getOrderByID(id)
+        setStatus(updatepayment.paymentStatus)
+        window.location.reload()
+    }
     
+    if(showformdetail){
+        formdetail = <AdminOrderDetailComponent orderId={getorderid} onCancel={onDetailCancel}></AdminOrderDetailComponent>
+    }
+
     return (
                     <div className="card shadow mb-4">
                         <div className="card-header py-3 d-flex flex-row justify-content-between">
                             <h6 className="m-0 font-weight-bold text-primary">Order Table</h6>
-                            <button className="button-options">Create</button> 
+                            {/* <button className="button-options">Create</button>  */}
                         </div>
                         <div className="card-body">
                             <div className="table-responsive">
@@ -46,6 +62,7 @@ const AdminOrderComponent:React.FC = () =>{
                                             <th>Phương thức thanh toán</th>
                                             <th>Trạng thái thanh toán</th>
                                             <th>Options</th>
+                                            <th>Chi tiết</th>
                                         </tr>
                                     </thead>
 
@@ -68,13 +85,16 @@ const AdminOrderComponent:React.FC = () =>{
                                         <i className="bi bi-pen"></i>
                                         <i className="bi bi-x-octagon"></i>
                                         </td>
-
+                                        <td><button className="btn btn-primary" onClick={() => clicktoshowformdetail(order.id)}>Detail</button></td>
                                         </tr>
                                     ))}
                                         
                                     </tbody>
                                 </table>
                             </div>
+                        </div>
+                        <div className="detail-page">
+                                {formdetail}
                         </div>
                     </div>
 

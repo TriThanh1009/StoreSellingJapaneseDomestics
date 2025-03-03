@@ -1,9 +1,11 @@
 export interface OrderDetailModel{
     id? : string
-    orderID? : string
-    productID? : string
+    orderID: string
+    productID : string
     headType : string
+    unitProduct : string
+    unitPrice : number
     quantity : number
-    subtotal? : number
-    promotionID? : string
+    subtotal : number
+    promotion : string
 }

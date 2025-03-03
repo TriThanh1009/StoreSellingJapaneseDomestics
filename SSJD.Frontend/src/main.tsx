@@ -12,6 +12,7 @@ import Register from "./Pages/AuthenticateComponent/Register/Register";
 import Forgotpassword from "./Pages/AuthenticateComponent/ForgotPassword/forgotpassword";
 import { jwtDecode } from "jwt-decode";
 
+// eslint-disable-next-line react-refresh/only-export-components
 const Main = () => {
   const [role, setRole] = useState("");
   const [accessToken, setAccessToken] = useState(localStorage.getItem("accessToken"));
@@ -23,7 +24,7 @@ const Main = () => {
         setRole(getrole);
       } catch (error) {
         console.error("Lỗi khi giải mã token:", error);
-        setRole("");
+        setRole("")
       }
     } else {
       setRole("");

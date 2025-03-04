@@ -31,7 +31,7 @@ const ItemCard:React.FC<props> = ({products}) =>{
   }, []);
   
   const addtocart = () => {
-    console.log(selectheadtype)
+    setShowAlert(true)
     increaseCartQuantity(products.id,selectheadtype)
     setTimeout(() => {
       setShowAlert(false);

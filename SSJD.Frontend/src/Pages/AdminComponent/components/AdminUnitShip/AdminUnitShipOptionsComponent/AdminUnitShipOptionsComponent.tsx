@@ -11,8 +11,16 @@ interface Props {
   }
 const AdminUnitShipOptionsComponent:React.FC<Props> = ({onCancel, selectedId})=>{
     const [unitship, setunitship] = useState<UnitShipOptionsModel>();
+    const [error, seterror] = useState<UnitShipOptionsModel>();
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
+        let errorMsg = ""
+        if(name === "name"){
+            if (/[^A-Za-zÀ-ỹ\s]/.test(value)) {
+                errorMsg = "Tên đơn vị vẩn chuyển chỉ được chứa chữ cái và khoảng trắng!";
+              }
+        }
+
         if (selectedId) {
             setunitship(prev => ({
                 ...prev,
@@ -23,6 +31,7 @@ const AdminUnitShipOptionsComponent:React.FC<Props> = ({onCancel, selectedId})=>
             ...prev,
             [name]: value,
         }));
+        seterror({...error,[name] : errorMsg})
         
     };
 
@@ -59,6 +68,7 @@ const AdminUnitShipOptionsComponent:React.FC<Props> = ({onCancel, selectedId})=>
             <label className="col-sm-5 col-form-label">Name</label>
             <div className="col-sm-10">
                 <input type="text" id="name"  name="name"  onChange={handleChange}   pattern="[a-zA-Z ]+"   className="form-control" />
+                {error?.name && <p style={{ color: "red" }}>{error?.name}</p>}
             </div>
         </div>
         <div className='button-options-list d-flex flex-row gap-3' >

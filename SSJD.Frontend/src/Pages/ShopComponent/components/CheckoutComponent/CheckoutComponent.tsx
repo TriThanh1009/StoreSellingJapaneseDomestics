@@ -14,10 +14,12 @@ import { OrderCreateModel } from '../../../../Model/Order/OrderCreateModel'
 import { createOrder } from '../../../../Responsitories/OrderResponsitory'
 import { CreateListOrderDetail } from '../../../../Responsitories/OrderDetailResponsitory'
 import { OrderDetailwithProduct } from '../../../../Model/RelationshipModel/OrderWithProduct/OrderWithProduct'
+import { error } from 'console'
 const CheckoutComponent:React.FC = () =>{
     const {cart} = useShoppingCart()
     const [orderswdetail,setorderswdetail] = useState<OrderDetailwithProduct[]>()
     const [order,setorder] = useState<OrderCreateModel>()
+    const [error,seterror] = useState<OrderCreateModel>()
     const [user,setuser] = useState<UserModel>()
     const [total,settotal] = useState(0)
     const navigate = useNavigate()
@@ -62,6 +64,17 @@ const CheckoutComponent:React.FC = () =>{
 
     const handleOrderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
+        let errorMsg = ""
+        if(name === "customerName"){
+            if (/[^A-Za-zÀ-ỹ\s]/.test(value)) {
+                errorMsg = "Họ và tên chỉ được chứa chữ cái và khoảng trắng!";
+              }
+        }
+        if (name === "customerPhone") {
+            if (/\D/.test(value)) {
+              errorMsg = "Số điện thoại chỉ được chứa số!";
+            }
+          }
         if(userid){
             setorder((prev)=>({
                 ...prev,
@@ -85,6 +98,7 @@ const CheckoutComponent:React.FC = () =>{
                 [name] : value 
             }))
         }
+        seterror({...error,[name]:errorMsg})
         console.log(order)
         
     };
@@ -126,9 +140,11 @@ const CheckoutComponent:React.FC = () =>{
                 </div>
                 <div className='login-input'>
                     <div className='input-information d-flex flex-column justify-content-center gap-3'>
-                        <input type='text' name='customerName' onChange={handleOrderChange} placeholder="Họ và tên"></input>
+                        <input type='text' name='customerName' onChange={handleOrderChange}  placeholder="Họ và tên"></input>
+                        {error?.customerName && <p style={{ color: "red" }}>{error?.customerName}</p>}
                         <input type='text' name='shippingAddress' onChange={handleOrderChange} placeholder="Địa chỉ"></input>   
-                        <input type='text' name='customerPhone' onChange={handleOrderChange} placeholder="Số điện thoại"></input>
+                        <input type='text' name='customerPhone' onChange={handleOrderChange}  placeholder="Số điện thoại"></input>
+                        {error?.customerPhone && <p style={{ color: "red" }}>{error?.customerPhone}</p>}
                         <select id='shippingUnitID' name='shippingUnitID' onChange={()=>handleOrderChange}>
                             <option value="1">Viettel Post</option>
                         </select>

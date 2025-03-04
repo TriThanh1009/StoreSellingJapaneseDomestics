@@ -16,7 +16,7 @@ const Footer:React.FC=()=>{
             const data = await getUserByID(userid)
             setuser(data)
         }
-            
+            //
     }
     return(
         <div className="container footer-margin">

@@ -43,7 +43,11 @@ export const CreateListOrderDetail = async(data:any)=>{
 }
 
 export const editOrderDetail = async(data:any)=>{
-    const response = await axios.put(`${apiUrl}/OrderDetail/EditOrderDetail`)
+    const response = await axios.put(`${apiUrl}/OrderDetail/EditOrderDetail`,JSON.stringify(data),{
+        headers:{
+            "Content-Type" : "application/json"
+        }
+    })
     return response.data
 }
 

@@ -4,7 +4,7 @@ import './Footer.css'
 import { UserModel } from '../../../Model/User/UserModel'
 import { getUserByID } from '../../../Responsitories/UserResponsitory';
 const Footer:React.FC=()=>{
-    const [userid, setuserid] = useState(localStorage.getItem("id"));
+    const [userid] = useState(localStorage.getItem("id"));
     const [user,setuser] = useState<UserModel>()
 
     useEffect(()=>{

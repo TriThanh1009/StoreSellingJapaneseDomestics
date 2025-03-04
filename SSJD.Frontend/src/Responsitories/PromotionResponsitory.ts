@@ -16,12 +16,20 @@ export const getPromotionByID = async(id : string)=>{
 }
 
 export const createPromotion = async(data:any)=>{
-    const response = await axios.post(`${apiUrl}/Promotion/CreatePromotion`)
+    const response = await axios.post(`${apiUrl}/Promotion/CreatePromotion`,JSON.stringify(data),{
+        headers:{
+            "Content-Type" : "application/json"
+        }
+    })
     return response.data
 }
 
 export const editPromotion = async(data:any)=>{
-    const response = await axios.put(`${apiUrl}/Promotion/EditPromotion`)
+    const response = await axios.put(`${apiUrl}/Promotion/EditPromotion`,JSON.stringify(data),{
+        headers:{
+            "Content-Type" : "application/json"
+        }
+    })
     return response.data
 }
 

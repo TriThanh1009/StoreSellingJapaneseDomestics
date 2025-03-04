@@ -17,12 +17,20 @@ export const getCategoryByID = async(id : string)=>{
 }
 
 export const createCategory = async(data:any)=>{
-    const response = await axios.post(`${apiUrl}/Category/CreateCategory`)
+    const response = await axios.post(`${apiUrl}/Category/CreateCategory`,JSON.stringify(data),{
+        headers:{
+            "Content-Type" : "application/json"
+        }
+    })
     return response.data
 }
 
 export const editCategory = async(data:any)=>{
-    const response = await axios.put(`${apiUrl}/Category/EditCategory`)
+    const response = await axios.put(`${apiUrl}/Category/EditCategory`,JSON.stringify(data),{
+        headers:{
+            "Content-Type" : "application/json"
+        }
+    })
     return response.data
 }
 

@@ -17,12 +17,20 @@ export const getMemberCardByID = async(id : string)=>{
 }
 
 export const createMemberCard = async(data:any)=>{
-    const response = await axios.post(`${apiUrl}/MemberCard/CreateMemberCard`)
+    const response = await axios.post(`${apiUrl}/MemberCard/CreateMemberCard`,JSON.stringify(data),{
+        headers:{
+            "Content-Type" : "application/json"
+        }
+    })
     return response.data
 }
 
 export const editMemberCard = async(data:any)=>{
-    const response = await axios.put(`${apiUrl}/MemberCard/EditMemberCard`)
+    const response = await axios.put(`${apiUrl}/MemberCard/EditMemberCard`,JSON.stringify(data),{
+        headers:{
+            "Content-Type" : "application/json"
+        }
+    })
     return response.data
 }
 

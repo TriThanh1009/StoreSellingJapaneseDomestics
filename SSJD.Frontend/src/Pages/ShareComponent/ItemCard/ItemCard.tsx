@@ -2,9 +2,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useRef, useState } from "react"
 import './ItemCard.css'
-import logoimg from '../../../Image/logo.jpg'
 import { ProductModel } from "../../../Model/Product/ProductModel"
-import { get } from "http"
 import { useShoppingCart } from "../../../Hooks/useShoppingCart"
 import { useNavigate } from "react-router-dom"
 

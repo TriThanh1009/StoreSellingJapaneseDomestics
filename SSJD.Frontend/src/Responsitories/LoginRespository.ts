@@ -2,8 +2,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import axios from 'axios'
 import { LoginModel } from '../Model/Login/LoginModel';
-import { DecodeToken } from './TokenResponsitory';
-import { jwtDecode } from 'jwt-decode';
+
 const apiUrl = import.meta.env.VITE_API_URL;
 
 

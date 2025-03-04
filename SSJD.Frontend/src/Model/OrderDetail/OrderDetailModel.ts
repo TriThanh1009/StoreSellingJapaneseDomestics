@@ -2,7 +2,7 @@ export interface OrderDetailModel{
     id? : string
     orderID?: string
     productID? : string
-    headType? : string
+    headType : string
     unitProduct? : string
     unitPrice? : number
     quantity : number

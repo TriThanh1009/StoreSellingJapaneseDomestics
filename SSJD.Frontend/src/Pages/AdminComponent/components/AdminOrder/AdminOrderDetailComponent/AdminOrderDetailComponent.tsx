@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useState } from "react"
 import { OrderWithOrderDetail } from "../../../../../Model/RelationshipModel/OrderWithOrderDetail/OrderWithOrderDetail"
-import { getOrderDetailByID, listByOrderID } from "../../../../../Responsitories/OrderDetailResponsitory"
+import { listByOrderID } from "../../../../../Responsitories/OrderDetailResponsitory"
 
 
 interface Props{

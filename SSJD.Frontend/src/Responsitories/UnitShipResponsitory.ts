@@ -16,12 +16,20 @@ export const getUnitShipByID = async(id : string)=>{
 }
 
 export const createUnitShip = async(data:any)=>{
-    const response = await axios.post(`${apiUrl}/UnitShip/CreateUnitShip`)
+    const response = await axios.post(`${apiUrl}/UnitShip/CreateUnitShip`,JSON.stringify(data),{
+        headers:{
+            "Content-Type" : "application/json"
+        }
+    })
     return response.data
 }
 
 export const editUnitShip = async(data:any)=>{
-    const response = await axios.put(`${apiUrl}/UnitShip/EditUnitShip`)
+    const response = await axios.put(`${apiUrl}/UnitShip/EditUnitShip`,JSON.stringify(data),{
+        headers:{
+            "Content-Type" : "application/json"
+        }
+    })
     return response.data
 }
 

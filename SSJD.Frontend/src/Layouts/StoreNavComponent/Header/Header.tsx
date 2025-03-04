@@ -8,15 +8,13 @@ import logoimg from '../../../Image/logo.jpg'
 import logo from '../../../Image/chill.jpg'
 import React, { useEffect, useState } from 'react';
 import { useShoppingCart } from '../../../Hooks/useShoppingCart';
-import CartComponent from '../../../Pages/ShopComponent/components/CartComponent/CartComponent';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { UserModel } from '../../../Model/User/UserModel';
 import { getUserByID } from '../../../Responsitories/UserResponsitory';
 
 const Header:React.FC=()=>{
     const [showMenu, setShowMenu] = useState("");
-    const [openDropdown,setopenDropdown] = useState(null)
-    const [userid, setuserid] = useState(localStorage.getItem("id"));
+    const [userid] = useState(localStorage.getItem("id"));
     const [user,setuser] = useState<UserModel>()
     const {cartQuantity} = useShoppingCart()
     const navigate = useNavigate()

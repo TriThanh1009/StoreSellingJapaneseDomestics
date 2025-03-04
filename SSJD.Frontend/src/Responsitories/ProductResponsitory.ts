@@ -26,7 +26,11 @@ export const createProduct = async(data:any)=>{
 }
 
 export const editProduct = async(data:any)=>{
-    const response = await axios.put(`${apiUrl}/Product/EditProduct`)
+    const response = await axios.put(`${apiUrl}/Product/EditProduct`,JSON.stringify(data),{
+        headers:{
+            "Content-Type" : "application/json"
+        }
+    })
     return response.data
 }
 

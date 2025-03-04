@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useEffect, useState } from 'react';
+import React, {  useState } from 'react';
 import { PromotionOptionsModel } from '../../../../../Model/Promotion/PromotionOptionsModel';
 import { editPromotion, createPromotion } from '../../../../../Responsitories/PromotionResponsitory';
 

@@ -17,12 +17,20 @@ export const getBrandByID = async(id : string)=>{
 }
 
 export const createBrandy = async(data:any)=>{
-    const response = await axios.post(`${apiUrl}/Brand/CreateBrand`)
+    const response = await axios.post(`${apiUrl}/Brand/CreateBrand`,JSON.stringify(data),{
+        headers:{
+            "Content-Type" : "application/json"
+        }
+    })
     return response.data
 }
 
 export const editBrand = async(data:any)=>{
-    const response = await axios.put(`${apiUrl}/Brand/EditBrand`)
+    const response = await axios.put(`${apiUrl}/Brand/EditBrand`,JSON.stringify(data),{
+        headers:{
+            "Content-Type" : "application/json"
+        }
+    })
     return response.data
 }
 

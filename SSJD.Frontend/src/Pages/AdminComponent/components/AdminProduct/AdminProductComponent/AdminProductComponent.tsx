@@ -5,8 +5,7 @@ import AdminProductOptionsComponent from "../AdminProductOptionsComponent/AdminP
 import './AdminProductComponent.css'
 import { deleteProduct, getProduct } from "../../../../../Responsitories/ProductResponsitory"
 import { ProductModel } from "../../../../../Model/Product/ProductModel"
-import logo from '../../../../../../../Uploads/61f60849-bd68-457b-8efa-30c90a3dfcdb.jpg'
-import { log } from "console"
+
 import AdminProductDetailOptionsComponent from "../AdminProductDetailComponent/AdminProductDetailOptionsComponent"
 const AdminProductComponent:React.FC = () =>{
     const apiUrl = import.meta.env.VITE_API_GET_IMG;

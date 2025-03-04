@@ -34,7 +34,11 @@ export const ChangePaymentStatus = async(orderid : string)=>{
 }
 
 export const editOrder= async(data:any)=>{
-    const response = await axios.put(`${apiUrl}/Order/EditOrder`)
+    const response = await axios.put(`${apiUrl}/Order/EditOrder`,JSON.stringify(data),{
+        headers:{
+            "Content-Type" : "application/json"
+        }
+    })
     return response.data
 }
 

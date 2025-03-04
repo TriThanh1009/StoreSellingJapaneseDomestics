@@ -4,7 +4,6 @@ import { Outlet } from 'react-router-dom';
 import ItemCard from '../../../ShareComponent/ItemCard/ItemCard';
 import { ProductModel } from '../../../../Model/Product/ProductModel';
 import { getProduct } from '../../../../Responsitories/ProductResponsitory';
-import CardComponent from '../CartComponent/CartComponent';
 
 const HomeComponent:React.FC = () =>{
   const [products,setproducts] = useState<ProductModel[]>()

@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useState } from "react"
-import img from '../../../../Image/logo.jpg'
 import './ProductDetailComponent.css'
 import { useNavigate, useParams } from "react-router-dom"
 import { ProductModel } from "../../../../Model/Product/ProductModel"

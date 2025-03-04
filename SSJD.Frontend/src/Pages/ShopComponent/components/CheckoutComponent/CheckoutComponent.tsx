@@ -6,15 +6,13 @@ import React, { useEffect, useState } from 'react'
 
 import { useShoppingCart } from '../../../../Hooks/useShoppingCart'
 import { getProductByID } from '../../../../Responsitories/ProductResponsitory'
-import logomomo from '../../../../Image/logo_momo.jpg'
-import logovcb from '../../../../Image/logo_vcb.jpg'
-import { data, useNavigate } from 'react-router-dom'
+
+import { useNavigate } from 'react-router-dom'
 import { UserModel } from '../../../../Model/User/UserModel'
 import { getUserByID } from '../../../../Responsitories/UserResponsitory'
-import { it } from 'node:test'
 import { OrderCreateModel } from '../../../../Model/Order/OrderCreateModel'
-import { createOrder, getOrderByID } from '../../../../Responsitories/OrderResponsitory'
-import { CreateListOrderDetail, createOrderDetail } from '../../../../Responsitories/OrderDetailResponsitory'
+import { createOrder } from '../../../../Responsitories/OrderResponsitory'
+import { CreateListOrderDetail } from '../../../../Responsitories/OrderDetailResponsitory'
 import { OrderDetailwithProduct } from '../../../../Model/RelationshipModel/OrderWithProduct/OrderWithProduct'
 const CheckoutComponent:React.FC = () =>{
     const {cart} = useShoppingCart()
@@ -22,7 +20,6 @@ const CheckoutComponent:React.FC = () =>{
     const [order,setorder] = useState<OrderCreateModel>()
     const [user,setuser] = useState<UserModel>()
     const [total,settotal] = useState(0)
-    const [selected, setSelected] = useState<string>("");
     const navigate = useNavigate()
     const userid = localStorage.getItem('id')
     useEffect(() => {    
@@ -60,10 +57,10 @@ const CheckoutComponent:React.FC = () =>{
           const userdata = await getUserByID(userid)
           setuser(userdata)
         }
+        console.log(user)
       }
 
     const handleOrderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-
         const { name, value } = e.target;
         if(userid){
             setorder((prev)=>({
@@ -71,20 +68,34 @@ const CheckoutComponent:React.FC = () =>{
                 userID : userid,
                 orderDate : new Date().toISOString(),
                 orderStatus : "1",
-                shippingUnitID : "1",
+                totalPrice : total,
+                paymentMethod : "VietQR",
+                paymentStatus :0,
+                [name] : value 
+            }))
+        }else {
+            setorder((prev)=>({
+                ...prev,
+                userID : "1",
+                orderDate : new Date().toISOString(),
+                orderStatus : "1",
                 totalPrice : total,
                 paymentMethod : "VietQR",
                 paymentStatus :0,
                 [name] : value 
             }))
         }
+        console.log(order)
         
     };
 
     
     const orderAccept = async (amount: number) => {
+        console.log(amount)
+        console.log(order)
         if (order) {
             const orderdata = await createOrder(order);
+            console.log(orderdata)
             if (orderdata) {
                 const orderDetails = orderswdetail?.map((detaildata) => ({ //Duyet qua tung object ==> result : array
                     orderID: orderdata,
@@ -118,6 +129,9 @@ const CheckoutComponent:React.FC = () =>{
                         <input type='text' name='customerName' onChange={handleOrderChange} placeholder="Họ và tên"></input>
                         <input type='text' name='shippingAddress' onChange={handleOrderChange} placeholder="Địa chỉ"></input>   
                         <input type='text' name='customerPhone' onChange={handleOrderChange} placeholder="Số điện thoại"></input>
+                        <select id='shippingUnitID' name='shippingUnitID' onChange={()=>handleOrderChange}>
+                            <option value="1">Viettel Post</option>
+                        </select>
                         {/* <div className='checkout-payment-method d-flex flex-row gap-2'>
                         <img 
                             src={logomomo} 

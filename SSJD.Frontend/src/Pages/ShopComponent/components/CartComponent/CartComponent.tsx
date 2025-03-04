@@ -75,7 +75,7 @@ const CartComponent: React.FC = () => {
                       <br />
                       <div className="d-flex flex-row gap-2">
                         <small>Type: {order.product.category}</small>
-                        <small>Head: {order.orderdetail.headType}</small>
+                        <small>Head: {order.orderdetail?.headType}</small>
                       </div>
                       
                     </div>
@@ -83,16 +83,16 @@ const CartComponent: React.FC = () => {
                 </td>
                 <td>${(order.product.price * order.quantity)}</td>
                 <td className="">
-                  <i  onClick={()=>decreaseCartQuantity(order.product.id,order.orderdetail.headType)} className="bi bi-caret-left"></i>
+                  <i  onClick={()=>order.orderdetail.headType && decreaseCartQuantity(order.product.id,order.orderdetail.headType)} className="bi bi-caret-left"></i>
                   <span className="mx-2">{order.quantity}</span>
-                  <i onClick={()=>increaseCartQuantity(order.product.id,order.orderdetail.headType)} className="bi bi-caret-right"></i>
+                  <i onClick={()=>order.orderdetail.headType &&increaseCartQuantity(order.product.id,order.orderdetail.headType)} className="bi bi-caret-right"></i>
                 </td>
                 
                 <td>
                   <Button
                     variant="danger"
                     size="sm"
-                    onClick={() => handleRemove(order.product.id,order.orderdetail.headType)}
+                    onClick={() =>order.orderdetail.headType && handleRemove(order.product.id,order.orderdetail.headType)}
                   >
                     🗑️
                   </Button>

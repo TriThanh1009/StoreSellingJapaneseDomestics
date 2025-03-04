@@ -14,7 +14,6 @@ import { OrderCreateModel } from '../../../../Model/Order/OrderCreateModel'
 import { createOrder } from '../../../../Responsitories/OrderResponsitory'
 import { CreateListOrderDetail } from '../../../../Responsitories/OrderDetailResponsitory'
 import { OrderDetailwithProduct } from '../../../../Model/RelationshipModel/OrderWithProduct/OrderWithProduct'
-import { error } from 'console'
 const CheckoutComponent:React.FC = () =>{
     const {cart} = useShoppingCart()
     const [orderswdetail,setorderswdetail] = useState<OrderDetailwithProduct[]>()

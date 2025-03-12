@@ -31,7 +31,10 @@ namespace SSJD.DataAccess.Extension
                 new Category() { ID = "1", Name = "Marker" }
                 );
             modelbuilder.Entity<UnitShip>().HasData(
-                new Category() { ID = "1", Name = "Viettel Post" }
+                new UnitShip() { ID = "1", Name = "Viettel Post" }
+                );
+            modelbuilder.Entity<Account>().HasData(
+                new Account() { ID = "1", UserName = "Customer", Password = "1", PasswordCheck = "1", Email= "Customer@gmail.com" }
                 );
         }
     }

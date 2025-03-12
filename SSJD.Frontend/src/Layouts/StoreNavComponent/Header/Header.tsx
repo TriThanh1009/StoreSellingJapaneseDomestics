@@ -11,21 +11,33 @@ import { useShoppingCart } from '../../../Hooks/useShoppingCart';
 import { useNavigate } from 'react-router-dom';
 import { UserModel } from '../../../Model/User/UserModel';
 import { getUserByID } from '../../../Responsitories/UserResponsitory';
+import { auth } from '../../../Responsitories/Firebase';
 
 const Header:React.FC=()=>{
     const [showMenu, setShowMenu] = useState("");
     const [userid] = useState(localStorage.getItem("id"));
+    const [loginMethod] = useState(localStorage.getItem("loginMethod"))
     const [user,setuser] = useState<UserModel>()
+    const [googleuser, setgoogleuser] = useState(auth.currentUser);
+    const [userPhoto, setUserPhoto] = useState<string | undefined>();
     const {cartQuantity} = useShoppingCart()
     const navigate = useNavigate()
     useEffect(()=>{
-        fetchdatabyuserid()
-    })
+        fetchdatabyuser()
+    },[])
 
-    const fetchdatabyuserid = async() =>{
-        if(userid){
-            const data = await getUserByID(userid)
-            setuser(data)
+    const fetchdatabyuser = async() =>{
+        if(loginMethod == "account"){
+            if(userid){
+                const data = await getUserByID(userid)
+                setuser(data)
+            }
+        }
+        if(loginMethod == "google"){
+            auth.onAuthStateChanged((googleuser) => {
+                setgoogleuser(googleuser); // Cập nhật lại user khi Firebase hoàn tất
+                setUserPhoto(googleuser?.photoURL as string)
+            });
         }
         
     }
@@ -97,19 +109,19 @@ const Header:React.FC=()=>{
             <div className="account-container">
                 {/* Ảnh đại diện */}
                 <div className="account-image" onClick={() => handleMenuClick("logout")}>
-                    <img src={logo}  />
+                    <img src={userPhoto || logo}   />
                 </div>
 
                 {/* Menu Logout */}
                 {showMenu==="logout" && (
                     <div>
-                        {user &&
+                        {loginMethod &&
                         <div className="dropdown-menu-logout d-flex flex-column gap-2">
                             <button onClick={()=>clicktonav("profile")} className="logout-button">Profile</button>   
                             <button onClick={LogoutFeature} className="logout-button">Logout</button>
                         </div> 
                         }
-                        {!user && <button onClick={()=>clicktonav("register")} className="logout-button">Register</button>}
+                        {!loginMethod && <button onClick={()=>clicktonav("register")} className="logout-button">Register</button>}
                 </div>
                 )}
             </div>

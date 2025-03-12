@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using FirebaseAdmin;
+using FirebaseAdmin.Auth;
+using Google.Apis.Auth.OAuth2;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -81,6 +84,22 @@ namespace StoreSellingJapaneseDomestics
                 .AllowCredentials()
                 .SetIsOriginAllowed((host) => true);
             }));
+            //
+            services.AddSingleton(provider =>
+            {
+                var credentialPath = "firebaseconfig.json";
+                return FirebaseApp.Create(new AppOptions
+                {
+                    Credential = GoogleCredential.FromFile(credentialPath)
+                });
+            });
+            services.AddSingleton(provider =>
+            {
+                var app = provider.GetRequiredService<FirebaseApp>();
+                return FirebaseAuth.GetAuth(app); // Lấy FirebaseAuth từ FirebaseApp
+            });
+            //
+            services.AddSingleton(provider => FirebaseAuth.GetAuth(provider.GetRequiredService<FirebaseApp>()));
             services.AddSignalRCore();
             services.AddSignalR();
             services.AddSwaggerGen(options =>

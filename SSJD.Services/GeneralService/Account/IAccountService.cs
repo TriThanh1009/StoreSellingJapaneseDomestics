@@ -1,4 +1,5 @@
-﻿using SSJD.Entities.GeneralEntity;
+﻿using Microsoft.AspNetCore.Mvc;
+using SSJD.Entities.GeneralEntity;
 using SSJD.Services.GeneralService.Base;
 using SSJD.ViewModel.GeneralViewModel.Account;
 using SSJD.ViewModel.GeneralViewModel.PageResult;
@@ -14,6 +15,8 @@ namespace SSJD.Services.GeneralService.Account
     public interface IAccountService : IBaseService<AccountRequestModel,AccountViewModel>
     {
         Task<PagedResult<AccountViewModel>> GetAccountPaging(AccountPagingRequest request);
+        Task ForgotPassword(ForgotPasswordRequest request);
+        Task SendCustomEmail(string email, string resetLink);
 
     }
 }

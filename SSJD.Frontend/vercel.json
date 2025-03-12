@@ -1,0 +1,20 @@
+{
+    "version": 2,
+    "builds": [
+      {
+        "src": "index.html",
+        "use": "@vercel/static"
+      },
+      {
+        "src": "*.{js,css}",
+        "use": "@vercel/static"
+      }
+    ],
+    "outputDirectory": "dist",
+    "rewrites": [
+      {
+        "source": "/(.*)",
+        "destination": "/index.html"
+      }
+    ]
+  }

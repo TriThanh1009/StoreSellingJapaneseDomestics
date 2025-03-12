@@ -51,13 +51,13 @@ namespace SSJD.DataAccess.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "8b2debd2-0005-4235-b9a6-444545c03391",
+                            Id = "c2ab8099-daa5-437a-a7b0-bc77feb223e7",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "aaad981f-302c-4648-a182-52961567c593",
+                            Id = "f22c0e00-5779-41cc-a3b5-286d936d9676",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         });
@@ -269,6 +269,16 @@ namespace SSJD.DataAccess.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Account", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            ID = "1",
+                            Email = "Customer@gmail.com",
+                            Password = "1",
+                            PasswordCheck = "1",
+                            UserName = "Customer"
+                        });
                 });
 
             modelBuilder.Entity("SSJD.Entities.StoreEntity.Brand", b =>
@@ -361,7 +371,7 @@ namespace SSJD.DataAccess.Migrations
                     b.Property<DateTime>("OrderDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 2, 26, 15, 23, 5, 355, DateTimeKind.Local).AddTicks(2417));
+                        .HasDefaultValue(new DateTime(2025, 3, 11, 1, 57, 46, 225, DateTimeKind.Local).AddTicks(1383));
 
                     b.Property<string>("OrderStatus")
                         .IsRequired()
@@ -521,7 +531,7 @@ namespace SSJD.DataAccess.Migrations
                     b.Property<DateTime>("Warranty")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 2, 26, 15, 23, 5, 359, DateTimeKind.Local).AddTicks(1826));
+                        .HasDefaultValue(new DateTime(2025, 3, 11, 1, 57, 46, 229, DateTimeKind.Local).AddTicks(1490));
 
                     b.HasKey("ID");
 
@@ -539,12 +549,12 @@ namespace SSJD.DataAccess.Migrations
                     b.Property<DateTime>("CreateDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 2, 26, 15, 23, 5, 359, DateTimeKind.Local).AddTicks(3530));
+                        .HasDefaultValue(new DateTime(2025, 3, 11, 1, 57, 46, 229, DateTimeKind.Local).AddTicks(3168));
 
                     b.Property<DateTime>("EndDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 2, 26, 15, 23, 5, 359, DateTimeKind.Local).AddTicks(3688));
+                        .HasDefaultValue(new DateTime(2025, 3, 11, 1, 57, 46, 229, DateTimeKind.Local).AddTicks(3346));
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -562,8 +572,8 @@ namespace SSJD.DataAccess.Migrations
                         new
                         {
                             ID = "1",
-                            CreateDate = new DateTime(2025, 2, 26, 15, 23, 5, 360, DateTimeKind.Local).AddTicks(8681),
-                            EndDate = new DateTime(2025, 2, 26, 15, 23, 5, 360, DateTimeKind.Local).AddTicks(8773),
+                            CreateDate = new DateTime(2025, 3, 11, 1, 57, 46, 230, DateTimeKind.Local).AddTicks(6684),
+                            EndDate = new DateTime(2025, 3, 11, 1, 57, 46, 230, DateTimeKind.Local).AddTicks(6784),
                             Name = "None",
                             PercentDiscount = 0
                         });

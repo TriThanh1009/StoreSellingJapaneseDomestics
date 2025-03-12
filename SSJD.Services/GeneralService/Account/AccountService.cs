@@ -1,4 +1,5 @@
 ﻿using Azure.Core;
+using FirebaseAdmin.Auth;
 using Microsoft.EntityFrameworkCore;
 using SharpCompress.Common;
 using SSJD.DataAccess;
@@ -19,9 +20,11 @@ namespace SSJD.Services.GeneralService.Account
     public class AccountService : IAccountService
     {
         private readonly SSJDDbContext _context;
-        public AccountService(SSJDDbContext context)
+        private readonly FirebaseAuth _firebaseAuth;
+        public AccountService(SSJDDbContext context, FirebaseAuth firebase)
         {
             _context = context;
+            _firebaseAuth = firebase;
         }
         public async Task<string> Create(AccountRequestModel request)
         {
@@ -59,6 +62,23 @@ namespace SSJD.Services.GeneralService.Account
                 _context.Account.Update(data);
                 await _context.SaveChangesAsync();
             }
+        }
+
+        public async Task ForgotPassword(ForgotPasswordRequest request)
+        {
+            var actionCodeSettings = new ActionCodeSettings
+            {
+                Url = "http://localhost:5255/reset-password", // URL frontend để xử lý reset
+                HandleCodeInApp = false
+            };
+
+            var link = await _firebaseAuth.GeneratePasswordResetLinkAsync(request.Email, actionCodeSettings);
+            await SendCustomEmail(request.Email, link); // Gửi email tùy chỉnh (nếu cần)
+        }
+        public async Task SendCustomEmail(string email, string resetLink)
+        {
+            // Sử dụng SMTP hoặc dịch vụ khác để gửi email tùy chỉnh
+            var emailContent = resetLink;
         }
 
         public async Task<PagedResult<AccountViewModel>> GetAccountPaging(AccountPagingRequest request)

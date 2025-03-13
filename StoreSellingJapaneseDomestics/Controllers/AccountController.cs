@@ -34,12 +34,6 @@ namespace StoreSellingJapaneseDomestics.Controllers
             var data = await _service.Create(request);
             return Ok(data);
         }
-        [HttpPost("ForgotPassword")]
-        public async Task<IActionResult> ForgotPassword([FromBody] ForgotPasswordRequest request)
-        {
-            await _service.ForgotPassword(request);
-            return Ok();
-        }
         [HttpPut("EditAccount")]
         public async Task<IActionResult> Edit([FromBody] AccountRequestModel request)
         {

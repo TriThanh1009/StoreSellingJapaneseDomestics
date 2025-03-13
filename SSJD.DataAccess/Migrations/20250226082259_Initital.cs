@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace SSJD.DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class Initital : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -111,8 +111,8 @@ namespace SSJD.DataAccess.Migrations
                 {
                     ID = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 3, 11, 1, 57, 40, 783, DateTimeKind.Local).AddTicks(9990)),
-                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 3, 11, 1, 57, 40, 784, DateTimeKind.Local).AddTicks(171)),
+                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 2, 26, 15, 22, 58, 906, DateTimeKind.Local).AddTicks(7674)),
+                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 2, 26, 15, 22, 58, 906, DateTimeKind.Local).AddTicks(7830)),
                     PercentDiscount = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -312,7 +312,7 @@ namespace SSJD.DataAccess.Migrations
                     ProductID = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     HeadType = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
-                    Warranty = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 3, 11, 1, 57, 40, 783, DateTimeKind.Local).AddTicks(8410)),
+                    Warranty = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 2, 26, 15, 22, 58, 906, DateTimeKind.Local).AddTicks(5985)),
                     Origin = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false)
                 },
                 constraints: table =>
@@ -334,7 +334,7 @@ namespace SSJD.DataAccess.Migrations
                     UserID = table.Column<string>(type: "nvarchar(50)", nullable: false),
                     CustomerName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     CustomerPhone = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 3, 11, 1, 57, 40, 779, DateTimeKind.Local).AddTicks(7658)),
+                    OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 2, 26, 15, 22, 58, 902, DateTimeKind.Local).AddTicks(6188)),
                     ShippingUnitID = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ShippingAddress = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     OrderStatus = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -395,17 +395,12 @@ namespace SSJD.DataAccess.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Account",
-                columns: new[] { "ID", "Email", "Password", "PasswordCheck", "UserName" },
-                values: new object[] { "1", "Customer@gmail.com", "1", "1", "Customer" });
-
-            migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "3ec199b6-eb2b-4df1-bce6-2da956cb8de9", null, "Admin", "ADMIN" },
-                    { "ba1c0610-1f45-43be-8c75-2d49639fa462", null, "Customer", "CUSTOMER" }
+                    { "82809fa2-9560-4381-aba6-b6d386399d84", null, "Customer", "CUSTOMER" },
+                    { "cb7a1571-06e8-4769-b744-3d97b7cbd832", null, "Admin", "ADMIN" }
                 });
 
             migrationBuilder.InsertData(
@@ -426,7 +421,7 @@ namespace SSJD.DataAccess.Migrations
             migrationBuilder.InsertData(
                 table: "Promotion",
                 columns: new[] { "ID", "CreateDate", "EndDate", "Name", "PercentDiscount" },
-                values: new object[] { "1", new DateTime(2025, 3, 11, 1, 57, 40, 785, DateTimeKind.Local).AddTicks(3299), new DateTime(2025, 3, 11, 1, 57, 40, 785, DateTimeKind.Local).AddTicks(3395), "None", 0 });
+                values: new object[] { "1", new DateTime(2025, 2, 26, 15, 22, 58, 908, DateTimeKind.Local).AddTicks(795), new DateTime(2025, 2, 26, 15, 22, 58, 908, DateTimeKind.Local).AddTicks(893), "None", 0 });
 
             migrationBuilder.InsertData(
                 table: "UnitShip",

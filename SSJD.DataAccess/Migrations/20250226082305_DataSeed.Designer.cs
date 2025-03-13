@@ -12,8 +12,8 @@ using SSJD.DataAccess;
 namespace SSJD.DataAccess.Migrations
 {
     [DbContext(typeof(SSJDDbContext))]
-    [Migration("20250310185741_Initial")]
-    partial class Initial
+    [Migration("20250226082305_DataSeed")]
+    partial class DataSeed
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -54,13 +54,13 @@ namespace SSJD.DataAccess.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "3ec199b6-eb2b-4df1-bce6-2da956cb8de9",
+                            Id = "8b2debd2-0005-4235-b9a6-444545c03391",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "ba1c0610-1f45-43be-8c75-2d49639fa462",
+                            Id = "aaad981f-302c-4648-a182-52961567c593",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         });
@@ -272,16 +272,6 @@ namespace SSJD.DataAccess.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Account", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            ID = "1",
-                            Email = "Customer@gmail.com",
-                            Password = "1",
-                            PasswordCheck = "1",
-                            UserName = "Customer"
-                        });
                 });
 
             modelBuilder.Entity("SSJD.Entities.StoreEntity.Brand", b =>
@@ -374,7 +364,7 @@ namespace SSJD.DataAccess.Migrations
                     b.Property<DateTime>("OrderDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 3, 11, 1, 57, 40, 779, DateTimeKind.Local).AddTicks(7658));
+                        .HasDefaultValue(new DateTime(2025, 2, 26, 15, 23, 5, 355, DateTimeKind.Local).AddTicks(2417));
 
                     b.Property<string>("OrderStatus")
                         .IsRequired()
@@ -534,7 +524,7 @@ namespace SSJD.DataAccess.Migrations
                     b.Property<DateTime>("Warranty")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 3, 11, 1, 57, 40, 783, DateTimeKind.Local).AddTicks(8410));
+                        .HasDefaultValue(new DateTime(2025, 2, 26, 15, 23, 5, 359, DateTimeKind.Local).AddTicks(1826));
 
                     b.HasKey("ID");
 
@@ -552,12 +542,12 @@ namespace SSJD.DataAccess.Migrations
                     b.Property<DateTime>("CreateDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 3, 11, 1, 57, 40, 783, DateTimeKind.Local).AddTicks(9990));
+                        .HasDefaultValue(new DateTime(2025, 2, 26, 15, 23, 5, 359, DateTimeKind.Local).AddTicks(3530));
 
                     b.Property<DateTime>("EndDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 3, 11, 1, 57, 40, 784, DateTimeKind.Local).AddTicks(171));
+                        .HasDefaultValue(new DateTime(2025, 2, 26, 15, 23, 5, 359, DateTimeKind.Local).AddTicks(3688));
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -575,8 +565,8 @@ namespace SSJD.DataAccess.Migrations
                         new
                         {
                             ID = "1",
-                            CreateDate = new DateTime(2025, 3, 11, 1, 57, 40, 785, DateTimeKind.Local).AddTicks(3299),
-                            EndDate = new DateTime(2025, 3, 11, 1, 57, 40, 785, DateTimeKind.Local).AddTicks(3395),
+                            CreateDate = new DateTime(2025, 2, 26, 15, 23, 5, 360, DateTimeKind.Local).AddTicks(8681),
+                            EndDate = new DateTime(2025, 2, 26, 15, 23, 5, 360, DateTimeKind.Local).AddTicks(8773),
                             Name = "None",
                             PercentDiscount = 0
                         });

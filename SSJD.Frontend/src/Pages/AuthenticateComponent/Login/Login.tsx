@@ -8,13 +8,10 @@ import { LoginAccess } from '../../../Responsitories/LoginRespository';
 import { LoginModel } from '../../../Model/Login/LoginModel';
 import { useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
-import { signInWithPopup } from 'firebase/auth';
-import { auth, googleProvider } from '../../../Responsitories/Firebase';
 
 function Login(){
     const [account,setaccount] = useState<LoginModel>() 
     const [accessToken, setAccessToken] = useState(localStorage.getItem("accessToken"));
-    const [error, setError] = useState<string>("");
     const navigate = useNavigate()
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -25,21 +22,6 @@ function Login(){
         
     };
     useEffect(() => {
-        handleLogin()
-    }, [])
-    useEffect(() => {
-        const handleStorageChange = () => {
-          setAccessToken(localStorage.getItem("accessToken"));
-        };
-      
-        window.addEventListener("storage", handleStorageChange);
-      
-        return () => {
-          window.removeEventListener("storage", handleStorageChange);
-        };
-      }, []);
-
-    const handleLogin = async () =>{
         if(accessToken){
             const decodeToken = jwtDecode<{ [key: string]: any }>(accessToken);
             const getrole = decodeToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
@@ -54,21 +36,23 @@ function Login(){
                 }
             }
         }
-      }
-      const handleGoogleLogin = async () => {
-        try {
-          const result = await signInWithPopup(auth, googleProvider);
-          console.log(result.user)
-          localStorage.setItem('loginMethod',"google")
-          navigate("/home");
-        } catch (err: any) {
-          console.error(err);
-        }
-      };
+    }, [])
+    useEffect(() => {
+        const handleStorageChange = () => {
+          setAccessToken(localStorage.getItem("accessToken"));
+        };
+      
+        window.addEventListener("storage", handleStorageChange);
+      
+        return () => {
+          window.removeEventListener("storage", handleStorageChange);
+        };
+      }, []);
+
+
     const handleSubmit = async (e:React.FormEvent)=>{
         e.preventDefault()
         await LoginAccess(account)
-        localStorage.setItem('loginMethod',"account")
         window.location.reload()
     }
 
@@ -95,13 +79,9 @@ function Login(){
                             <span>Mật khẩu</span>
                             <input type='password' name='password' onChange={handleChange}></input>
                             <button className='button-signin'>Sign In</button>
-                            
                         </div>
                     </div>
                 </form>
-                <div>
-                    <button className='login-with-google-button' onClick={handleGoogleLogin}>Đăng nhập với Google</button>
-                    </div>
                 <div className='register-forgotpassword d-flex flex-row gap-3'>
                     <span className='register-forgotpassword-items' onClick={navtoForgotpassword}>Forgot your password ?</span>
                     <span>/</span>

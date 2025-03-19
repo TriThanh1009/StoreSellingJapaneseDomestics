@@ -28,7 +28,6 @@ services:
       - ./Uploads:/app/Uploads
     depends_on:
       - sdb
-      
 networks:
   mynetwork:
     driver : bridge

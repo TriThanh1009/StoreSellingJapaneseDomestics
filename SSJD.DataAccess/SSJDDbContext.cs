@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace SSJD.DataAccess
 {
@@ -35,9 +36,10 @@ namespace SSJD.DataAccess
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer("Data Source=sdb;Database=SSJDDB;User ID=sa;Password=Thanh@123456;TrustServerCertificate=True")
+        {      
+            optionsBuilder.UseSqlServer("Data Source = 35.247.171.103,1433; Database =SSJDDB; User ID =sqlserver; Password =D#)QY_>8O025H|s^;TrustServerCertificate=True")
                 .ConfigureWarnings(w => w.Ignore(RelationalEventId.PendingModelChangesWarning));
+            //"Data Source=sdb;Database=SSJDDB;User ID=sa;Password=Thanh@123456;TrustServerCertificate=True"
         }
 
         

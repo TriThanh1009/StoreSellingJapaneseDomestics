@@ -21,7 +21,7 @@ namespace SSJD.DataAccess
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json")
                 .Build();
-            var connectionString = configuration.GetConnectionString("SSJDdb");
+            var connectionString = configuration.GetConnectionString("SSJDDB");
             var optionsBuilder = new DbContextOptionsBuilder<SSJDDbContext>();
             optionsBuilder.UseSqlServer(connectionString);
             return new SSJDDbContext(optionsBuilder.Options);

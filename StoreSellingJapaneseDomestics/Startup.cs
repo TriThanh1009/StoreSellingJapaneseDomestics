@@ -46,7 +46,7 @@ namespace StoreSellingJapaneseDomestics
             services.AddCors();
             services.AddControllers();
             services.AddDbContext<SSJDDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("SSJDdb"))
+                options.UseSqlServer(Configuration.GetConnectionString("SSJDDB"))
 
                 );
             services.AddEndpointsApiExplorer();
@@ -96,7 +96,7 @@ namespace StoreSellingJapaneseDomestics
                 options.OperationFilter<SecurityRequirementsOperationFilter>();
                 options.OperationFilter<SwaggerFileOperationFilter>();
             });
-            
+            services.AddAWSLambdaHosting(LambdaEventSource.RestApi);
             services
                 .AddAuthentication(options =>
                 {

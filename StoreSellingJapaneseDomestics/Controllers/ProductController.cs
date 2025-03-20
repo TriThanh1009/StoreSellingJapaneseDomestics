@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SSJD.Services.GeneralService.Storage.CloudStorage;
+using SSJD.Services.GeneralService.Storage.FileStorage;
 using SSJD.Services.StoreService.Product;
 using SSJD.ViewModel.StoreViewModel.Product;
 
@@ -11,9 +13,11 @@ namespace StoreSellingJapaneseDomestics.Controllers
     public class ProductController : ControllerBase
     {
         private readonly IProductService _service;
-        public ProductController(IProductService service)
+        private readonly ICloudStorageService _cloudStorageService;
+        public ProductController(IProductService service,ICloudStorageService cloudStorageService)
         {
             _service = service;
+            _cloudStorageService = cloudStorageService;
         }
         [HttpGet]
         public async Task<IActionResult> Get()
@@ -33,6 +37,7 @@ namespace StoreSellingJapaneseDomestics.Controllers
             var data = await _service.Create(request);
             return Ok(data);
         }
+
         [HttpPut("EditProduct")]
         public async Task<IActionResult> Edit([FromBody] ProductRequestModel request)
         {

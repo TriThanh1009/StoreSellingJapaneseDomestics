@@ -7,9 +7,11 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using MongoDB.Driver.Core.Configuration;
 using SSJD.DataAccess;
 using SSJD.Entities.StoreEntity;
 using SSJD.Services.GeneralService.Account;
+using SSJD.Services.GeneralService.Storage.CloudStorage;
 using SSJD.Services.GeneralService.Storage.FileStorage;
 using SSJD.Services.GeneralService.Storage.Swagger;
 using SSJD.Services.StoreService.Brand;
@@ -46,12 +48,16 @@ namespace StoreSellingJapaneseDomestics
             services.AddCors();
             services.AddControllers();
             services.AddDbContext<SSJDDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("SSJDDB"))
-
-                );
+            {
+                options.UseSqlServer("SSJDdb");
+                options.EnableSensitiveDataLogging(); // Log chi tiết lỗi SQL
+                options.EnableDetailedErrors(); // Log lỗi chi tiết
+            });
             services.AddEndpointsApiExplorer();
             services.AddHttpContextAccessor();
             services.AddTransient<SSJDDbContext>();
+            services.AddTransient<CloudStorageService>();
+            services.AddTransient<FileStorageService>();
             services.AddTransient<IAccountService, AccountService>();
             services.AddTransient<IBrandService, BrandService>();
             services.AddTransient<ICategoryService, CategorySerivce>();
@@ -68,6 +74,7 @@ namespace StoreSellingJapaneseDomestics
             services.AddTransient<IFileStorageService, FileStorageService>();
             services.AddTransient<RoleManager<IdentityRole>>();
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddSingleton<ICloudStorageService, CloudStorageService>();
             services.AddControllersWithViews();
             services.AddIdentity<User,IdentityRole>()
                 .AddRoles<IdentityRole>()

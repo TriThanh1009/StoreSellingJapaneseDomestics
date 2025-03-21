@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace SSJD.DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class Initital : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -111,8 +111,8 @@ namespace SSJD.DataAccess.Migrations
                 {
                     ID = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 2, 26, 15, 22, 58, 906, DateTimeKind.Local).AddTicks(7674)),
-                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 2, 26, 15, 22, 58, 906, DateTimeKind.Local).AddTicks(7830)),
+                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 3, 20, 23, 47, 4, 767, DateTimeKind.Local).AddTicks(5099)),
+                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 3, 20, 23, 47, 4, 767, DateTimeKind.Local).AddTicks(5267)),
                     PercentDiscount = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -312,7 +312,7 @@ namespace SSJD.DataAccess.Migrations
                     ProductID = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     HeadType = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
-                    Warranty = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 2, 26, 15, 22, 58, 906, DateTimeKind.Local).AddTicks(5985)),
+                    Warranty = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 3, 20, 23, 47, 4, 767, DateTimeKind.Local).AddTicks(3438)),
                     Origin = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false)
                 },
                 constraints: table =>
@@ -334,7 +334,7 @@ namespace SSJD.DataAccess.Migrations
                     UserID = table.Column<string>(type: "nvarchar(50)", nullable: false),
                     CustomerName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     CustomerPhone = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 2, 26, 15, 22, 58, 902, DateTimeKind.Local).AddTicks(6188)),
+                    OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2025, 3, 20, 23, 47, 4, 762, DateTimeKind.Local).AddTicks(8843)),
                     ShippingUnitID = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ShippingAddress = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     OrderStatus = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -395,13 +395,23 @@ namespace SSJD.DataAccess.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "Account",
+                columns: new[] { "ID", "Email", "Password", "PasswordCheck", "UserName" },
+                values: new object[] { "1", "Guest", "Guest", "Guest", "Guest" });
+
+            migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "82809fa2-9560-4381-aba6-b6d386399d84", null, "Customer", "CUSTOMER" },
-                    { "cb7a1571-06e8-4769-b744-3d97b7cbd832", null, "Admin", "ADMIN" }
+                    { "0e664dc6-09de-432b-9cd2-6e1352966346", null, "Admin", "ADMIN" },
+                    { "b5fb823a-eb3e-4706-9b11-d542baec875a", null, "Customer", "CUSTOMER" }
                 });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[] { "1", 0, "497cae09-50ac-4d57-9b33-5c5431627093", null, false, false, null, null, null, null, false, "ce5f5587-e4ec-4f1c-a716-00e5035be024", false, "Guest" });
 
             migrationBuilder.InsertData(
                 table: "Brand",
@@ -421,12 +431,17 @@ namespace SSJD.DataAccess.Migrations
             migrationBuilder.InsertData(
                 table: "Promotion",
                 columns: new[] { "ID", "CreateDate", "EndDate", "Name", "PercentDiscount" },
-                values: new object[] { "1", new DateTime(2025, 2, 26, 15, 22, 58, 908, DateTimeKind.Local).AddTicks(795), new DateTime(2025, 2, 26, 15, 22, 58, 908, DateTimeKind.Local).AddTicks(893), "None", 0 });
+                values: new object[] { "1", new DateTime(2025, 3, 20, 23, 47, 4, 769, DateTimeKind.Local).AddTicks(847), new DateTime(2025, 3, 20, 23, 47, 4, 769, DateTimeKind.Local).AddTicks(941), "None", 0 });
 
             migrationBuilder.InsertData(
                 table: "UnitShip",
                 columns: new[] { "ID", "Name" },
                 values: new object[] { "1", "Viettel Post" });
+
+            migrationBuilder.InsertData(
+                table: "User",
+                columns: new[] { "Id", "AccountID", "Address", "IdentityCard", "Image", "MemberCardID" },
+                values: new object[] { "1", "1", "", "", "", "1" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

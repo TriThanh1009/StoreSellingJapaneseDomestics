@@ -12,8 +12,8 @@ using SSJD.DataAccess;
 namespace SSJD.DataAccess.Migrations
 {
     [DbContext(typeof(SSJDDbContext))]
-    [Migration("20250226082259_Initital")]
-    partial class Initital
+    [Migration("20250320164705_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -54,13 +54,13 @@ namespace SSJD.DataAccess.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "cb7a1571-06e8-4769-b744-3d97b7cbd832",
+                            Id = "0e664dc6-09de-432b-9cd2-6e1352966346",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "82809fa2-9560-4381-aba6-b6d386399d84",
+                            Id = "b5fb823a-eb3e-4706-9b11-d542baec875a",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         });
@@ -272,6 +272,16 @@ namespace SSJD.DataAccess.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Account", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            ID = "1",
+                            Email = "Guest",
+                            Password = "Guest",
+                            PasswordCheck = "Guest",
+                            UserName = "Guest"
+                        });
                 });
 
             modelBuilder.Entity("SSJD.Entities.StoreEntity.Brand", b =>
@@ -364,7 +374,7 @@ namespace SSJD.DataAccess.Migrations
                     b.Property<DateTime>("OrderDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 2, 26, 15, 22, 58, 902, DateTimeKind.Local).AddTicks(6188));
+                        .HasDefaultValue(new DateTime(2025, 3, 20, 23, 47, 4, 762, DateTimeKind.Local).AddTicks(8843));
 
                     b.Property<string>("OrderStatus")
                         .IsRequired()
@@ -524,7 +534,7 @@ namespace SSJD.DataAccess.Migrations
                     b.Property<DateTime>("Warranty")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 2, 26, 15, 22, 58, 906, DateTimeKind.Local).AddTicks(5985));
+                        .HasDefaultValue(new DateTime(2025, 3, 20, 23, 47, 4, 767, DateTimeKind.Local).AddTicks(3438));
 
                     b.HasKey("ID");
 
@@ -542,12 +552,12 @@ namespace SSJD.DataAccess.Migrations
                     b.Property<DateTime>("CreateDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 2, 26, 15, 22, 58, 906, DateTimeKind.Local).AddTicks(7674));
+                        .HasDefaultValue(new DateTime(2025, 3, 20, 23, 47, 4, 767, DateTimeKind.Local).AddTicks(5099));
 
                     b.Property<DateTime>("EndDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2025, 2, 26, 15, 22, 58, 906, DateTimeKind.Local).AddTicks(7830));
+                        .HasDefaultValue(new DateTime(2025, 3, 20, 23, 47, 4, 767, DateTimeKind.Local).AddTicks(5267));
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -565,8 +575,8 @@ namespace SSJD.DataAccess.Migrations
                         new
                         {
                             ID = "1",
-                            CreateDate = new DateTime(2025, 2, 26, 15, 22, 58, 908, DateTimeKind.Local).AddTicks(795),
-                            EndDate = new DateTime(2025, 2, 26, 15, 22, 58, 908, DateTimeKind.Local).AddTicks(893),
+                            CreateDate = new DateTime(2025, 3, 20, 23, 47, 4, 769, DateTimeKind.Local).AddTicks(847),
+                            EndDate = new DateTime(2025, 3, 20, 23, 47, 4, 769, DateTimeKind.Local).AddTicks(941),
                             Name = "None",
                             PercentDiscount = 0
                         });
@@ -632,6 +642,25 @@ namespace SSJD.DataAccess.Migrations
                     b.HasIndex("MemberCardID");
 
                     b.ToTable("User", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "1",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "497cae09-50ac-4d57-9b33-5c5431627093",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "ce5f5587-e4ec-4f1c-a716-00e5035be024",
+                            TwoFactorEnabled = false,
+                            UserName = "Guest",
+                            AccountID = "1",
+                            Address = "",
+                            IdentityCard = "",
+                            Image = "",
+                            MemberCardID = "1"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

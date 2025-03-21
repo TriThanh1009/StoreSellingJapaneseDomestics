@@ -14,6 +14,12 @@ namespace SSJD.DataAccess.Extension
     {
         public static void Seed(this ModelBuilder modelbuilder)
         {
+            modelbuilder.Entity<User>().HasData(
+                new User() { Id = "1", UserName = "Guest",AccountID="1",MemberCardID="1"}
+                );
+            modelbuilder.Entity<Account>().HasData(
+                new Account() { ID = "1", UserName = "Guest",Password="Guest",PasswordCheck="Guest",Email="Guest" }
+                );
             modelbuilder.Entity<MemberCard>().HasData(
                 new MemberCard() { ID = "1", Point = 0, MemberClass = "None Class", Discount = 30 }
                 );
@@ -31,7 +37,7 @@ namespace SSJD.DataAccess.Extension
                 new Category() { ID = "1", Name = "Marker" }
                 );
             modelbuilder.Entity<UnitShip>().HasData(
-                new Category() { ID = "1", Name = "Viettel Post" }
+                new UnitShip() { ID = "1", Name = "Viettel Post" }
                 );
         }
     }

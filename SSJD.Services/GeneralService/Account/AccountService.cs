@@ -25,17 +25,23 @@ namespace SSJD.Services.GeneralService.Account
         }
         public async Task<string> Create(AccountRequestModel request)
         {
-            var entity = new SSJD.Entities.GeneralEntity.Account()
+            var usernameexist = await _context.Account.FirstOrDefaultAsync(x => x.UserName == request.UserName);
+            if (usernameexist == null)
             {
-                ID = Guid.NewGuid().ToString(),
-                UserName = request.UserName,
-                Password = request.Password,
-                PasswordCheck = request.PasswordCheck,
-                Email = request.Email,
-            };
-            _context.Account.Add(entity);
-            await _context.SaveChangesAsync();
-            return entity.ID;
+                var entity = new SSJD.Entities.GeneralEntity.Account()
+                {
+                    ID = Guid.NewGuid().ToString(),
+                    UserName = request.UserName,
+                    Password = request.Password,
+                    PasswordCheck = request.PasswordCheck,
+                    Email = request.Email,
+                };
+                _context.Account.Add(entity);
+                await _context.SaveChangesAsync();
+                return entity.ID;
+            }
+            throw new Exception("Username already exists");
+
         }
 
 

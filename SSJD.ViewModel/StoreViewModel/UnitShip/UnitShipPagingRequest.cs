@@ -9,6 +9,6 @@ namespace SSJD.ViewModel.StoreViewModel.UnitShip
 {
     public class UnitShipPagingRequest : PagingRequestBase
     {
-        public string keyword { get; set; } = String.Empty;
+        public string Keyword { get; set; } = String.Empty;
     }
 }

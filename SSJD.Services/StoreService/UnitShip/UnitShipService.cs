@@ -2,6 +2,7 @@
 using SharpCompress.Common;
 using SSJD.DataAccess;
 using SSJD.Services.GeneralService.Base;
+using SSJD.ViewModel.GeneralViewModel.Account;
 using SSJD.ViewModel.GeneralViewModel.PageResult;
 using SSJD.ViewModel.StoreViewModel.UnitShip;
 using System;
@@ -75,9 +76,28 @@ namespace SSJD.Services.StoreService.UnitShip
             throw new NotImplementedException();
         }
 
-        public Task<PagedResult<UnitShipViewModel>> GetUnitShipPaging(UnitShipPagingRequest request)
+        public async Task<PagedResult<UnitShipViewModel>> GetUnitShipPaging(UnitShipPagingRequest request)
         {
-            throw new NotImplementedException();
+            var query = from p in _context.UnitShip select p;
+            if (!string.IsNullOrEmpty(request.Keyword))
+            {
+                query = query.Where(x => x.Name.Contains(request.Keyword));
+            }
+            var totalRow = await query.CountAsync();
+            var data = await query.Skip((request.PageIndex - 1) * request.PageSize)
+                                  .Take(request.PageSize)
+                                  .Select(x => new UnitShipViewModel()
+                                  {
+                                      Name = x.Name
+                                  }).ToListAsync();
+            var pagedView = new PagedResult<UnitShipViewModel>()
+            {
+                TotalRecords = totalRow,
+                PageSize = request.PageSize,
+                PageIndex = request.PageIndex,
+                Items = data
+            };
+            return pagedView;
         }
     }
 }
